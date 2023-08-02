@@ -1,15 +1,15 @@
-import styles from "../styles-modules/header.css";
+import "../styles/header.css"
 import logoVaca from "../assets/LogoVaca.svg";
 
 
 function Header () {
     return (
-      <header className={styles.header}>
+      <header className= "header">
 
         <img className="header-logo" src={logoVaca} alt="logo" />
 
 
-        <div className="nav_menu">
+        <div className="header-botones">
        
           <button className="nav_item" id="Iniciar-sesion">
             Iniciar sesión
