@@ -8,7 +8,11 @@ spring:
     config:
       server:
         git:
-          uri: git@gitlab.com:mcabate/ctd/hispanos/proyecto-integrador-2/proyecto-integrador-0723/1021ft-c1/equipo-03.git
-          default-label: backend
+          uri: https://gitlab.ctd.academy/ctd/hispanos/proyecto-integrador-2/proyecto-integrador-0723/1021ft-c1/equipo-03.git
+          username: mcabate
+          password: bwXbVEGd2queNcG9oeDK
+          default-label: config-server
           force-pull: true
           search-paths: ConfigData
+          ignoreLocalSshSettings: false
+          strictHostKeyChecking: false
