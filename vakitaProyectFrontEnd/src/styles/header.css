@@ -16,8 +16,7 @@
 
 .header-logo{
     height: 7rem;
-    object-fit: fill;
-    
+    object-fit: fill; 
 }
 
 
@@ -42,3 +41,129 @@
     font-family: 'Inria Sans', sans-serif;
 }
 
+/* Medias Queries de Mobile a Desktop */
+
+
+@media only screen and (min-width: 391px){
+
+.header-botones {
+    margin-right: 20px;
+    width:56%;
+}
+}
+
+
+@media only screen and (min-width: 440px){
+
+        .header-botones {
+            margin-right: 30px;
+            width:50%;
+        }
+        }
+    
+        @media only screen and (min-width: 500px){
+
+            .header-botones {
+                margin-right: 34px;
+                width:46%;
+            }
+            }
+            @media only screen and (min-width: 510px){
+
+                .header-botones {
+                    margin-right: 34px;
+                    width:44%;
+                }
+                }
+
+                @media only screen and (min-width: 554px){
+
+                    .header-botones {
+                        margin-right: 39px;
+                        width:42%;
+                    }
+                    }
+                    @media only screen and (min-width: 578px){
+
+                        .header-botones {
+                            margin-right: 35px;
+                            width:39%;
+                        }
+                        }
+
+                        @media only screen and (min-width: 590px){
+
+                            .header-botones {
+                                margin-right: 40px;
+                                width:38%;
+                            }
+                            }
+
+                            @media only screen and (min-width: 614px){
+
+                                .header-botones {
+                                    margin-right: 42px;
+                                    width:36%;
+                                }
+                                }
+
+                                @media only screen and (min-width: 638px){
+
+                                    .header-botones {
+                                        margin-right: 45px;
+                                        width:35%;
+                                    }
+                                    }
+
+                                    @media only screen and (min-width: 672px){
+
+                                        .header-botones {
+                                            margin-right: 47px;
+                                            width:33%;
+                                        }
+                                        }
+                                        @media only screen and (min-width: 704px){
+
+                                            .header-botones {
+                                                margin-right: 35px;
+                                                width:33%;
+                                            }
+                                            }
+
+                                       
+
+/* Medias Queries de Mobile a Ipad Mini*/
+
+@media only screen and (min-width: 768px){
+
+    .header-botones {
+        margin-right: 60px;
+        width:30%;
+    }
+    
+    }
+
+/* Medias Queries de Ipad Mini a Desktop*/ 
+@media only screen and (min-width: 1700px){
+    .header-botones {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-right: 40px;
+        width:12%;
+    }
+    
+    .nav_item
+    {
+        padding: 10px;
+        margin-right: 15px;
+        border-radius: .7rem;
+        cursor: pointer;
+        border: none;
+        font-weight: 500;
+        cursor: pointer;
+        background-color: #DEC6C6;
+        font-family: 'Inria Sans', sans-serif;
+    }
+ 
+    }
