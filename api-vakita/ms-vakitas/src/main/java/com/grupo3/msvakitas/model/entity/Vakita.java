@@ -11,7 +11,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "vakita")
+@Table(name = "VAKITA")
 public class Vakita implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -27,23 +27,23 @@ public class Vakita implements Serializable {
     @Column(name = "USER_ID", nullable = false)
     private Long idCreatorUser;
 
-    @Column(name = "NAME", nullable = false, length = 100)
+    @Column(name = "DESCRIPTION", length = 100)
     private String description;
 
-    @Column(name = "TOTAL_AMOUNT", nullable = false, columnDefinition = "float(8,2)")
+    @Column(name = "TOTAL_AMOUNT")
     private Double totalAmount;
 
-    @Column(name = "CUMULATIVE_AMOUNT", nullable = false, columnDefinition = "float(8,2) default 0.0")
-    private Double cumulativeAmount;
+    @Column(name = "CUMULATIVE_AMOUNT")
+    private Double cumulativeAmount = 0.0;
 //    private List<User> listaUsuarios = new ArrayList<>();
 
-    @Column(name = "CREATION_DATE", nullable = false)
+    @Column(name = "CREATION_DATE", nullable = true)
     private LocalDate creationDate;
 
-    @Column(name = "EXPIRATION_DATE", nullable = false)
+    @Column(name = "EXPIRATION_DATE")
     private LocalDate expirationDate;
 
-    @Column(name = "IS_ACTIVE", nullable = false)
+    @Column(name = "IS_ACTIVE")
     private Boolean isActive;
 //    @Data
 //    @AllArgsConstructor

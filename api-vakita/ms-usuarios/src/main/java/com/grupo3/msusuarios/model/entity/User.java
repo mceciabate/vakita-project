@@ -2,10 +2,14 @@ package com.grupo3.msusuarios.model.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -31,6 +35,10 @@ public class User implements Serializable {
     private String password;
     @Column(name = "BIRTHDATE", nullable = false)
     private LocalDate birthdate;
+
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<UserAndVakita> musics = new ArrayList<>();
 
     //private ArrayList<> vakitas;
 
