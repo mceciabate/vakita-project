@@ -16,7 +16,6 @@ public class Vakita implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-
     private Long id;
     private String name;
     private Long idCreatorUser;

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 @Data
 @Entity
 public class User implements Serializable{
+
     @Serial
     private static final long serialVersionUID = 1L;
 
