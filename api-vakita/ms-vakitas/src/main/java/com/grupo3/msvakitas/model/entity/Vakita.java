@@ -27,7 +27,7 @@ public class Vakita implements Serializable {
     @Column(name = "USER_ID", nullable = false)
     private Long idCreatorUser;
 
-    @Column(name = "NAME", nullable = false, length = 50)
+    @Column(name = "NAME", nullable = false, length = 100)
     private String description;
 
     @Column(name = "TOTAL_AMOUNT", nullable = false, columnDefinition = "float(8,2)")
