@@ -1,4 +1,5 @@
 package com.grupo3.msvakitas.model.entity;
+import com.grupo3.msvakitas.model.enums.VakitaTypes;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,11 +14,11 @@ import java.util.ArrayList;
 @Entity
 @Table(name = "vakitas")
 public class Vakita implements Serializable {
+
     @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "VAQUITA_ID", unique = true, nullable = false)
     private Long id;
 
@@ -45,7 +46,9 @@ public class Vakita implements Serializable {
     @Column(name = "IS_ACTIVE", nullable = false)
     private Boolean isActive;
 
+    @Column(name = "TYPE", nullable = false)
+    private VakitaTypes type;
+
     @ManyToMany(mappedBy="vakitas")
     private ArrayList<User> contributors;
-
 }
