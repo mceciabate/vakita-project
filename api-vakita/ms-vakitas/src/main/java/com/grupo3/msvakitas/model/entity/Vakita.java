@@ -2,11 +2,10 @@ package com.grupo3.msvakitas.model.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
+
 
 @Data
 @NoArgsConstructor
@@ -27,23 +26,24 @@ public class Vakita implements Serializable {
     @Column(name = "USER_ID", nullable = false)
     private Long idCreatorUser;
 
-    @Column(name = "DESCRIPTION", length = 100)
+    @Column(name = "DESCRIPTION", nullable = false, length = 100)
     private String description;
 
-    @Column(name = "TOTAL_AMOUNT")
+    @Column(name = "TOTAL_AMOUNT", nullable = false)
     private Double totalAmount;
 
-    @Column(name = "CUMULATIVE_AMOUNT")
+    @Column(name = "CUMULATIVE_AMOUNT", nullable = false)
     private Double cumulativeAmount = 0.0;
 //    private List<User> listaUsuarios = new ArrayList<>();
 
-    @Column(name = "CREATION_DATE", nullable = true)
+    @Column(name = "CREATION_DATE", nullable = false)
     private LocalDate creationDate;
 
-    @Column(name = "EXPIRATION_DATE")
+    @Column(name = "EXPIRATION_DATE", nullable = false)
     private LocalDate expirationDate;
 
-    @Column(name = "IS_ACTIVE")
+    @Column(name = "IS_ACTIVE", nullable = false)
+//    @Column
     private Boolean isActive;
 //    @Data
 //    @AllArgsConstructor
