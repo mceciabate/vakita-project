@@ -1,13 +1,17 @@
-package com.grupo3.msusuarios.model;
-
+package com.grupo3.msusuarios.model.entity;
 import jakarta.persistence.*;
+import lombok.Data;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
+@Data
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

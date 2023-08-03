@@ -1,23 +1,18 @@
-package model.entity;
-
+package com.grupo3.msvakitas.model.entity;
 import jakarta.persistence.*;
-import jdk.jfr.DataAmount;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @Entity
-@Setter
-@Getter
-@Table
-public class Vakita {
+@Table(name = "vakita")
+public class Vakita implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
