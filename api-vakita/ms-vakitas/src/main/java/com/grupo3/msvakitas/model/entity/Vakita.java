@@ -11,7 +11,7 @@ import java.util.ArrayList;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "VAKITA")
+@Table(name = "vakitas")
 public class Vakita implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -44,13 +44,8 @@ public class Vakita implements Serializable {
 
     @Column(name = "IS_ACTIVE", nullable = false)
     private Boolean isActive;
-//
-//    @OneToMany()
-//    @JoinTable(
-//            name = "vaquita_contributors",
-//            joinColumns = @JoinColumn(name = "vakita_id"),
-//            inverseJoinColumns = @JoinColumn(name = "usuario_id")
-//    )
-//    private ArrayList<Long> contributors = new ArrayList<>();
+
+    @ManyToMany(mappedBy="vakitas")
+    private ArrayList<User> contributors;
 
 }
