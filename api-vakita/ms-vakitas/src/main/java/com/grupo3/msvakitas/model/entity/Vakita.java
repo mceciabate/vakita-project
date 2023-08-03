@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 
 @Data
@@ -34,7 +35,6 @@ public class Vakita implements Serializable {
 
     @Column(name = "CUMULATIVE_AMOUNT", nullable = false)
     private Double cumulativeAmount = 0.0;
-//    private List<User> listaUsuarios = new ArrayList<>();
 
     @Column(name = "CREATION_DATE", nullable = false)
     private LocalDate creationDate;
@@ -43,32 +43,14 @@ public class Vakita implements Serializable {
     private LocalDate expirationDate;
 
     @Column(name = "IS_ACTIVE", nullable = false)
-//    @Column
     private Boolean isActive;
-//    @Data
-//    @AllArgsConstructor
-//    public static class User {
-//        private String name;
-//        private String lastName;
-//        private String dni;
-//        private String email;
-//        private String password;
-//        private LocalDate birthdate;
-//    }
-
 //
-//    @Override
-//    public String toString() {
-//        return "Vakita{" +
-//                "id=" + id +
-//                ", name='" + name + '\'' +
-//                ", idCreatorUser=" + idCreatorUser +
-//                ", description='" + description + '\'' +
-//                ", totalAmount=" + totalAmount +
-//                ", cumulativeAmount=" + cumulativeAmount +
-//                ", creationDate=" + creationDate +
-//                ", expirationDate=" + expirationDate +
-//                ", isActive=" + isActive +
-//                '}';
-//    }
+//    @OneToMany()
+//    @JoinTable(
+//            name = "vaquita_contributors",
+//            joinColumns = @JoinColumn(name = "vakita_id"),
+//            inverseJoinColumns = @JoinColumn(name = "usuario_id")
+//    )
+//    private ArrayList<Long> contributors = new ArrayList<>();
+
 }

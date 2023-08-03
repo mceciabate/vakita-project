@@ -6,7 +6,7 @@ spring:
     name: ms-usuarios
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/vakitadb
+    url: jdbc:mysql://localhost:3306/usersdb
     username: root
     password: root
   jpa:
