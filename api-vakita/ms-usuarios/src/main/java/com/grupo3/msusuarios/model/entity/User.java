@@ -38,7 +38,7 @@ public class User implements Serializable {
 
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
-    private List<UserAndVakita> musics = new ArrayList<>();
+    private List<String> vakitas = new ArrayList<>();
 
     //private ArrayList<> vakitas;
 
