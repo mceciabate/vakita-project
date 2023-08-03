@@ -4,15 +4,15 @@ server:
 spring:
   application:
     name: ms-usuarios
-    datasource:
-      driverClassName: com.mysql.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/usuarios_dev
-      username: root
-      password: root
-    jpa:
-      hibernate.ddl-auto: create-update
-      generate-ddl: true
-      show-sql: true
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/vakitadb
+    username: root
+    password: root
+  jpa:
+    hibernate.ddl-auto: create-update
+    generate-ddl: true
+    show-sql: true
 
 eureka:
   client:
