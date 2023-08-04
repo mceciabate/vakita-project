@@ -51,6 +51,6 @@ public class Vakita implements Serializable {
     @Column(name = "TYPE", nullable = false)
     private VakitaTypes type;
 
-    @ManyToMany(mappedBy="vakitas", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy="vakitas", fetch = FetchType.LAZY)
     private List<User> contributors;
 }

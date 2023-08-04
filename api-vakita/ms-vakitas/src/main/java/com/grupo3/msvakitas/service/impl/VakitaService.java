@@ -141,8 +141,8 @@ public class VakitaService implements IVakitaService {
     @Override
     public void addContributor(Long id, UserDTO user){
 //        VakitaDTO vakita = this.getVakitaById(id);
-//        List<UserDTO> contributors = vakita.getContributors();
-//        contributors.add(user);
+//        vakita.getContributors().add(user);
+////        contributors.add(user);
 //        this.updateVakita(vakita);
 //        log.info("Success updating vakita: " + id);
     }
