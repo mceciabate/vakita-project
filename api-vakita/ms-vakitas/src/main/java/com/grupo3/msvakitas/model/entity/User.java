@@ -21,7 +21,7 @@ public class User implements Serializable{
             joinColumns = @JoinColumn(name = "FK_vakita", nullable = false),
             inverseJoinColumns = @JoinColumn(name="FK_users", nullable = false)
     )
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private ArrayList<Vakita> vakitas;
 }
 
