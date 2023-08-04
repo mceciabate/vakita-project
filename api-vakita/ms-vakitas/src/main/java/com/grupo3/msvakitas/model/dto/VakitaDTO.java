@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -20,4 +21,5 @@ public class VakitaDTO {
     private LocalDate expirationDate;
     private Boolean isActive;
     private VakitaTypes type;
+    private List<UserDTO> contributors;
 }
