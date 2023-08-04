@@ -9,7 +9,7 @@ public interface IUserService {
     UserDTO save(UserDTO userDTO);
     UserDTO findById(Long id);
     UserDTO updateById(Long id, UserDTO userDTO);
-    String changePassword(String newPassword);
+    Boolean changePassword(Long id, String newPassword);
     void deleteById(Long id);
     List<UserDTO> findAll();
 }
