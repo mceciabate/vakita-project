@@ -20,19 +20,11 @@ public class VakitaService implements IVakitaService {
 
 
 
-
-    private final ModelMapper mapper;
+    @Autowired
+    private  ModelMapper mapper;
 
     @Autowired
-    private final IVakitaRepository vakitaRepository;
-
-
-    public VakitaService(IVakitaRepository vakitaRepository, ModelMapper mapper) {
-        this.vakitaRepository = vakitaRepository;
-        this.mapper = new ModelMapper();
-    }
-
-
+    private IVakitaRepository vakitaRepository;
     @Override
     public List<VakitaDTO> getAllVakitas(){
         List<VakitaDTO> listaVakitas = new ArrayList<>();
