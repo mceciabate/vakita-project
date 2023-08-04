@@ -5,6 +5,7 @@ import com.grupo3.msvakitas.model.dto.VakitaDTO;
 import com.grupo3.msvakitas.model.entity.Vakita;
 import com.grupo3.msvakitas.repository.IVakitaRepository;
 import com.grupo3.msvakitas.service.IVakitaService;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class VakitaService implements IVakitaService {
 
@@ -33,6 +35,7 @@ public class VakitaService implements IVakitaService {
         List<VakitaDTO> listaVakitas = new ArrayList<>();
         List<Vakita> vakitas = vakitaRepository.findAll();
         vakitas.forEach(vakita -> listaVakitas.add(mapper.map(vakita, VakitaDTO.class)));
+        log.info("Get all vakitas list");
         return  listaVakitas;
     }
     @Override
@@ -42,6 +45,7 @@ public class VakitaService implements IVakitaService {
         if(vakita.isPresent()){
             vakitaDTO = mapper.map(vakita, VakitaDTO.class);
         }
+        log.info("Get vakita id:" + vakitaDTO.getId());
         return  vakitaDTO;
     }
 
@@ -55,6 +59,7 @@ public class VakitaService implements IVakitaService {
             }
 
         }
+        log.info("Get vakitasByOwner. Size: " + vakitasByUser.size());
         return vakitasByUser;
     }
 
@@ -63,6 +68,7 @@ public class VakitaService implements IVakitaService {
         //TODO validaciones aqui?
         Vakita vakitaNew = mapper.map(vakita, Vakita.class);
         vakitaRepository.save(vakitaNew);
+        log.info("Saving new vakita from user:" + vakita.getIdCreatorUser());
         return mapper.map(vakitaNew, VakitaDTO.class);
 
     }
@@ -79,11 +85,14 @@ public class VakitaService implements IVakitaService {
         }
         else{
             response = "No se puede modificar el saldo";
+            log.info("Error from amount method");
         }
+        log.info("Success, amount update");
         return response;
     }
 
     @Override
+    //TODO MODIFICAR ESTE METODO
     public List<VakitaDTO> getVakitasActives(){
         List<VakitaDTO> lista = this.getAllVakitas();
         List<VakitaDTO> listaActivas = new ArrayList<>();
@@ -92,6 +101,8 @@ public class VakitaService implements IVakitaService {
                 listaActivas.add(vakita);
             }
         }
+        //TODO completar este logger
+        log.info("Get all vakitas actives from user: ");
         return  listaActivas;
     }
 
@@ -108,6 +119,7 @@ public class VakitaService implements IVakitaService {
 
             }
         }
+        log.info("Get vakitas list from contributor: "+ email);
         return vakitaListByContributor;
     }
 
@@ -117,6 +129,7 @@ public class VakitaService implements IVakitaService {
             Vakita vakitaToSave = mapper.map(vakita, Vakita.class);
             vakitaRepository.save(vakitaToSave);
         }
+        log.info("Update vakita id: " + vakita.getId());
         return vakita;
     }
 
@@ -126,12 +139,14 @@ public class VakitaService implements IVakitaService {
         List<UserDTO> contributors = vakita.getContributors();
         contributors.add(user);
         this.updateVakita(vakita);
+        log.info("Success updating vakita: " + id);
     }
 
     public void deleteVakita(Long id){
         VakitaDTO vakitaToDrop = this.getVakitaById(id);
         Vakita vakitaEntityToDrop = mapper.map(vakitaToDrop, Vakita.class);
         vakitaRepository.delete(vakitaEntityToDrop);
+        log.info("Success, vakita deleted: " + id);
 
     }
 
@@ -141,6 +156,7 @@ public class VakitaService implements IVakitaService {
         if (vakitaToCancel.getIsActive() == true){
             vakitaToCancel.setIsActive(false);
         }
+        log.info("Success, cencel vakita id: " + id);
         this.updateVakita(vakitaToCancel);
     }
 
