@@ -19,14 +19,17 @@ import java.util.Optional;
 public class VakitaService implements IVakitaService {
 
 
-    //TODO LOGUEO
+
+
     private final ModelMapper mapper;
-    private final IVakitaRepository vakitaRepository;
 
     @Autowired
+    private final IVakitaRepository vakitaRepository;
+
+
     public VakitaService(IVakitaRepository vakitaRepository, ModelMapper mapper) {
         this.vakitaRepository = vakitaRepository;
-        this.mapper = mapper;
+        this.mapper = new ModelMapper();
     }
 
 
