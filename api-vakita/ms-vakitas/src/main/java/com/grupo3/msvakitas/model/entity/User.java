@@ -1,9 +1,11 @@
 package com.grupo3.msvakitas.model.entity;
+
 import jakarta.persistence.*;
 import lombok.Data;
+
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 
 
 @Data
@@ -21,8 +23,9 @@ public class User implements Serializable{
             joinColumns = @JoinColumn(name = "FK_vakita", nullable = false),
             inverseJoinColumns = @JoinColumn(name="FK_users", nullable = false)
     )
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    private ArrayList<Vakita> vakitas;
+//    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany
+    private List<Vakita> vakitas;
 }
 
 

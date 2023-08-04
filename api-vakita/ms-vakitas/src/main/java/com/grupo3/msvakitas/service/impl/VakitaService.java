@@ -112,19 +112,20 @@ public class VakitaService implements IVakitaService {
 
     @Override
     public List<VakitaDTO> getVakitasByContributors(String email){
-        List<VakitaDTO> allVakitas = this.getAllVakitas();
-        List<VakitaDTO> vakitaListByContributor = new ArrayList<>();
-        //TODO: FIX FOR DENTRO DEL FOR
-        for (VakitaDTO vakita : allVakitas) {
-            for (UserDTO contributor : vakita.getContributors()) {
-                if(contributor.getMail() == email){
-                    vakitaListByContributor.add(vakita);
-                }
-
-            }
-        }
-        log.info("Get vakitas list from contributor: "+ email);
-        return vakitaListByContributor;
+//        List<VakitaDTO> allVakitas = this.getAllVakitas();
+//        List<VakitaDTO> vakitaListByContributor = new ArrayList<>();
+//        //TODO: FIX FOR DENTRO DEL FOR
+//        for (VakitaDTO vakita : allVakitas) {
+//            for (UserDTO contributor : vakita.getContributors()) {
+//                if(contributor.getMail() == email){
+//                    vakitaListByContributor.add(vakita);
+//                }
+//
+//            }
+//        }
+//        log.info("Get vakitas list from contributor: "+ email);
+//        return vakitaListByContributor;
+        return null;
     }
 
     @Override
@@ -139,11 +140,11 @@ public class VakitaService implements IVakitaService {
 
     @Override
     public void addContributor(Long id, UserDTO user){
-        VakitaDTO vakita = this.getVakitaById(id);
-        List<UserDTO> contributors = vakita.getContributors();
-        contributors.add(user);
-        this.updateVakita(vakita);
-        log.info("Success updating vakita: " + id);
+//        VakitaDTO vakita = this.getVakitaById(id);
+//        List<UserDTO> contributors = vakita.getContributors();
+//        contributors.add(user);
+//        this.updateVakita(vakita);
+//        log.info("Success updating vakita: " + id);
     }
 
     public void deleteVakita(Long id){
@@ -160,7 +161,7 @@ public class VakitaService implements IVakitaService {
         if (vakitaToCancel.getIsActive() == true){
             vakitaToCancel.setIsActive(false);
         }
-        log.info("Success, cencel vakita id: " + id);
+        log.info("Success, cancel vakita id: " + id);
         this.updateVakita(vakitaToCancel);
     }
 
