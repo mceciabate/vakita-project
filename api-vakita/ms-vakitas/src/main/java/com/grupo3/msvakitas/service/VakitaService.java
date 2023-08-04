@@ -107,9 +107,35 @@ public class VakitaService {
         return vakitaListByContributor;
     }
 
-    //TODO: DROP/UPDATE/ADD CONTRIBUTOR/?
+    public VakitaDTO updateVakita(VakitaDTO vakita){
+        if(vakitaRepository.existsById(vakita.getId())){
+            Vakita vakitaToSave = mapper.map(vakita, Vakita.class);
+            vakitaRepository.save(vakitaToSave);
+        }
+        return vakita;
+    }
 
+    public void addContributor(Long id, UserDTO user){
+        VakitaDTO vakita = this.getVakitaById(id);
+        List<UserDTO> contributors = vakita.getContributors();
+        contributors.add(user);
+        this.updateVakita(vakita);
+    }
 
+    public void deleteVakita(Long id){
+        VakitaDTO vakitaToDrop = this.getVakitaById(id);
+        Vakita vakitaEntityToDrop = mapper.map(vakitaToDrop, Vakita.class);
+        vakitaRepository.delete(vakitaEntityToDrop);
+
+    }
+
+    public void cancelVakita(Long id){
+        VakitaDTO vakitaToCancel = this.getVakitaById(id);
+        if (vakitaToCancel.getIsActive() == true){
+            vakitaToCancel.setIsActive(false);
+        }
+        this.updateVakita(vakitaToCancel);
+    }
 
 }
 
