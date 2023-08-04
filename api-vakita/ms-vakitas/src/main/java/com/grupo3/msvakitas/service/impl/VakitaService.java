@@ -1,9 +1,10 @@
-package com.grupo3.msvakitas.service;
+package com.grupo3.msvakitas.service.impl;
 
 import com.grupo3.msvakitas.model.dto.UserDTO;
 import com.grupo3.msvakitas.model.dto.VakitaDTO;
 import com.grupo3.msvakitas.model.entity.Vakita;
 import com.grupo3.msvakitas.repository.IVakitaRepository;
+import com.grupo3.msvakitas.service.IVakitaService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,30 +14,28 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class VakitaService {
+public class VakitaService implements IVakitaService {
 
 
     //TODO LOGUEO
-    //TODO: CREAR INTERFAZ
-    //TODO AUTOWIRED NO ESTARÍA FUNCIONANDO
-    @Autowired
     private final ModelMapper mapper;
-    @Autowired
     private final IVakitaRepository vakitaRepository;
 
+    @Autowired
     public VakitaService(IVakitaRepository vakitaRepository, ModelMapper mapper) {
         this.vakitaRepository = vakitaRepository;
         this.mapper = mapper;
     }
 
 
+    @Override
     public List<VakitaDTO> getAllVakitas(){
         List<VakitaDTO> listaVakitas = new ArrayList<>();
         List<Vakita> vakitas = vakitaRepository.findAll();
         vakitas.forEach(vakita -> listaVakitas.add(mapper.map(vakita, VakitaDTO.class)));
         return  listaVakitas;
     }
-
+    @Override
     public VakitaDTO getVakitaById(Long id){
         Optional<Vakita> vakita = vakitaRepository.findById(id);
         VakitaDTO vakitaDTO = null;
@@ -46,6 +45,7 @@ public class VakitaService {
         return  vakitaDTO;
     }
 
+    @Override
     public List<VakitaDTO> getVakitaByOwner(Long id){
         List<VakitaDTO> listaVakitas = this.getAllVakitas();
         List<VakitaDTO> vakitasByUser = new ArrayList<>();
@@ -58,6 +58,7 @@ public class VakitaService {
         return vakitasByUser;
     }
 
+    @Override
     public VakitaDTO createVakita(VakitaDTO vakita){
         //TODO validaciones aqui?
         Vakita vakitaNew = mapper.map(vakita, Vakita.class);
@@ -66,6 +67,7 @@ public class VakitaService {
 
     }
 
+    @Override
     public String modifyAmount(Double amount, Long id){
         String response;
         VakitaDTO vakitaModify = this.getVakitaById(id);
@@ -81,6 +83,7 @@ public class VakitaService {
         return response;
     }
 
+    @Override
     public List<VakitaDTO> getVakitasActives(){
         List<VakitaDTO> lista = this.getAllVakitas();
         List<VakitaDTO> listaActivas = new ArrayList<>();
@@ -92,7 +95,8 @@ public class VakitaService {
         return  listaActivas;
     }
 
-    public List<VakitaDTO> getVakitasbyContributors(String email){
+    @Override
+    public List<VakitaDTO> getVakitasByContributors(String email){
         List<VakitaDTO> allVakitas = this.getAllVakitas();
         List<VakitaDTO> vakitaListByContributor = new ArrayList<>();
         //TODO: FIX FOR DENTRO DEL FOR
@@ -107,6 +111,7 @@ public class VakitaService {
         return vakitaListByContributor;
     }
 
+    @Override
     public VakitaDTO updateVakita(VakitaDTO vakita){
         if(vakitaRepository.existsById(vakita.getId())){
             Vakita vakitaToSave = mapper.map(vakita, Vakita.class);
@@ -115,6 +120,7 @@ public class VakitaService {
         return vakita;
     }
 
+    @Override
     public void addContributor(Long id, UserDTO user){
         VakitaDTO vakita = this.getVakitaById(id);
         List<UserDTO> contributors = vakita.getContributors();
@@ -129,6 +135,7 @@ public class VakitaService {
 
     }
 
+    @Override
     public void cancelVakita(Long id){
         VakitaDTO vakitaToCancel = this.getVakitaById(id);
         if (vakitaToCancel.getIsActive() == true){
