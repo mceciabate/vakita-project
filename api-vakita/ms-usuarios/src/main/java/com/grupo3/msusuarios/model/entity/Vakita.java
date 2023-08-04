@@ -7,11 +7,12 @@ import lombok.Data;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
 public class Vakita implements Serializable {
+
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -31,5 +32,5 @@ public class Vakita implements Serializable {
             inverseJoinColumns = @JoinColumn(name="FK_users", nullable = false)
     )
     @ManyToMany(cascade = CascadeType.ALL)
-    private ArrayList<User> users;
+    private List<User> users;
 }

@@ -5,13 +5,14 @@ import lombok.NoArgsConstructor;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
+
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -37,7 +38,7 @@ public class User implements Serializable {
     @Column(name = "BIRTHDATE", nullable = false)
     private LocalDate birthdate;
 
-    @ManyToMany(mappedBy = "users")
-    private ArrayList<Vakita> vakitas;
+    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
+    private List<Vakita> vakitas;
 
 }
