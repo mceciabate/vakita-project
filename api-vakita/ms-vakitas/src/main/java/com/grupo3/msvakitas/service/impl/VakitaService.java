@@ -25,6 +25,8 @@ public class VakitaService implements IVakitaService {
 
     @Autowired
     private IVakitaRepository vakitaRepository;
+
+    //Método para traer todas las vakitas
     @Override
     public List<VakitaDTO> getAllVakitas(){
         List<VakitaDTO> listaVakitas = new ArrayList<>();
@@ -33,6 +35,8 @@ public class VakitaService implements IVakitaService {
         log.info("Get all vakitas list");
         return  listaVakitas;
     }
+
+    //Método para traer vakitas por id
     @Override
     public VakitaDTO getVakitaById(Long id){
         Optional<Vakita> vakita = vakitaRepository.findById(id);
@@ -44,20 +48,22 @@ public class VakitaService implements IVakitaService {
         return  vakitaDTO;
     }
 
+    //Método para filtrar las vakitas por usuario que la creó
     @Override
     public List<VakitaDTO> getVakitaByOwner(Long id){
         List<VakitaDTO> listaVakitas = this.getAllVakitas();
-        List<VakitaDTO> vakitasByUser = new ArrayList<>();
+        List<VakitaDTO> vakitasByOwner = new ArrayList<>();
         for (VakitaDTO vakita : listaVakitas) {
             if(vakita.getIdCreatorUser().equals(id)){
-                vakitasByUser.add(vakita);
+                vakitasByOwner.add(vakita);
             }
 
         }
-        log.info("Get vakitasByOwner. Size: " + vakitasByUser.size());
-        return vakitasByUser;
+        log.info("Get vakitasByOwner. Size: " + vakitasByOwner.size());
+        return vakitasByOwner;
     }
 
+    //Método para crear una nueva vakita
     @Override
     public VakitaDTO createVakita(VakitaDTO vakita){
         //TODO validaciones aqui?
@@ -68,29 +74,29 @@ public class VakitaService implements IVakitaService {
 
     }
 
+    //Método para modificar el saldo de una vaquita
     @Override
-    public String modifyAmount(Double amount, Long id){
-        String response;
+    public void modifyAmount(Double amount, Long id){
         VakitaDTO vakitaModify = this.getVakitaById(id);
         Double amountDiference = vakitaModify.getTotalAmount() - vakitaModify.getCumulativeAmount();
         if(vakitaModify.getIsActive() == true && amount <= amountDiference ){
             Double deposit = vakitaModify.getCumulativeAmount() + amount;
             vakitaModify.setCumulativeAmount(deposit);
-            response = "Has aumentado el saldo de tu vakita exiosamente";
+            this.updateVakita(vakitaModify);
         }
         else{
-            response = "No se puede modificar el saldo";
             log.info("Error from amount method");
         }
-        log.info("Success, amount update");
-        return response;
+        log.info("Success, amount update: "+ vakitaModify.getCumulativeAmount());
 
     }
 
+
+    //Este método filtra las vakitas activas de un user
     @Override
     //TODO MODIFICAR ESTE METODO
-    public List<VakitaDTO> getVakitasActives(){
-        List<VakitaDTO> lista = this.getAllVakitas();
+    public List<VakitaDTO> getVakitasActivesByOwner(Long id){
+        List<VakitaDTO> lista = this.getVakitaByOwner(id);
         List<VakitaDTO> listaActivas = new ArrayList<>();
         for (VakitaDTO vakita : lista) {
             if (vakita.getIsActive()==true){
@@ -98,28 +104,32 @@ public class VakitaService implements IVakitaService {
             }
         }
         //TODO completar este logger
-        log.info("Get all vakitas actives from user: ");
+        log.info("Get all vakitas actives from user, size: " + listaActivas.size());
         return  listaActivas;
     }
 
+    //Este método filtra las vakitas que coinciden con un email de un user
+    //Es para saber en que vakitas participo aunque yo no sea el owner, es decir
+    //aunque yo no sea quien las creó.
+
     @Override
     public List<VakitaDTO> getVakitasByContributors(String email){
-//        List<VakitaDTO> allVakitas = this.getAllVakitas();
-//        List<VakitaDTO> vakitaListByContributor = new ArrayList<>();
-//        //TODO: FIX FOR DENTRO DEL FOR
-//        for (VakitaDTO vakita : allVakitas) {
-//            for (UserDTO contributor : vakita.getContributors()) {
-//                if(contributor.getMail() == email){
-//                    vakitaListByContributor.add(vakita);
-//                }
-//
-//            }
-//        }
-//        log.info("Get vakitas list from contributor: "+ email);
-//        return vakitaListByContributor;
-        return null;
+        List<VakitaDTO> allVakitas = this.getAllVakitas();
+        List<VakitaDTO> vakitaListByContributor = new ArrayList<>();
+        //TODO: FIX FOR DENTRO DEL FOR
+        for (VakitaDTO vakita : allVakitas) {
+            for (UserDTO contributor : vakita.getContributors()) {
+                if(contributor.getMail() == email){
+                    vakitaListByContributor.add(vakita);
+                }
+
+            }
+        }
+        log.info("Get vakitas list from contributor: "+ email);
+        return vakitaListByContributor;
     }
 
+    //Este método es para actualizar una vakita existente
     @Override
     public VakitaDTO updateVakita(VakitaDTO vakita){
         if(vakitaRepository.existsById(vakita.getId())){
@@ -130,15 +140,18 @@ public class VakitaService implements IVakitaService {
         return vakita;
     }
 
+    //Este método es para agregarme como contribuyente a una vakita
     @Override
-    public void addContributor(Long id, UserDTO user){
-//        VakitaDTO vakita = this.getVakitaById(id);
-//        vakita.getContributors().add(user);
-////        contributors.add(user);
-//        this.updateVakita(vakita);
-//        log.info("Success updating vakita: " + id);
+    public void addContributor(Long vakitaId, UserDTO user){
+        VakitaDTO vakita = this.getVakitaById(vakitaId);
+        List<UserDTO> listContributors =  vakita.getContributors();
+        listContributors.add(user);
+        this.updateVakita(vakita);
+        log.info("Success updating vakita: " + vakitaId);
     }
 
+    //Método para eliminar una vakita
+    @Override
     public void deleteVakita(Long id){
         VakitaDTO vakitaToDrop = this.getVakitaById(id);
         Vakita vakitaEntityToDrop = mapper.map(vakitaToDrop, Vakita.class);
@@ -147,6 +160,9 @@ public class VakitaService implements IVakitaService {
 
     }
 
+    //Este método es para dejar una vakita inactiva, es decir
+    //para cuando se quiera cancelar antes de la fecha de término
+    //o antes de cumplir el objetivo
     @Override
     public void cancelVakita(Long id){
         VakitaDTO vakitaToCancel = this.getVakitaById(id);

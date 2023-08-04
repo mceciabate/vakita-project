@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -52,5 +53,5 @@ public class Vakita implements Serializable {
     private VakitaTypes type;
 
     @ManyToMany(mappedBy="vakitas", fetch = FetchType.EAGER)
-    private List<User> contributors;
+    private List<User> contributors = new ArrayList<>();
 }

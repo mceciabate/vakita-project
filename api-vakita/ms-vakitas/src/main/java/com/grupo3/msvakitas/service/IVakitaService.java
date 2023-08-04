@@ -11,14 +11,14 @@ public interface IVakitaService {
     List<VakitaDTO> getAllVakitas();
     VakitaDTO getVakitaById(Long id);
     List<VakitaDTO> getVakitaByOwner(Long id);
-    List<VakitaDTO> getVakitasActives();
+    List<VakitaDTO> getVakitasActivesByOwner(Long id);
     List<VakitaDTO> getVakitasByContributors(String email);
 
     //create
     VakitaDTO createVakita(VakitaDTO vakita);
 
     //update
-    String modifyAmount(Double amount, Long id);
+    void modifyAmount(Double amount, Long id);
     VakitaDTO updateVakita(VakitaDTO vakita);
     void addContributor(Long id, UserDTO user);
     void cancelVakita(Long id);
