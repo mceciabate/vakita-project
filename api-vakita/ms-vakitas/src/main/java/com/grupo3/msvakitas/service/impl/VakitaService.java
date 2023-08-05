@@ -29,6 +29,9 @@ public class VakitaService implements IVakitaService {
     @Autowired
     private IVakitaRepository vakitaRepository;
 
+    @Autowired
+    private UsuarioService usuarioService;
+
     //Método para traer todas las vakitas
     //TODO: CONSULTAR SI QUIEREN UN ERROR O UNA LISTA VACÍA ESTÁ BIEN
     @Override
@@ -82,6 +85,8 @@ public class VakitaService implements IVakitaService {
         if(vakita.getExpirationDate().equals(LocalDate.now()) || vakita.getName() == null || vakita.getIdCreatorUser() == null){
             throw new BadRequestException("No se puede crear la vakita, corrobore los datos");
         } else {
+            UserDTO userToAdd = usuarioService.getUserById(vakita.getIdCreatorUser());
+            vakita.getContributors().add(userToAdd);
             Vakita vakitaNew = mapper.map(vakita, Vakita.class);
             vakitaRepository.save(vakitaNew);
             log.info("Saving new vakita from user:" + vakita.getIdCreatorUser());
