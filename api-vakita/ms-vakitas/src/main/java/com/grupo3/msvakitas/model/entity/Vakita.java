@@ -34,6 +34,9 @@ public class Vakita implements Serializable {
     @Column(name = "DESCRIPTION", nullable = false, length = 100)
     private String description;
 
+    @Column(name = "IMG_URL", nullable = false, length = 200)
+    private String imgURL;
+
     @Column(name = "TOTAL_AMOUNT", nullable = false)
     private Double totalAmount;
 

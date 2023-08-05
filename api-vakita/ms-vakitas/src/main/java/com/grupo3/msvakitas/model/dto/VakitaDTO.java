@@ -18,6 +18,7 @@ public class VakitaDTO {
     private String name;
     private Long idCreatorUser;
     private String description;
+    private String imgURL;
     private Double totalAmount;
     private Double cumulativeAmount = 0.0;
     private LocalDate creationDate;

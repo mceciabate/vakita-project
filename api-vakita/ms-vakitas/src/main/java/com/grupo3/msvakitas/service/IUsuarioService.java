@@ -8,4 +8,6 @@ import com.grupo3.msvakitas.model.dto.UserDTO;
 public interface IUsuarioService {
 
     void createUser(UserDTO user);
+
+    UserDTO getUserById(Long id);
 }
