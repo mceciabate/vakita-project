@@ -103,7 +103,7 @@ public class VakitaService implements IVakitaService {
             Double deposit = vakitaModify.getCumulativeAmount() + amount;
             vakitaModify.setCumulativeAmount(deposit);
             log.info("Success, amount update: "+ vakitaModify.getCumulativeAmount());
-            this.updateVakita(vakitaModify);
+            this.updateVakita(id, vakitaModify);
         }
         else if(!vakitaModify.getIsActive()){
             throw new BadRequestException("Para depositar dinero la vakita debe estar activa");
@@ -155,16 +155,21 @@ public class VakitaService implements IVakitaService {
     }
 
     //Este método es para actualizar una vakita existente
+    //LOS CAMPOS QUE SE PERMITEN MODIFICAR SON: Descripcion, imagen, fecha de expiracion
     @Override
-    public VakitaDTO updateVakita(VakitaDTO vakita) throws BadRequestException {
+    public VakitaDTO updateVakita(Long id, VakitaDTO vakita) throws BadRequestException, ResourceNotFoundException {
+         VakitaDTO vakitaToModify = this.getVakitaById(id);
         if (vakita.getExpirationDate().equals(LocalDate.now()) || vakita.getName() == null || vakita.getIdCreatorUser() == null){
             throw new BadRequestException("Alguno de los datos es incorrecto, no se puede actualizar la vakita");
         }
-        else if(vakitaRepository.existsById(vakita.getId())){
-            Vakita vakitaToSave = mapper.map(vakita, Vakita.class);
+        vakitaToModify.setDescription(vakita.getDescription());
+        vakitaToModify.setImgURL(vakita.getImgURL());
+        vakitaToModify.setExpirationDate(vakita.getExpirationDate());
+        if(vakitaRepository.existsById(vakitaToModify.getId())){
+            Vakita vakitaToSave = mapper.map(vakitaToModify, Vakita.class);
             vakitaRepository.save(vakitaToSave);
         }
-        log.info("Update vakita id: " + vakita.getId());
+        log.info("Update vakita id: " + id);
         return vakita;
     }
 
@@ -174,7 +179,7 @@ public class VakitaService implements IVakitaService {
         VakitaDTO vakita = this.getVakitaById(vakitaId);
         List<UserDTO> listContributors =  vakita.getContributors();
         listContributors.add(user);
-        this.updateVakita(vakita);
+        this.updateVakita(vakitaId, vakita);
         log.info("Success updating vakita: " + vakitaId);
     }
 
@@ -202,7 +207,7 @@ public class VakitaService implements IVakitaService {
             vakitaToCancel.setIsActive(false);
         }
         log.info("Success, cancel vakita id: " + id);
-        this.updateVakita(vakitaToCancel);
+        this.updateVakita(id, vakitaToCancel);
     }
 
 }

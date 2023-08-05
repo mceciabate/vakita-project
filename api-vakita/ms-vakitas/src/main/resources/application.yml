@@ -14,10 +14,12 @@ spring:
     hibernate.ddl-auto: create-drop
     generate-ddl: true
     show-sql: true
-    defer-datasource-initialization: true
-  sql:
-    init:
-      mode: always
+
+#Inicializacion de data en la bd, toma el script que está en resources al iniciar el ms
+#    defer-datasource-initialization: true
+#  sql:
+#    init:
+#      mode: always
 
 eureka:
   client:

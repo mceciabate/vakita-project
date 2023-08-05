@@ -44,11 +44,10 @@ public class VakitaController {
     }
 
     @PutMapping("/{id}")
-    //MAL- PIDE EL ID
     @ResponseStatus(code = HttpStatus.OK)
 //    @PreAuthorized("hasRole('USER')")
-    public ResponseEntity updateVakita(@RequestBody VakitaDTO vakita) throws BadRequestException {
-        vakitaService.updateVakita(vakita);
+    public ResponseEntity updateVakita(@PathVariable Long id, @RequestBody VakitaDTO vakita) throws BadRequestException, ResourceNotFoundException {
+        vakitaService.updateVakita(id, vakita);
         return ResponseEntity.ok().build();
     }
 

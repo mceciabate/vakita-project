@@ -21,7 +21,10 @@ public interface IVakitaService {
 
     //update
     void modifyAmount(Double amount, Long id) throws ResourceNotFoundException, BadRequestException;
-    VakitaDTO updateVakita(VakitaDTO vakita) throws BadRequestException;
+
+    //Este método es para actualizar una vakita existente
+    VakitaDTO updateVakita(Long id, VakitaDTO vakita) throws BadRequestException, ResourceNotFoundException;
+
     void addContributor(Long id, UserDTO user) throws ResourceNotFoundException, BadRequestException;
     void cancelVakita(Long id) throws ResourceNotFoundException, BadRequestException;
 
