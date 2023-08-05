@@ -1,5 +1,12 @@
 * {
-  margin: 0;
-  padding: 0;
-  text-decoration: unset;
+    margin: 0;
+    padding: 0;
+    text-decoration: unset;
+  }
+
+
+.body{
+  width: 100%;
+  height: 100%;
 }
+

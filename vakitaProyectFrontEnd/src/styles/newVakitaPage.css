@@ -1,0 +1,11 @@
+.buttonSubmit{
+    padding: 10px;
+    margin-right: 15px;
+    border-radius: .7rem;
+    cursor: pointer;
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+    background-color: #DEC6C6;
+    font-family: 'Inria Sans', sans-serif;
+}
