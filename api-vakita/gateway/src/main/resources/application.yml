@@ -4,22 +4,21 @@ server:
 spring:
   application:
     name: api-gateway
-#  cloud:
-#    gateway:
-#      discovery:
-#        locator:
-#          enabled: true
-#      routes:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+      ##        Completar cuando estï¿½ ready
 #        - id: ms-usuarios
 #          uri: lb://api-usuarios
 ##          predicates:
-##        Completar cuando esté ready
 ##            - Path=/api/**
-#        - id: ms-vakitas
-#          uri: lb://api-vakitas
-##          predicates:
-##        Completar cuando esté ready
-##            - Path=/api/**
+        - id: ms-vakitas
+          uri: lb://ms-vakitas
+          predicates:
+            - Path=/api/v1/vakita/**
 
 eureka:
   client:
@@ -27,19 +26,23 @@ eureka:
     fetchRegistry: true
     serviceURL:
       defaultZone: http://localhost:8761/eureka
+
 management:
   endpoint:
     gateway:
       enabled: true
+  endpoints:
+    web:
+      exposure:
+#        include: "*"
+        include: gateway
+
 
 info:
   app:
     name: ${spring.application.name}
 
 
-  endpoints:
-    web:
-      exposure:
-        include: "*"
+
 
 
