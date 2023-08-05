@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -25,6 +24,21 @@ public class VakitaDTO {
     private LocalDate expirationDate;
     private Boolean isActive;
     private VakitaTypes type;
-    private List<UserDTO> contributors = new ArrayList<>();
+    private List<UserDTO> contributors;
 
+    //CONSTRUCTOR SIN ID
+
+    public VakitaDTO(String name, Long idCreatorUser, String description, String imgURL, Double totalAmount, Double cumulativeAmount, LocalDate creationDate, LocalDate expirationDate, Boolean isActive, VakitaTypes type, List<UserDTO> contributors) {
+        this.name = name;
+        this.idCreatorUser = idCreatorUser;
+        this.description = description;
+        this.imgURL = imgURL;
+        this.totalAmount = totalAmount;
+        this.cumulativeAmount = cumulativeAmount;
+        this.creationDate = creationDate;
+        this.expirationDate = expirationDate;
+        this.isActive = isActive;
+        this.type = type;
+        this.contributors = contributors;
+    }
 }
