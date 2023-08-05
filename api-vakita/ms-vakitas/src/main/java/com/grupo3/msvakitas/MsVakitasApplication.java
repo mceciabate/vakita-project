@@ -12,4 +12,5 @@ public class MsVakitasApplication {
 		SpringApplication.run(MsVakitasApplication.class, args);
 	}
 
+
 }

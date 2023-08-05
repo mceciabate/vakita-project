@@ -1,12 +1,15 @@
 package com.grupo3.msvakitas.model.entity;
+
 import com.grupo3.msvakitas.model.enums.VakitaTypes;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 
 @Data
@@ -49,6 +52,6 @@ public class Vakita implements Serializable {
     @Column(name = "TYPE", nullable = false)
     private VakitaTypes type;
 
-    @ManyToMany(mappedBy="vakitas")
-    private ArrayList<User> contributors;
+    @ManyToMany(mappedBy="vakitas", fetch = FetchType.EAGER)
+    private List<User> contributors = new ArrayList<>();
 }
