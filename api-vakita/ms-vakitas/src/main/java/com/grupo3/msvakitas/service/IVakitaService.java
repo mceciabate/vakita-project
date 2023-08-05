@@ -12,7 +12,7 @@ public interface IVakitaService {
     //read
     List<VakitaDTO> getAllVakitas();
     VakitaDTO getVakitaById(Long id) throws ResourceNotFoundException;
-    List<VakitaDTO> getVakitaByOwner(Long id) throws ResourceNotFoundException;
+    List<VakitaDTO> getVakitasByOwner(Long id) throws ResourceNotFoundException;
     List<VakitaDTO> getVakitasActivesByOwner(Long id) throws ResourceNotFoundException;
     List<VakitaDTO> getVakitasByContributors(String email) throws ResourceNotFoundException, BadRequestException;
 

@@ -84,7 +84,7 @@ public class VakitaServiceTest {
     @Test
     public void dGetVakitaByOwner() throws ResourceNotFoundException, BadRequestException{
         this.bGetAllVakitas();
-        List<VakitaDTO> vakitasByOwner = vakitaService.getVakitaByOwner(1L);
+        List<VakitaDTO> vakitasByOwner = vakitaService.getVakitasByOwner(1L);
         Assert.assertTrue(vakitasByOwner.size() == 2);
 
     }
