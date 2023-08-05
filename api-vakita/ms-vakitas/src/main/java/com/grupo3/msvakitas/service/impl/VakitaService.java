@@ -1,5 +1,7 @@
 package com.grupo3.msvakitas.service.impl;
 
+import com.grupo3.msvakitas.handler.BadRequestException;
+import com.grupo3.msvakitas.handler.ResourceNotFoundException;
 import com.grupo3.msvakitas.model.dto.UserDTO;
 import com.grupo3.msvakitas.model.dto.VakitaDTO;
 import com.grupo3.msvakitas.model.entity.Vakita;
@@ -10,6 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +30,7 @@ public class VakitaService implements IVakitaService {
     private IVakitaRepository vakitaRepository;
 
     //Método para traer todas las vakitas
+    //TODO: CONSULTAR SI QUIEREN UN ERROR O UNA LISTA VACÍA ESTÁ BIEN
     @Override
     public List<VakitaDTO> getAllVakitas(){
         List<VakitaDTO> listaVakitas = new ArrayList<>();
@@ -38,73 +42,84 @@ public class VakitaService implements IVakitaService {
 
     //Método para traer vakitas por id
     @Override
-    public VakitaDTO getVakitaById(Long id){
+    public VakitaDTO getVakitaById(Long id) throws ResourceNotFoundException {
         Optional<Vakita> vakita = vakitaRepository.findById(id);
-        VakitaDTO vakitaDTO = null;
-        if(vakita.isPresent()){
+        VakitaDTO vakitaDTO;
+        if(!vakita.isPresent()){
+           throw new ResourceNotFoundException("No se encuentra la vakita con id "+id);
+        }
+        else{
             vakitaDTO = mapper.map(vakita, VakitaDTO.class);
         }
         log.info("Get vakita id:" + vakitaDTO.getId());
         return  vakitaDTO;
+
     }
 
     //Método para filtrar las vakitas por usuario que la creó
     @Override
-    public List<VakitaDTO> getVakitaByOwner(Long id){
+    public List<VakitaDTO> getVakitaByOwner(Long id) throws ResourceNotFoundException{
         List<VakitaDTO> listaVakitas = this.getAllVakitas();
         List<VakitaDTO> vakitasByOwner = new ArrayList<>();
         for (VakitaDTO vakita : listaVakitas) {
             if(vakita.getIdCreatorUser().equals(id)){
                 vakitasByOwner.add(vakita);
             }
-
         }
-        log.info("Get vakitasByOwner. Size: " + vakitasByOwner.size());
-        return vakitasByOwner;
+        if (vakitasByOwner.size() == 0) {
+            throw new ResourceNotFoundException("El usuario con id: " + id +" no tiene vakitas para mostrar");
+        }
+        else{
+            log.info("Get vakitasByOwner. Size: " + vakitasByOwner.size());
+            return vakitasByOwner;
+        }
+
     }
 
     //Método para crear una nueva vakita
     @Override
-    public VakitaDTO createVakita(VakitaDTO vakita){
-        //TODO validaciones aqui?
-        Vakita vakitaNew = mapper.map(vakita, Vakita.class);
-        vakitaRepository.save(vakitaNew);
-        log.info("Saving new vakita from user:" + vakita.getIdCreatorUser());
-        return mapper.map(vakitaNew, VakitaDTO.class);
-
+    public VakitaDTO createVakita(VakitaDTO vakita) throws BadRequestException {
+        if(vakita.getExpirationDate().equals(LocalDate.now()) || vakita.getName() == null || vakita.getIdCreatorUser() == null){
+            throw new BadRequestException("No se puede crear la vakita, corrobore los datos");
+        } else {
+            Vakita vakitaNew = mapper.map(vakita, Vakita.class);
+            vakitaRepository.save(vakitaNew);
+            log.info("Saving new vakita from user:" + vakita.getIdCreatorUser());
+            return mapper.map(vakitaNew, VakitaDTO.class);
+        }
     }
 
     //Método para modificar el saldo de una vaquita
     @Override
-    public void modifyAmount(Double amount, Long id){
+    public void modifyAmount(Double amount, Long id) throws ResourceNotFoundException, BadRequestException{
         VakitaDTO vakitaModify = this.getVakitaById(id);
         Double amountDiference = vakitaModify.getTotalAmount() - vakitaModify.getCumulativeAmount();
-        if(vakitaModify.getIsActive() == true && amount <= amountDiference ){
+        if(vakitaModify.getIsActive() && amount <= amountDiference ){
             Double deposit = vakitaModify.getCumulativeAmount() + amount;
             vakitaModify.setCumulativeAmount(deposit);
+            log.info("Success, amount update: "+ vakitaModify.getCumulativeAmount());
             this.updateVakita(vakitaModify);
         }
-        else{
-            log.info("Error from amount method");
+        else if(!vakitaModify.getIsActive()){
+            throw new BadRequestException("Para dpositar dinero la vakita debe estar activa");
         }
-        log.info("Success, amount update: "+ vakitaModify.getCumulativeAmount());
-
+        else if(amount> amountDiference){
+            throw new BadRequestException("El monto a depositar no puede superar el total restante");
+        }
     }
 
 
     //Este método filtra las vakitas activas de un user
     @Override
-    //TODO MODIFICAR ESTE METODO
-    public List<VakitaDTO> getVakitasActivesByOwner(Long id){
+    public List<VakitaDTO> getVakitasActivesByOwner(Long id) throws ResourceNotFoundException{
         List<VakitaDTO> lista = this.getVakitaByOwner(id);
         List<VakitaDTO> listaActivas = new ArrayList<>();
         for (VakitaDTO vakita : lista) {
-            if (vakita.getIsActive()==true){
+            if (vakita.getIsActive()){
                 listaActivas.add(vakita);
             }
         }
-        //TODO completar este logger
-        log.info("Get all vakitas actives from user, size: " + listaActivas.size());
+        log.info("Get all vakitas actives from user "+id+", size: " + listaActivas.size());
         return  listaActivas;
     }
 
@@ -113,17 +128,19 @@ public class VakitaService implements IVakitaService {
     //aunque yo no sea quien las creó.
 
     @Override
-    public List<VakitaDTO> getVakitasByContributors(String email){
+    public List<VakitaDTO> getVakitasByContributors(String email) throws ResourceNotFoundException {
         List<VakitaDTO> allVakitas = this.getAllVakitas();
         List<VakitaDTO> vakitaListByContributor = new ArrayList<>();
         //TODO: FIX FOR DENTRO DEL FOR
         for (VakitaDTO vakita : allVakitas) {
             for (UserDTO contributor : vakita.getContributors()) {
-                if(contributor.getMail() == email){
+                if(contributor.getMail().equals(email)){
                     vakitaListByContributor.add(vakita);
                 }
-
             }
+        }
+        if(vakitaListByContributor.size() == 0){
+            throw new ResourceNotFoundException("El usuario no tiene vakitas para mostrar");
         }
         log.info("Get vakitas list from contributor: "+ email);
         return vakitaListByContributor;
@@ -131,7 +148,7 @@ public class VakitaService implements IVakitaService {
 
     //Este método es para actualizar una vakita existente
     @Override
-    public VakitaDTO updateVakita(VakitaDTO vakita){
+    public VakitaDTO updateVakita(VakitaDTO vakita) throws BadRequestException {
         if(vakitaRepository.existsById(vakita.getId())){
             Vakita vakitaToSave = mapper.map(vakita, Vakita.class);
             vakitaRepository.save(vakitaToSave);
@@ -142,7 +159,7 @@ public class VakitaService implements IVakitaService {
 
     //Este método es para agregarme como contribuyente a una vakita
     @Override
-    public void addContributor(Long vakitaId, UserDTO user){
+    public void addContributor(Long vakitaId, UserDTO user) throws ResourceNotFoundException, BadRequestException {
         VakitaDTO vakita = this.getVakitaById(vakitaId);
         List<UserDTO> listContributors =  vakita.getContributors();
         listContributors.add(user);
@@ -152,7 +169,7 @@ public class VakitaService implements IVakitaService {
 
     //Método para eliminar una vakita
     @Override
-    public void deleteVakita(Long id){
+    public void deleteVakita(Long id) throws ResourceNotFoundException{
         VakitaDTO vakitaToDrop = this.getVakitaById(id);
         Vakita vakitaEntityToDrop = mapper.map(vakitaToDrop, Vakita.class);
         vakitaRepository.delete(vakitaEntityToDrop);
@@ -164,9 +181,9 @@ public class VakitaService implements IVakitaService {
     //para cuando se quiera cancelar antes de la fecha de término
     //o antes de cumplir el objetivo
     @Override
-    public void cancelVakita(Long id){
+    public void cancelVakita(Long id) throws ResourceNotFoundException, BadRequestException {
         VakitaDTO vakitaToCancel = this.getVakitaById(id);
-        if (vakitaToCancel.getIsActive() == true){
+        if (vakitaToCancel.getIsActive()){
             vakitaToCancel.setIsActive(false);
         }
         log.info("Success, cancel vakita id: " + id);
