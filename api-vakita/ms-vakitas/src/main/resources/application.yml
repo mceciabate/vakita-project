@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: ms-vaquitas
+    name: ms-vakitas
   datasource:
     driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/vakitadb
@@ -14,6 +14,12 @@ spring:
     hibernate.ddl-auto: create-drop
     generate-ddl: true
     show-sql: true
+
+#Inicializacion de data en la bd, toma el script que está en resources al iniciar el ms
+#    defer-datasource-initialization: true
+#  sql:
+#    init:
+#      mode: always
 
 eureka:
   client:
@@ -34,7 +40,7 @@ management:
     env:
       enabled: true
     app:
-      name: ms-vaquitas
+      name: ms-vakitas
       version: 1.0.0
       description: Microservicios Vakitas
 
