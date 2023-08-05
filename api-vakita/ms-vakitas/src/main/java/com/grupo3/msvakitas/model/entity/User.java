@@ -23,7 +23,7 @@ public class User implements Serializable{
             joinColumns = @JoinColumn(name = "FK_vakita", nullable = false),
             inverseJoinColumns = @JoinColumn(name="FK_users", nullable = false)
     )
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Vakita> vakitas;
 }
 
