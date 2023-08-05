@@ -26,7 +26,7 @@ public interface IVakitaService {
     void cancelVakita(Long id) throws ResourceNotFoundException, BadRequestException;
 
     //delete
-    void deleteVakita(Long id) throws ResourceNotFoundException;
+    void deleteVakita(Long id) throws ResourceNotFoundException, BadRequestException;
 
 
 

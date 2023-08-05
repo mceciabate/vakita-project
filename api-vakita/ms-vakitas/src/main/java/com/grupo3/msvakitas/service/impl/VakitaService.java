@@ -180,12 +180,16 @@ public class VakitaService implements IVakitaService {
 
     //Método para eliminar una vakita
     @Override
-    public void deleteVakita(Long id) throws ResourceNotFoundException{
+    public void deleteVakita(Long id) throws ResourceNotFoundException, BadRequestException {
         VakitaDTO vakitaToDrop = this.getVakitaById(id);
-        Vakita vakitaEntityToDrop = mapper.map(vakitaToDrop, Vakita.class);
-        vakitaRepository.delete(vakitaEntityToDrop);
-        log.info("Success, vakita deleted: " + id);
-
+        if (vakitaToDrop.getIsActive() == true ){
+            throw new BadRequestException("Para eliminar un vakita debe estar inactiva");
+        }
+        else {
+            Vakita vakitaEntityToDrop = mapper.map(vakitaToDrop, Vakita.class);
+            vakitaRepository.delete(vakitaEntityToDrop);
+            log.info("Success, vakita deleted: " + id);
+        }
     }
 
     //Este método es para dejar una vakita inactiva, es decir

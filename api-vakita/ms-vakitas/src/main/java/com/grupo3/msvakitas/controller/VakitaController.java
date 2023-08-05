@@ -23,9 +23,9 @@ public class VakitaController {
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
 //    @PreAuthorized("hasRole('USER')")
-    public ResponseEntity<Long> create(@Valid @RequestBody VakitaDTO vakita) throws BadRequestException {
+    public ResponseEntity create(@Valid @RequestBody VakitaDTO vakita) throws BadRequestException {
         vakitaService.createVakita(vakita);
-        return ResponseEntity.ok(vakita.getId());
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping
@@ -42,7 +42,7 @@ public class VakitaController {
         return ResponseEntity.ok(vakitaService.getVakitaById(id));
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     @ResponseStatus(code = HttpStatus.OK)
 //    @PreAuthorized("hasRole('USER')")
     public ResponseEntity updateVakita(@RequestBody VakitaDTO vakita) throws BadRequestException {
@@ -52,8 +52,8 @@ public class VakitaController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(code = HttpStatus.OK)
-//    @PreAuthorized("hasRole('USER')")
-    public ResponseEntity deleteVakita(@PathVariable Long id) throws ResourceNotFoundException {
+//    @PreAuthorized("hasRole('ADMIN')")
+    public ResponseEntity deleteVakita(@PathVariable Long id) throws ResourceNotFoundException, BadRequestException {
         vakitaService.deleteVakita(id);
         return ResponseEntity.ok().build();
     }
