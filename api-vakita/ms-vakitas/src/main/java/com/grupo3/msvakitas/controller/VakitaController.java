@@ -21,6 +21,7 @@ public class VakitaController {
     private VakitaService vakitaService;
 
     @PostMapping
+    //TODO ESTA DEVOLVIENDO 200
     @ResponseStatus(code = HttpStatus.CREATED)
 //    @PreAuthorized("hasRole('USER')")
     public ResponseEntity create(@Valid @RequestBody VakitaDTO vakita) throws BadRequestException {
@@ -43,6 +44,7 @@ public class VakitaController {
     }
 
     @PutMapping("/{id}")
+    //MAL- PIDE EL ID
     @ResponseStatus(code = HttpStatus.OK)
 //    @PreAuthorized("hasRole('USER')")
     public ResponseEntity updateVakita(@RequestBody VakitaDTO vakita) throws BadRequestException {
