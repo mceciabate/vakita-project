@@ -1,9 +1,0 @@
-package com.grupo3.msusuarios.repository;
-
-import com.grupo3.msusuarios.model.entity.User;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
-@Repository
-public interface IUserRepository extends JpaRepository<User, Long>{
-}
