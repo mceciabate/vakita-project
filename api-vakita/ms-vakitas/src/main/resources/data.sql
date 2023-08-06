@@ -1,3 +1,5 @@
+create schema if not exists vakitadb ;
+use vakitadb;
 -- USUARIOS
 INSERT INTO vakitadb.users (user_id,user_email) VALUES(1,"andres@micorreo.com");
 INSERT INTO vakitadb.users (user_id,user_email) VALUES(2,"mglendinning0@correo.com");
