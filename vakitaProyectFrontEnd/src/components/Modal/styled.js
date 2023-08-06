@@ -2,7 +2,7 @@ import { keyframes, styled } from "styled-components";
 
 const slideInAnimation = keyframes`
     from {
-        transform: translateX(100%);
+        transform: translateX(-100%);
     }
     to {
         transform: translateX(0);
@@ -16,19 +16,34 @@ export const ModalContainer = styled.article`
     left: 0;
     width: 100%;
     min-height: 100vh;
-    background-color: gray;
+    background-color: rgba(0, 0, 0, 0.60);
     display: ${props => props.isOpen ? "flex" : "none"};
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: flex-start;
+
+    @media (max-width: 769px) {
+        display: flex;
+    }
 
     .modal-container {
         background-color: white;
         position: relative;
         overflow-y: auto;
-        /* animation: ${slideInAnimation} 0.3s ease; */
+        animation: ${slideInAnimation} 0.3s ease;
         height: 100vh;
         width: 90%;
         max-width: 375px;
-        margin-left: 1.2rem;
+        margin-right: 1.2rem;
+    }
+
+    .header-menu-closer {
+        display: flex;
+        padding: 10px;
+        background-color: rgb(250,189, 0);
+        color: white;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.1rem;
+        font-weight: 700;
     }
 `;

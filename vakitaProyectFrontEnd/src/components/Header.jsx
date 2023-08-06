@@ -30,7 +30,6 @@ function Header() {
 
         <button onClick={()=> {openModal()}}>pruebaaa</button>
         <BurgerMenu isOpen={isOpenModal} closeMenu={closeModal}/>
-
       </div>
 
     </header>

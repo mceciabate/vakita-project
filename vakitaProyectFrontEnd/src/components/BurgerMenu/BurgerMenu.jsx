@@ -1,10 +1,11 @@
+import Menu from "../Menu/Menu";
 import ModalMenu from "../Modal/ModalMenu";
 
 const BurgerMenu = ({isOpen, closeMenu}) => {
 
     return (
         <ModalMenu isOpen={isOpen} closeModal={closeMenu}>
-            <p>ASDASDASD</p>
+            <Menu/>
         </ModalMenu>
     )
 
