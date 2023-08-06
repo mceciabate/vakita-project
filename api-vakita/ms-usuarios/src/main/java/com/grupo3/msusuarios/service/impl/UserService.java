@@ -1,6 +1,7 @@
 package com.grupo3.msusuarios.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.grupo3.msusuarios.handler.BadRequestException;
 import com.grupo3.msusuarios.model.dto.UserDTO;
 import com.grupo3.msusuarios.model.entity.User;
 import com.grupo3.msusuarios.repository.IUserRepository;
@@ -8,6 +9,7 @@ import com.grupo3.msusuarios.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +26,10 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public UserDTO save(UserDTO userDTO) {
+    public UserDTO save(UserDTO userDTO) throws BadRequestException {
+        if (userDTO.getBirthdate().equals(LocalDate.now() ||null) {
+            throw new BadRequestException("No se puede crear el usuario");
+        }
         User user = mapper.convertValue(userDTO, User.class);
         userRepository.save(user);
         return userDTO;

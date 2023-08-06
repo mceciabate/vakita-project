@@ -34,6 +34,5 @@ public class UsuarioService implements IUsuarioService {
         Optional<User> userEntity = usuarioRepository.findById(id);
         UserDTO user = mapper.map(userEntity, UserDTO.class);
         return user;
-
     }
 }
