@@ -3,6 +3,7 @@ package com.grupo3.msvakitas.controller;
 import com.grupo3.msvakitas.handler.BadRequestException;
 import com.grupo3.msvakitas.handler.ResourceNotFoundException;
 import com.grupo3.msvakitas.model.dto.VakitaDTO;
+import com.grupo3.msvakitas.model.dto.VakitaPatchDTO;
 import com.grupo3.msvakitas.service.impl.VakitaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,9 +71,17 @@ public class VakitaController {
     }
 
     //MODIFICAR DESCRIPCION, IMAGEN O FECHA DE EXPIRACION(ALARGAR EL PLAZO DE VENCIMIENTO)
+    @PatchMapping("/{id}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public ResponseEntity partialUpdateVakita(@PathVariable Long id, @RequestBody VakitaPatchDTO vakita ) throws BadRequestException, ResourceNotFoundException {
+        vakitaService.partialUpdate(id, vakita.getKey(), vakita.getValue());
+        return ResponseEntity.ok().build();
+    }
+
+    //MODIFICAR TODA LA VAKITA
     @PutMapping("/{id}")
     @ResponseStatus(code = HttpStatus.OK)
-//    @PreAuthorized("hasRole('USER')")
+//    @PreAuthorized("hasRole('ADMIN')")
     public ResponseEntity updateVakita(@PathVariable Long id, @Valid @RequestBody VakitaDTO vakita) throws BadRequestException, ResourceNotFoundException {
         vakitaService.updateVakita(id, vakita);
         return ResponseEntity.ok().build();

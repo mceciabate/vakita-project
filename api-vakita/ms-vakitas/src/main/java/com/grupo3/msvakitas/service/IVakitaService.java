@@ -24,6 +24,8 @@ public interface IVakitaService {
     //Este método es para actualizar una vakita existente
     VakitaDTO updateVakita(Long id, VakitaDTO vakita) throws BadRequestException, ResourceNotFoundException;
 
+    VakitaDTO partialUpdate(Long id, String key, String value) throws ResourceNotFoundException, BadRequestException;
+
     void addContributor(Long id, Long userId) throws ResourceNotFoundException, BadRequestException;
     void inactiveVakita(Long id) throws ResourceNotFoundException, BadRequestException;
 

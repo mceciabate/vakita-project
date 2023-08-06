@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.lang.String;
 
 @Slf4j
 @Service
@@ -162,18 +163,42 @@ public class VakitaService implements IVakitaService {
         if (vakita.getExpirationDate().equals(LocalDate.now()) || vakita.getName() == null || vakita.getIdCreatorUser() == null){
             throw new BadRequestException("Alguno de los datos es incorrecto, no se puede actualizar la vakita");
         }
+        vakitaToModify.setName(vakita.getName());
+        vakitaToModify.setIdCreatorUser(vakita.getIdCreatorUser());
         vakitaToModify.setDescription(vakita.getDescription());
         vakitaToModify.setImgURL(vakita.getImgURL());
-        vakitaToModify.setExpirationDate(vakita.getExpirationDate());
-        vakitaToModify.setContributors(vakita.getContributors());
+        vakitaToModify.setTotalAmount(vakita.getTotalAmount());
         vakitaToModify.setCumulativeAmount(vakita.getCumulativeAmount());
+        vakitaToModify.setCreationDate(vakita.getCreationDate());
+        vakitaToModify.setExpirationDate(vakita.getExpirationDate());
         vakitaToModify.setIsActive(vakita.getIsActive());
+        vakitaToModify.setType(vakita.getType());
+        vakitaToModify.setContributors(vakita.getContributors());
+
         if(vakitaRepository.existsById(vakitaToModify.getId())){
             Vakita vakitaToSave = mapper.map(vakitaToModify, Vakita.class);
             vakitaRepository.save(vakitaToSave);
         }
         log.info("Update vakita id: " + id);
         return vakita;
+    }
+    //Este método es para modificar parcialmete una vakita existente
+    //LOS CAMPOS QUE SE PERMITEN MODIFICAR SON: Descripcion, imagen, fecha de expiracion
+
+    @Override
+    public VakitaDTO partialUpdate(Long id, String key, String value) throws ResourceNotFoundException, BadRequestException {
+        VakitaDTO vakitaToModify = this.getVakitaById(id);
+        if (key.equalsIgnoreCase("descripcion")){
+            vakitaToModify.setDescription(value);
+        }
+        if (key.equalsIgnoreCase("imagen")){
+            vakitaToModify.setImgURL(value);
+        }
+        if(key.equalsIgnoreCase("fecha_expiracion")){
+            vakitaToModify.setExpirationDate(LocalDate.parse(value));
+        }
+        this.updateVakita(id, vakitaToModify);
+        return vakitaToModify;
     }
 
     //Este método es para agregarme como contribuyente a una vakita
@@ -184,7 +209,7 @@ public class VakitaService implements IVakitaService {
         List<UserDTO> listContributors =  vakita.getContributors();
         listContributors.add(newContributor);
         this.updateVakita(vakitaId, vakita);
-        log.info("Success updating vakita: " + vakitaId);
+        log.info("Success updating contributor in  vakita: " + vakitaId);
     }
 
     //Método para eliminar una vakita
@@ -203,8 +228,9 @@ public class VakitaService implements IVakitaService {
 
     //Este método es para dejar una vakita inactiva, es decir
     //para cuando se quiera cancelar antes de la fecha de término
-    //o antes de cumplir el objetivo
-    //a las vakitas inctivas no se les puede modificar el saldo
+    //o antes de llegar al dinero que se puso como  objetivo.
+    //A las vakitas inctivas no se les puede agregar dinero, sería el paso
+    //previo para devolver al usuario el monto acumulado.
     @Override
     public void inactiveVakita(Long id) throws ResourceNotFoundException, BadRequestException {
         VakitaDTO vakitaToCancel = this.getVakitaById(id);
