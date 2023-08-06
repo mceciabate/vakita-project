@@ -106,7 +106,7 @@ public class VakitaServiceTest {
     @Test
     public void fGetVakitasActivesByOwner() throws ResourceNotFoundException, BadRequestException{
         this.bGetAllVakitas();
-        Assert.assertTrue(vakitaService.getVakitasActivesByOwner(1L).size() == 1);
+        Assert.assertTrue(vakitaService.getVakitasActivesByContributor(1L).size() == 1);
     }
 
 //    @Test
@@ -121,7 +121,7 @@ public class VakitaServiceTest {
     @Test
     public void hCancelVakita() throws ResourceNotFoundException, BadRequestException{
         this.aCreateVakita();
-        vakitaService.cancelVakita(1L);
+        vakitaService.inactiveVakita(1L);
         Assert.assertTrue(vakitaService.getVakitaById(1L).getIsActive() == false);
 
     }

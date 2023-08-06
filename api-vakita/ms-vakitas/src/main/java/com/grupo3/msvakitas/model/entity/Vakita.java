@@ -17,7 +17,7 @@ import java.util.List;
 @Entity
 @Table(name = "vakitas")
 public class Vakita implements Serializable {
-
+//TODO: NOT BLANK PARA VALIDATION
     @Serial
     private static final long serialVersionUID = 1L;
 
