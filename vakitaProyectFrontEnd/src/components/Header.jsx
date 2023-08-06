@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "../styles/header.css"
 import logoVaca from "../assets/LogoVaca.svg";
 import BurgerMenu from "./BurgerMenu/BurgerMenu";

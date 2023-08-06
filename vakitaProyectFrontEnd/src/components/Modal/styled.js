@@ -10,7 +10,6 @@ const slideInAnimation = keyframes`
 `
 
 export const ModalContainer = styled.article`
-    position: fixed;
     z-index: 999;
     top: 0;
     left: 0;
