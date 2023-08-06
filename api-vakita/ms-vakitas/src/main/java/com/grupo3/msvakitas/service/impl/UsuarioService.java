@@ -9,6 +9,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -26,6 +28,15 @@ public class UsuarioService implements IUsuarioService {
     public void createUser(UserDTO user) {
         User userToSave = mapper.map(user, User.class);
         usuarioRepository.save(userToSave);
+
+    }
+
+    @Override
+    public List<UserDTO> getAllUsers(){
+        List<UserDTO> listUsers = new ArrayList<>();
+        List<User> usuarios = usuarioRepository.findAll();
+        usuarios.forEach(user -> listUsers.add(mapper.map(user, UserDTO.class)));
+        return  listUsers;
 
     }
 
