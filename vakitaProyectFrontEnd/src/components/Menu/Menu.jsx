@@ -1,10 +1,11 @@
+import { MenuLateral } from "./styled";
 
 
 const Menu = () => {
     return (
-        <div>
+        <MenuLateral>
             <p>HOLA</p>
-        </div>
+        </MenuLateral>
     )
 };
 

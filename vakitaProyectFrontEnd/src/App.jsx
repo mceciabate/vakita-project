@@ -8,7 +8,9 @@ function App() {
     <div className="App"> 
     <Header/>
     <section className='section-landing'>
-      <Menu/>
+      <div className='div-menu'>
+        <Menu/>
+      </div>
       <Landing/>
     </section>
     </div>

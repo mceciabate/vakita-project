@@ -21,10 +21,6 @@ export const ModalContainer = styled.article`
     justify-content: flex-start;
     align-items: flex-start;
 
-    @media (max-width: 769px) {
-        display: flex;
-    }
-
     .modal-container {
         background-color: white;
         position: relative;

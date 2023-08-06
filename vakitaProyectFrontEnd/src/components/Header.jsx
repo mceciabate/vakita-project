@@ -9,10 +9,6 @@ function Header() {
 
   const [isOpenModal, openModal, closeModal] = useModal(false);
 
-  useEffect(() => {
-    console.log(isOpenModal)
-  }, [isOpenModal])
-
   return (
     <header className="header">
 
@@ -28,7 +24,7 @@ function Header() {
           Crear cuenta
         </button>
 
-        <button onClick={()=> {openModal()}}>pruebaaa</button>
+        <button className="nav_btn_menu" onClick={()=> {openModal()}}>pruebaaa</button>
         <BurgerMenu isOpen={isOpenModal} closeMenu={closeModal}/>
       </div>
 
