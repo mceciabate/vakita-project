@@ -1,8 +1,13 @@
 import {useRef, useEffect} from 'react';
+import { ModalContainer } from './styled';
 
-const ModalMenu = ({children, isOpen, closeModal, titleHandler}) => {
+const ModalMenu = ({children, isOpen, closeModal}) => {
 
-    const modalRef = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+    }, [])
+
+    const modalRef = useRef(null);
+
 
     useEffect(() => {
         const handleOutsideClick = (event) => {
@@ -20,12 +25,12 @@ const ModalMenu = ({children, isOpen, closeModal, titleHandler}) => {
     }, []);
 
     return (
-        <article isOpen={isOpen}>
+        <ModalContainer isOpen={isOpen}>
             <div ref={modalRef} className={`modal-container ${isOpen ? 'open' : ''}`}>
                 <button onClick={closeModal}>x</button>
                 {children}
             </div>
-        </article>
+        </ModalContainer>
     )
     
 }
