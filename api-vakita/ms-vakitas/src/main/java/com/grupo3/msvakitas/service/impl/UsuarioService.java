@@ -1,5 +1,6 @@
 package com.grupo3.msvakitas.service.impl;
 
+import com.grupo3.msvakitas.handler.ResourceNotFoundException;
 import com.grupo3.msvakitas.model.dto.UserDTO;
 import com.grupo3.msvakitas.model.entity.User;
 import com.grupo3.msvakitas.repository.IUsuarioRepository;
@@ -41,9 +42,15 @@ public class UsuarioService implements IUsuarioService {
     }
 
     @Override
-    public UserDTO getUserById(Long id){
+    public UserDTO getUserById(Long id) throws ResourceNotFoundException {
         Optional<User> userEntity = usuarioRepository.findById(id);
-        UserDTO user = mapper.map(userEntity, UserDTO.class);
+        UserDTO user;
+        if(!userEntity.isPresent()){
+            throw new ResourceNotFoundException("No existe el usuario");
+        }
+        else{
+            user = mapper.map(userEntity, UserDTO.class);
+        }
         return user;
 
     }

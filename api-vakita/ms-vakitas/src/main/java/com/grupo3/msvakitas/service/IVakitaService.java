@@ -12,11 +12,11 @@ public interface IVakitaService {
     List<VakitaDTO> getAllVakitas();
     VakitaDTO getVakitaById(Long id) throws ResourceNotFoundException;
     List<VakitaDTO> getVakitasByOwner(Long id) throws ResourceNotFoundException;
-    List<VakitaDTO> getVakitasActivesByOwner(Long id) throws ResourceNotFoundException;
+    List<VakitaDTO> getVakitasActivesByContributor(Long userId) throws ResourceNotFoundException;
     List<VakitaDTO> getVakitasByContributors(Long userId) throws ResourceNotFoundException, BadRequestException;
 
     //create
-    VakitaDTO createVakita(VakitaDTO vakita) throws BadRequestException;
+    VakitaDTO createVakita(VakitaDTO vakita) throws BadRequestException, ResourceNotFoundException;
 
     //update
     void modifyAmount(Double amount, Long id) throws ResourceNotFoundException, BadRequestException;

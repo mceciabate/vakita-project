@@ -81,7 +81,7 @@ public class VakitaService implements IVakitaService {
 
     //Método para crear una nueva vakita
     @Override
-    public VakitaDTO createVakita(VakitaDTO vakita) throws BadRequestException {
+    public VakitaDTO createVakita(VakitaDTO vakita) throws BadRequestException, ResourceNotFoundException {
         if(vakita.getExpirationDate().equals(LocalDate.now()) || vakita.getName() == null || vakita.getIdCreatorUser() == null){
             throw new BadRequestException("No se puede crear la vakita, corrobore los datos");
         } else {
@@ -116,8 +116,8 @@ public class VakitaService implements IVakitaService {
 
     //Este método filtra las vakitas activas de un user
     @Override
-    public List<VakitaDTO> getVakitasActivesByOwner(Long id) throws ResourceNotFoundException{
-        List<VakitaDTO> lista = this.getVakitasByOwner(id);
+    public List<VakitaDTO> getVakitasActivesByContributor(Long id) throws ResourceNotFoundException{
+        List<VakitaDTO> lista = this.getVakitasByContributors(id);
         List<VakitaDTO> listaActivas = new ArrayList<>();
         for (VakitaDTO vakita : lista) {
             if (vakita.getIsActive()){
@@ -166,6 +166,8 @@ public class VakitaService implements IVakitaService {
         vakitaToModify.setImgURL(vakita.getImgURL());
         vakitaToModify.setExpirationDate(vakita.getExpirationDate());
         vakitaToModify.setContributors(vakita.getContributors());
+        vakitaToModify.setCumulativeAmount(vakita.getCumulativeAmount());
+        vakitaToModify.setIsActive(vakita.getIsActive());
         if(vakitaRepository.existsById(vakitaToModify.getId())){
             Vakita vakitaToSave = mapper.map(vakitaToModify, Vakita.class);
             vakitaRepository.save(vakitaToSave);

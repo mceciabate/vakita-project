@@ -1,5 +1,6 @@
 package com.grupo3.msvakitas.service;
 
+import com.grupo3.msvakitas.handler.ResourceNotFoundException;
 import com.grupo3.msvakitas.model.dto.UserDTO;
 
 import java.util.List;
@@ -12,5 +13,5 @@ public interface IUsuarioService {
 
     List<UserDTO> getAllUsers();
 
-    UserDTO getUserById(Long id);
+    UserDTO getUserById(Long id) throws ResourceNotFoundException;
 }

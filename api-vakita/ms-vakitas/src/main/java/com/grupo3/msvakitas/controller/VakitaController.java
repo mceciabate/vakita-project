@@ -25,7 +25,7 @@ public class VakitaController {
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
 //    @PreAuthorized("hasRole('USER')")
-    public ResponseEntity create(@Valid @RequestBody VakitaDTO vakita) throws BadRequestException {
+    public ResponseEntity create(@Valid @RequestBody VakitaDTO vakita) throws BadRequestException, ResourceNotFoundException {
         vakitaService.createVakita(vakita);
         return ResponseEntity.ok().build();
     }
@@ -54,12 +54,12 @@ public class VakitaController {
         return ResponseEntity.ok(vakitaService.getVakitaById(id));
     }
 
-    //OBTENER LAS VAKITAS ACTIVAS POR ID DEL CREADOR
-    @GetMapping("/actives/{id}")
+    //OBTENER LA LISTA DE VAKITAS ACTIVAS POR CONTRIBUYENTE
+    @GetMapping("/actives/{userId}")
     @ResponseStatus(code = HttpStatus.OK)
     //    @PreAuthorized("hasRole('USER')")
-    public ResponseEntity<List<VakitaDTO>> getVakitasActivesByCreator(@PathVariable Long userId) throws ResourceNotFoundException {
-        return ResponseEntity.ok(vakitaService.getVakitasByOwner(userId));
+    public ResponseEntity<List<VakitaDTO>> getActivesByContributor(@PathVariable Long userId) throws ResourceNotFoundException {
+        return ResponseEntity.ok(vakitaService.getVakitasActivesByContributor(userId));
     }
 
     //OBTENER LISTADO DE VAKITAS EN LAS QUE SOY CONTRIBUYENTE(LAS HAYA CREADO O NO)
@@ -96,6 +96,7 @@ public class VakitaController {
         return ResponseEntity.ok().build();
     }
 
+    //CAMBIAR EL ESTADO DE UNA VAKITA A INACTIVO
     @PutMapping("/inactive/{vakitaId}")
     @ResponseStatus(code = HttpStatus.OK)
     public ResponseEntity changeStateToInactive(@PathVariable Long vakitaId) throws BadRequestException, ResourceNotFoundException {

@@ -13,6 +13,11 @@ INSERT INTO vakitadb.users (user_id,user_email) VALUES(10, "diazjuan@micorreo.co
 
 -- VAKITAS
 -- SELECT * FROM VAKITAS;
+-- update vakitas
+-- set is_active = 0
+-- where vakita_id = 1;
+
+
 -- en type 0 es normal(CREARLAS EN NORMAL), en active 1 es true;
 
 
