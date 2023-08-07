@@ -1,0 +1,1 @@
+INSERT INTO "users" VALUES (1,'cecilia@micorreo.com'),(2,'mglendinning0@correo.com'),(3,'rrmaria@micorreo.com'),(4,'andreagal@micorreo.com'),(5,'melodaniel@micorreo.com'),(6,'karenv@micorreo.com'),(7,'josemartinez@micorreo.com'),(8,'fergarcia@micorreo.com'),(9,'luciamesa@micorreo.com'),(10,'diazjuan@micorreo.com');

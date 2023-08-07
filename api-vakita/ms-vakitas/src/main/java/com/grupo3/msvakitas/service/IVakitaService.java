@@ -3,11 +3,10 @@ package com.grupo3.msvakitas.service;
 import com.grupo3.msvakitas.handler.BadRequestException;
 import com.grupo3.msvakitas.handler.ResourceNotFoundException;
 import com.grupo3.msvakitas.model.dto.VakitaDTO;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
+
 public interface IVakitaService {
 
     //read

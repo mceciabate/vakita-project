@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ import java.util.List;
 //@ContextConfiguration(locations = "/test-context.xml")
 @Import({AppConfiguration.class, UsuarioService.class})
 //@AutoConfigureDataJpa
+@Sql(scripts = { "/insert_data2.sql" })
 public class VakitaServiceTest {
 
     @Autowired
@@ -39,6 +41,12 @@ public class VakitaServiceTest {
 
     @Autowired
     private UsuarioService usuarioService;
+
+    @Test
+    public void testeando() throws ResourceNotFoundException {
+        Assertions.assertTrue(usuarioService.getUserById(1L).getEmail().equals("cecilia@micorreo.com"));
+        Assert.assertTrue(vakitaService.getAllVakitas().size()==0);
+    }
 
 
     @Test

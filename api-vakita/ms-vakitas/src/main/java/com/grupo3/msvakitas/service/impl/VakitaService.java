@@ -10,7 +10,6 @@ import com.grupo3.msvakitas.service.IVakitaService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -20,7 +19,6 @@ import java.util.Optional;
 
 @Slf4j
 @Service
-@Component
 public class VakitaService implements IVakitaService {
 
 
