@@ -13,14 +13,14 @@ import java.util.List;
 @NoArgsConstructor
 public class UserDTO {
     private Long id;
-    private String mail;
+    private String email;
     @JsonIgnore
     private List<VakitaDTO> vakitas;
 
     //constructor sin vakitas
 
-    public UserDTO(Long id, String mail) {
+    public UserDTO(Long id, String email) {
         this.id = id;
-        this.mail = mail;
+        this.email = email;
     }
 }

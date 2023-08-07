@@ -59,7 +59,7 @@ public class Vakita implements Serializable {
 //    @ManyToMany(mappedBy="vakitas", fetch = FetchType.EAGER)
 //    private List<User> contributors = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
     @JoinTable(
             name = "vakita_has_contributors",
             joinColumns = @JoinColumn(name = "vakita_id"),

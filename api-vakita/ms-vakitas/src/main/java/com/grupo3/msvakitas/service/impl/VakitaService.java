@@ -219,6 +219,9 @@ public class VakitaService implements IVakitaService {
         if (vakitaToDrop.getIsActive() == true ){
             throw new BadRequestException("Para eliminar un vakita debe estar inactiva");
         }
+        else if(vakitaToDrop.getCumulativeAmount() > 0.0){
+            throw new BadRequestException("La vakita debe estar vacía");
+        }
         else {
             Vakita vakitaEntityToDrop = mapper.map(vakitaToDrop, Vakita.class);
             vakitaRepository.delete(vakitaEntityToDrop);
