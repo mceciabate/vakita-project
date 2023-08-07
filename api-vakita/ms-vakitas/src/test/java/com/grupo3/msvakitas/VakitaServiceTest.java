@@ -1,6 +1,7 @@
 package com.grupo3.msvakitas;
 
 
+import com.grupo3.msvakitas.configuration.AppConfiguration;
 import com.grupo3.msvakitas.handler.BadRequestException;
 import com.grupo3.msvakitas.handler.ResourceNotFoundException;
 import com.grupo3.msvakitas.model.dto.UserDTO;
@@ -12,8 +13,10 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -22,10 +25,16 @@ import java.util.List;
 //TODO REVISAR TODOS LOS TEST UNITARIOS
 //TODO HABILITAR EL SCRIPT DE BD
 @SpringBootTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+//@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@AutoConfigureTestDatabase
+
+//@ContextConfiguration(locations = "/test-context.xml")
+@Import({AppConfiguration.class, UsuarioService.class})
+//@AutoConfigureDataJpa
 public class VakitaServiceTest {
 
     @Autowired
+    @Qualifier("vakitaService")
     private VakitaService vakitaService;
 
     @Autowired

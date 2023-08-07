@@ -10,16 +10,17 @@ import com.grupo3.msvakitas.service.IVakitaService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.lang.String;
 
 @Slf4j
 @Service
+@Component
 public class VakitaService implements IVakitaService {
 
 
@@ -27,11 +28,14 @@ public class VakitaService implements IVakitaService {
     @Autowired
     private  ModelMapper mapper;
 
+
     @Autowired
     private IVakitaRepository vakitaRepository;
 
     @Autowired
     private UsuarioService usuarioService;
+
+
 
     //Método para traer todas las vakitas
     //TODO: CONSULTAR SI QUIEREN UN ERROR O UNA LISTA VACÍA ESTÁ BIEN
