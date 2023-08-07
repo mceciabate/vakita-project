@@ -5,10 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-//@ComponentScan(basePackages = "com.grupo3.*")
-//@EnableJpaRepositories(basePackages = "com.grupo3.msvakitas.repository")
 @EnableJpaRepositories
-
 public class MsVakitasApplication {
 
 	public static void main(String[] args) {

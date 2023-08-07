@@ -20,12 +20,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO REVISAR TODOS LOS TEST UNITARIOS
-//TODO HABILITAR EL SCRIPT DE BD
+
 @SpringBootTest
 @AutoConfigureTestDatabase
-//@ContextConfiguration(locations = "/test-context.xml")
-//@Import({AppConfiguration.class, UsuarioService.class})
 @Sql(scripts = { "/insert_data2.sql" })
 public class VakitaServiceTest {
 
@@ -37,7 +34,7 @@ public class VakitaServiceTest {
     private UsuarioService usuarioService;
 
     @Test
-    public void testeando() throws ResourceNotFoundException {
+    public void testeandoDataSource() throws ResourceNotFoundException {
         Assertions.assertTrue(usuarioService.getUserById(1L).getEmail().equals("cecilia@micorreo.com"));
         Assert.assertTrue(vakitaService.getAllVakitas().size()==0);
     }
@@ -45,29 +42,22 @@ public class VakitaServiceTest {
 
     @Test
     public void aCreateVakita() throws ResourceNotFoundException, BadRequestException {
-        UserDTO user = new UserDTO(1L, "mail@elmail.com");
-        UserDTO user2 = new UserDTO(2L, "mail2@elmail.com");
-        UserDTO user3 = new UserDTO(3L, "mail3@elmail.com");
-        UserDTO user4 = new UserDTO(4L, "mail4@elmail.com");
-
-        usuarioService.createUser(user);
-        usuarioService.createUser(user2);
-        usuarioService.createUser(user3);
-        usuarioService.createUser(user4);
-
-        List<UserDTO> contributors = new ArrayList<>();
-//        contributors.add(user);
-        contributors.add(user2);
-        contributors.add(user3);
-        contributors.add(user4);
-
-//        VakitaDTO vakita = new VakitaDTO(1L, "la vakita", 1L, "esto es una vakita", "esto es una url", 1000.00, 0.0, LocalDate.now(), LocalDate.parse("2023-12-01"), true, VakitaTypes.normal, contributors);
-        VakitaDTO vakita = new VakitaDTO(1L, "the cow", 1L, "la descripción", "url", 1000.0, 0.0, LocalDate.now(), LocalDate.parse("2023-12-01"), true, VakitaTypes.normal, contributors);
+        VakitaDTO vakita = new VakitaDTO(
+                "the cow",
+                1L,
+                "la descripción",
+                "url",
+                1000.0,
+                0.0,
+                LocalDate.now(),
+                LocalDate.parse("2023-12-01"),
+                true,
+                VakitaTypes.normal);
 
         vakitaService.createVakita(vakita);
-
-        System.out.println(vakita);
-        Assert.assertEquals(vakita.getName(), vakitaService.getVakitaById(1L).getName());
+        List<VakitaDTO> todasLasVakitas = vakitaService.getAllVakitas();
+        VakitaDTO vakitaCreada = todasLasVakitas.get(todasLasVakitas.size() - 1);
+        Assert.assertEquals(vakita.getName(), vakitaCreada.getName());
 
     }
 
