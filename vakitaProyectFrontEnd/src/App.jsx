@@ -2,6 +2,7 @@ import './App.css'
 import Header from './components/Header.jsx';
 import Landing from './components/Landing.jsx';
 import NewVakita from './pages/newVakita/NewVakita'
+
 function App() {
 
   return (
@@ -9,6 +10,7 @@ function App() {
     <Header/>
     <Landing/>
     <NewVakita/>
+   
     </div>
   )
 }

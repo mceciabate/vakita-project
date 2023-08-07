@@ -1,20 +1,33 @@
 
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field, ErrorMessage, FieldArray  } from 'formik';
 import * as Yup from 'yup';
 import vakitabanner from "../../assets/vakitabanner.png"
-import { useState } from 'react';
+import {  useState } from 'react';
 import "../../styles/newVakitaPage.css"
+import EmailList from './EmailList';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCirclePlus, faCircleInfo, faShareNodes } from "@fortawesome/free-solid-svg-icons"
+import Swal from 'sweetalert2'
+import ShareButton from './SharedButton';
 
 
 const NewVakita = () => {
  
-  const [emailValue, setEmailValue] = useState('');
-  const [emailError, setEmailError] = useState('');
+  
+  
+  
+  const [emails, setEmails] = useState([]);
+  const [emailExists, setEmailExists] = useState(null);
+  const [isDuplicate, setIsDuplicate] = useState(false);
+  const [emailValid, setEmailValid] = useState(true);
+
+
+  
+  
   
   
 
 
-console.log(emailValue);
 
   // Esquema de validación con Yup
   const validationSchema = Yup.object().shape({
@@ -22,47 +35,114 @@ console.log(emailValue);
     amount: Yup.number().required('Campo requerido'),
     date: Yup.string().required('Campo requerido'),
     description: Yup.string().required('Campo requerido'),
-    email: Yup.string().email('Email inválido').required('Campo requerido'),
-  //  email: Yup.string().required('Campo requerido')
-  //  .test('email-exists', 'Email no existe', async function (value) {
-  //   try {
-  //     const response = await fetch(`https://tu-api.com/verificar-email?email=${value}`);
-  //     const data = await response.json();
-  //     return data.exists; // Aquí asumimos que la API devuelve un objeto { exists: true/false }
-  //   } catch (error) {
-  //     console.error('Error al verificar el email en la API:', error);
-  //     return false;
-  //   }
-  // }),
+    email: Yup.string()
+    .email('Ingrese un email válido')
+    .required('Campo requerido'),
+  
 
   });
 
   // Función para manejar el envío del formulario
-  const handleSubmit = (values) => {
-    // Aquí puedes realizar las acciones necesarias con los datos ingresados
+  const handleSubmit = (values, actions) => {
+    // Acá se puede realizar las acciones necesarias con los datos ingresados
     // Por ejemplo, enviar los datos a una API o guardarlos en una base de datos
     console.log(values);
+
+    const dataToSend = {
+      name:values.name,
+      amount:values.amount,
+      date: values.date,
+      description:values.description,
+      emails: emails.filter((email) => email !== ''), // Filtrar emails vacíos
+    };
+    console.log(dataToSend);
+
+
+     // Validar todos los emails antes de guardarlos solo si no hay emails vacíos
+     const allEmailsValid = emails.every((email) => email !== '' && checkEmail(email).exists);
+
+     if (allEmailsValid) {
+       // Mostrar los emails por consola
+       console.log('Array de emails:', emails);
+     }
+ 
+     actions.setSubmitting(false);
+
+     
+     Swal.fire({
+      title: '<strong>Vaquita creada con éxito</strong>',
+      icon: 'success',
+      html:
+        'Ir a ' +
+        '<a href="//sweetalert2.github.io">Mis Vaquitas</a> ' ,
+      showCloseButton: true,
+      
+      
+    })
+     
+    actions.resetForm();
+     
   };
 
 
-    // Función para manejar la verificación de email al hacer clic en "Add"
-    const handleAddClick = async (values) => {
-      setEmailValue(values)
+    
 
-      try {
-        await validationSchema.validateAt('email', { email: emailValue });
-        // Llamar a la API aquí para verificar la existencia del email
-        console.log('Email válido:', emailValue);
-        setEmailError('');
-      } catch (error) {
-        console.error('Error de validación del email:', error.message);
-        setEmailError('Ingrese un email de usuario válido');
+
+
+
+
+  const handleAddEmail = (values, actions) => {
+    const emailData = checkEmail(values.email);
+
+    if (values.email.trim() === '') {
+      // Ignorar emails vacíos
+      return;
+    }
+
+    if (!emailData.exists) {
+      //cambie EmailValid a false, estaba en true, probar con API
+      setEmailValid(false);
+      setEmailExists(false);
+      setIsDuplicate(false);
+      setEmails((prevEmails) => [...prevEmails, values.email]);
+    } else if (emailData.isDuplicate) {
+      setIsDuplicate(true);
+      setEmailExists(true);
+    } else {
+      //cambie EmailValid a false, estaba en true, probar con API
+      setEmailValid(false);
+      setEmailExists(true);
+      setIsDuplicate(false);
+
+      // Verificar si el email ya está en el array antes de agregarlo
+      if (!emails.includes(values.email)) {
+        setEmails((prevEmails) => [...prevEmails, values.email]);
       }
-    };
+    }
+  };
+
+  const checkEmail = (email) => {
+    // Simulación de la verificación en el array de emails
+    const emailExists = emails.includes(email);
+    const isDuplicate = emails.filter((item) => item === email).length > 1;
+
+    return { exists: emailExists, isDuplicate };
+  };
+
+
+  const removeMember = (index) => {
+    const updatedEmails = [...emails];
+    updatedEmails.splice(index, 1);
+    setEmails(updatedEmails);
+  };
  
   return (
     <>
+    <div className='containerPage'>
+      <div className="boxItems">
+        <div className='title'>
     <h2>Hagamos una vaquita</h2>
+    </div>
 
     <div> 
       
@@ -73,7 +153,7 @@ console.log(emailValue);
           amount: '',
           date: '',
           description: '',
-          email: ''
+          email:'',
         }}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
@@ -81,68 +161,141 @@ console.log(emailValue);
 
 {({values}) => (
         <Form>
-          <div>
-          <div>
-            <label htmlFor="name">Nombre de tu vaquita:</label>
-            <Field type="text" id="name" name="name"/>
+          <div className='boxReverseBanner'>
+            <div className='boxOne'>
+          <div className="boxItems">
+            <label htmlFor="name"></label>
+            <Field type="text" id="name" name="name" placeholder="Nombre de la vaca"/>
+            <div className='error'>
             <ErrorMessage name="name" component="div" />
-           
+            </div>
           </div>
-          <div>
-            <label htmlFor="amount">Importe total:</label>
-            <Field type="number" id="amount" name="amount" />
+          <div className="boxItems">
+            <label htmlFor="amount"></label>
+            <Field type="number" id="amount" name="amount" placeholder="Importe total" />
+            <div className='error'>
             <ErrorMessage name="amount" component="div" />
+            </div>
           </div>
-          <div>
-            <label htmlFor="date">Plazo de la vaquita:</label>
-            <Field type="date" id="date" name="date" />
+          <div className="boxItems">
+            <label htmlFor="date"></label>
+            <Field type="date" id="date" name="date"/>
+            <div className='error'>
             <ErrorMessage name="date" component="div" />
+            </div>
           </div>
-          <div>
-            <label htmlFor="description">Descripción:</label>
-            <Field as="textarea" id="description" name="description" />
+          <div className="boxItems">
+            <label htmlFor="description"></label>
+            <Field as="textarea" id="description" name="description" placeholder="Descripción" />
+            <div className='error'>
             <ErrorMessage name="description" component="div" />
+            </div>
           </div>
 
-          <div>
+          </div>
 
-          <div>
+          <div className='boxTwo'>
+          <div className='img'>
         <img src={vakitabanner} alt="Imagen de banner"/>
       </div>
       <div>
-        <p>{values.name}</p>
-        <p>{values.amount}</p>
+        <p className={values.name ?"textBannerActive": 'textBanner'}>{values.name|| "Nombre de la vaca"}</p>
+        <p className= {values.amount ?"textBannerActiveNumber": 'textBanner'}>{values.amount ? `$ ${values.amount}`: "$0 "}</p>
+        
       </div>
       </div>
 
       </div>
 
 
-      <div>
-<h4>¿Quiénes van a ser los integrantes de esta vaca?</h4>
+      <div className='halfBackground'>
+
 <div>
-            <label htmlFor="email"></label>
-            <Field type="email" id="email" name="email"   placeholder="Agregar integrante con su email"/>
-            <ErrorMessage name="email" component="div" />
-            {emailError && <div>{emailError}</div>}
-           
+<div className="boxItems">
+
+          <EmailList emails={emails} onRemove={removeMember} />
+
+        <div>
+        <div className="boxItems">
+              <label htmlFor="email"></label>
+              <Field type="email" id="email" name="email" placeholder="Agregar integrante con su email" />
+              <div className='error'>
+              <ErrorMessage name="email" component="div" />
+              </div>
+              </div>
+              {emailExists !== null && (
+        <div>
+          {emailExists ? (
+            isDuplicate ? (
+              <p>El email está duplicado.</p>
+            ) : (
+              <div>
+                <p>El email ya fue agregado: {emails[emails.length - 1]}</p>
+              </div>
+            )
+          ) : emailValid ? (
+            <p>Ingrese un email de un usuario válido.</p>
+          ) : null}
+        </div>
+      )}
+      
+            </div>
+            <div>
+              <button type="button" disabled={!values.email.includes('@')} className="buttonAdd" onClick={() => handleAddEmail(values)}>
+              <FontAwesomeIcon icon={faCirclePlus}  />
+              </button>
+              
+            </div>
+          
+            </div>
+
+
+
+    
+
+
           </div>
-          {/* <button type="button" onClick={() => setEmailValue(values.email)}>Add</button> */}
-          <button type="button" onClick={() => handleAddClick(values.email)}><FontAwesomeIcon icon="fa-solid fa-circle-plus" /></button>
-      </div>
+          
+      
 
 
-          <button className="buttonSubmit" type="submit"  disabled={!emailValue || emailError}>Crear Vaca</button>
+
+<div className='buttonSubmitBox'>
+   {/* Revisar validacion de className cuando este conectado al back*/}
+          <button className={emailValid || !values.name || !values.amount || !values.date || !values.description || !values.name || !values.amount || !values.date || !values.description?"buttonSubmit":"buttonSubmitActive"}  type="submit"  disabled={emailValid|| !values.name || !values.amount || !values.date || !values.description || !values.name || !values.amount || !values.date || !values.description}>Crear Vaca</button>
+         
+          
+          </div>
+          </div>
         </Form>
          )}
+
+         
       </Formik>
+
+      <div className='info'>
+        
+        <div className='infoText'>
+
+        <FontAwesomeIcon icon={faCircleInfo} size="xl" />
+        <p>Recuerda que todos los integrantes de este grupo
+         tienen que estar registrados en nuestra plataforma.
+        </p>
+        <div ><ShareButton url={"https://fontawesome.com/docs/web/use-with/react/style#size"} /></div>
+        </div>
+        
+        
+        </div>
+
+
     </div>
     
     
     
     
-    
-    
+    </div>
+
+    </div>
     </>
     
     )
