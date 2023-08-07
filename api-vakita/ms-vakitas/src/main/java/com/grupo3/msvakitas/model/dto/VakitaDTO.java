@@ -41,4 +41,19 @@ public class VakitaDTO {
         this.type = type;
         this.contributors = contributors;
     }
+
+    //CONSTRUCTOR SIN ID NI CONTRIBUYENTES
+
+    public VakitaDTO(String name, Long idCreatorUser, String description, String imgURL, Double totalAmount, Double cumulativeAmount, LocalDate creationDate, LocalDate expirationDate, Boolean isActive, VakitaTypes type) {
+        this.name = name;
+        this.idCreatorUser = idCreatorUser;
+        this.description = description;
+        this.imgURL = imgURL;
+        this.totalAmount = totalAmount;
+        this.cumulativeAmount = cumulativeAmount;
+        this.creationDate = creationDate;
+        this.expirationDate = expirationDate;
+        this.isActive = isActive;
+        this.type = type;
+    }
 }

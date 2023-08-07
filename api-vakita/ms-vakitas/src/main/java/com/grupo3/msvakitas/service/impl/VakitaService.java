@@ -42,7 +42,7 @@ public class VakitaService implements IVakitaService {
         List<VakitaDTO> listaVakitas = new ArrayList<>();
         List<Vakita> vakitas = vakitaRepository.findAll();
         vakitas.forEach(vakita -> listaVakitas.add(mapper.map(vakita, VakitaDTO.class)));
-        log.info("Get all vakitas list");
+        log.info("Get all vakitas list. Size: " + listaVakitas.size());
         return  listaVakitas;
     }
 
@@ -52,7 +52,7 @@ public class VakitaService implements IVakitaService {
         Optional<Vakita> vakita = vakitaRepository.findById(id);
         VakitaDTO vakitaDTO;
         if(!vakita.isPresent()){
-           throw new ResourceNotFoundException("No se encuentra la vakita con id "+id);
+           throw new ResourceNotFoundException("No se encuentra la vakita con id: "+id);
         }
         else{
             vakitaDTO = mapper.map(vakita, VakitaDTO.class);
@@ -135,7 +135,7 @@ public class VakitaService implements IVakitaService {
     }
 
     //Este método filtra las vakitas que coinciden con un id de un user
-    //Es para saber en que vakitas participo aunque yo no sea el owner, es decir
+    //Es para saber en qué vakitas participo aunque yo no sea el owner, es decir
     //aunque yo no sea quien las creó.
 
     @Override
