@@ -10,20 +10,22 @@ import com.grupo3.msvakitas.service.impl.UsuarioService;
 import com.grupo3.msvakitas.service.impl.VakitaService;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 
 @SpringBootTest
 @AutoConfigureTestDatabase
 @Sql(scripts = { "/insert_data2.sql" })
+@TestMethodOrder(MethodOrderer.MethodName.class)
 public class VakitaServiceTest {
 
     @Autowired
@@ -36,7 +38,7 @@ public class VakitaServiceTest {
     @Test
     public void testeandoDataSource() throws ResourceNotFoundException {
         Assertions.assertTrue(usuarioService.getUserById(1L).getEmail().equals("cecilia@micorreo.com"));
-        Assert.assertTrue(vakitaService.getAllVakitas().size()==0);
+        Assert.assertTrue(vakitaService.getAllVakitas().size() > 0);
     }
 
 
@@ -63,93 +65,95 @@ public class VakitaServiceTest {
 
     @Test
     public void bGetAllVakitas() throws ResourceNotFoundException, BadRequestException {
-        UserDTO user = new UserDTO(1L, "mail@elmail.com");
-        UserDTO user2 = new UserDTO(2L, "mail2@elmail.com");
-
-        usuarioService.createUser(user);
-        usuarioService.createUser(user2);
-
-        List<UserDTO> contributors = new ArrayList<>();
-        contributors.add(user);
-        contributors.add(user2);
-
-        VakitaDTO vakita = new VakitaDTO(3L, "la vakita", 1L, "esto es una vakita", "esto es una url", 1000.00, 0.0, LocalDate.now(), LocalDate.parse("2023-12-01"), false, VakitaTypes.normal, contributors);
-        VakitaDTO vakita2 = new VakitaDTO(4L, "la vakita", 1L, "esto es otra vakita", "esto es una url",  10000.00, 500.0, LocalDate.now(), LocalDate.parse("2023-12-01"), true, VakitaTypes.normal, contributors);
-        vakitaService.createVakita(vakita);
-        vakitaService.createVakita(vakita2);
-        Assert.assertTrue(vakitaService.getAllVakitas().size() == 2);
+        Assert.assertFalse(vakitaService.getAllVakitas().isEmpty());
 
 
     }
 
     @Test
     public void cGetVakitaById() throws ResourceNotFoundException, BadRequestException{
-        this.aCreateVakita();
         Assert.assertTrue(vakitaService.getVakitaById(1L).getId() != null);
     }
 
     @Test
     public void dGetVakitaByOwner() throws ResourceNotFoundException, BadRequestException{
-        this.bGetAllVakitas();
         List<VakitaDTO> vakitasByOwner = vakitaService.getVakitasByOwner(1L);
-        Assert.assertTrue(vakitasByOwner.size() == 2);
+        Assert.assertFalse(vakitasByOwner.isEmpty());
 
     }
 
     @Test
     public void eModifyAmount() throws ResourceNotFoundException, BadRequestException{
-        this.aCreateVakita();
         vakitaService.modifyAmount(100.0, 1L);
         VakitaDTO vakitaModificada = vakitaService.getVakitaById(1L);
         Assertions.assertTrue(vakitaModificada.getCumulativeAmount().equals(100.0));
     }
 
     @Test
-    public void fGetVakitasActivesByOwner() throws ResourceNotFoundException, BadRequestException{
-        this.bGetAllVakitas();
-        Assert.assertTrue(vakitaService.getVakitasActivesByContributor(1L).size() == 1);
+    public void fInactiveVakita() throws BadRequestException, ResourceNotFoundException {
+        vakitaService.inactiveVakita(4L);
+        Assertions.assertTrue(vakitaService.getVakitaById(4L).getIsActive().equals(false));
     }
 
-//    @Test
-//    public void gUpdateVakita() throws ResourceNotFoundException, BadRequestException{
-//        this.aCreateVakita();
-//        VakitaDTO vakitaModify = vakitaService.getVakitaById(1L);
-//        vakitaModify.setName("change");
-//        vakitaService.updateVakita(vakitaModify);
-//        Assert.assertTrue(vakitaService.getVakitaById(1L).getName().equals("change"));
-//    }
+    @Test
+    public void fGetVakitasActivesByContributor() throws ResourceNotFoundException, BadRequestException{
+        Assert.assertTrue(vakitaService.getVakitasActivesByContributor(10L).size() > 1);
+    }
+
 
     @Test
-    public void hCancelVakita() throws ResourceNotFoundException, BadRequestException{
-        this.aCreateVakita();
+    public void gPartialUpdateVakita() throws ResourceNotFoundException, BadRequestException{
+        String value = "imagen_modificada";
+        String key = "imagen";
+        vakitaService.partialUpdate(4L, key, value);
+        Assertions.assertTrue(vakitaService.getVakitaById(4L).getImgURL().equals(value));
+    }
+
+    @Test
+    public void hInactiveVakita() throws ResourceNotFoundException, BadRequestException{
+        vakitaService.inactiveVakita(10L);
+        Assert.assertTrue(vakitaService.getVakitaById(10L).getIsActive() == false);
+
+    }
+
+
+    @Test
+    public void iDeleteVakita() throws ResourceNotFoundException, BadRequestException{
         vakitaService.inactiveVakita(1L);
-        Assert.assertTrue(vakitaService.getVakitaById(1L).getIsActive() == false);
-
+        vakitaService.deleteVakita(1L);
+        Assertions.assertNull(vakitaService.getVakitaById(1L));
     }
-
-    //TODO FIX METHOD
-//    @Test
-//    public void iAddContributor() throws BadRequestException, ResourceNotFoundException {
-//        UserDTO userToAdd = new UserDTO(10L, "mail10@mail.com");
-//        usuarioService.createUser(userToAdd);
-//        this.aCreateVakita();
-//        VakitaDTO vakitaModified = vakitaService.getVakitaById(1L);
-//        System.out.println(vakitaModified.getContributors());
-//        vakitaService.addContributor(1L, userToAdd);
-//        System.out.println("/////////////////////////////");
-//        System.out.println(vakitaModified.getContributors().size());
-//        Assertions.assertTrue(vakitaModified.getContributors().size()==2);
-//    }
-
-    //get vakitas by contributor
 
     @Test
-    public void jDeleteVakita() throws ResourceNotFoundException, BadRequestException{
-        this.aCreateVakita();
-        vakitaService.deleteVakita(1L);
-        Assert.assertTrue(vakitaService.getAllVakitas().size()==0);
+    public void jGetAllByContributor() throws ResourceNotFoundException {
+        List<VakitaDTO> getAllByC = vakitaService.getVakitasByContributors(3L);
+        Assertions.assertTrue(getAllByC.size() == 3);
     }
 
+    @Test
+    public void kAddContributor() throws ResourceNotFoundException, BadRequestException {
+        vakitaService.addContributor(5L, 10L);
+        VakitaDTO vakitaDTO = vakitaService.getVakitaById(5L);
+        Assertions.assertTrue(vakitaDTO.getContributors().contains(usuarioService.getUserById(5L)));
+    }
+
+    @Test
+    public void lUpdateVakita() throws ResourceNotFoundException, BadRequestException {
+        VakitaDTO vakitaUpdate = vakitaService.getVakitaById(7L);
+        String name = "Name modificado";
+        Long idCreator = vakitaUpdate.getIdCreatorUser();
+        String description = "se cambio la descripcion";
+        String img = "nueva Url";
+        Double total = 5000.0;
+        LocalDate dateCreation = vakitaUpdate.getCreationDate();
+        LocalDate dateExpiration = LocalDate.parse("2024-07-13");
+        Boolean active = false;
+        Enum<VakitaTypes> type = VakitaTypes.normal;
+        List<UserDTO> contributors = vakitaUpdate.getContributors();
+        vakitaService.updateVakita(7L, vakitaUpdate);
+        Assertions.assertTrue(vakitaService.getVakitaById(7L).equals(vakitaUpdate));
+
+    }
 
 }
 

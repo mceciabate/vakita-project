@@ -1,5 +1,5 @@
 
-INSERT INTO "users" VALUES (1,'cecilia@micorreo.com'),(2,'mglendinning0@correo.com'),(3,'rrmaria@micorreo.com'),(4,'andreagal@micorreo.com'),(5,'melodaniel@micorreo.com'),(6,'karenv@micorreo.com'),(7,'josemartinez@micorreo.com'),(8,'fergarcia@micorreo.com'),(9,'luciamesa@micorreo.com'),(10,'diazjuan@micorreo.com');
+INSERT INTO "users" VALUES (default,'cecilia@micorreo.com'),(default,'mglendinning0@correo.com'),(default,'rrmaria@micorreo.com'),(default,'andreagal@micorreo.com'),(default,'melodaniel@micorreo.com'),(default,'karenv@micorreo.com'),(default,'josemartinez@micorreo.com'),(default,'fergarcia@micorreo.com'),(default,'luciamesa@micorreo.com'),(default,'diazjuan@micorreo.com');
 
 INSERT INTO "vakitas" VALUES ('2023-04-7', 0.0,'2023-10-17', 1, 2000.0, 0, 4, default, 'Cumple Juan', 'Fiesta sorpresa para Juan', 'URL');
 INSERT INTO "vakitas" VALUES ('2022-12-20', 1500.0, '2023-07-10', 1, 2000, 0, 1, default, 'Paseo familiar', 'Conocer el mar', 'url');
@@ -18,7 +18,7 @@ INSERT INTO "vakita_has_contributors" VALUES (4, 1);
 INSERT INTO "vakita_has_contributors" VALUES (1, 2);
 INSERT INTO "vakita_has_contributors" VALUES (2, 3);
 INSERT INTO "vakita_has_contributors" VALUES (2, 4);
-INSERT INTO "vakita_has_contributors" VALUES (3, 5);
+INSERT INTO "vakita_has_contributors" VALUES (9, 5);
 INSERT INTO "vakita_has_contributors" VALUES (4, 6);
 INSERT INTO "vakita_has_contributors" VALUES (2, 7);
 INSERT INTO "vakita_has_contributors" VALUES (5, 8);
