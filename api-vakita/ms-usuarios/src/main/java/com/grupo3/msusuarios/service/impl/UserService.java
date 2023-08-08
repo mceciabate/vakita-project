@@ -1,15 +1,14 @@
 package com.grupo3.msusuarios.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.grupo3.msusuarios.handler.BadRequestException;
 import com.grupo3.msusuarios.model.dto.UserDTO;
 import com.grupo3.msusuarios.model.entity.User;
 import com.grupo3.msusuarios.repository.IUserRepository;
 import com.grupo3.msusuarios.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,50 +25,85 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public UserDTO save(UserDTO userDTO) throws BadRequestException {
-        if (userDTO.getBirthdate().equals(LocalDate.now() ||null) {
-            throw new BadRequestException("No se puede crear el usuario");
+    @Transactional
+    public UserDTO save(UserDTO userDTO) throws Exception {
+        try {
+            User user = mapper.convertValue(userDTO, User.class);
+            userRepository.save(user);
+            return userDTO;
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
         }
-        User user = mapper.convertValue(userDTO, User.class);
-        userRepository.save(user);
-        return userDTO;
     }
 
     @Override
-    public UserDTO findById(Long id) {
-        UserDTO userDTO = null;
-        Optional<User> user = userRepository.findById(id);
-        if(user.isPresent()){
-            userDTO = mapper.convertValue(user, UserDTO.class);
+    public UserDTO findById(Long id) throws Exception {
+        try {
+            User user = userRepository.findById(id).orElse(null);
+            if(user != null){
+                UserDTO userDTO = mapper.convertValue(user, UserDTO.class);
+                return userDTO;
+            }
+            return null;
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
         }
-        return userDTO;
     }
 
     @Override
-    public UserDTO updateById(Long id, UserDTO userDTO) {
-        User user = mapper.convertValue(userDTO, User.class);
-        userRepository.save(user);
-        return userDTO;
-    }
-
-    @Override
-    public Boolean changePassword(Long id, String newPassword) {
-        User user = userRepository.findById(id).orElse(null);
-        if(user == null){
-            return false;
+    @Transactional
+    public UserDTO updateById(Long id, UserDTO userDTO) throws Exception {
+        try {
+            Optional<User> findUser = userRepository.findById(id);
+            if(findUser.isPresent()){
+                User user = mapper.convertValue(userDTO, User.class);
+                userRepository.save(user);
+                return userDTO;
+            }
+            return null;
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
         }
-        user.setPassword(newPassword);
-        userRepository.save(user);
-        return true;
     }
 
     @Override
-    public void deleteById(Long id) {
-        userRepository.deleteById(id);
+    @Transactional
+    public Boolean changePassword(Long id, String newPassword) throws Exception {
+        try {
+            User user = userRepository.findById(id).orElse(null);
+            if(user != null){
+                user.setPassword(newPassword);
+                userRepository.save(user);
+                return true;
+            }else {
+                return false;
+            }
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
     }
 
     @Override
-    public List<UserDTO> findAll() {
-        return userRepository.findAll().stream().map(user -> mapper.convertValue(user, UserDTO.class)).toList();
+    @Transactional
+    public Boolean deleteById(Long id) throws Exception {
+        try {
+            if(userRepository.existsById(id)){
+                userRepository.deleteById(id);
+                return true;
+            }else {
+                return false;
+            }
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<UserDTO> findAll() throws Exception {
+        try {
+            return userRepository.findAll().stream().map(user -> mapper.convertValue(user, UserDTO.class)).toList();
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
     }
 }

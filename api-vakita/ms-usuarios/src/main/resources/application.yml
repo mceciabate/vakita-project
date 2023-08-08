@@ -1,11 +1,14 @@
 server:
   port: ${PORT:${SERVER_PORT:0}}
+  error:
+    include-message: always
+    include-binding-errors: always
 
 spring:
   application:
     name: ms-usuarios
   datasource:
-    driverClassName: com.mysql.jdbc.Driver
+    driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/usersdb
     username: root
     password: root
@@ -39,4 +42,3 @@ management:
       name: ms-usuarios
       version: 1.0.0
       description: Microservicios Usuarios
-
