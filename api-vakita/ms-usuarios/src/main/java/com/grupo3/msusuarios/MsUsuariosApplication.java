@@ -10,8 +10,6 @@ public class MsUsuariosApplication {
 		SpringApplication.run(MsUsuariosApplication.class, args);
 	}
 
-
-
 //	@Bean
 //	public CommandLineRunner loadData(UserService service) {
 //		return (args) -> {
@@ -30,4 +28,5 @@ public class MsUsuariosApplication {
 //
 //		};
 //	}
+
 }
