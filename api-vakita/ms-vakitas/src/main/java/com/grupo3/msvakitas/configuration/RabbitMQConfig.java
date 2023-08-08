@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-    public static final String EXCHANGE_NAME = "userExchange";
+    public static final String EXCHANGE_NAME = "vakitaExchange";
 
     public static final String TOPIC_NEW_USER = "com.grupo3.msusuarios.newUser";
 
@@ -26,12 +26,12 @@ public class RabbitMQConfig {
 
     @Bean
     public Queue newUserQueue() {
-        return new Queue(QUEUE_NEW_USER);
+        return new Queue(QUEUE_NEW_USER, true);
     }
 
 
     @Bean
-    public Binding declareBindingSpecificNewMovie() {
+    public Binding declareBindingSpecificNewUser() {
         return BindingBuilder.bind(newUserQueue()).to(appExchange()).with(TOPIC_NEW_USER);
     }
 

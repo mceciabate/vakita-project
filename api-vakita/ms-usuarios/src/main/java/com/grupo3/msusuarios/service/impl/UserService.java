@@ -3,6 +3,7 @@ package com.grupo3.msusuarios.service.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.grupo3.msusuarios.event.NewUserEventProducer;
 import com.grupo3.msusuarios.model.dto.UserDTO;
+import com.grupo3.msusuarios.model.dto.UserRabbitDTO;
 import com.grupo3.msusuarios.model.entity.User;
 import com.grupo3.msusuarios.repository.IUserRepository;
 import com.grupo3.msusuarios.service.IUserService;
@@ -37,7 +38,8 @@ public class UserService implements IUserService {
             User user = mapper.convertValue(userDTO, User.class);
             log.info("Saving user: " + userDTO.getName());
             userRepository.save(user);
-            event.execute(user);
+            UserRabbitDTO userToSend = new UserRabbitDTO(userDTO.getEmail());
+            event.execute(userToSend);
             return userDTO;
         }catch (Exception e){
             throw new Exception(e.getMessage());

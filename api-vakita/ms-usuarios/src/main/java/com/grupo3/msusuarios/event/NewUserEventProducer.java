@@ -2,7 +2,7 @@ package com.grupo3.msusuarios.event;
 
 
 import com.grupo3.msusuarios.config.RabbitMQConfig;
-import com.grupo3.msusuarios.model.entity.User;
+import com.grupo3.msusuarios.model.dto.UserRabbitDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.time.LocalDate;
 
 @Component
 @Slf4j
@@ -27,11 +26,13 @@ public class NewUserEventProducer {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    public void execute(User newUser){
-        Data data = new Data();
+    public void execute(UserRabbitDTO newUser){
+        NewUserEventProducer.Data data= new NewUserEventProducer.Data();
         BeanUtils.copyProperties(newUser, data.getUser());
         rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, RabbitMQConfig.TOPIC_NEW_USER, data);
     }
+
+
 
     @Getter
     @Setter
@@ -41,22 +42,18 @@ public class NewUserEventProducer {
     public static class Data implements Serializable{
         @Serial
         private static final long serialVersionUID = 1L;
-        private Data.User user = new Data.User();
+        private Data.UserDto user = new Data.UserDto();
 
         @Getter
         @Setter
         @NoArgsConstructor
         @AllArgsConstructor
-        public static class User implements Serializable{
+        public static class UserDto implements Serializable{
             @Serial
             private static final long serialVersionUID = 1L;
             private Long id;
-            private String name;
-            private String lastName;
-            private String dni;
             private String email;
-            private String password;
-            private LocalDate birthdate;
+
         }
 
 
