@@ -208,8 +208,7 @@ public class VakitaService implements IVakitaService {
     public void addContributor(Long vakitaId, Long userId) throws ResourceNotFoundException, BadRequestException {
         UserDTO newContributor = usuarioService.getUserById(userId);
         VakitaDTO vakita = this.getVakitaById(vakitaId);
-        List<UserDTO> listContributors =  vakita.getContributors();
-        listContributors.add(newContributor);
+        vakita.getContributors().add(newContributor);
         this.updateVakita(vakitaId, vakita);
         log.info("Success updating contributor in  vakita: " + vakitaId);
     }
