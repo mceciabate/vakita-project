@@ -75,5 +75,3 @@ INSERT INTO vakitadb.vakita_has_contributors (user_id, vakita_id) VALUES (8, 10)
 INSERT INTO vakitadb.vakita_has_contributors (user_id, vakita_id) VALUES (9, 10);
 INSERT INTO vakitadb.vakita_has_contributors (user_id, vakita_id) VALUES (3, 10);
 INSERT INTO vakitadb.vakita_has_contributors (user_id, vakita_id) VALUES (4, 10);
-
-
