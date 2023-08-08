@@ -52,6 +52,5 @@ public class UsuarioService implements IUsuarioService {
             user = mapper.map(userEntity, UserDTO.class);
         }
         return user;
-
     }
 }
