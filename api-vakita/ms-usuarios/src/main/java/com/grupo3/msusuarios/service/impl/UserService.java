@@ -37,7 +37,7 @@ public class UserService implements IUserService {
             User user = mapper.convertValue(userDTO, User.class);
             log.info("Saving user: " + userDTO.getName());
             userRepository.save(user);
-            event.execute(userDTO);
+            event.execute(user);
             return userDTO;
         }catch (Exception e){
             throw new Exception(e.getMessage());
