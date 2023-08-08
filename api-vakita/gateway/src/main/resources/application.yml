@@ -10,11 +10,10 @@ spring:
         locator:
           enabled: true
       routes:
-      ##        Completar cuando est� ready
-#        - id: ms-usuarios
-#          uri: lb://api-usuarios
-##          predicates:
-##            - Path=/api/**
+        - id: ms-usuarios
+          uri: lb://ms-usuarios
+          predicates:
+            - Path=/api/v1/usuarios/**
         - id: ms-vakitas
           uri: lb://ms-vakitas
           predicates:
