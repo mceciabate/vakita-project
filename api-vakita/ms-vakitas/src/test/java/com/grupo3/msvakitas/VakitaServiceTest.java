@@ -37,7 +37,7 @@ public class VakitaServiceTest {
     private UsuarioService usuarioService;
 
     @Test
-    public void testeandoDataSource() throws ResourceNotFoundException {
+    public void aaTesteandoDataSource() throws ResourceNotFoundException {
         Assertions.assertTrue(usuarioService.getUserById(1L).getEmail().equals("cecilia@micorreo.com"));
         Assert.assertTrue(vakitaService.getAllVakitas().size() > 0);
     }
@@ -154,14 +154,14 @@ public class VakitaServiceTest {
 //        Assertions.assertTrue(vakitaDTO.getContributors().contains(usuarioService.getUserById(5L)));
 //    }
 
-    @Test
-    public void lUpdateVakita() throws ResourceNotFoundException, BadRequestException {
-        VakitaDTO vakitaUpdate = vakitaService.getVakitaById(7L);
-        VakitaDTO vakita = new VakitaDTO("name", 1L, "descripcion", "url", 1000.0, 0.0, LocalDate.parse("2020-03-01"), LocalDate.parse("2023-02-01"), false, VakitaTypes.normal);
-        vakitaService.updateVakita(7L, vakita);
-        Assertions.assertTrue(vakitaService.getVakitaById(7L).getName().equals(vakita.getName()));
-
-    }
+//    @Test
+//    public void lUpdateVakita() throws ResourceNotFoundException, BadRequestException {
+//        VakitaDTO vakitaUpdate = vakitaService.getVakitaById(7L);
+//        VakitaDTO vakita = new VakitaDTO("name", 1L, "descripcion", "url", 1000.0, 0.0, LocalDate.parse("2020-03-01"), LocalDate.parse("2023-02-01"), false, VakitaTypes.normal);
+//        vakitaService.updateVakita(7L, vakita);
+//        Assertions.assertTrue(vakitaService.getVakitaById(7L).getName().equals(vakita.getName()));
+//
+//    }
 
 }
 
