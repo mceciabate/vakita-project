@@ -2,7 +2,7 @@ import Cow from "../assets/cow.svg";
 import Hands from "../assets/hands.svg";
 import Goals from "../assets/goals.svg";
 
-export const sections_dashboards = [
+const sections_dashboards = [
     {
         "title": "Mis Vaquitas",
         "img": `${Cow}`,
@@ -18,4 +18,6 @@ export const sections_dashboards = [
         "img": `${Goals}`,
         "onlyMobile": true
     },
-]
+];
+
+export default sections_dashboards
