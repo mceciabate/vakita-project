@@ -1,7 +1,6 @@
 package com.grupo3.msusuarios.service;
 
 import com.grupo3.msusuarios.model.dto.UserDTO;
-import org.apache.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

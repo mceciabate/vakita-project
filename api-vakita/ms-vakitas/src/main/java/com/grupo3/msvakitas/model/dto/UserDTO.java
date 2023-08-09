@@ -23,4 +23,8 @@ public class UserDTO {
         this.id = id;
         this.email = email;
     }
+    //constructor in id y sin vakitas
+    public UserDTO(String email) {
+        this.email = email;
+    }
 }

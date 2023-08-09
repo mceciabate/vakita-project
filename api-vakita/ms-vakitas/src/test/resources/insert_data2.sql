@@ -19,7 +19,7 @@ INSERT INTO "vakita_has_contributors" VALUES (1, 2);
 INSERT INTO "vakita_has_contributors" VALUES (2, 3);
 INSERT INTO "vakita_has_contributors" VALUES (2, 4);
 INSERT INTO "vakita_has_contributors" VALUES (9, 5);
-INSERT INTO "vakita_has_contributors" VALUES (1, 6);
+INSERT INTO "vakita_has_contributors" VALUES (1, 8);
 INSERT INTO "vakita_has_contributors" VALUES (2, 7);
 INSERT INTO "vakita_has_contributors" VALUES (5, 8);
 INSERT INTO "vakita_has_contributors" VALUES (6, 9);

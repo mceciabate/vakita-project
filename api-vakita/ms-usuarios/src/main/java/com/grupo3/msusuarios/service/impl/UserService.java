@@ -1,10 +1,13 @@
 package com.grupo3.msusuarios.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.grupo3.msusuarios.event.NewUserEventProducer;
 import com.grupo3.msusuarios.model.dto.UserDTO;
+import com.grupo3.msusuarios.model.dto.UserRabbitDTO;
 import com.grupo3.msusuarios.model.entity.User;
 import com.grupo3.msusuarios.repository.IUserRepository;
 import com.grupo3.msusuarios.service.IUserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,15 +16,19 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class UserService implements IUserService {
 
     private final IUserRepository userRepository;
     private final ObjectMapper mapper;
 
+    private final NewUserEventProducer event;
+
     @Autowired
-    public UserService(IUserRepository userRepository, ObjectMapper mapper) {
+    public UserService(IUserRepository userRepository, ObjectMapper mapper, NewUserEventProducer event) {
         this.userRepository = userRepository;
         this.mapper = mapper;
+        this.event = event;
     }
 
     @Override
@@ -29,7 +36,10 @@ public class UserService implements IUserService {
     public UserDTO save(UserDTO userDTO) throws Exception {
         try {
             User user = mapper.convertValue(userDTO, User.class);
+            log.info("Saving user: " + userDTO.getName());
             userRepository.save(user);
+            UserRabbitDTO userToSend = new UserRabbitDTO(userDTO.getEmail());
+            event.execute(userToSend);
             return userDTO;
         }catch (Exception e){
             throw new Exception(e.getMessage());

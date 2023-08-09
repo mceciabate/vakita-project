@@ -24,13 +24,6 @@ public class User implements Serializable{
     private Long id;
     @Column(name = "USER_EMAIL", nullable = false, length = 200)
     private String email;
-//    @JoinTable(
-//            name = "vakitas_users",
-//            joinColumns = @JoinColumn(name = "FK_vakita", nullable = false),
-//            inverseJoinColumns = @JoinColumn(name="FK_users", nullable = false)
-//    )
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    private List<Vakita> vakitas;
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "contributors")
     private List<Vakita> vakitas;
@@ -40,6 +33,10 @@ public class User implements Serializable{
     //CONTRUCTOR SIN ARRAY DE VAKITAS
     public User(Long id, String email) {
         this.id = id;
+        this.email = email;
+    }
+
+    public User(String email) {
         this.email = email;
     }
 }
