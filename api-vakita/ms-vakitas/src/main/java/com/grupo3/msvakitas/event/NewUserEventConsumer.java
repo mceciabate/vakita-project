@@ -25,8 +25,6 @@ public class NewUserEventConsumer {
             User newUser = new User();
             BeanUtils.copyProperties(data.getUser(), newUser);
             repository.save(newUser);
-
-
     }
 
     @Getter
