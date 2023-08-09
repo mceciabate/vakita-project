@@ -2,19 +2,20 @@
 import { Formik, Form, Field, ErrorMessage, FieldArray  } from 'formik';
 import * as Yup from 'yup';
 import vakitabanner from "../../assets/vakitabanner.png"
-import {  useState } from 'react';
+import { useContext,  useState } from 'react';
 import "../../styles/newVakitaPage.css"
 import EmailList from './EmailList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCirclePlus, faCircleInfo, faShareNodes } from "@fortawesome/free-solid-svg-icons"
+import { faCirclePlus, faCircleInfo } from "@fortawesome/free-solid-svg-icons"
 import Swal from 'sweetalert2'
 import ShareButton from './SharedButton';
+import { VakitaContext } from '../../context/VakitaProvider';
 
 
 const NewVakita = () => {
  
   
-  
+  const {addNewVakita} = useContext(VakitaContext)
   
   const [emails, setEmails] = useState([]);
   const [emailExists, setEmailExists] = useState(null);
@@ -46,7 +47,7 @@ const NewVakita = () => {
   const handleSubmit = (values, actions) => {
     // Acá se puede realizar las acciones necesarias con los datos ingresados
     // Por ejemplo, enviar los datos a una API o guardarlos en una base de datos
-    console.log(values);
+    // console.log(values);
 
     const dataToSend = {
       name:values.name,
@@ -55,7 +56,8 @@ const NewVakita = () => {
       description:values.description,
       emails: emails.filter((email) => email !== ''), // Filtrar emails vacíos
     };
-    console.log(dataToSend);
+    // console.log(dataToSend);
+    addNewVakita(dataToSend);
 
 
      // Validar todos los emails antes de guardarlos solo si no hay emails vacíos
