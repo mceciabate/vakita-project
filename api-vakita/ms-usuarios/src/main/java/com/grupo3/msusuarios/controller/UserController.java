@@ -1,7 +1,9 @@
 package com.grupo3.msusuarios.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.grupo3.msusuarios.model.dto.UserDTO;
 import com.grupo3.msusuarios.service.IUserService;
+import com.grupo3.msusuarios.service.impl.ConfirmationTokenService;
 import com.grupo3.msusuarios.util.FormatMessage;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -19,10 +21,14 @@ public class UserController {
 
     private static final Logger logg = Logger.getLogger(UserController.class);
     private final IUserService userService;
+    private final ObjectMapper mapper;
+    private final ConfirmationTokenService confirmationTokenService;
 
     @Autowired
-    public UserController(IUserService userService) {
+    public UserController(IUserService userService, ObjectMapper mapper, ConfirmationTokenService confirmationTokenService) {
         this.userService = userService;
+        this.confirmationTokenService = confirmationTokenService;
+        this.mapper = mapper;
     }
 
     @Operation(summary = "Busca todos los registros de usuarios")
@@ -66,7 +72,21 @@ public class UserController {
         }
         try {
             logg.info("saved");
-            return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(userDTO));
+            confirmationTokenService.sendConfirmationEmail(userDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Usuario registrado. Se ha enviado un correo de confirmación.");
+        } catch (Exception e) {
+            logg.error("error: "+ e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor, intente mas tarde.\"}");
+        }
+    }
+
+    @GetMapping("/confirmar")
+    public ResponseEntity<?> confirmUserRegistration(@RequestParam("token") String token) {
+        logg.info("Metodo confirmUserRegistration");
+        try {
+            logg.info("confirmed");
+            confirmationTokenService.confirmUser(token);
+            return ResponseEntity.status(HttpStatus.OK).body("Cuenta confirmada exitosamente.");
         } catch (Exception e) {
             logg.error("error: "+ e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor, intente mas tarde.\"}");

@@ -7,6 +7,18 @@ server:
 spring:
   application:
     name: ms-usuarios
+# TO SEND MAIL
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: vakitas.grupo3@gmail.com
+    password: xkzmuhogqoxrihxt
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 #  zipkin:
 #    baseUrl: http://localhost:9411/
 #    enabled: true
@@ -29,6 +41,7 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
+
 
 #Inicializacion de data en la bd, toma el script que está en resources al iniciar el ms
     defer-datasource-initialization: true
