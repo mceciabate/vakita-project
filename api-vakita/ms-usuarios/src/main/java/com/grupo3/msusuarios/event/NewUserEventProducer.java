@@ -18,22 +18,16 @@ import java.io.Serializable;
 @Component
 @Slf4j
 public class NewUserEventProducer {
-
     private final RabbitTemplate rabbitTemplate;
-
 
     public NewUserEventProducer(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
     }
-
     public void execute(UserRabbitDTO newUser){
         NewUserEventProducer.Data data= new NewUserEventProducer.Data();
         BeanUtils.copyProperties(newUser, data.getUser());
         rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, RabbitMQConfig.TOPIC_NEW_USER, data);
     }
-
-
-
     @Getter
     @Setter
     @NoArgsConstructor
