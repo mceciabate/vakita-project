@@ -21,7 +21,6 @@ public class UserService implements IUserService {
 
     private final IUserRepository userRepository;
     private final ObjectMapper mapper;
-
     private final NewUserEventProducer event;
 
     @Autowired
