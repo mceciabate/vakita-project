@@ -10,6 +10,18 @@ export const MenuLateral = styled.section`
     justify-content: space-between; */
 `;
 
+export const HeaderMenuLateral = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: ;
+
+    img.avatar {
+        width:30%;
+        height:30%;
+        margin-right:20px;
+    }
+`;
+
 export const BloqueOptions = styled.div`
     display: flex;
     flex-direction: column;
@@ -19,3 +31,4 @@ export const BloqueOptions = styled.div`
         cursor: pointer;
     }
 `;
+

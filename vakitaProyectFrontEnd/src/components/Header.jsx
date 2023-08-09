@@ -25,6 +25,8 @@ function Header() {
           Crear cuenta
         </button>
 
+{/* menu hamburguesa para mobile */}
+
         <button 
         className="nav_btn_menu" 
         title="Abrir menú"

@@ -37,17 +37,39 @@
     font-family: 'Inria Sans', sans-serif;
 }
 
-.nav_btn_menu {
-    display: block;
-    background: none;
-    border: none;
-    margin: 0 1rem;
+
+
+/* Esto quiere decir que mientras este en desktop el menu hamburguesa sera invisible*/
+.nav_btn_menu{
     cursor: pointer;
+    background: transparent;
+    border: none;
+    outline: none;
+    display: none;
+    opacity: 0;
+}
+
+/* Esto quiere decir que el menu hamburguesa sera visible en mobile*/
+@media only screen and (max-width: 530px) {
+    .nav_btn_menu {
+        display: block;
+        opacity: 1;
+        margin-right: 30px;
+    }
+
+    .nav_item{
+        cursor: pointer;
+        background: transparent;
+        border: none;
+        outline: none;
+        display: none;
+        opacity: 0;
+    }
 }
 
 /* Medias Queries de Mobile a Desktop*/
 
-@media only screen and (min-width: 391px) {
+@media only screen and (min-width: 370px) {
 
     .header-botones {
         display: flex;
@@ -57,14 +79,5 @@
         width: 100%;
     }
 }
-
-
-@media (min-width: 769px) {
-    .nav_btn_menu {
-        display: none;
-    }  
-  }
-
-
 
 
