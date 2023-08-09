@@ -53,7 +53,7 @@
 }
 
 /* Esto quiere decir que el menu hamburguesa sera visible en mobile*/
-@media only screen and (max-width: 530px) {
+@media only screen and (max-width: 768px) {
     .nav_btn_menu {
         display: block;
         opacity: 1;
