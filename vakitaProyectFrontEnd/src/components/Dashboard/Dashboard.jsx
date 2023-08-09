@@ -1,4 +1,4 @@
-import { DashboardDiv } from "./styled"
+import { DashboardDiv, Sections } from "./styled"
 import sections_dashboards from "../../jsons/sections_dashboards"
 import SectionDashboard from "../SectionDashboard/SectionDashboard";
 const Dashboard = () => {
@@ -10,7 +10,7 @@ const Dashboard = () => {
             
             <p>Inicio</p>
 
-            
+            <Sections>
             {
                 sections_dashboards.map(art => {
                     // console.log(art);
@@ -20,6 +20,8 @@ const Dashboard = () => {
                     
                 })
             }
+            </Sections>
+
         </DashboardDiv>
     )
 }
