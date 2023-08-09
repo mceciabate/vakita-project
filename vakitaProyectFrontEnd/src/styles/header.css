@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inria+Sans&display=swap');
 
-
 .header {
     width: 100%;
     display: flex;
@@ -38,12 +37,14 @@
     font-family: 'Inria Sans', sans-serif;
 }
 
-/* Medias Queries de Mobile a Desktop*/
+.nav_btn_menu {
+    display: block;
+}
 
+/* Medias Queries de Mobile a Desktop*/
 
 @media only screen and (min-width: 391px) {
 
-    
     .header-botones {
         display: flex;
         justify-content: flex-end;
@@ -53,6 +54,12 @@
     }
 }
 
+
+@media (min-width: 769px) {
+    .nav_btn_menu {
+        display: none;
+    }  
+  }
 
 
 
