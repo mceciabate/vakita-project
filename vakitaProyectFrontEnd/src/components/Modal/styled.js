@@ -10,6 +10,7 @@ const slideInAnimation = keyframes`
 `
 
 export const ModalContainer = styled.article`
+    position: fixed;
     z-index: 999;
     top: 0;
     left: 0;
@@ -22,7 +23,6 @@ export const ModalContainer = styled.article`
 
     .modal-container {
         background-color: white;
-        position: relative;
         overflow-y: auto;
         animation: ${slideInAnimation} 0.3s ease;
         height: 100vh;
