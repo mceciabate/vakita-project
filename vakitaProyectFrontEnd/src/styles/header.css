@@ -37,7 +37,10 @@
     font-family: 'Inria Sans', sans-serif;
 }
 
-
+.img-menuIcon{
+    width: 200%;
+    height: 200%;
+}
 
 /* Esto quiere decir que mientras este en desktop el menu hamburguesa sera invisible*/
 .nav_btn_menu{
@@ -54,7 +57,7 @@
     .nav_btn_menu {
         display: block;
         opacity: 1;
-        margin-right: 30px;
+        margin-right: 45px;
     }
 
     .nav_item{

@@ -32,7 +32,7 @@ function Header() {
         title="Abrir menú"
         aria-label="Abrir menú"
         onClick={()=> {openModal()}}>
-          <img src={MenuIcon} />
+          <img className="img-menuIcon" src={MenuIcon} />
         </button>
         <BurgerMenu isOpen={isOpenModal} closeMenu={closeModal}/>  
       </div>

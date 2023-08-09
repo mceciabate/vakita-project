@@ -21,10 +21,10 @@ const Menu = () => {
                 <hr />
                 <a>Necesito mi dinero</a>
                 <a>Ayuda</a>
-                <hr />
-                <a>Cerrar sesión</a>
+                
+                
             </BloqueOptions>
-            <button>Salir</button>
+            <button className="botonSalir">Salir</button>
         </MenuLateral>
     )
 };
