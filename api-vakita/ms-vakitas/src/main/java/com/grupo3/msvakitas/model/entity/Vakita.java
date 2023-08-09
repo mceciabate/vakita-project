@@ -2,6 +2,7 @@ package com.grupo3.msvakitas.model.entity;
 
 import com.grupo3.msvakitas.model.enums.VakitaTypes;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -22,6 +23,7 @@ public class Vakita implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+//    @NotBlank
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "VAKITA_ID", unique = true, nullable = false)
     private Long id;
