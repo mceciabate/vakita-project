@@ -21,7 +21,7 @@ export const MenuLateral = styled.section`
         display: none;
         opacity: 0;
         }
-`;
+    }`;
 
 export const HeaderMenuLateral = styled.div`
 
