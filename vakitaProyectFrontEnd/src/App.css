@@ -15,7 +15,7 @@
 
 .div-menu {
   display: none;
-  background-color: red;
+  background-color: #fff;
 }
 
 @media (min-width: 769px) {

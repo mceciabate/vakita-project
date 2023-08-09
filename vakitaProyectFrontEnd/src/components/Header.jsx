@@ -3,6 +3,7 @@ import "../styles/header.css"
 import logoVaca from "../assets/LogoVaca.svg";
 import BurgerMenu from "./BurgerMenu/BurgerMenu";
 import { useModal } from "../hooks/useModal";
+import MenuIcon from "../assets/menu_burger.svg"
 
 
 function Header() {
@@ -24,7 +25,13 @@ function Header() {
           Crear cuenta
         </button>
 
-        <button className="nav_btn_menu" onClick={()=> {openModal()}}>pruebaaa</button>
+        <button 
+        className="nav_btn_menu" 
+        title="Abrir menú"
+        aria-label="Abrir menú"
+        onClick={()=> {openModal()}}>
+          <img src={MenuIcon} />
+        </button>
         <BurgerMenu isOpen={isOpenModal} closeMenu={closeModal}/>
       </div>
 
