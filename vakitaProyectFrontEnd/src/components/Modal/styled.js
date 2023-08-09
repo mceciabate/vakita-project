@@ -29,6 +29,8 @@ export const ModalContainer = styled.article`
         width: 90%;
         max-width: 375px;
         margin-right: 1.2rem;
+        display: flex;
+        flex-direction: column;
     }
 
     .header-menu-closer {
@@ -41,4 +43,11 @@ export const ModalContainer = styled.article`
         font-size: 1.1rem;
         font-weight: 700;
     }
+`;
+
+export const BtnClose = styled.button`
+    align-self: flex-end;
+    background: none;
+    border: none;
+    margin: 0.8rem;
 `;

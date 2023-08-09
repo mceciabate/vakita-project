@@ -1,5 +1,5 @@
 import {useRef, useEffect} from 'react';
-import { ModalContainer } from './styled';
+import { BtnClose, ModalContainer } from './styled';
 
 const ModalMenu = ({children, isOpen, closeModal}) => {
 
@@ -26,8 +26,8 @@ const ModalMenu = ({children, isOpen, closeModal}) => {
 
     return (
         <ModalContainer isOpen={isOpen}>
-            <div ref={modalRef} className={`modal-container ${isOpen ? 'open' : ''}`}>
-                <button onClick={closeModal}>x</button>
+            <div ref={modalRef} className="modal-container">
+                <BtnClose onClick={closeModal}>x</BtnClose>
                 {children}
             </div>
         </ModalContainer>
