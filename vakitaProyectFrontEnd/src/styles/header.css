@@ -39,6 +39,10 @@
 
 .nav_btn_menu {
     display: block;
+    background: none;
+    border: none;
+    margin: 0 1rem;
+    cursor: pointer;
 }
 
 /* Medias Queries de Mobile a Desktop*/
