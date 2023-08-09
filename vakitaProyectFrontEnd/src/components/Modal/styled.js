@@ -10,6 +10,7 @@ const slideInAnimation = keyframes`
 `
 
 export const ModalContainer = styled.article`
+    position: fixed;
     z-index: 999;
     top: 0;
     left: 0;
@@ -22,13 +23,14 @@ export const ModalContainer = styled.article`
 
     .modal-container {
         background-color: white;
-        position: relative;
         overflow-y: auto;
         animation: ${slideInAnimation} 0.3s ease;
         height: 100vh;
         width: 90%;
         max-width: 375px;
         margin-right: 1.2rem;
+        display: flex;
+        flex-direction: column;
     }
 
     .header-menu-closer {
@@ -41,4 +43,11 @@ export const ModalContainer = styled.article`
         font-size: 1.1rem;
         font-weight: 700;
     }
+`;
+
+export const BtnClose = styled.button`
+    align-self: flex-end;
+    background: none;
+    border: none;
+    margin: 0.8rem;
 `;

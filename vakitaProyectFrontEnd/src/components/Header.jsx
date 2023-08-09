@@ -32,9 +32,9 @@ function Header() {
         onClick={()=> {openModal()}}>
           <img src={MenuIcon} />
         </button>
-        <BurgerMenu isOpen={isOpenModal} closeMenu={closeModal}/>
+        <BurgerMenu isOpen={isOpenModal} closeMenu={closeModal}/>  
       </div>
-
+      
     </header>
   );
 }
