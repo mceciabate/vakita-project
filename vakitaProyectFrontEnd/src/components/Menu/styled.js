@@ -8,10 +8,17 @@ export const MenuLateral = styled.section`
     /* display: flex; */
     /* flex-direction: column;
     justify-content: space-between; */
+    
+
+        
+    
+    
 
 
     /* Aqui se establece que el boton salir no se mostrara en desktop*/
     @media (min-width: 768px){
+
+        padding: 2.5rem 1rem;
         .botonSalir {
             display: flex;
         flex-direction: row;
@@ -29,7 +36,9 @@ export const HeaderMenuLateral = styled.div`
     flex-direction: row;
     background: transparent;
     border: none;
-    
+    background-color:black;
+    color:white;
+    padding: 20px;
     img.avatar {
         width:30%;
         height:30%;

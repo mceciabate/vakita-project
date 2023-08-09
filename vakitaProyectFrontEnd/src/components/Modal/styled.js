@@ -32,6 +32,7 @@ export const ModalContainer = styled.article`
         margin-left: 1.2rem;
         display: flex;
         flex-direction: column;
+        
     }
 
     .header-menu-closer {
