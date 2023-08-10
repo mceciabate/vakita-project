@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inria+Sans&display=swap');
 
-
 .header {
     width: 100%;
     display: flex;
@@ -38,12 +37,43 @@
     font-family: 'Inria Sans', sans-serif;
 }
 
+.img-menuIcon{
+    width: 200%;
+    height: 200%;
+}
+
+/* Esto quiere decir que mientras este en desktop el menu hamburguesa sera invisible*/
+.nav_btn_menu{
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    outline: none;
+    display: none;
+    opacity: 0;
+}
+
+/* Esto quiere decir que el menu hamburguesa sera visible en mobile*/
+@media only screen and (max-width: 768px) {
+    .nav_btn_menu {
+        display: block;
+        opacity: 1;
+        margin-right: 45px;
+    }
+
+    .nav_item{
+        cursor: pointer;
+        background: transparent;
+        border: none;
+        outline: none;
+        display: none;
+        opacity: 0;
+    }
+}
+
 /* Medias Queries de Mobile a Desktop*/
 
+@media only screen and (min-width: 370px) {
 
-@media only screen and (min-width: 391px) {
-
-    
     .header-botones {
         display: flex;
         justify-content: flex-end;
@@ -52,8 +82,5 @@
         width: 100%;
     }
 }
-
-
-
 
 

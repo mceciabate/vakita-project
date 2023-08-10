@@ -1,12 +1,17 @@
 import './App.css'
+import Routers from './Routes/Routers';
 import Header from './components/Header.jsx';
-import Landing from './components/Landing.jsx';
+
+
 function App() {
 
   return (
     <div className="App"> 
     <Header/>
-    <Landing/>
+  
+      <Routers/>
+      
+  
     </div>
   )
 }
