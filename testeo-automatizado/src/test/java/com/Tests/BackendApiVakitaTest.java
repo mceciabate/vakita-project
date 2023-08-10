@@ -21,12 +21,11 @@ import static io.restassured.config.EncoderConfig.encoderConfig;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class BackendApiVakitaTest {
 
-    static ExtentSparkReporter spark = new ExtentSparkReporter("src/test/java/com/ExtentReport/Reports/BackendSmokeSuiteTest.html");
+    static ExtentSparkReporter spark = new ExtentSparkReporter("src/test/java/com/ExtentReport/Reports/BackendVakitaSmokeSuiteTest.html");
     static ExtentReports report;
     ExtentTest test;
     private String baseURLVakitas = "http://localhost:8080/api/v1/vakita";
 
-    private String baseURLUsuarios = "http://localhost:8080/api/v1/usuarios/";
 
 
     @BeforeAll
@@ -150,9 +149,8 @@ public class BackendApiVakitaTest {
                 .statusCode(400);
 
     }
-//
-//    @Test
-//    @Tag("smoke")
+
+
 
     @AfterAll
     public void cerrarReporte(){
