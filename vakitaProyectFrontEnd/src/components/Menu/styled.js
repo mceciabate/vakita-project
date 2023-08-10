@@ -64,6 +64,7 @@ export const BloqueOptions = styled.div`
     flex-direction: column;
     width: 100%;
     height: 100%;
+    margin-top: 10px;
    
     
     /* margin-top: 50px; */
@@ -76,7 +77,7 @@ export const BloqueOptions = styled.div`
 
     hr {
         margin-top:30px;
-        margin-bottom:60px;
+        margin-bottom:50px;
     }
 
     @media (max-width: 768px){
