@@ -25,7 +25,7 @@ export const MenuLateral = styled.section`
         opacity: 1;
         
         }
-`;
+    }`;
 
 
 
