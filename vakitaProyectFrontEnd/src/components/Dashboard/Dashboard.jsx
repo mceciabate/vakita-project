@@ -1,34 +1,33 @@
-import { DashboardDiv, Sections, MenuDiv, SectionLanding } from "./styled"
+import { DashboardDiv, Sections, MenuDiv, SectionLanding, DivContSections } from "./styled"
 import sections_dashboards from "../../jsons/sections_dashboards"
 import SectionDashboard from "../SectionDashboard/SectionDashboard";
 import Menu from "../Menu/Menu";
-
-
+import BannerDashboard from "../BannerDashboard/BannerDashboard"
 const Dashboard = () => {
-
-    console.log(sections_dashboards);
-
     return (
         <SectionLanding>
-             <MenuDiv>
-            <Menu/>
+            <MenuDiv>
+                <Menu/>
             </MenuDiv>
-        <DashboardDiv>
-            
-            <p>Inicio</p>
+            <DashboardDiv>
+                <DivContSections>
+                    <BannerDashboard />
+                </DivContSections>
+                <DivContSections>
+                    <p>Inicio</p>
+                    <Sections>
+                    {
+                        sections_dashboards.map(art => {
+                            return (
+                                <SectionDashboard img={art.img} title={art.title} displayMobile={art.onlyMobile}/>
+                            )
+                            
+                        })
+                    }
+                    </Sections>
+                </DivContSections>
 
-            <Sections>
-            {
-                sections_dashboards.map(art => {
-                    return (
-                        <SectionDashboard img={art.img} title={art.title} displayMobile={art.onlyMobile}/>
-                    )
-                    
-                })
-            }
-            </Sections>
-
-        </DashboardDiv>
+            </DashboardDiv>
         </SectionLanding>
     )
 }
