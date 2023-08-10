@@ -13,17 +13,7 @@ export const Sections = styled.section`
     align-items: center;
 `;
 
-export const MenuDiv=styled.div`
 
-    display: none;
-
-    @media (min-width: 769px){
-          
-      display: flex;
-     
-    
-    }
-`;
 
 export const SectionLanding= styled.section`
 

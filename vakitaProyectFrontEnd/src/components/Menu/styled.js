@@ -72,4 +72,15 @@ export const BloqueOptions = styled.div`
     }
 `;
 
+export const MenuDiv=styled.div`
 
+    display: none;
+
+    @media (min-width: 769px){
+          
+      display: flex;
+      
+     
+    
+    }
+`;

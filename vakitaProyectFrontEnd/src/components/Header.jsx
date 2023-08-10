@@ -4,6 +4,7 @@ import logoVaca from "../assets/LogoVaca.svg";
 import BurgerMenu from "./BurgerMenu/BurgerMenu";
 import { useModal } from "../hooks/useModal";
 import MenuIcon from "../assets/menu_burger.svg"
+import { Link } from 'react-router-dom'
 
 
 function Header() {
@@ -18,7 +19,7 @@ function Header() {
       <div className="header-botones">
 
         <button className="nav_item" id="Iniciar-sesion">
-          Iniciar sesión
+          <Link to="/Log-in">Iniciar sesión</Link>
         </button>
 
         <button className="nav_item" id="Crear-cuenta">

@@ -1,9 +1,15 @@
-import { BloqueOptions,HeaderMenuLateral, MenuLateral } from "./styled";
+import { BloqueOptions,HeaderMenuLateral, MenuDiv, MenuLateral } from "./styled";
+import { DashboardDiv, Sections,SectionLanding } from "../Dashboard/styled"
 import  Avatar from "../../assets/vaquitaPerfil.png";
+import { Link, Outlet } from 'react-router-dom'
+
 
 const Menu = () => {
-    
+   
     return (
+        <>
+       
+        <MenuDiv>
         <MenuLateral>
             <HeaderMenuLateral>
 
@@ -11,21 +17,28 @@ const Menu = () => {
                 <h3>Hola, <br/> Cecilia Abate</h3>
                 
             </HeaderMenuLateral>
-
+          
             <BloqueOptions>
-                <a>Nueva Vaca</a>
-                <a>Mis Vaquitas</a>
+            <Link to="/menu">Inicio</Link>
+                <Link to="/menu/crear-vaca">Nueva Vaca</Link>
+                <Link to="/menu/mis-vaquitas">Mis Vaquitas</Link>
                 <hr />
-                <a>Mi perfil</a>
-                <a>Datos financieros</a>
+                <Link to="/mi-perfil">Mi perfil</Link>
+                <Link to="/datos-financieros">Datos financieros</Link>
                 <hr />
-                <a>Necesito mi dinero</a>
-                <a>Ayuda</a>
-                
-                
+                <Link to="/necesito-mi-dinero">Necesito mi dinero</Link>
+                <Link to="/ayuda">Ayuda</Link>
             </BloqueOptions>
             <button className="botonSalir">Salir</button>
+           
+           
+           
         </MenuLateral>
+        <Outlet/>
+        </MenuDiv>
+       
+        
+        </>
     )
 };
 
