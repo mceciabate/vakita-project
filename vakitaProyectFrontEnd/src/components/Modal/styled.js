@@ -39,7 +39,7 @@ export const ModalContainer = styled.article`
     
     .modal-container section {
         width: 100%;
-        height: 100vh;
+        height: 95vh;
         padding:0px;
         display:flex;
         flex-direction: column;

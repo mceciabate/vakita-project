@@ -42,14 +42,14 @@ const MyVakita = () => {
 
   return (
     <>
+    <div className='pageMyVakita'>
       <h2 className='h2'>Mis vaquitas</h2>
       <h3 className='h3'>Activas</h3>
       <div className="containerPageMyVakita">
-      
-       
         {renderDataMyVakita()}
-       
       </div>
+      </div>
+      
     </>
   );
 };
