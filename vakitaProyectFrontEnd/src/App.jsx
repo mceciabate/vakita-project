@@ -1,6 +1,7 @@
 import './App.css'
 import Routers from './Routes/Routers';
 import Header from './components/Header.jsx';
+import Login from './components/Login/Login';
 
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
     <Header/>
   
       <Routers/>
+      <Login/>
       
   
     </div>

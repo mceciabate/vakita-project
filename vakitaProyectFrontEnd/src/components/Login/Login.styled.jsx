@@ -149,6 +149,23 @@ export const Button = styled.button`
   cursor: pointer;
   `
 
+  export const ButtonRegister = styled.button`
+  display: inline-block;
+  text-decoration: none;
+  color: #007bff; 
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 0;
+  font-family: 'Inria Sans';
+
+  :hover{
+    text-decoration: underline;
+}
+
+  `
+
   export const Questions = styled.p`
 color: ${black};
 text-align: right;

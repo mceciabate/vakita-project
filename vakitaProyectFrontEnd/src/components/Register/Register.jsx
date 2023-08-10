@@ -1,6 +1,7 @@
 import React from "react";
 import * as Yup from "yup";
 import {useFormik} from "formik";
+import Swal from "sweetalert2";
 import logoVaca from "../../assets/LogoVaca.svg";
 import {Input, ContainerInput, FormContainer, BoxText, ContainerGeneral, BoxTitle, Label, Button, FinalParagraph, ImgVaca, GeneralFormContainer, InfoP} from './Register.styled.jsx';
 
@@ -24,8 +25,13 @@ function Register() {
       passwordConfirm:  Yup.string().min(4, "Debe contener 4 digitos o más").max(50).required("Confirmación de contraseña es requerida").oneOf([Yup.ref("password")], "Las contraseñas no coinciden")
         }),
     onSubmit: (values) => {
+        
+      Swal.fire({
+        title: 'Registro realizado con éxito',
+        text:'Ahora puedes iniciar sesión',
+        icon:'success'
+    })
         formik.resetForm();
-        console.log("Probando OnSubmit Register");
     }
 });
 
@@ -102,12 +108,8 @@ function Register() {
              
                 </ContainerInput>
                 
-                
                 {formik.touched.password && formik.errors.password && <span style={{ color: "red" }}>{formik.errors.password}</span>}
               
-                
-
-
                 <ContainerInput>
                   <Label htmlFor="passwordConfirm">Confirmar contraseña</Label>
                   <Input

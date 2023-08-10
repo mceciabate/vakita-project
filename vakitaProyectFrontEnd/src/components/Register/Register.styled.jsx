@@ -145,6 +145,7 @@ export const Button = styled.button`
   width: 100px;
   font-size: 14px;
   margin-top: 15px;
+  cursor: pointer;
   `
 export const FinalParagraph = styled.p`
 color: #000;
