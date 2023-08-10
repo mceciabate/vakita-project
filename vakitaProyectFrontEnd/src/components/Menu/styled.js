@@ -64,7 +64,9 @@ export const BloqueOptions = styled.div`
     flex-direction: column;
     width: 100%;
     height: 100%;
-    margin-top: 50px;
+   
+    
+    /* margin-top: 50px; */
 
     a {
         padding: 0.8rem;
@@ -92,12 +94,15 @@ export const BloqueOptions = styled.div`
 export const MenuDiv=styled.div`
 
     display: flex;
+    justify-content: center;
+    
+    
 
     @media (min-width: 769px){
-          
-      display: flex;
-      
-     
+        
+   justify-content:normal;
     
     }
+
+    
 `;

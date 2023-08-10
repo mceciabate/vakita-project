@@ -10,6 +10,7 @@ import { faCirclePlus, faCircleInfo } from "@fortawesome/free-solid-svg-icons"
 import Swal from 'sweetalert2'
 import ShareButton from './SharedButton';
 import { VakitaContext } from '../../context/VakitaProvider';
+import { Link } from 'react-router-dom'
 
 
 const NewVakita = () => {
@@ -76,8 +77,9 @@ const NewVakita = () => {
       icon: 'success',
       html:
         'Ir a ' +
-        '<a href="//sweetalert2.github.io">Mis Vaquitas</a> ' ,
+        `<a href="/menu/mis-vaquitas">Mis Vaquitas</a> ` ,
       showCloseButton: true,
+     
       
       
     })
@@ -162,7 +164,7 @@ const NewVakita = () => {
       >
 
 {({values}) => (
-        <Form>
+        <Form className='formNewVakita'>
           <div className='boxReverseBanner'>
             <div className='boxOne'>
           <div className="boxItems">
@@ -212,7 +214,7 @@ const NewVakita = () => {
 
       <div className='halfBackground'>
 
-<div>
+<div >
 <div className="boxItems">
 
           <EmailList emails={emails} onRemove={removeMember} />

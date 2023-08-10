@@ -14,7 +14,7 @@ function Header() {
   return (
     <header className="header">
 
-      <img className="header-logo" src={logoVaca} alt="logo" />
+      <Link to="/menu"><img className="header-logo" src={logoVaca} alt="logo" /></Link>
 
       <div className="header-botones">
 

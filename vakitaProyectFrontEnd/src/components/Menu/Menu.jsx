@@ -1,5 +1,4 @@
 import { BloqueOptions,HeaderMenuLateral, MenuDiv, MenuLateral } from "./styled";
-import { DashboardDiv, Sections,SectionLanding } from "../Dashboard/styled"
 import  Avatar from "../../assets/vaquitaPerfil.png";
 import { Link, Outlet } from 'react-router-dom'
 

@@ -23,7 +23,7 @@ const Dashboard = () => {
                 sections_dashboards.map(art => {
                     // console.log(art);
                     return (
-                        <SectionDashboard img={art.img} title={art.title} displayMobile={art.onlyMobile}/>
+                        <SectionDashboard link={art.link} img={art.img} title={art.title} displayMobile={art.onlyMobile}/>
                     )
                     
                 })
