@@ -10,25 +10,24 @@ export const MenuLateral = styled.section`
     justify-content: space-between; */
     
 
-        
-    
-    
-
 
     /* Aqui se establece que el boton salir no se mostrara en desktop*/
     @media (min-width: 768px){
 
         padding: 2.5rem 1rem;
         .botonSalir {
-            display: flex;
+            display: block;
         flex-direction: row;
         background: transparent;
         border: none;
         outline: none;
         display: none;
-        opacity: 0;
+        opacity: 1;
+        
         }
 `;
+
+
 
 export const HeaderMenuLateral = styled.div`
 
@@ -40,8 +39,8 @@ export const HeaderMenuLateral = styled.div`
     color:white;
     padding: 20px;
     img.avatar {
-        width:30%;
-        height:30%;
+        width:40%;
+        height:100%;
         margin-right:20px;
     }
     
@@ -52,13 +51,14 @@ export const HeaderMenuLateral = styled.div`
         display: none;
         opacity: 0;
     }
-
-
 `;
 
 export const BloqueOptions = styled.div`
     display: flex;
     flex-direction: column;
+    width: 100%;
+    height: 100%;
+    margin-top: 50px;
 
     a {
         padding: 0.8rem;
@@ -69,6 +69,17 @@ export const BloqueOptions = styled.div`
     hr {
         margin-top:30px;
         margin-bottom:60px;
+    }
+
+    @media (max-width: 768px){
+        a {
+            margin-left:10px;
+            
+        }
+        hr {
+            margin-left:20px;
+            width:37%
+        }
     }
 `;
 
