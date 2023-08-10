@@ -3,13 +3,11 @@ package com.grupo3.msusuarios.service.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.grupo3.msusuarios.model.dto.UserDTO;
 import com.grupo3.msusuarios.model.entity.ConfirmationToken;
-import com.grupo3.msusuarios.model.entity.User;
 import com.grupo3.msusuarios.repository.ConfirmationTokenRepository;
 import com.grupo3.msusuarios.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
