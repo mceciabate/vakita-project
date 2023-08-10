@@ -26,13 +26,13 @@ public class BackendApiVakitaTest {
     ExtentTest test;
     private String baseURLVakitas = "http://localhost:8080/api/v1/vakita";
 
-
-
     @BeforeAll
     public void initReport(){
         report = ExtentFactory.getInstance();
         report.attachReporter(spark);
     }
+
+    //VALIDACIONES DE LOS CÓDIGOS DE RESPUESTA PARA LA API DE VAKITAS
 
     @Test
     @Tag("smoke")
@@ -50,7 +50,7 @@ public class BackendApiVakitaTest {
         vakita.put("expirationDate", "2023-08-07");
         vakita.put("isActive", true);
         vakita.put("type", "normal");
-        System.out.println(vakita.toJSONString());
+        test.log(Status.INFO, "Se configura la petición");
         given().config(RestAssured.config().encoderConfig(encoderConfig().appendDefaultContentCharsetToContentTypeIfUndefined(false))).
                 contentType("application/json")
                 .body(vakita.toString())
@@ -59,12 +59,14 @@ public class BackendApiVakitaTest {
                 .then()
                 .assertThat()
                 .statusCode(200);
+        test.log(Status.INFO, "Se resuelve la petición");
+        test.log(Status.PASS, "Se ejecuta la petición de manera exitosa");
         test.log(Status.PASS, "Se obtiene respuesta exitosa");
     }
 
     @Test
     @Tag("smoke")
-    public void bValidacionCrearVakita(){
+    public void bValidacionDateCrearVakita(){
         test = report.createTest("Test de Validar fecha de creacion Vakita");
         test.log(Status.INFO, "Inicia el Test");
         JSONObject vakita = new JSONObject();
@@ -78,7 +80,7 @@ public class BackendApiVakitaTest {
         vakita.put("expirationDate", LocalDate.now().toString());
         vakita.put("isActive", true);
         vakita.put("type", "normal");
-        System.out.println(vakita.toJSONString());
+        test.log(Status.INFO, "Se configura la petición");
         given().config(RestAssured.config().encoderConfig(encoderConfig().appendDefaultContentCharsetToContentTypeIfUndefined(false))).
                 contentType("application/json")
                 .body(vakita.toString())
@@ -87,6 +89,8 @@ public class BackendApiVakitaTest {
                 .then()
                 .assertThat()
                 .statusCode(400);
+        test.log(Status.INFO, "Se resuelve la petición");
+        test.log(Status.PASS, "Se ejecuta la petición de manera exitosa");
         test.log(Status.PASS, "Se obtiene respuesta acorde al error");
     }
 
@@ -95,6 +99,7 @@ public class BackendApiVakitaTest {
     public void cObtenerVakitaPorId(){
         test = report.createTest("Test de Obtener Vakita po Id");
         test.log(Status.INFO, "Inicia el Test");
+        test.log(Status.INFO, "Se configura la petición");
         given()
                .pathParam("vakitaId", 1)
                .when()
@@ -102,6 +107,8 @@ public class BackendApiVakitaTest {
                .then()
                .assertThat()
                 .statusCode(200);
+        test.log(Status.INFO, "Se resuelve la petición");
+        test.log(Status.PASS, "Se ejecuta la petición de manera exitosa");
         test.log(Status.PASS, "Se obtiene respuesta exitosa");
     }
 
@@ -110,6 +117,7 @@ public class BackendApiVakitaTest {
     public void dDepositarSaldo(){
         test = report.createTest("Test de depositar dinero en una vakita");
         test.log(Status.INFO, "Inicia el Test");
+        test.log(Status.INFO, "Se configura la petición");
         given()
                 .queryParam("amount", 200.0)
                 .queryParam("vakitaId", 1)
@@ -118,6 +126,9 @@ public class BackendApiVakitaTest {
                 .then()
                 .assertThat()
                 .statusCode(200);
+        test.log(Status.INFO, "Se resuelve la petición");
+        test.log(Status.PASS, "Se ejecuta la petición de manera exitosa");
+        test.log(Status.PASS, "Se obtiene respuesta exitosa");
     }
 
     @Test
@@ -125,6 +136,7 @@ public class BackendApiVakitaTest {
     public void eInactivarUnaVakita(){
         test = report.createTest("Test Inactivar una vakita");
         test.log(Status.INFO, "Inicia el Test");
+        test.log(Status.INFO, "Se configura la petición");
         given()
                 .pathParam("vakitaId", 1)
                 .when()
@@ -132,13 +144,17 @@ public class BackendApiVakitaTest {
                 .then()
                 .assertThat()
                 .statusCode(200);
+        test.log(Status.INFO, "Se resuelve la petición");
+        test.log(Status.PASS, "Se ejecuta la petición de manera exitosa");
+        test.log(Status.PASS, "Se obtiene respuesta exitosa");
     }
 
     @Test
     @Tag("smoke")
-    public void fValidacionVakitaInactiva(){
+    public void fValidacionDepositoEnVakitaInactiva(){
         test = report.createTest("Test Validar que no se puede depositar dinero a una vakita");
         test.log(Status.INFO, "Inicia el Test");
+        test.log(Status.INFO, "Se configura la petición");
         given()
                 .queryParam("amount", 200.0)
                 .queryParam("vakitaId", 1)
@@ -147,10 +163,11 @@ public class BackendApiVakitaTest {
                 .then()
                 .assertThat()
                 .statusCode(400);
+        test.log(Status.INFO, "Se resuelve la petición");
+        test.log(Status.PASS, "Se ejecuta la petición de manera exitosa");
+        test.log(Status.PASS, "Se obtiene respuesta exitosa");
 
     }
-
-
 
     @AfterAll
     public void cerrarReporte(){

@@ -32,6 +32,8 @@ public class BackendApiUserTest {
         report.attachReporter(spark);
     }
 
+    //VALIDACIONES DE LOS CÓDIGOS DE RESPUESTA PARA LA API DE USUARIOS
+
     @Test
     @Tag("smoke")
     public void aCrearUsuario(){
@@ -42,8 +44,9 @@ public class BackendApiUserTest {
         user.put("lastName", "Abate");
         user.put("dni", "11111111");
         user.put("email", "mail@mail.com");
-        user.put( "password", "password");
-        user.put( "birthdate", "1994-05-01");
+        user.put("password", "password");
+        user.put("birthdate", "1994-05-01");
+        test.log(Status.INFO, "Se configura la petición");
         given().config(RestAssured.config().encoderConfig(encoderConfig().appendDefaultContentCharsetToContentTypeIfUndefined(false))).
                 contentType("application/json")
                 .body(user.toString())
@@ -52,14 +55,17 @@ public class BackendApiUserTest {
                 .then()
                 .assertThat()
                 .statusCode(201);
+        test.log(Status.INFO, "Se resuelve la petición");
+        test.log(Status.PASS, "Se ejecuta la petición de manera exitosa");
         test.log(Status.PASS, "Se obtiene respuesta exitosa");
     }
 
     @Test
     @Tag("smoke")
     public void bObtenerUserPorId(){
-        test = report.createTest("Test de Obtener Usuario po Id");
+        test = report.createTest("Test de Obtener Usuario por Id");
         test.log(Status.INFO, "Inicia el Test");
+        test.log(Status.INFO, "Se configura la petición");
         given()
                 .pathParam("usuarioId", 1)
                 .when()
@@ -67,6 +73,8 @@ public class BackendApiUserTest {
                 .then()
                 .assertThat()
                 .statusCode(200);
+        test.log(Status.INFO, "Se resuelve la petición");
+        test.log(Status.PASS, "Se ejecuta la petición de manera exitosa");
         test.log(Status.PASS, "Se obtiene respuesta exitosa");
     }
 
@@ -77,6 +85,7 @@ public class BackendApiUserTest {
         test.log(Status.INFO, "Inicia el Test");
         JSONObject newPass = new JSONObject();
         newPass.put("password", "nuevapass");
+        test.log(Status.INFO, "Se configura la petición");
         given().config(RestAssured.config().encoderConfig(encoderConfig().appendDefaultContentCharsetToContentTypeIfUndefined(false))).
                 contentType("application/json")
                 .pathParam("usuarioId", 6)
@@ -86,7 +95,73 @@ public class BackendApiUserTest {
                 .then()
                 .assertThat()
                 .statusCode(200);
+        test.log(Status.INFO, "Se resuelve la petición");
+        test.log(Status.PASS, "Se ejecuta la petición de manera exitosa");
         test.log(Status.PASS, "Se obtiene respuesta exitosa");
+    }
+
+    @Test
+    @Tag("smoke")
+    public void dModificarUsuario(){
+        test = report.createTest("Test de Modificar datos de usuario");
+        test.log(Status.INFO, "Inicia el Test");
+        JSONObject user = new JSONObject();
+        user.put("id", 1);
+        user.put("name", "Cosme");
+        user.put("lastName", "Fulanito");
+        user.put("dni", "11111111");
+        user.put("email", "fulanito@mail.com");
+        user.put("password", "password");
+        user.put("birthdate", "1994-05-01");
+        test.log(Status.INFO, "Se configura la petición");
+        given().config(RestAssured.config().encoderConfig(encoderConfig().appendDefaultContentCharsetToContentTypeIfUndefined(false))).
+                contentType("application/json")
+                .pathParam("usuarioId", 1)
+                .body(user.toString())
+                .when()
+                .put(baseURLUsuarios+"/{usuarioId}")
+                .then()
+                .assertThat()
+                .statusCode(200);
+        test.log(Status.INFO, "Se resuelve la petición");
+        test.log(Status.PASS, "Se ejecuta la petición de manera exitosa");
+        test.log(Status.PASS, "Se obtiene respuesta exitosa");
+    }
+
+    @Test
+    @Tag("smoke")
+    public void eEliminarUsuario(){
+        test = report.createTest("Test de eliminar Usuario por Id");
+        test.log(Status.INFO, "Inicia el Test");
+        test.log(Status.INFO, "Se configura la petición");
+        given()
+                .pathParam("usuarioId", 5)
+                .when()
+                .delete(baseURLUsuarios+"/{usuarioId}")
+                .then()
+                .assertThat()
+                .statusCode(204);
+        test.log(Status.INFO, "Se resuelve la petición");
+        test.log(Status.PASS, "Se ejecuta la petición de manera exitosa");
+        test.log(Status.PASS, "Se obtiene respuesta exitosa");
+    }
+
+    @Test
+    @Tag("smoke")
+    public void fEliminarUsuarioNoexistente(){
+        test = report.createTest("Test de eliminar Usuario por Id");
+        test.log(Status.INFO, "Inicia el Test");
+        test.log(Status.INFO, "Se configura la petición");
+        given()
+                .pathParam("usuarioId", 5)
+                .when()
+                .delete(baseURLUsuarios+"/{usuarioId}")
+                .then()
+                .assertThat()
+                .statusCode(404);
+        test.log(Status.INFO, "Se resuelve la petición");
+        test.log(Status.PASS, "Se ejecuta la petición de manera exitosa");
+        test.log(Status.PASS, "Se obtiene respuesta acorde al error");
     }
 
     @AfterAll
