@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Mike\",\r\n    \"lastName\": \"Mayers\",\r\n    \"dni\": \"11111111\",\r\n    \"email\": \"maatiii.r@gmail.com\",\r\n    \"password\": \"password1\",\r\n    \"birthdate\": \"1994-05-01\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Mike\",\r\n    \"lastName\": \"Mayers\",\r\n    \"dni\": \"11111111\",\r\n    \"email\": \"mail@vakitas.com\",\r\n    \"password\": \"password1\",\r\n    \"birthdate\": \"1994-05-01\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

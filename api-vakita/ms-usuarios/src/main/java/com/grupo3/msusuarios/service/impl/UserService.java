@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.grupo3.msusuarios.event.NewUserEventProducer;
 import com.grupo3.msusuarios.model.dto.UserDTO;
 import com.grupo3.msusuarios.model.dto.UserRabbitDTO;
+import com.grupo3.msusuarios.model.dto.UserWithoutPasswordDTO;
 import com.grupo3.msusuarios.model.entity.User;
 import com.grupo3.msusuarios.repository.IUserRepository;
 import com.grupo3.msusuarios.service.IUserService;
@@ -122,9 +123,9 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public List<UserDTO> findAll() throws Exception {
+    public List<UserWithoutPasswordDTO> findAll() throws Exception {
         try {
-            return userRepository.findAll().stream().map(user -> mapper.convertValue(user, UserDTO.class)).toList();
+            return userRepository.findAll().stream().map(user -> mapper.convertValue(user, UserWithoutPasswordDTO.class)).toList();
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }

@@ -1,6 +1,7 @@
 package com.grupo3.msusuarios.service;
 
 import com.grupo3.msusuarios.model.dto.UserDTO;
+import com.grupo3.msusuarios.model.dto.UserWithoutPasswordDTO;
 
 import java.util.List;
 
@@ -12,5 +13,5 @@ public interface IUserService {
     UserDTO updateById(Long id, UserDTO userDTO) throws Exception;
     Boolean changePassword(Long id, String newPassword) throws Exception;
     Boolean deleteById(Long id) throws Exception;
-    List<UserDTO> findAll() throws Exception;
+    List<UserWithoutPasswordDTO> findAll() throws Exception;
 }

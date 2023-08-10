@@ -2,6 +2,7 @@ package com.grupo3.msusuarios.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.grupo3.msusuarios.model.dto.UserDTO;
+import com.grupo3.msusuarios.model.dto.UserWithoutPasswordDTO;
 import com.grupo3.msusuarios.service.IUserService;
 import com.grupo3.msusuarios.service.impl.ConfirmationTokenService;
 import com.grupo3.msusuarios.util.FormatMessage;
@@ -54,7 +55,7 @@ public class UserController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"No se encontraron registros con ese ID.\"}");
             }
             logg.info("obtained");
-            return ResponseEntity.status(HttpStatus.OK).body(userDTO);
+            return ResponseEntity.status(HttpStatus.OK).body(mapper.convertValue(userDTO, UserWithoutPasswordDTO.class));
         } catch (Exception e) {
             logg.error(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"notice\":\"Error. Por favor, intente mas tarde.\"}");
@@ -71,7 +72,7 @@ public class UserController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"No se encontraron registros con ese email.\"}");
             }
             logg.info("obtained");
-            return ResponseEntity.status(HttpStatus.OK).body(userDTO);
+            return ResponseEntity.status(HttpStatus.OK).body(mapper.convertValue(userDTO, UserWithoutPasswordDTO.class));
         } catch (Exception e) {
             logg.error(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"notice\":\"Error. Por favor, intente mas tarde.\"}");
