@@ -60,6 +60,20 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public UserDTO findByEmail(String email) throws Exception {
+        try {
+            User user = userRepository.findByEmail(email).orElse(null);
+            if(user != null){
+                UserDTO userDTO = mapper.convertValue(user, UserDTO.class);
+                return userDTO;
+            }
+            return null;
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
     @Transactional
     public UserDTO updateById(Long id, UserDTO userDTO) throws Exception {
         try {

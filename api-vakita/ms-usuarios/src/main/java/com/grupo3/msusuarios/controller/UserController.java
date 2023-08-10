@@ -61,6 +61,23 @@ public class UserController {
         }
     }
 
+    @Operation(summary = "Busca un usuario por el email")
+    @GetMapping("/email/{email}")
+    public ResponseEntity<?> getUserByEmail(@PathVariable String email) {
+        logg.info("Metodo getUserByEmail");
+        try {
+            UserDTO userDTO = userService.findByEmail(email);
+            if (userDTO == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"No se encontraron registros con ese email.\"}");
+            }
+            logg.info("obtained");
+            return ResponseEntity.status(HttpStatus.OK).body(userDTO);
+        } catch (Exception e) {
+            logg.error(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"notice\":\"Error. Por favor, intente mas tarde.\"}");
+        }
+    }
+
     @Operation(summary = "Agrega un usuario")
     @PostMapping
     public ResponseEntity<?> createUser(@Valid @RequestBody UserDTO userDTO, BindingResult result) {
