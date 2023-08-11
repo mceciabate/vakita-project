@@ -1,0 +1,40 @@
+variables:
+
+  MAVEN_OPTS: -Dmaven.repo.local=.m2/repository
+
+image: maven:latest
+
+stages:
+  - build
+  - test
+  - package
+#  - deploy
+
+cache:
+  paths:
+    - .m2/repository
+    - target
+
+build_job:
+  stage: build
+  script:
+    - echo "Maven compile started"
+    - cd ./api-vakita/ms-usuarios 
+    - mvn compile
+
+test_job:
+ stage: test
+ script:
+   - echo "Maven test started"
+   - cd ./api-vakita/ms-usuarios
+   - mvn clean test
+
+package_job: 
+  stage: package
+  artifacts:
+    paths:
+    - api-vakita/ms-usuarios/target/*.jar
+  script:
+    - cd ./ms-usuarios
+    - mvn package
+
