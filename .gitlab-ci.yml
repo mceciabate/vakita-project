@@ -15,27 +15,67 @@ cache:
     - .m2/repository
     - target
 
-build_job:
+# Build para todos los ms
+build_usuarios:
   stage: build
   script:
-    - echo "Maven compile started"
+    - echo "Maven compile started on users"
     - cd ./api-vakita/ms-usuarios 
     - mvn compile
 
-test_job:
+build_vakitas:
+  stage: build
+  script:
+    - echo "Maven compile started on vakitas"
+    - cd ./api-vakita/ms-vakitas
+    - mvn compile
+
+build_gateway:
+  stage: build
+  script:
+    - echo "Maven compile started on gateway"
+    - cd ./api-vakita/gateway
+    - mvn compile
+
+build_eureka:
+  stage: build
+  script:
+    - echo "Maven compile started on eureka-server"
+    - cd ./api-vakita/EurekaServer 
+    - mvn compile
+
+# Testeo para los resource server
+test_usuarios:
  stage: test
  script:
-   - echo "Maven test started"
+   - echo "Maven test started on users"
    - cd ./api-vakita/ms-usuarios
    - mvn clean test
 
-package_job: 
+test_vakitas:
+ stage: test
+ script:
+   - echo "Maven test started on vakitas"
+   - cd ./api-vakita/ms-vakitas
+   - mvn clean test
+
+#Artefactos para los resource server
+package_users: 
   stage: package
   artifacts:
     paths:
     - api-vakita/ms-usuarios/target/*.jar
   script:
-    - echo pwd
-    - cd .api-vakita/ms-usuarios
+    - echo "Maven package started on usuarios"
+    - cd ./api-vakita/ms-usuarios
     - mvn package
 
+package_vakitas: 
+  stage: package
+  artifacts:
+    paths:
+    - api-vakita/ms-vakitas/target/*.jar
+  script:
+    - echo "Maven package started on vakitas"
+    - cd ./api-vakita/ms-vakitas
+    - mvn package
