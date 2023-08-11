@@ -35,6 +35,7 @@ package_job:
     paths:
     - api-vakita/ms-usuarios/target/*.jar
   script:
-    - cd ./ms-usuarios
+    - echo pwd
+    - cd .api-vakita/ms-usuarios
     - mvn package
 
