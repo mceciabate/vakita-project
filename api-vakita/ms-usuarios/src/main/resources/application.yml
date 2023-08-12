@@ -1,10 +1,53 @@
 server:
   port: ${PORT:${SERVER_PORT:0}}
+  error:
+    include-message: always
+    include-binding-errors: always
 
 spring:
   application:
     name: ms-usuarios
+# TO SEND MAIL
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: vakitas.grupo3@gmail.com
+    password: xkzmuhogqoxrihxt
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+#  zipkin:
+#    baseUrl: http://localhost:9411/
+#    enabled: true
+  rabbitmq:
+    username: guest
+    password: guest
+    host: localhost
+    port: 5672
+  datasource:
+#    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/usersdb
+    createDatabaseIfNotExist: true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate.ddl-auto: create-drop
+    generate-ddl: true
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
 
+
+#Inicializacion de data en la bd, toma el script que está en resources al iniciar el ms
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
 eureka:
   client:
     registerWithEureka: true
@@ -27,4 +70,3 @@ management:
       name: ms-usuarios
       version: 1.0.0
       description: Microservicios Usuarios
-

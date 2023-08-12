@@ -1,0 +1,321 @@
+{
+	"info": {
+		"_postman_id": "aca788fe-94e6-44f3-b02f-fa6db5aa0bcc",
+		"name": "Api-vakita",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20337969"
+	},
+	"item": [
+		{
+			"name": "MS-Vakitas",
+			"item": [
+				{
+					"name": "getAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/vakita",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"vakita"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getVakitaById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/vakita/12",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"vakita",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "vakitasbycreator",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/vakita/user/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"vakita",
+								"user",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "vakitasActivasPorContriuyente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/vakita/actives/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"vakita",
+								"actives",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allMyVakitas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/vakita/contributors/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"vakita",
+								"contributors",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "postVakita",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \r\n    \"name\": \"una vakita desde postman\",\r\n    \"idCreatorUser\": 8,\r\n    \"description\": \"esto es una drescripcion\",\r\n    \"imgURL\": \"url\",\r\n    \"totalAmount\": 5000.0,\r\n    \"cumulativeAmount\": 0.0,\r\n    \"creationDate\": \"2023-08-10\",\r\n    \"expirationDate\": \"2023-08-07\",\r\n    \"isActive\": true,\r\n    \"type\": \"normal\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/vakita",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"vakita"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "putVakita",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \r\n        \"name\": \"Paseo familiar\",\r\n        \"idCreatorUser\": 1,\r\n        \"description\": \"Conocer el Machu Pichu\",\r\n        \"imgURL\": \"URL modificada\",\r\n        \"totalAmount\": 2000.0,\r\n        \"cumulativeAmount\": 200.0,\r\n        \"creationDate\": \"2022-12-20\",\r\n        \"expirationDate\": \"2024-07-10\",\r\n        \"isActive\": true,\r\n        \"type\": \"normal\",\r\n        \"contributors\": [\r\n            {\r\n                \"id\": 1,\r\n                \"mail\": null\r\n            },\r\n            {\r\n                \"id\": 10,\r\n                \"mail\": null\r\n            }\r\n        ]\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/vakita/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"vakita",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deposit",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/vakita/deposit?amount=20.0&vakitaId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"vakita",
+								"deposit"
+							],
+							"query": [
+								{
+									"key": "amount",
+									"value": "20.0"
+								},
+								{
+									"key": "vakitaId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addContributor",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/vakita/contributors/add/10/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"vakita",
+								"contributors",
+								"add",
+								"10",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "setInactive",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/vakita/inactive/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"vakita",
+								"inactive",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "patchVakita",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"key\" : \"imagen\",\r\n    \"value\" : \"se cambio la img\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/vakita/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"vakita",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteVakita",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/vakita/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"vakita",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
