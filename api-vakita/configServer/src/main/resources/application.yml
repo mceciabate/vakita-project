@@ -9,7 +9,8 @@ spring:
       server:
         git:
           uri: https://gitlab.ctd.academy/ctd/hispanos/proyecto-integrador-2/proyecto-integrador-0723/1021ft-c1/equipo-03.git
-
+          username: mcabate
+          password: wUyfGWKRUD5Lxc3z1pjh
           default-label: config-server
           force-pull: true
           search-paths: ConfigData
