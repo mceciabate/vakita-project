@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import LandingComponent from "../components/Landing"
-import LogIn from '../components/LogIn';
-import Register from "../components/Register"
+import Login from '../components/Login/Login';
+// import Register from "../components/Register"
+import Register from '../components/Register/Register';
 import Header from '../components/Header';
 import Protected from '../guards/Protected';
 import Dashboard from '../components/Dashboard/Dashboard';
@@ -23,7 +24,7 @@ const Routers = () => {
                 <Routes>
             
                   <Route path="/" element={<LandingComponent/>} /> 
-                  <Route path="/log-in" element={<LogIn />} />
+                  <Route path="/log-in" element={<Login />} />
                   <Route path="/register" element={<Register/>}
                   />
                    <Route element={<Protected isLogged={isSignedIn} />}> 
