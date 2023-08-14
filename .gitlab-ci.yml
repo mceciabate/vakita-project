@@ -32,6 +32,8 @@ package_config:
     - api-vakita/configServer/target/*.jar
   script:
     - echo "Maven package started on config-server"
-    - echo "spring.cloud.vault.token=$VAULT_TOKEN" >> bootstrap.yml
+    - cd ./api-vakita/configServer/src/main/resources/
+    - echo "spring.cloud.vault.token=$VAULT_TOKEN" >> bootstrap.properties
+    - cd ../../../../../
     - cd ./api-vakita/configServer
     - mvn package
