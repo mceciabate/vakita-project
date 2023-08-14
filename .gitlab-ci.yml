@@ -1,0 +1,37 @@
+variables:
+
+  MAVEN_OPTS: -Dmaven.repo.local=.m2/repository
+
+image: maven:latest
+
+stages:
+  - build
+  - package
+#  - deploy
+
+cache:
+  paths:
+    - .m2/repository
+    - target
+
+build_config-config:
+  stage: build
+  only:
+    - config-server
+  script:
+    - echo "Maven compile started on config-server"
+    - cd ./api-vakita/configServer
+    - mvn compile
+
+package_config: 
+  stage: package
+  only:
+    - config-server
+  artifacts:
+    paths:
+    - api-vakita/configServer/target/*.jar
+  script:
+    - echo "Maven package started on config-server"
+    - echo "spring.cloud.vault.token=$VAULT_TOKEN" >> bootstrap.yml
+    - cd ./api-vakita/configServer
+    - mvn package
