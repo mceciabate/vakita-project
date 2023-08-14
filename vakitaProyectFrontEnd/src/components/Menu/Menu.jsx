@@ -18,15 +18,15 @@ const Menu = () => {
             </HeaderMenuLateral>
           
             <BloqueOptions>
-            <Link to="/menu">Inicio</Link>
-                <Link to="/menu/crear-vaca">Nueva Vaca</Link>
-                <Link to="/menu/mis-vaquitas">Mis Vaquitas</Link>
+            <Link to="/dashboard">Inicio</Link>
+                <Link to="/dashboard/crear-vaca">Nueva Vaca</Link>
+                <Link to="/dashboard/mis-vaquitas">Mis Vaquitas</Link>
                 <hr />
-                <Link to="/mi-perfil">Mi perfil</Link>
-                <Link to="/datos-financieros">Datos financieros</Link>
+                <Link to="/dashboard/mi-perfil">Mi perfil</Link>
+                <Link to="/dashboard/datos-financieros">Datos financieros</Link>
                 <hr />
-                <Link to="/necesito-mi-dinero">Necesito mi dinero</Link>
-                <Link to="/ayuda">Ayuda</Link>
+                <Link to="/dashboard/necesito-mi-dinero">Necesito mi dinero</Link>
+                <Link to="/dashboard/ayuda">Ayuda</Link>
             </BloqueOptions>
             <button className="botonSalir">Salir</button>
            

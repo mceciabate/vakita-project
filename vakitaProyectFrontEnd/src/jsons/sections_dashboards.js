@@ -5,14 +5,14 @@ import Goals from "../assets/goals.svg";
 const sections_dashboards = [
     {
         "title": "Mis Vaquitas",
-        "link":"/menu/mis-vaquitas",
+        "link":"/dashboard/mis-vaquitas",
         "img": `${Cow}`,
         "onlyMobile": false
     },
     {
         "title": "Hagamos una vaca",
         "img": `${Hands}`,
-        "link":"/menu/crear-vaca",
+        "link":"/dashboard/crear-vaca",
         "onlyMobile": false
     },
     // {        

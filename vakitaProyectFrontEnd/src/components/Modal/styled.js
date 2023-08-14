@@ -7,6 +7,8 @@ const slideInAnimation = keyframes`
     to {
         transform: translateX(0);
     }
+
+  
 `
 
 export const ModalContainer = styled.article`
@@ -22,6 +24,7 @@ export const ModalContainer = styled.article`
     justify-content: flex-start;
     align-items: flex-start;
     //
+    
     
     
 
@@ -75,6 +78,10 @@ export const ModalContainer = styled.article`
         font-size: 1.1rem;
         font-weight: 700;
     }
+
+
+   
+      
 `;
 
 export const BtnClose = styled.button`
