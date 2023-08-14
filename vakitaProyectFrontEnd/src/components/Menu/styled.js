@@ -43,6 +43,10 @@ export const HeaderMenuLateral = styled.div`
     background-color:black;
     color:white;
     padding: 20px;
+
+    
+      
+
     img.avatar {
     
         width:40%;

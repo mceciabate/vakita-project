@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import LandingComponent from "../components/Landing"
 import LogIn from '../components/LogIn';
+import Register from "../components/Register"
 import Header from '../components/Header';
 import Protected from '../guards/Protected';
 import Dashboard from '../components/Dashboard/Dashboard';
@@ -23,13 +24,11 @@ const Routers = () => {
             
                   <Route path="/" element={<LandingComponent/>} /> 
                   <Route path="/log-in" element={<LogIn />} />
-                  {/* <Route
-                    path="/register"
-                    element={<Register />}
-                  /> */}
+                  <Route path="/register" element={<Register/>}
+                  />
                    <Route element={<Protected isLogged={isSignedIn} />}> 
                    
-                   <Route path="/menu/*" element={<Menu />}>
+                   <Route path="/dashboard/*" element={<Menu />}>
             {/* Nested routes without leading slashes */}
             <Route index element={<Dashboard />} />
             <Route path="crear-vaca" element={<NewVakita />} />
