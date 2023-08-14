@@ -11,4 +11,5 @@ spring:
       host: 35.173.127.195
       port: '8200'
       uri: http://35.173.127.195:8200/
+      token: s.LSFvw8USKwcUgsZgEP7n85cA
       kv-version: 2
