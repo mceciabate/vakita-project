@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: config-server
+  cloud:
+    vault:
+      enabled: true
+      application:
+        name: config-server
+      scheme: http
+      authentication: TOKEN
+      host: 35.173.127.195
+      port: '8200'
+      uri: http://35.173.127.195:8200/
+
+      kv-version: 2
