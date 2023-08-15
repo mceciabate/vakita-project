@@ -98,6 +98,7 @@ public class UserController {
         }
     }
 
+    @Operation(hidden = true)
     @GetMapping("/confirmar")
     public ResponseEntity<?> confirmUserRegistration(@RequestParam("token") String token) {
         logg.info("Metodo confirmUserRegistration");

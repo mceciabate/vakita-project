@@ -48,6 +48,6 @@ public class User implements Serializable {
     @Column(name = "BIRTHDATE", nullable = false)
     private LocalDate birthdate;
 
-    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
-    private List<Vakita> vakitas;
+//    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
+//    private List<Vakita> vakitas;
 }
