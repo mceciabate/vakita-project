@@ -2,8 +2,8 @@ import React from "react";
 import * as Yup from "yup";
 import {useFormik} from "formik";
 import Swal from "sweetalert2";
-import logoVaca from "../../assets/LogoVaca.svg";
-import {Input, ContainerInput, FormContainer, BoxText, ContainerGeneral, BoxTitle, Label, Button, FinalParagraph, ImgVaca, GeneralFormContainer, InfoP} from './Register.styled.jsx';
+import logoVaca from "../../assets/logoVacaInicio.png";
+import {Input, ContainerInput, FormContainer, BoxText, ContainerGeneral, TituloCrearCuenta, Label, Button, GeneralFormContainer,ImgVaca} from './Register.styled.jsx';
 
 
 
@@ -38,18 +38,20 @@ function Register() {
 
     return (
       <ContainerGeneral>
-        <ImgVaca src={logoVaca} alt="logo" />
-
+        
+         
+         
+         <ImgVaca src={logoVaca} alt="logo" /> 
 
         <GeneralFormContainer>
-          <BoxTitle>
+          <TituloCrearCuenta>
             <h1>Crea tu cuenta</h1>
-          </BoxTitle>
+          </TituloCrearCuenta>
 
       
               <FormContainer onSubmit={formik.handleSubmit}>
                 <BoxText>
-                  <InfoP>Ingresa tus datos</InfoP>
+                  <h2>Ingresa tus datos</h2>
                 </BoxText>
                 <ContainerInput>
                   <Label htmlFor="name">Tu nombre</Label>
@@ -129,9 +131,6 @@ function Register() {
                 <Button type="submit">Crear cuenta</Button>
               </FormContainer>
 
-          <FinalParagraph>
-            cow company De colombia y argentina pal mundo
-          </FinalParagraph>
         </GeneralFormContainer>
       </ContainerGeneral>
     );
