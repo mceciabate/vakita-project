@@ -19,27 +19,27 @@ spring:
           predicates:
             - Path=/api/v1/vakita/**
 
-eureka:
-  client:
-    registerWithEureka: false
-    fetchRegistry: true
-    serviceURL:
-      defaultZone: http://localhost:8761/eureka
-
-management:
-  endpoint:
-    gateway:
-      enabled: true
-  endpoints:
-    web:
-      exposure:
-#        include: "*"
-        include: gateway
-
-
-info:
-  app:
-    name: ${spring.application.name}
+#eureka:
+#  client:
+#    registerWithEureka: false
+#    fetchRegistry: true
+#    serviceURL:
+#      defaultZone: http://localhost:8761/eureka
+#
+#management:
+#  endpoint:
+#    gateway:
+#      enabled: true
+#  endpoints:
+#    web:
+#      exposure:
+##        include: "*"
+#        include: gateway
+#
+#
+#info:
+#  app:
+#    name: ${spring.application.name}
 
 
 

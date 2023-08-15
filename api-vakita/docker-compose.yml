@@ -10,3 +10,43 @@ services:
     expose:
       - 15672
       - 5672
+    networks:
+      - local-cecilia
+  gateway-container:
+    image: mcabate/gateway:latest
+#    restart: on-failure
+    container_name: gateway-container
+    ports:
+      - "8080:8080"
+    expose:
+      - '8080'
+    networks:
+      - local-cecilia
+  vakitas-container:
+    image: mcabate/vakitas:latest
+#    restart: on-failure
+    container_name: vakitas-container
+    ports:
+      - "9091:9091"
+    expose:
+      - '9091'
+    links:
+      - gateway-container
+      - rabbitmq-container
+    networks:
+      - local-cecilia
+  usuarios-container:
+    image: mcabate/usuarios:latest
+#    restart: on-failure
+    container_name: usuarios-container
+    ports:
+      - "9090:9090"
+    expose:
+      - '9090'
+    networks:
+      - local-cecilia
+    links:
+      - gateway-container
+
+networks:
+  local-cecilia:
