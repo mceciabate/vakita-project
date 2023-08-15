@@ -22,6 +22,8 @@ services:
       - '8080'
     networks:
       - local-cecilia
+    depends_on:
+      - eureka-server-container
   vakitas-container:
     image: mcabate/vakitas:latest
 #    restart: on-failure
@@ -30,11 +32,11 @@ services:
       - "9091:9091"
     expose:
       - '9091'
-    links:
-      - gateway-container
-      - rabbitmq-container
     networks:
       - local-cecilia
+    depends_on:
+      - eureka-server-container
+      - rabbitmq-container
   usuarios-container:
     image: mcabate/usuarios:latest
 #    restart: on-failure
@@ -45,8 +47,16 @@ services:
       - '9090'
     networks:
       - local-cecilia
-    links:
-      - gateway-container
+    depends_on:
+      - eureka-server-container
+      - rabbitmq-container
+  eureka-server-container:
+    image: mcabate/eureka:latest
+    container_name: eureka-server-container
+    ports:
+     - "8761:8761"
+    expose:
+     - '8761'
 
 networks:
   local-cecilia:
