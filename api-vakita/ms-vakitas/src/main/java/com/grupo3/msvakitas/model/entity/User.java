@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "users")
+@Table(name = "users_in_vakita")
 public class User implements Serializable{
 
     @Serial

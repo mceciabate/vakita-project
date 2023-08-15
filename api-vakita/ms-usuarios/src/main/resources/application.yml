@@ -1,5 +1,5 @@
 server:
-  port: ${PORT:${SERVER_PORT:0}}
+  port: ${PORT:${SERVER_PORT:9090}}
   error:
     include-message: always
     include-binding-errors: always
@@ -34,7 +34,7 @@ spring:
       username: 0723TDPI2N1C01LAED1021FT_GRUPO3
       password: ahjoh5Lu
   jpa:
-    hibernate.ddl-auto: create-drop
+    hibernate.ddl-auto: update
     generate-ddl: true
     show-sql: true
     properties:
