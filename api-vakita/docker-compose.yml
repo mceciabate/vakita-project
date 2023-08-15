@@ -57,6 +57,8 @@ services:
      - "8761:8761"
     expose:
      - '8761'
+    networks:
+      - local-cecilia
 
 networks:
   local-cecilia:
