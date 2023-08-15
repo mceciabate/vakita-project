@@ -69,3 +69,7 @@ management:
       name: ms-usuarios
       version: 1.0.0
       description: Microservicios Usuarios
+
+spring-doc:
+  api-docs:
+    path: /swagger-usuarios

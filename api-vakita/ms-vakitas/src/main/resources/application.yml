@@ -54,3 +54,6 @@ management:
       version: 1.0.0
       description: Microservicios Vakitas
 
+spring-doc:
+  api-docs:
+    path: /swagger-vakitas
