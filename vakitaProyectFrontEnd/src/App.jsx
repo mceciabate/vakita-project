@@ -1,13 +1,9 @@
 import './App.css'
-import Routers from './Routes/Routers';
-import Header from './components/Header.jsx';
-
+import Routers from './Routers/Routers';
 
 function App() {
-
   return (
-    <div className="App"> 
-    <Header/>
+    <div > 
       <Routers/>
     </div>
   )

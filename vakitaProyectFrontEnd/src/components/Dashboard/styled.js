@@ -8,6 +8,7 @@ export const DashboardDiv = styled.div`
 `;
 
 export const Sections = styled.section`
+  
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -22,13 +23,15 @@ export const MenuDiv=styled.div`
     }
 `;
 
+
+
 export const SectionLanding= styled.section`
   display: flex;
 `;
 
 export const DivContSections = styled.div`
   padding: 0 2rem;
-  margin: 0 auto;
+  margin: 1rem auto 1rem auto;  
   display: flex;
   flex-direction: column;
 
@@ -36,4 +39,11 @@ export const DivContSections = styled.div`
     font-size: 1.3rem;
     font-weight: bold;
   }
+
+  @media (min-width: 769px){
+      display: flex;
+      padding: 0 4rem;
+      margin: 2rem auto 5rem auto;
+    }
+
 `;

@@ -1,9 +1,10 @@
-import { DivContainer, Image } from "./style"
+import { DivContainer } from "./style"
+import { Link } from 'react-router-dom'
 
-const SectionDashboard = ({img, title, displayMobile}) => {
+const SectionDashboard = ({img, title, displayMobile, link}) => {
     return (
         <DivContainer displayMobile={displayMobile}>
-            <Image src={img} />
+          <Link to={link}> <img src={img} /></Link> 
             <h3>{title}</h3>
         </DivContainer>
     )

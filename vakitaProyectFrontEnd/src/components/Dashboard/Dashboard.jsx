@@ -10,22 +10,21 @@ const Dashboard = () => {
                 <Menu/>
             </MenuDiv>
             <DashboardDiv>
-                <DivContSections>
-                    <BannerDashboard />
-                </DivContSections>
-                <DivContSections>
-                    <p>Inicio</p>
-                    <Sections>
-                    {
-                        sections_dashboards.map(art => {
-                            return (
-                                <SectionDashboard img={art.img} title={art.title} displayMobile={art.onlyMobile}/>
-                            )
-                            
-                        })
-                    }
-                    </Sections>
-                </DivContSections>
+            <DivContSections>
+                <BannerDashboard />
+            </DivContSections>
+            <DivContSections>
+                <p>Inicio</p>
+                <Sections>
+                {
+                    sections_dashboards.map(art => {
+                        return (
+                            <SectionDashboard key={art.title} img={art.img} title={art.title} displayMobile={art.onlyMobile}/>
+                        )
+                    })
+                }
+            </Sections>
+            </DivContSections>
 
             </DashboardDiv>
         </SectionLanding>
