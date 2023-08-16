@@ -39,6 +39,7 @@ public class UserService implements IUserService {
             log.info("Saving user: " + userDTO.getName());
             userRepository.save(user);
             UserRabbitDTO userToSend = new UserRabbitDTO(userDTO.getEmail());
+            System.out.println(userToSend.toString());
             event.execute(userToSend);
             return userDTO;
         }catch (Exception e){
