@@ -64,13 +64,9 @@ const NewVakita = () => {
     // Por ejemplo, enviar los datos a una API o guardarlos en una base de datos
     // console.log(values);
 
-    const emptyEmails= emails.filter((email) => email !== '') // Filtrar emails vacíos
+ 
     
-    // console.log(emptyEmails);
-  //   const arrayMembers=[{
-  //     "id": 8,
-  //   "email": "fergarcia@micorreo.com"
-  // }]
+   
 
   console.log(arrayMembers);
     const dataToSend = {
@@ -96,7 +92,7 @@ const NewVakita = () => {
 
      if (allEmailsValid) {
        // Mostrar los emails por consola
-       console.log('Array de emails:', emails);
+      //  console.log('Array de emails:', emails);
      }
  
      actions.setSubmitting(false);
@@ -124,7 +120,7 @@ const NewVakita = () => {
             icon: 'success',
             html:
               'Ir a ' +
-              `<a href="/menu/mis-vaquitas">Mis Vaquitas</a> ` ,
+              `<a href="/dashboard/mis-vaquitas">Mis Vaquitas</a> ` ,
             showCloseButton: true, 
           })
 
@@ -143,34 +139,8 @@ const NewVakita = () => {
 
 
 
-  const handleAddEmail = (values, actions) => {
-    // const emailData = checkEmail(values.email);
-
-    // if (values.email.trim() === '') {
-    //   // Ignorar emails vacíos
-    //   return;
-    // }
-
-    // if (!emailData.exists) {
-    //   //cambie EmailValid a false, estaba en true, probar con API
-    //   setEmailValid(false);
-    //   setEmailExists(false);
-    //   setIsDuplicate(false);
-    //   setEmails((prevEmails) => [...prevEmails, values.email]);
-    // } else if (emailData.isDuplicate) {
-    //   setIsDuplicate(true);
-    //   setEmailExists(true);
-    // } else {
-    //   //cambie EmailValid a false, estaba en true, probar con API
-    //   setEmailValid(false);
-    //   setEmailExists(true);
-    //   setIsDuplicate(false);
-
-    //   // Verificar si el email ya está en el array antes de agregarlo
-    //   if (!emails.includes(values.email)) {
-    //     setEmails((prevEmails) => [...prevEmails, values.email]);
-    //   }
-    // }
+  const handleAddEmail = (values) => {
+    
 
 
     const emailData = checkEmail(values.email);
@@ -211,11 +181,7 @@ const NewVakita = () => {
   };
 
   const checkEmail = (email) => {
-    // Simulación de la verificación en el array de emails
-    // const emailExists = emails.includes(email);
-    // const isDuplicate = emails.filter((item) => item === email).length > 1;
-
-    // return { exists: emailExists, isDuplicate };
+  
     const emailExists = getUsers.some((user) => user.email === email);
     const isDuplicate = emails.filter((item) => item === email).length > 1;
   
@@ -380,7 +346,7 @@ const NewVakita = () => {
 
 
 <div className='buttonSubmitBox'>
-   {/* Revisar validacion de className cuando este conectado al back*/}
+ 
           <button className={!emailValid || !emailExists || !values.name || !values.amount || !values.endDate ||  !values.startDate|| !values.description || !values.name || !values.amount ||  !values.description?"buttonSubmit":"buttonSubmitActive"}  type="submit"  disabled={!emailValid || !emailExists || !values.name || !values.amount || !values.endDate ||  !values.startDate|| !values.description || !values.name || !values.amount || !values.description}>Crear Vaca</button>
          
           
