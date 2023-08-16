@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 
+
 export const MenuLateral = styled.section`
 display: none;
     width: 18rem;
@@ -76,6 +77,8 @@ export const BloqueOptions = styled.div`
     a {
         padding: 0.8rem;
         cursor: pointer;
+        color:black;
+        font-family: arial;
         
     }
 

@@ -1,43 +1,41 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import logoVaca from "../../assets/LogoVaca.svg";
+import logoVaca from "../../assets/logoVacaInicio.png";
 import Swal from "sweetalert2";
-import { useUser } from '../../context/UserProvider'; 
-import { ContainerGeneral, FormContainer, ContainerInput, Input, Label, BoxText, Button, Questions, BoxTitle, FinalParagraph, ImgVaca, GeneralFormContainer, ButtonRegister } from './Login.styled.jsx';
+import { useUser } from '../../context/UserProvider';
+import { ContainerGeneral, FormContainer, ContainerInput, Input, Label, BoxText, Button, Questions, TituloBienvenida, FinalParagraph, GeneralFormContainer, ButtonRegister, Compania,ImgVaca } from './Login.styled.jsx';
 
 
 
 function Login() {
 
-    const { loginData, setLoginData } = useUser(); 
-   
+    const { loginData, setLoginData } = useUser();
+
 
 
     const formik = useFormik({
         initialValues: {
-          email: loginData.email,
-          password: loginData.password
+            email: loginData.email,
+            password: loginData.password
         },
         validationSchema: Yup.object({
-            email: Yup.string().email("No es un correo valido").required("Correo es requerido"),
+            email: Yup.string().email("No es un email valido").required("Email es requerido"),
             password: Yup.string().min(4, "Debe contener 4 digitos o más").max(50).required("Contraseña es requerida")
         }),
         onSubmit: (values) => {
-        
+
             Swal.fire({
                 title: 'Inicio exitoso',
-                text:'Inició tu sesión',
-                icon:'success'
-              }) 
+                text: 'Inició tu sesión',
+                icon: 'success'
+            })
             formik.resetForm();
 
             setLoginData({
                 email: values.email,
                 password: values.password
-              });
-
-            //   console.log(values);
+            });
         }
     });
 
@@ -46,25 +44,29 @@ function Login() {
 
         <ContainerGeneral>
 
-            <ImgVaca src={logoVaca} alt="logo" />
+            
+         
+         <ImgVaca src={logoVaca} alt="logo" /> 
+
+
 
             <GeneralFormContainer>
 
-                <BoxTitle>
+                <TituloBienvenida>
                     <h1>Bienvenido a su vaca virtual</h1>
-                </BoxTitle>
+                </TituloBienvenida>
 
 
                 <FormContainer onSubmit={formik.handleSubmit}>
 
                     <BoxText>
-                        <h2>Inicio de Sesion</h2>
+                        <h2>Inicio de sesión</h2>
                     </BoxText>
 
                     <ContainerInput>
-                        <Label htmlFor="Correo">Ingresa tu correo</Label>
+                        <Label htmlFor="Email">Ingresa tu Email</Label>
                         <Input
-                            type="text"
+                            type="email"
                             name="email"
                             id="email"
                             onChange={formik.handleChange}
@@ -86,7 +88,7 @@ function Login() {
                         {formik.touched.password && formik.errors.password && <span style={{ color: "red", marginLeft: "20px" }}>{formik.errors.password}</span>}
                     </ContainerInput>
 
-                    <Button type='submit'>Continuar </Button>
+                    <Button className="continuar" type='submit'>Continuar </Button>
 
                     <Questions>
                         <h5>¿Olvidaste tu email?</h5>
@@ -96,14 +98,13 @@ function Login() {
                 </FormContainer>
 
                 <FinalParagraph>
-                    <h5>¿No tienes una cuenta?,  </h5>
-                    <ButtonRegister >Creala aquí</ButtonRegister>
+                    <h5>¿No tienes una cuenta?, <ButtonRegister >Creala aquí</ButtonRegister>  </h5>
+
                 </FinalParagraph>
 
-                <FinalParagraph>
-                    cow company
-                    De colombia y argentina pal mundo
-                </FinalParagraph>
+                <Compania>
+                    Cow company <br /> De colombia y argentina pal mundo
+                </Compania>
 
 
             </GeneralFormContainer>
