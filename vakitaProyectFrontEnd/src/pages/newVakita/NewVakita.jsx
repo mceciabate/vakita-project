@@ -2,7 +2,7 @@
 import { Formik, Form, Field, ErrorMessage, FieldArray  } from 'formik';
 import * as Yup from 'yup';
 import vakitabanner from "../../assets/vakitabanner.png"
-import { useContext,  useState } from 'react';
+import { useContext,  useEffect,  useState } from 'react';
 import "../../styles/newVakitaPage.css"
 import EmailList from './EmailList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -10,7 +10,10 @@ import { faCirclePlus, faCircleInfo } from "@fortawesome/free-solid-svg-icons"
 import Swal from 'sweetalert2'
 import ShareButton from './SharedButton';
 import { VakitaContext } from '../../context/VakitaProvider';
-import { Link } from 'react-router-dom'
+import axiosVakita from "../../helper/axiosVakita"
+import axios from 'axios';
+import CustomDatePicker from './CustomDatePicker';
+
 
 
 const NewVakita = () => {
@@ -22,11 +25,20 @@ const NewVakita = () => {
   const [emailExists, setEmailExists] = useState(null);
   const [isDuplicate, setIsDuplicate] = useState(false);
   const [emailValid, setEmailValid] = useState(true);
+  const [getUsers, setGetUsers] = useState([]);
+  const [arrayMembers, setArrayMembers] = useState([]);
 
-
   
   
-  
+  useEffect(() => {
+    const loadData = async () => {
+      await axios.get("http://localhost:8080/api/v1/usuarios").then((res) => {
+        
+        setGetUsers(res.data)
+      });
+    };
+    loadData();
+  }, []);
   
 
 
@@ -35,8 +47,10 @@ const NewVakita = () => {
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('Campo requerido'),
     amount: Yup.number().required('Campo requerido'),
-    date: Yup.string().required('Campo requerido'),
+    startDate: Yup.string().required('Campo requerido'),
+    endDate: Yup.string().required('Campo requerido'),
     description: Yup.string().required('Campo requerido'),
+    cumulativeAmount:Yup.number(),
     email: Yup.string()
     .email('Ingrese un email válido')
     .required('Campo requerido'),
@@ -50,14 +64,30 @@ const NewVakita = () => {
     // Por ejemplo, enviar los datos a una API o guardarlos en una base de datos
     // console.log(values);
 
+    const emptyEmails= emails.filter((email) => email !== '') // Filtrar emails vacíos
+    
+    // console.log(emptyEmails);
+  //   const arrayMembers=[{
+  //     "id": 8,
+  //   "email": "fergarcia@micorreo.com"
+  // }]
+
+  console.log(arrayMembers);
     const dataToSend = {
       name:values.name,
-      amount:values.amount,
-      date: values.date,
+      idCreatorUser: 8,
       description:values.description,
-      emails: emails.filter((email) => email !== ''), // Filtrar emails vacíos
+      imgURL: "url",
+      totalAmount:values.amount,
+      creationDate: values.startDate,
+      expirationDate: values.endDate,
+      cumulativeAmount:values.cumulativeAmount,
+      isActive: true,
+      type: "normal",
+      // contributors: emails.filter((email) => email !== ''), // Filtrar emails vacíos
+      contributors: arrayMembers,
     };
-    // console.log(dataToSend);
+    console.log(dataToSend);
     addNewVakita(dataToSend);
 
 
@@ -72,64 +102,123 @@ const NewVakita = () => {
      actions.setSubmitting(false);
 
      
-     Swal.fire({
-      title: '<strong>Vaquita creada con éxito</strong>',
-      icon: 'success',
-      html:
-        'Ir a ' +
-        `<a href="/menu/mis-vaquitas">Mis Vaquitas</a> ` ,
-      showCloseButton: true,
+   
      
-      
-      
-    })
+   
      
-    actions.resetForm();
-     
+
+    axiosVakita
+      .post(
+        "",
+     dataToSend,
+        {
+          headers: {
+            "Content-type": "application/json",          },
+        }
+      )
+      .then((res) => {
+        if (res.status === 200) {
+         
+          Swal.fire({
+            title: '<strong>Vaquita creada con éxito</strong>',
+            icon: 'success',
+            html:
+              'Ir a ' +
+              `<a href="/menu/mis-vaquitas">Mis Vaquitas</a> ` ,
+            showCloseButton: true, 
+          })
+
+          actions.resetForm();
+
+      } else if (res.status === 503) {
+          console.log("respuesta1 ", res.data.data);
+      }
+      })
+      .catch(error => console.log(error) )
   };
 
 
-    
 
 
 
 
 
   const handleAddEmail = (values, actions) => {
+    // const emailData = checkEmail(values.email);
+
+    // if (values.email.trim() === '') {
+    //   // Ignorar emails vacíos
+    //   return;
+    // }
+
+    // if (!emailData.exists) {
+    //   //cambie EmailValid a false, estaba en true, probar con API
+    //   setEmailValid(false);
+    //   setEmailExists(false);
+    //   setIsDuplicate(false);
+    //   setEmails((prevEmails) => [...prevEmails, values.email]);
+    // } else if (emailData.isDuplicate) {
+    //   setIsDuplicate(true);
+    //   setEmailExists(true);
+    // } else {
+    //   //cambie EmailValid a false, estaba en true, probar con API
+    //   setEmailValid(false);
+    //   setEmailExists(true);
+    //   setIsDuplicate(false);
+
+    //   // Verificar si el email ya está en el array antes de agregarlo
+    //   if (!emails.includes(values.email)) {
+    //     setEmails((prevEmails) => [...prevEmails, values.email]);
+    //   }
+    // }
+
+
     const emailData = checkEmail(values.email);
 
     if (values.email.trim() === '') {
-      // Ignorar emails vacíos
+      // Ignorar emails vacíos 
       return;
     }
-
+  
     if (!emailData.exists) {
-      //cambie EmailValid a false, estaba en true, probar con API
       setEmailValid(false);
       setEmailExists(false);
       setIsDuplicate(false);
-      setEmails((prevEmails) => [...prevEmails, values.email]);
     } else if (emailData.isDuplicate) {
       setIsDuplicate(true);
       setEmailExists(true);
     } else {
-      //cambie EmailValid a false, estaba en true, probar con API
-      setEmailValid(false);
+      setEmailValid(true);
       setEmailExists(true);
       setIsDuplicate(false);
-
-      // Verificar si el email ya está en el array antes de agregarlo
+  
       if (!emails.includes(values.email)) {
         setEmails((prevEmails) => [...prevEmails, values.email]);
+
+         // Find the user with the matching email from getUsers
+        const userWithEmail = getUsers.find(user => user.email === values.email);
+      
+      if (userWithEmail) {
+        const newMember = {
+          id: userWithEmail.id,
+          email: userWithEmail.email,
+        };
+        setArrayMembers(prevArrayMembers => [...prevArrayMembers, newMember]);
+      }
+
       }
     }
   };
 
   const checkEmail = (email) => {
     // Simulación de la verificación en el array de emails
-    const emailExists = emails.includes(email);
-    const isDuplicate = emails.filter((item) => item === email).length > 1;
+    // const emailExists = emails.includes(email);
+    // const isDuplicate = emails.filter((item) => item === email).length > 1;
 
+    // return { exists: emailExists, isDuplicate };
+    const emailExists = getUsers.some((user) => user.email === email);
+    const isDuplicate = emails.filter((item) => item === email).length > 1;
+  
     return { exists: emailExists, isDuplicate };
   };
 
@@ -140,6 +229,10 @@ const NewVakita = () => {
     setEmails(updatedEmails);
   };
  
+
+
+  
+    
   return (
     <>
     <div className='containerPage'>
@@ -155,8 +248,10 @@ const NewVakita = () => {
         initialValues={{
           name: '',
           amount: '',
-          date: '',
+          startDate: '',
+          endDate: '',
           description: '',
+          cumulativeAmount:'',
           email:'',
         }}
         validationSchema={validationSchema}
@@ -181,18 +276,28 @@ const NewVakita = () => {
             <ErrorMessage name="amount" component="div" />
             </div>
           </div>
-          <div className="boxItems">
-            <label htmlFor="date"></label>
-            <Field type="date" id="date" name="date"/>
-            <div className='error'>
-            <ErrorMessage name="date" component="div" />
-            </div>
-          </div>
+          
+
+         
+            <Field  id="startDate"  name="startDate" label="Fecha inicio de ahorro" component={CustomDatePicker}/>
+            
+       
+            <Field  id="endDate" name="endDate" label="Fecha final de ahorro" component={CustomDatePicker}/>
+           
+
           <div className="boxItems">
             <label htmlFor="description"></label>
             <Field as="textarea" id="description" name="description" placeholder="Descripción" />
             <div className='error'>
             <ErrorMessage name="description" component="div" />
+            </div>
+          </div>
+
+          <div className="boxItems">
+            <label htmlFor="cumulativeAmount"></label>
+            <Field type="number" id="cumulativeAmount" name="cumulativeAmount" placeholder="Importe a cargar en la vakita" />
+            <div className='error'>
+            <ErrorMessage name="cumulativeAmount" component="div" />
             </div>
           </div>
 
@@ -227,7 +332,7 @@ const NewVakita = () => {
               <ErrorMessage name="email" component="div" />
               </div>
               </div>
-              {emailExists !== null && (
+              {/* {emailExists !== null && (
         <div>
           {emailExists ? (
             isDuplicate ? (
@@ -240,8 +345,18 @@ const NewVakita = () => {
           ) : emailValid ? (
             <p>Ingrese un email de un usuario válido.</p>
           ) : null}
+          
         </div>
-      )}
+      )} */}
+
+{emailExists !== null && (
+  <div>
+    {!emailExists && (
+      <p>{emailValid ? 'Ingrese un email válido.' : 'El email no está registrado.'}</p>
+    )}
+    {emailExists && isDuplicate && <p>El email está duplicado.</p>}
+  </div>
+)}
       
             </div>
             <div>
@@ -266,7 +381,7 @@ const NewVakita = () => {
 
 <div className='buttonSubmitBox'>
    {/* Revisar validacion de className cuando este conectado al back*/}
-          <button className={emailValid || !values.name || !values.amount || !values.date || !values.description || !values.name || !values.amount || !values.date || !values.description?"buttonSubmit":"buttonSubmitActive"}  type="submit"  disabled={emailValid|| !values.name || !values.amount || !values.date || !values.description || !values.name || !values.amount || !values.date || !values.description}>Crear Vaca</button>
+          <button className={!emailValid || !emailExists || !values.name || !values.amount || !values.endDate ||  !values.startDate|| !values.description || !values.name || !values.amount ||  !values.description?"buttonSubmit":"buttonSubmitActive"}  type="submit"  disabled={!emailValid || !emailExists || !values.name || !values.amount || !values.endDate ||  !values.startDate|| !values.description || !values.name || !values.amount || !values.description}>Crear Vaca</button>
          
           
           </div>

@@ -15,7 +15,7 @@ function Register() {
       email: "",
       birthdate: "",
       password: "",
-      confirmPassword: "",
+      passwordConfirm: "",
     },
     validationSchema: Yup.object({
       name: Yup.string().required("Nombre es requerido"),
@@ -32,6 +32,8 @@ function Register() {
         icon:'success'
     })
         formik.resetForm();
+
+        console.log(values);
     }
 });
 

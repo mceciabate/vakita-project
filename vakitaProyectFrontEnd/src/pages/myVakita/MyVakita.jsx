@@ -3,14 +3,14 @@ import { VakitaContext } from '../../context/VakitaProvider';
 import { useContext } from 'react';
 import '../../styles/myVakitaPage.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faUser} from '@fortawesome/free-solid-svg-icons';
 import chart from "../../assets/chart.png"
 
 const MyVakita = () => {
   const { dataVakita } = useContext(VakitaContext);
 
   const renderDataMyVakita = () => {
-    return dataVakita.map((vakita, index) => (
+    return dataVakita?.map((vakita, index) => (
       <div className="cardMyVakita" key={index}>
         <div>
           <div>
