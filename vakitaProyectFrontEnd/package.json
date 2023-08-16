@@ -25,9 +25,9 @@
     "react-datepicker": "^4.16.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.14.2",
-    "sort-by": "^1.2.0",
+    "sort-by": "^0.0.2",
     "styled-components": "^6.0.7",
-    "sweetalert2": "^11.7.20",
+    "sweetalert2": "^11.6.13",
     "yup": "^1.2.0"
   },
   "devDependencies": {
