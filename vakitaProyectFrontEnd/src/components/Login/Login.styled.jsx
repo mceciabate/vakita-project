@@ -121,15 +121,14 @@ export const Label = styled.label`
 `;
 
 export const Input = styled.input`
-background-color: red;
-height: 35px;
-width: 85%;
-border-radius: 10px;
-background-color: #E4E4E4;
-outline: none;
-border: none;
-margin:0 auto;
-padding: 2px;
+height: 35px !important;
+width: 85% !important;
+border-radius: 10px !important;
+background-color: #E4E4E4 !important; 
+outline: none !important;
+border: none !important;
+margin:0 auto  !important;
+padding: 2px !important;
 `;
 
 

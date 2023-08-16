@@ -118,14 +118,14 @@ margin-left: 20px;
 `;
 
 export const Input = styled.input`
-  background-color: black;
-  height: 35px;
-  width: 85%;
-  border-radius: 10px;
-  background-color: #eee;
-  outline: none;
-  border: 0;
-  margin-left: 20px;
+  height: 35px !important;
+  width: 85% !important;
+  border-radius: 10px !important;
+  background-color: #eee !important;
+  outline: none !important;
+  border: 0 !important;
+  margin-left: 20px !important;
+  padding: 2px !important;
 `;
 
 export const Button = styled.button`
