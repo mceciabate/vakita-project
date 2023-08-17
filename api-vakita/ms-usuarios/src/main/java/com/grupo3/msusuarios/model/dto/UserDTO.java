@@ -18,4 +18,5 @@ public class UserDTO {
     private String email;
     private String password;
     private LocalDate birthdate;
+    private Double amount;
 }

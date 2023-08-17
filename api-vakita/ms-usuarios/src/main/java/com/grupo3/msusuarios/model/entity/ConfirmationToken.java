@@ -35,4 +35,5 @@ public class ConfirmationToken implements Serializable {
     private String userEmail;
     private String userPassword;
     private LocalDate userBirthdate;
+    private Double amount;
 }
