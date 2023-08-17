@@ -10,11 +10,11 @@ import Dashboard from '../components/Dashboard/Dashboard';
 import NewVakita from '../pages/newVakita/NewVakita';
 import MyVakita from '../pages/myVakita/MyVakita';
 import Menu from '../components/Menu/Menu';
+import { useUser } from '../context/UserProvider';
 
 const Routers = () => {
-    // const { logged } = useContext(UserContext);
-   
-    const isSignedIn=true;
+    const { logged } = useUser();
+  
     return (
       <BrowserRouter>
       <div className="App"> 
@@ -27,7 +27,7 @@ const Routers = () => {
                   <Route path="/log-in" element={<Login />} />
                   <Route path="/register" element={<Register/>}
                   />
-                   <Route element={<Protected isLogged={isSignedIn} />}> 
+                   <Route element={<Protected isLogged={logged} />}> 
                    
                    <Route path="/dashboard/*" element={<Menu />}>
             {/* Nested routes without leading slashes */}

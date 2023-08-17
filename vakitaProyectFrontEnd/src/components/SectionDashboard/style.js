@@ -1,7 +1,11 @@
 import { styled } from "styled-components";
 
 export const Image = styled.img`
-    height: 40%;
+    /* height: 40%; */
+    @media (min-width: 769px) {
+        width: 6rem;
+    }
+    
 `;
 
 export const DivContainer = styled.div`
@@ -26,10 +30,11 @@ export const DivContainer = styled.div`
         background-color: #FFBEBE;
     }
 
-    @media (min-width: 769px) {
+    @media (min-width: 768px) {
+        
         display: ${props => !props.displayMobile ? "flex" : "none"};
-        width: 10rem;
-        height: 8rem;
+        width: 12rem;
+        height: 10rem;
         font-size: 1.1rem;
         max-width: none;
     }

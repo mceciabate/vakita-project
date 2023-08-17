@@ -2,7 +2,11 @@ import React from "react";
 import "../styles/landing.css"
 
 function LandingComponent() {
+
+  
   return (
+
+
     <div className="landing">
 
       <div className="propaganda" />

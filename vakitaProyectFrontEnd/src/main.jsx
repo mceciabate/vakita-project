@@ -10,10 +10,10 @@ import VakitaProvider from './context/VakitaProvider.jsx'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
 
-    <VakitaProvider>
     <UserProvider>
+    <VakitaProvider>
     <App />
-    </UserProvider>
     </VakitaProvider>
+    </UserProvider>
   </React.StrictMode>
 )

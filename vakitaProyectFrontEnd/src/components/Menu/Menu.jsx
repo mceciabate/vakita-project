@@ -1,14 +1,19 @@
 import { BloqueOptions,HeaderMenuLateral, MenuDiv, MenuLateral } from "./styled";
 import  Avatar from "../../assets/vaquitaPerfil.png";
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet} from 'react-router-dom'
+import { useUser } from "../../context/UserProvider";
 
 
 const Menu = () => {
+   
+    const { logged, setLogged } = useUser()
    
     return (
         <>
        
         <MenuDiv>
+            
+        {logged?  <>
         <MenuLateral>
             <HeaderMenuLateral>
 
@@ -28,12 +33,25 @@ const Menu = () => {
                 <Link to="/dashboard/necesito-mi-dinero">Necesito mi dinero</Link>
                 <Link to="/dashboard/ayuda">Ayuda</Link>
             </BloqueOptions>
-            <button className="botonSalir">Salir</button>
+            <button onClick={() => {
+             
+              window.top.location.reload();
+              setLogged(false);
+              }
+              }
+              className="botonSalir">Salir</button>
            
            
            
+        
         </MenuLateral>
-        <Outlet/>
+        <Outlet/></>: 
+        <div>
+        <button><Link to="/log-in" style={{color: "white"}}>Iniciar sesión</Link></button>
+        <button> <Link to="/register" style={{color: "white"}}>Crear cuenta</Link></button>
+        </div>
+            }
+        
         </MenuDiv>
        
         
