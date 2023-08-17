@@ -15,9 +15,8 @@ export const DivContainer = styled.div`
     align-items: center;
     justify-content: center;
     background-color: #F5F5F5;
-    width: 20%;
-    max-width: 5.5rem;
-    height: 5.5rem;
+    width: 10rem;
+    height: 8rem;
     gap: 1rem;
     padding: 0.8rem;
     cursor: pointer;
@@ -30,13 +29,14 @@ export const DivContainer = styled.div`
         background-color: #FFBEBE;
     }
 
-    @media (min-width: 768px) {
-        
+    @media (max-width: 769px) {
         display: ${props => !props.displayMobile ? "flex" : "none"};
-        width: 12rem;
-        height: 10rem;
+        width: 15rem;
+        height: 8rem;
         font-size: 1.1rem;
         max-width: none;
+        margin-top:15px;
     }
+    
 `;
 
