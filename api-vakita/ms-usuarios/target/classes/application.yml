@@ -7,6 +7,21 @@ server:
 spring:
   application:
     name: ms-usuarios
+<<<<<<< HEAD:api-vakita/ms-usuarios/target/classes/application.yml
+=======
+# TO SEND MAIL
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: vakitas.grupo3@gmail.com
+    password: xkzmuhogqoxrihxt
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+>>>>>>> 3d5211bc10a45f3e27bf8a4146e185a8635e403d:api-vakita/ms-usuarios/src/main/resources/application.yml
 #  zipkin:
 #    baseUrl: http://localhost:9411/
 #    enabled: true
@@ -17,8 +32,12 @@ spring:
     port: 5672
   datasource:
 #    driverClassName: com.mysql.cj.jdbc.Driver
+<<<<<<< HEAD:api-vakita/ms-usuarios/target/classes/application.yml
     url: jdbc:mysql://localhost:3306/usersdb
     createDatabaseIfNotExist: true
+=======
+    url: jdbc:mysql://localhost:3306/usersdb?createDatabaseIfNotExist=true
+>>>>>>> 3d5211bc10a45f3e27bf8a4146e185a8635e403d:api-vakita/ms-usuarios/src/main/resources/application.yml
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -30,6 +49,10 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
 
+<<<<<<< HEAD:api-vakita/ms-usuarios/target/classes/application.yml
+=======
+
+>>>>>>> 3d5211bc10a45f3e27bf8a4146e185a8635e403d:api-vakita/ms-usuarios/src/main/resources/application.yml
 #Inicializacion de data en la bd, toma el script que está en resources al iniciar el ms
     defer-datasource-initialization: true
   sql:
@@ -56,4 +79,12 @@ management:
     app:
       name: ms-usuarios
       version: 1.0.0
+<<<<<<< HEAD:api-vakita/ms-usuarios/target/classes/application.yml
       description: Microservicios Usuarios
+=======
+      description: Microservicios Usuarios
+
+spring-doc:
+  api-docs:
+    path: /swagger-usuarios
+>>>>>>> 3d5211bc10a45f3e27bf8a4146e185a8635e403d:api-vakita/ms-usuarios/src/main/resources/application.yml
