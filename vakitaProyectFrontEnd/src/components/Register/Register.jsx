@@ -7,27 +7,19 @@ import axios from "axios";
 
 function Register() {
 
-  // const calcAgeGr18 = (birthdate) => {
+  const maxYear = () => {
 
-  //   const currentDate = new Date()
+    let maxYear = new Date().getFullYear() - 18;
+    const currentDate = new Date();
 
-  //     const diferenciaEnAnios = currentDate.getFullYear() - birthdate.getFullYear();
-
-  //     if (
-  //       diferenciaEnAnios > 18 ||
-  //       (diferenciaEnAnios === 18 && birthdate.getMonth() > currentDate.getMonth()) ||
-  //       (diferenciaEnAnios === 18 && birthdate.getMonth() === currentDate.getMonth() && birthdate.getDate() >= currentDate.getDate())
-  //     ) {
-  //       return ""
-
-  //     }
-
-  //     return "Solo pueden registrarse mayores de edad"
-  // }
+    return new Date(currentDate.getDay() + "/" + currentDate.getMonth() + "/" + maxYear)
+  }
 
   const formik = useFormik({
     initialValues: {
       name: "",
+      lastName: "",
+      dni: "",
       email: "",
       birthdate: "",
       password: "",
@@ -37,29 +29,39 @@ function Register() {
       name: Yup.string().required("Nombre es requerido"),
       lastName: Yup.string().required("Apellido es requerido"),
       email: Yup.string().email("No es un correo valido").required("Correo es requerido"),
-      // birthdate: Yup.date().max(new Date(), calcAgeGr18).required("Fecha de nacimiento es requerida"),
-      birthdate: Yup.string().required("Fecha de nacimiento es requerida"),
+      birthdate: Yup.date().max(maxYear(), "Se debe ser mayor de 18 años").required("Fecha de nacimiento es requerida"),
       password: Yup.string().min(4, "Debe contener 4 digitos o más").max(50).required("Contraseña es requerida"),
       passwordConfirm:  Yup.string().min(4, "Debe contener 4 digitos o más").max(50).required("Confirmación de contraseña es requerida").oneOf([Yup.ref("password")], "Las contraseñas no coinciden")
         }),
-    onSubmit: async (values) => {
-
+    onSubmit: async (values) => {    
       try {
-        console.log("");
 
         const response = await axios.post("http://localhost:8080/api/v1/usuarios", {
           "name": values.name,
           "lastName": values.lastName,
-          "dni": "11111111",
+          "dni": values.dni,
           "email": values.email,
           "password": values.password,
           "birthdate": values.birthdate
         })
 
+        if (response.data.success) {
+          Swal.fire({
+            title: 'Registro realizado con éxito',
+            text:'Ahora puedes iniciar sesión',
+            icon:'success'
+        })
+
+        formik.resetForm();
+
+      } 
+
         console.log(response);
 
       } catch (e) {
+        
         console.log(e);
+
         Swal.fire({
           title: 'Algo salió mal :(',
           text: e.code,
@@ -67,15 +69,8 @@ function Register() {
         })
 
       }
-      
-    //   Swal.fire({
-    //     title: 'Registro realizado con éxito',
-    //     text:'Ahora puedes iniciar sesión',
-    //     icon:'success'
-    // })
-    //     formik.resetForm();
-    // formik.resetForm();
 
+    formik.resetForm();
 
     }
 });
@@ -122,7 +117,20 @@ function Register() {
                     onBlur={formik.handleBlur}
                   />
                 </ContainerInput>
-                {formik.touched.name && formik.errors.name && <span style={{ color: "red", }}>{formik.errors.name}</span>}
+                {formik.touched.lastName && formik.errors.lastName && <span style={{ color: "red", }}>{formik.errors.lastName}</span>}
+
+                <ContainerInput>
+                  <Label htmlFor="dni">Tu dni</Label>
+                  <Input
+                    type="text"
+                    name="dni"
+                    id="dni"
+                    value={formik.values.dni}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                </ContainerInput>
+                {formik.touched.dni && formik.errors.dni && <span style={{ color: "red", }}>{formik.errors.dni}</span>}
 
                 <ContainerInput>
                   <Label htmlFor="email">Correo electrónico</Label>
