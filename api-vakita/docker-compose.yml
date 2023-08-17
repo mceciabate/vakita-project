@@ -37,7 +37,7 @@ services:
     networks:
       - grupo3
   usuarios-container:
-    image: mcabate/usuarios:latest
+    image: mcabate/pi:usuarios-v1
     restart: on-failure
     container_name: usuarios-container
     ports:
