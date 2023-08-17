@@ -1,0 +1,23 @@
+[2023-29-09 18:29:10] [ INFO ] [UserController:61] Metodo createUser
+[2023-29-09 18:29:10] [ INFO ] [UserController:62] UserDTO(id=null, name=Mike, lastName=Mayers, dni=11111111, email=usuario1@vakitas.com, password=password1, birthdate=1994-05-01)
+[2023-29-09 18:29:10] [ INFO ] [UserController:68] saved
+[2023-29-09 18:29:10] [ ERROR] [UserController:71] error: java.net.ConnectException: Connection refused: no further information
+[2023-29-09 18:29:22] [ INFO ] [UserController:44] Metodo getUserById
+[2023-29-09 18:29:22] [ INFO ] [UserController:50] obtained
+[2023-29-09 18:29:27] [ INFO ] [UserController:79] Metodo updateUserById
+[2023-29-09 18:29:27] [ INFO ] [UserController:80] UserDTO(id=1, name=Mike MOD, lastName=Mayers MOD, dni=11111111 MOD, email=usuario1@vakitas.com MOD, password=password1 MOD, birthdate=1888-08-08)
+[2023-29-09 18:29:27] [ INFO ] [UserController:94] updated
+[2023-29-09 18:29:32] [ INFO ] [UserController:105] Metodo changeUserPasswordById
+[2023-29-09 18:29:32] [ INFO ] [UserController:106] UserDTO(id=null, name=null, lastName=null, dni=null, email=null, password=NewPassword1 MOD, birthdate=null)
+[2023-29-09 18:29:32] [ INFO ] [UserController:116] updated
+[2023-29-09 18:29:37] [ INFO ] [UserController:128] Metodo deleteUserById
+[2023-29-09 18:29:37] [ INFO ] [UserController:134] deleted
+[2023-29-09 18:29:43] [ INFO ] [UserController:31] Metodo getAllUsers
+[2023-29-09 18:29:43] [ INFO ] [UserController:33] obtained
+[2023-29-09 18:29:53] [ INFO ] [UserController:61] Metodo createUser
+[2023-29-09 18:29:53] [ INFO ] [UserController:62] UserDTO(id=null, name=Mike, lastName=Mayers, dni=11111111, email=usuario1@vakitas.com, password=password1, birthdate=1994-05-01)
+[2023-29-09 18:29:53] [ INFO ] [UserController:68] saved
+[2023-29-09 18:29:53] [ ERROR] [UserController:71] error: java.net.ConnectException: Connection refused: no further information
+[2023-40-09 18:40:52] [ INFO ] [UserController:61] Metodo createUser
+[2023-40-09 18:40:52] [ INFO ] [UserController:62] UserDTO(id=null, name=Mike, lastName=Mayers, dni=11111111, email=usuario1@vakitas.com, password=password1, birthdate=1994-05-01)
+[2023-40-09 18:40:52] [ INFO ] [UserController:68] saved

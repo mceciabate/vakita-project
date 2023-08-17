@@ -1,0 +1,47 @@
+server:
+  port: ${PORT:${SERVER_PORT:8080}}
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: ms-usuarios
+          uri: lb://ms-usuarios
+          predicates:
+            - Path=/api/v1/usuarios/**
+        - id: ms-vakitas
+          uri: lb://ms-vakitas
+          predicates:
+            - Path=/api/v1/vakita/**
+
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: true
+    serviceURL:
+      defaultZone: http://localhost:8761/eureka
+
+management:
+  endpoint:
+    gateway:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+#        include: "*"
+        include: gateway
+
+
+info:
+  app:
+    name: ${spring.application.name}
+
+
+
+
+
