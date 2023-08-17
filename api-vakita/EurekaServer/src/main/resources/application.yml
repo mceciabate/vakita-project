@@ -6,7 +6,7 @@ spring:
     name: eurekaServer
 eureka:
   instance:
-    hostname: localhost
+    hostname: eureka-server-container
   client:
     registerWithEureka: false
     fetchRegistry: false

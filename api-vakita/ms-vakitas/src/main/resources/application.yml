@@ -9,7 +9,7 @@ spring:
   rabbitmq:
     username: guest
     password: guest
-    host: localhost
+    host: rabbit-container
     port: 5672
 
   datasource:
@@ -33,7 +33,7 @@ eureka:
     registerWithEureka: true
     fetchRegistry: false
     serviceURL:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://eureka-server-container:8761/eureka
   instance:
     instance-id: ${spring.application.name}:${random.int}
     preferIpAddress: true
