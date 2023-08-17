@@ -26,33 +26,33 @@ function Header() {
 
       <div className="header-botones">
         {(currentPath === "/" && !logged || currentPath === "/register") && (
-          <button
+          <Link to="/log-in"><button
             className={`nav_item ${activeButton === "Iniciar-sesion" ? "active" : ""}`}
             id="Iniciar-sesion"
             onClick={() => handleButtonClick("Iniciar-sesion")}
           >
-            <Link to="/log-in">Iniciar sesión</Link>
-          </button>
+            Iniciar sesión
+          </button></Link>
         )}
 
         {(currentPath === "/" && !logged || currentPath === "/log-in") && (
-          <button
+           <Link to="/register"><button
             className={`nav_item ${activeButton === "Crear-cuenta" ? "active" : ""}`}
             id="Crear-cuenta"
             onClick={() => handleButtonClick("Crear-cuenta")}
           >
-            <Link to="/register">Crear cuenta</Link>
-          </button>
+           Crear cuenta
+          </button></Link>
         )}
 
 {(currentPath === "/" && logged) && (
-          <button
+         <Link to="/dashboard"> <button
             className={`nav_item ${activeButton === "Crear-cuenta" ? "active" : ""}`}
             id="dashboard"
             onClick={() => handleButtonClick("Crear-cuenta")}
           >
-            <Link to="/dashboard">Dashboard</Link>
-          </button>
+            Dashboard
+          </button></Link>
         )}
 
         {/* menu hamburguesa para mobile */}
