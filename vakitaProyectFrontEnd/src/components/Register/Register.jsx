@@ -35,6 +35,7 @@ function Register() {
     },
     validationSchema: Yup.object({
       name: Yup.string().required("Nombre es requerido"),
+      lastName: Yup.string().required("Apellido es requerido"),
       email: Yup.string().email("No es un correo valido").required("Correo es requerido"),
       // birthdate: Yup.date().max(new Date(), calcAgeGr18).required("Fecha de nacimiento es requerida"),
       birthdate: Yup.string().required("Fecha de nacimiento es requerida"),
@@ -58,23 +59,24 @@ function Register() {
         console.log(response);
 
       } catch (e) {
+        console.log(e);
         Swal.fire({
           title: 'Algo salió mal :(',
-          text: e,
+          text: e.code,
           icon:'error'
         })
 
       }
       
-      formik.resetForm();
     //   Swal.fire({
     //     title: 'Registro realizado con éxito',
     //     text:'Ahora puedes iniciar sesión',
     //     icon:'success'
     // })
     //     formik.resetForm();
+    // formik.resetForm();
 
-        console.log(values);
+
     }
 });
 
@@ -103,6 +105,19 @@ function Register() {
                     name="name"
                     id="name"
                     value={formik.values.name}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                </ContainerInput>
+                {formik.touched.name && formik.errors.name && <span style={{ color: "red", }}>{formik.errors.name}</span>}
+
+                <ContainerInput>
+                  <Label htmlFor="lastName">Tu apellido</Label>
+                  <Input
+                    type="text"
+                    name="lastName"
+                    id="lastName"
+                    value={formik.values.lastName}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                   />
