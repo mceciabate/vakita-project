@@ -13,7 +13,7 @@ services:
     networks:
       - grupo3
   gateway-container:
-    image: mcabate/pi:gateway-v2
+    image: mcabate/pi:gateway-v3
     restart: on-failure
     container_name: gateway-container
     ports:
