@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,7 @@ import java.io.Serializable;
 
 @Component
 @Slf4j
+@EnableRabbit
 public class NewUserEventProducer {
     private final RabbitTemplate rabbitTemplate;
 

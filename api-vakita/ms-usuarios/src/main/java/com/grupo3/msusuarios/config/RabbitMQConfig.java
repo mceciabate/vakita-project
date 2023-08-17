@@ -13,6 +13,7 @@ public class RabbitMQConfig {
     public static final String EXCHANGE_NAME = "userExchange";
     public static final String TOPIC_NEW_USER = "com.grupo3.msusuarios.newUser";
 
+
     @Bean
     public TopicExchange appExchange(){
         return new TopicExchange(EXCHANGE_NAME);
