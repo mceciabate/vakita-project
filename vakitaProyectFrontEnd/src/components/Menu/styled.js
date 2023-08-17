@@ -3,13 +3,11 @@ import { styled } from "styled-components";
 
 export const MenuLateral = styled.section`
 display: none;
-    width: 18rem;
+    
     padding: 2.5rem 1rem;
-    height: calc(100vh - 112px);
+    
     font-family: 'Inria Sans', sans-serif;
-    /* display: flex; */
-    /* flex-direction: column;
-    justify-content: space-between; */
+    
     
 
 
@@ -18,7 +16,7 @@ display: none;
 display:flex;
 width: 18rem;
     padding: 2.5rem 1rem;
-    height: calc(100vh - 112px);
+    
     font-family: 'Inria Sans', sans-serif;
        
         .botonSalir {
@@ -102,13 +100,13 @@ export const BloqueOptions = styled.div`
 export const MenuDiv=styled.div`
 
     display: flex;
-    justify-content: center;
-    
+    justify-content: space-between;
+    width: 100%;
     
 
     @media (min-width: 769px){
         
-   justify-content:normal;
+   justify-content:space-between;
     
     }
 
