@@ -162,6 +162,39 @@ public class VakitaServiceTest {
         Assertions.assertTrue(vakitaModificada.getName().equals("name"));
 
     }
+    @Test
+    public void createVakitaValidations() throws BadRequestException, ResourceNotFoundException {
+        VakitaDTO vakitaDTO = new VakitaDTO("",1L,"vakita creada","www.img.com",2000.0,3000.0,LocalDate.parse("2023-09-06"),LocalDate.parse("2023-09-06"),true,VakitaTypes.normal);
+
+        VakitaDTO vakita =vakitaService.createVakita(vakitaDTO);
+        Assertions.assertTrue((vakita.getName() != null && vakita.getCumulativeAmount() >0.0 && vakita.getExpirationDate().isAfter(LocalDate.now())&&( vakita.getIdCreatorUser() != null ||!vakita.getContributors().isEmpty())));
+
+    }
+
+    @Test
+    public void updateVakitaPartially() throws BadRequestException, ResourceNotFoundException {
+        VakitaDTO vakitaDTO = new VakitaDTO("",1L,"esto es una descripcion","link",2000.0,3000.0,LocalDate.parse("2023-09-06"),LocalDate.parse("2023-09-06"),true,VakitaTypes.normal);
+
+        VakitaDTO vakita =vakitaService.createVakita(vakitaDTO);
+        VakitaDTO vakitaUpdateDes = vakitaService.partialUpdate(vakita.getId(),"descripcion","se modifico");
+        VakitaDTO vakitaUpdateImg = vakitaService.partialUpdate(vakita.getId(),"imagen","imagen nueva");
+        VakitaDTO vakitaUpdateDate = vakitaService.partialUpdate(vakita.getId(),"fecha-expiracion","2023-10-06");
+        Assertions.assertTrue(vakita.getDescription() != vakitaUpdateDes.getDescription());
+        Assertions.assertTrue(vakita.getImgURL() != vakitaUpdateImg.getImgURL());
+        Assertions.assertTrue(vakita.getExpirationDate() != vakitaUpdateDate.getExpirationDate());
+
+    }
+
+    @Test
+    public void modifyVakitaState() throws BadRequestException, ResourceNotFoundException {
+        VakitaDTO vakitaDTO = new VakitaDTO("",1L,"vakita creada","www.img.com",2000.0,3000.0,LocalDate.parse("2023-09-06"),LocalDate.parse("2023-09-06"),true,VakitaTypes.normal);
+
+        VakitaDTO vakita =vakitaService.createVakita(vakitaDTO);
+        Assertions.assertTrue((vakita.getName() != null && vakita.getCumulativeAmount() >0.0 && vakita.getExpirationDate().isAfter(LocalDate.now())&&( vakita.getIdCreatorUser() != null ||!vakita.getContributors().isEmpty())));
+
+    }
+
+    
 
 }
 
