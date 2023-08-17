@@ -1,17 +1,19 @@
 version: '3.9'
 services:
-  rabbitmq-container:
-    image: rabbitmq:3-management
-    container_name: rabbitmq-container
-    hostname: rabbitmq
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    expose:
-      - 15672
-      - 5672
-    networks:
-      - local-cecilia
+#  rabbitmq-container:
+#    build:
+#      context: ./
+#      dockerfile: Dockerfile
+#    container_name: rabbit-container
+#    hostname: stats
+#    ports:
+#      - "5672:5672"
+#      - "15672:15672"
+#    expose:
+#      - '15672'
+#      - '5672'
+#    networks:
+#      - local-cecilia
   gateway-container:
     image: mcabate/gateway:latest
 #    restart: on-failure
@@ -20,10 +22,9 @@ services:
       - "8080:8080"
     expose:
       - '8080'
-    networks:
-      - local-cecilia
     depends_on:
       - eureka-server-container
+    network_mode: host
   vakitas-container:
     image: mcabate/vakitas:latest
 #    restart: on-failure
@@ -32,11 +33,9 @@ services:
       - "9091:9091"
     expose:
       - '9091'
-    networks:
-      - local-cecilia
     depends_on:
       - eureka-server-container
-      - rabbitmq-container
+    network_mode: host
   usuarios-container:
     image: mcabate/usuarios:latest
 #    restart: on-failure
@@ -45,11 +44,9 @@ services:
       - "9090:9090"
     expose:
       - '9090'
-    networks:
-      - local-cecilia
     depends_on:
       - eureka-server-container
-      - rabbitmq-container
+    network_mode: host
   eureka-server-container:
     image: mcabate/eureka:latest
     container_name: eureka-server-container
@@ -57,8 +54,9 @@ services:
      - "8761:8761"
     expose:
      - '8761'
-    networks:
-      - local-cecilia
+    network_mode: host
 
-networks:
-  local-cecilia:
+
+
+#networks:
+#  local-cecilia:

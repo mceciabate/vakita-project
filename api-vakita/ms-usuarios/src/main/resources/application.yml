@@ -19,13 +19,14 @@ spring:
           auth: true
           starttls:
             enable: true
-#  zipkin:
-#    baseUrl: http://localhost:9411/
-#    enabled: true
+
   rabbitmq:
     username: guest
     password: guest
-    host: rabbitmq-container
+    host: localhost
+    exchange: user.exchange
+    queue: user.queue
+    routingkey: user.routingkey
     port: 5672
   datasource:
 #    driverClassName: com.mysql.cj.jdbc.Driver
@@ -52,7 +53,7 @@ eureka:
     registerWithEureka: true
     fetchRegistry: false
     serviceURL:
-      defaultZone: http://eureka-server-container:8761/eureka
+      defaultZone: http://localhost:8761/eureka
   instance:
     instance-id: ${spring.application.name}:${random.int}
     preferIpAddress: true
