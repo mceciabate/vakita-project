@@ -1,13 +1,29 @@
-import React from "react";
 import * as Yup from "yup";
 import {useFormik} from "formik";
 import Swal from "sweetalert2";
 import logoVaca from "../../assets/logoVacaInicio.png";
 import {Input, ContainerInput, FormContainer, BoxText, ContainerGeneral, TituloCrearCuenta, Label, Button, GeneralFormContainer,ImgVaca} from './Register.styled.jsx';
-
-
+import axios from "axios";
 
 function Register() {
+
+  // const calcAgeGr18 = (birthdate) => {
+
+  //   const currentDate = new Date()
+
+  //     const diferenciaEnAnios = currentDate.getFullYear() - birthdate.getFullYear();
+
+  //     if (
+  //       diferenciaEnAnios > 18 ||
+  //       (diferenciaEnAnios === 18 && birthdate.getMonth() > currentDate.getMonth()) ||
+  //       (diferenciaEnAnios === 18 && birthdate.getMonth() === currentDate.getMonth() && birthdate.getDate() >= currentDate.getDate())
+  //     ) {
+  //       return ""
+
+  //     }
+
+  //     return "Solo pueden registrarse mayores de edad"
+  // }
 
   const formik = useFormik({
     initialValues: {
@@ -20,18 +36,43 @@ function Register() {
     validationSchema: Yup.object({
       name: Yup.string().required("Nombre es requerido"),
       email: Yup.string().email("No es un correo valido").required("Correo es requerido"),
+      // birthdate: Yup.date().max(new Date(), calcAgeGr18).required("Fecha de nacimiento es requerida"),
       birthdate: Yup.string().required("Fecha de nacimiento es requerida"),
       password: Yup.string().min(4, "Debe contener 4 digitos o más").max(50).required("Contraseña es requerida"),
       passwordConfirm:  Yup.string().min(4, "Debe contener 4 digitos o más").max(50).required("Confirmación de contraseña es requerida").oneOf([Yup.ref("password")], "Las contraseñas no coinciden")
         }),
-    onSubmit: (values) => {
-        
-      Swal.fire({
-        title: 'Registro realizado con éxito',
-        text:'Ahora puedes iniciar sesión',
-        icon:'success'
-    })
-        formik.resetForm();
+    onSubmit: async (values) => {
+
+      try {
+        console.log("");
+
+        const response = await axios.post("http://localhost:8080/api/v1/usuarios", {
+          "name": values.name,
+          "lastName": values.lastName,
+          "dni": "11111111",
+          "email": values.email,
+          "password": values.password,
+          "birthdate": values.birthdate
+        })
+
+        console.log(response);
+
+      } catch (e) {
+        Swal.fire({
+          title: 'Algo salió mal :(',
+          text: e,
+          icon:'error'
+        })
+
+      }
+      
+      formik.resetForm();
+    //   Swal.fire({
+    //     title: 'Registro realizado con éxito',
+    //     text:'Ahora puedes iniciar sesión',
+    //     icon:'success'
+    // })
+    //     formik.resetForm();
 
         console.log(values);
     }
