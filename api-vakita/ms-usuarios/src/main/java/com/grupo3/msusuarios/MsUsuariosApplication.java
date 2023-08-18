@@ -9,10 +9,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @EnableDiscoveryClient
 public class MsUsuariosApplication {
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 		SpringApplication.run(MsUsuariosApplication.class, args);
-		RabbitMQConnection example = new RabbitMQConnection();
-		example.connectToRabbitMQ();
+//		RabbitMQConnection example = new RabbitMQConnection();
+//		example.connectToRabbitMQ();
 	}
 	}
 

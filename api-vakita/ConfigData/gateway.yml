@@ -11,7 +11,7 @@ spring:
           enabled: true
       routes:
         - id: ms-usuarios
-          uri: lb://ms-usuarios
+          uri: http://18.207.194.96:9090/
           predicates:
             - Path=/api/v1/usuarios/**
         - id: ms-vakitas
