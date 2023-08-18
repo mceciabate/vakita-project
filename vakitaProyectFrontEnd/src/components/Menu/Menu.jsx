@@ -1,4 +1,4 @@
-import { BloqueOptions,HeaderMenuLateral, MenuDiv, MenuLateral } from "./styled";
+import { BloqueOptions,HeaderMenuLateral, MenuDiv, MenuLateral,MenuSinLoguear } from "./styled";
 import  Avatar from "../../assets/vaquitaPerfil.png";
 import { Link, Outlet} from 'react-router-dom'
 import { useUser } from "../../context/UserProvider";
@@ -46,10 +46,11 @@ const Menu = () => {
         
         </MenuLateral>
         <Outlet/></>: 
-        <div>
-        <button><Link to="/log-in" style={{color: "white"}}>Iniciar sesión</Link></button>
-        <button> <Link to="/register" style={{color: "white"}}>Crear cuenta</Link></button>
-        </div>
+        
+        <MenuSinLoguear>
+        <button><Link to="/log-in" >Iniciar sesión</Link></button>
+        <button> <Link to="/register" >Crear cuenta</Link></button>
+        </MenuSinLoguear>
             }
         
         </MenuDiv>
