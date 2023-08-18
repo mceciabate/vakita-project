@@ -42,6 +42,14 @@ export const DivContSections = styled.div`
   p {
     font-size: 1.3rem;
     font-weight: bold;
+
+    
+  }
+
+  @media (max-width: 769px){
+    p {
+      margin-top: 30px; 
+    }
   }
 
   @media (min-width: 769px){
