@@ -30,7 +30,7 @@
  <p>El proyecto consta de la creación de un sitio web completo cuyo producto es una web app de ahorro colaborativo. Todo el proceso de desarrollo de esta web se divide en cuatro sprints.</p>
 
 
-    <h3> Objetivos </h3>
+<h3> Objetivos </h3>
 
     1- Desarrollar una web que consuma una API
     2- Crear una API
@@ -40,11 +40,11 @@
 
 <p>La importancia del PI se centra en el trabajo en equipo, la colaboración y la resolución de problemas. Su objetivo es crear un espacio para el desarrollo de las habilidades necesarias en el campo del desarrollo y la programación, todo bajo la premisa de "aprender, haciendo".</p>
 
-    <h3>Producto desarrollado</h3>
+<h3>Producto desarrollado</h3>
 <p>El equipo lleva adelante la creación de una app llamada VAKITA, esta permite que los usuarios se registren y al crear su cuenta puedan abrir una vaca o proyecto de ahorro ( de manera individual o con sus amigos)  <br>
 
 
-    <h3>Estrutura del proyecto</h3>
+<h3>Estrutura del proyecto</h3>
 <p>El proyecto se encuentra organizado en carpetas de cada área de desarrollo, estas permiten la mejor organización del código y la posibilidad de ver los módulos que componen esta web.</p>
 <hr/>
 <h3>Herramientas implementadas y Entorno requerido</h3>
