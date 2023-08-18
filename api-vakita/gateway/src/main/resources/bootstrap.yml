@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: gateway
+  cloud:
+    config:
+      enabled: true
+      uri: http://35.173.127.195:8888/
+
+
+
+
