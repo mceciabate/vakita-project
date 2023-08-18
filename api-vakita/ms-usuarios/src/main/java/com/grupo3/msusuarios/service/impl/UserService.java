@@ -130,4 +130,22 @@ public class UserService implements IUserService {
             throw new Exception(e.getMessage());
         }
     }
+
+    //TODO: Agrego método pára modificar el saldo de un usuario
+
+    @Override
+    public String updateAccountBalance(Long id, Double amount) throws Exception {
+        UserDTO userToModify = this.findById(id);
+        try {
+            Double accountBalanceUdate = userToModify.getAccount_balance() + amount;
+            userToModify.setAccount_balance(accountBalanceUdate);
+            this.updateById(id, userToModify);
+            String message = "AccountBalance for usuer: "+ id +" successful update to: " +amount;
+            return message;
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+
 }

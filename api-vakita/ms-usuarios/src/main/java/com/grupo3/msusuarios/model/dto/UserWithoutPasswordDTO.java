@@ -17,5 +17,5 @@ public class UserWithoutPasswordDTO {
     private String dni;
     private String email;
     private LocalDate birthdate;
-    private Double amount;
+    private Double account_balance;
 }

@@ -1,7 +1,9 @@
 package com.grupo3.msvakitas.service.impl;
 
+import com.grupo3.msvakitas.event.NewVakitaEventProducer;
 import com.grupo3.msvakitas.handler.BadRequestException;
 import com.grupo3.msvakitas.handler.ResourceNotFoundException;
+import com.grupo3.msvakitas.model.dto.UserForTransactionDTO;
 import com.grupo3.msvakitas.model.dto.UserDTO;
 import com.grupo3.msvakitas.model.dto.VakitaDTO;
 import com.grupo3.msvakitas.model.entity.Vakita;
@@ -26,6 +28,8 @@ public class VakitaService implements IVakitaService {
     @Autowired
     private  ModelMapper mapper;
 
+    @Autowired
+    private NewVakitaEventProducer event;
 
     @Autowired
     private IVakitaRepository vakitaRepository;
@@ -158,7 +162,6 @@ public class VakitaService implements IVakitaService {
     }
 
     //Este método es para actualizar una vakita existente
-    //LOS CAMPOS QUE SE PERMITEN MODIFICAR SON: Descripcion, imagen, fecha de expiracion
     @Override
     public VakitaDTO updateVakita(Long id, VakitaDTO vakita) throws BadRequestException, ResourceNotFoundException {
          VakitaDTO vakitaToModify = this.getVakitaById(id);
@@ -244,6 +247,23 @@ public class VakitaService implements IVakitaService {
         log.info("Success, cancel vakita id: " + id);
         this.updateVakita(id, vakitaToCancel);
     }
+
+    //TODO agrego el método para vaciar una vakita, en el metodo delete ya estaba establecido que la vakita fuera vacía.
+
+    @Override
+    public void drainVakita(Long id) throws ResourceNotFoundException, BadRequestException {
+        VakitaDTO vakitaToDrain = this.getVakitaById(id);
+        Long userCreator = vakitaToDrain.getIdCreatorUser();
+        Double cumulativeAmountFromVakitaToDrain = vakitaToDrain.getCumulativeAmount();
+        UserForTransactionDTO user = new UserForTransactionDTO(userCreator, cumulativeAmountFromVakitaToDrain);
+        if (!vakitaToDrain.getIsActive()){
+            vakitaToDrain.setCumulativeAmount(0.0);
+        }
+        this.updateVakita(id, vakitaToDrain);
+        event.executeAmount(user);
+        log.info("Se ha vaciado la vakita id: " + id);
+    }
+
 
 }
 

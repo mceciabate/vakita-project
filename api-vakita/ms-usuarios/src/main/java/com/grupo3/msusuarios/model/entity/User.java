@@ -48,8 +48,8 @@ public class User implements Serializable {
     @Column(name = "BIRTHDATE", nullable = false)
     private LocalDate birthdate;
 
-    @Column(name = "AMOUNT")
-    private Double amount = 0.0;
+    @Column(name = "ACCOUNT_BALANCE")
+    private Double account_balance = 0.0;
 
 //    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
 //    private List<Vakita> vakitas;

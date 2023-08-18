@@ -1,7 +1,7 @@
 package com.grupo3.msvakitas.event;
 
 import com.grupo3.msvakitas.configuration.RabbitMQConfig;
-import com.grupo3.msvakitas.model.dto.SendAmountRabbitDTO;
+import com.grupo3.msvakitas.model.dto.UserForTransactionDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,9 +26,9 @@ public class NewVakitaEventProducer {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    public void executeAmount(SendAmountRabbitDTO newSetAmount){
+    public void executeAmount(UserForTransactionDTO newAmountTransaction){
         NewVakitaEventProducer.Data data= new NewVakitaEventProducer.Data();
-        BeanUtils.copyProperties(newSetAmount, data.getUser());
+        BeanUtils.copyProperties(newAmountTransaction, data.getUser());
         rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME_USER_AMOUNT, RabbitMQConfig.TOPIC_NEW_USER_AMOUNT, data);
     }
 

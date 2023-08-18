@@ -14,4 +14,6 @@ public interface IUserService {
     Boolean changePassword(Long id, String newPassword) throws Exception;
     Boolean deleteById(Long id) throws Exception;
     List<UserWithoutPasswordDTO> findAll() throws Exception;
+
+    String updateAccountBalance(Long id, Double amount) throws Exception;
 }
