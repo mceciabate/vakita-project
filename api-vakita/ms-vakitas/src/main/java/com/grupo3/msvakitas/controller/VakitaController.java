@@ -1,9 +1,7 @@
 package com.grupo3.msvakitas.controller;
 
-import com.grupo3.msvakitas.event.NewVakitaEventProducer;
 import com.grupo3.msvakitas.handler.BadRequestException;
 import com.grupo3.msvakitas.handler.ResourceNotFoundException;
-import com.grupo3.msvakitas.model.dto.UserForTransactionDTO;
 import com.grupo3.msvakitas.model.dto.VakitaDTO;
 import com.grupo3.msvakitas.model.dto.VakitaPatchDTO;
 import com.grupo3.msvakitas.service.impl.VakitaService;
@@ -109,6 +107,14 @@ public class VakitaController {
     }
 
     //ENVIAR EL DINERO AL USUARIO
+    @Operation(summary = "Vaciar una vakita y enviarle el dinero al usuario")
+    @PatchMapping("/drain/{vakitaId}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public ResponseEntity drainVakita(@PathVariable Long vakitaId) throws BadRequestException, ResourceNotFoundException {
+        vakitaService.drainVakita(vakitaId);
+        return ResponseEntity.ok().build();
+    }
+
 
     //MODIFICAR TODA LA VAKITA
     @Operation(summary = "Modificar una vakita")

@@ -13,14 +13,14 @@ import java.io.Serializable;
 @AllArgsConstructor
 
 //TODO: RENOMBRÉ ESTA CLASE
-public class UserForTransactionDTO implements Serializable {
+public class UserForTransactionRabbitDTO implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
     private Long id;
     private Double amount;
 
-    public UserForTransactionDTO(Double amount) {
-        this.amount = amount;
-    }
+//    public UserForTransactionRabbitDTO(Double amount) {
+//        this.amount = amount;
+//    }
 }

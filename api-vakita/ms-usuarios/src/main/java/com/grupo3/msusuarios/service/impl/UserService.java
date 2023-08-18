@@ -134,14 +134,13 @@ public class UserService implements IUserService {
     //TODO: Agrego método pára modificar el saldo de un usuario
 
     @Override
-    public String updateAccountBalance(Long id, Double amount) throws Exception {
+    @Transactional
+    public void updateAccountBalance(Long id, Double amount) throws Exception {
         UserDTO userToModify = this.findById(id);
         try {
             Double accountBalanceUdate = userToModify.getAccount_balance() + amount;
             userToModify.setAccount_balance(accountBalanceUdate);
             this.updateById(id, userToModify);
-            String message = "AccountBalance for usuer: "+ id +" successful update to: " +amount;
-            return message;
         } catch (Exception e){
             throw new Exception(e.getMessage());
         }

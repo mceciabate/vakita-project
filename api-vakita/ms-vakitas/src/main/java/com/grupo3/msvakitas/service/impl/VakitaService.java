@@ -3,7 +3,7 @@ package com.grupo3.msvakitas.service.impl;
 import com.grupo3.msvakitas.event.NewVakitaEventProducer;
 import com.grupo3.msvakitas.handler.BadRequestException;
 import com.grupo3.msvakitas.handler.ResourceNotFoundException;
-import com.grupo3.msvakitas.model.dto.UserForTransactionDTO;
+import com.grupo3.msvakitas.model.dto.UserForTransactionRabbitDTO;
 import com.grupo3.msvakitas.model.dto.UserDTO;
 import com.grupo3.msvakitas.model.dto.VakitaDTO;
 import com.grupo3.msvakitas.model.entity.Vakita;
@@ -255,13 +255,15 @@ public class VakitaService implements IVakitaService {
         VakitaDTO vakitaToDrain = this.getVakitaById(id);
         Long userCreator = vakitaToDrain.getIdCreatorUser();
         Double cumulativeAmountFromVakitaToDrain = vakitaToDrain.getCumulativeAmount();
-        UserForTransactionDTO user = new UserForTransactionDTO(userCreator, cumulativeAmountFromVakitaToDrain);
+        UserForTransactionRabbitDTO user = new UserForTransactionRabbitDTO(userCreator, cumulativeAmountFromVakitaToDrain);
         if (!vakitaToDrain.getIsActive()){
             vakitaToDrain.setCumulativeAmount(0.0);
+            this.updateVakita(id, vakitaToDrain);
+            event.executeAmount(user);
+            log.info("Se ha vaciado la vakita id: " + id);
         }
-        this.updateVakita(id, vakitaToDrain);
-        event.executeAmount(user);
-        log.info("Se ha vaciado la vakita id: " + id);
+        else throw new BadRequestException("No se puede vaciar una vakita activa");
+
     }
 
 
