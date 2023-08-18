@@ -45,10 +45,12 @@ function Register() {
           "birthdate": values.birthdate
         })
 
-        if (response.data.success) {
+        console.log(response);
+
+        if (response.status == 201) {
           Swal.fire({
             title: 'Registro realizado con éxito',
-            text:'Ahora puedes iniciar sesión',
+            text:'Revisa tu correo electrónico para finalizar el registro',
             icon:'success'
         })
 
