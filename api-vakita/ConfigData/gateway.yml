@@ -35,9 +35,11 @@ management:
       exposure:
         #        include: "*"
         include: gateway
-
-
-info:
-  app:
-    name: ${spring.application.name}
+  info:
+    env:
+      enabled: true
+    app:
+      name: gateway
+      version: 1.0.0
+      description: Entry point
 
