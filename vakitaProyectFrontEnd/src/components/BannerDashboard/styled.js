@@ -29,7 +29,7 @@ export const Image = styled.img`
     }
     @media (max-width: 800px){
       font-size: 1.1rem;
-      width: 39vw;
+      width: 25vw;
     }
 `;
 
@@ -37,8 +37,11 @@ export const Image = styled.img`
 export const SpanText = styled.div`
   margin: auto;
   text-align: center;
+  display:flex;
+  flex-flow: column wrap;
   @media (max-width: 768px){
     font-size: 1.1rem;
+
 
   }
 `;
@@ -47,8 +50,26 @@ export const SpanText = styled.div`
 export const H2 = styled.h2`
     font-size: 1.1rem;
     width: 90%;
+    margin-bottom:25px;
 
     @media (max-width: 768px){
         font-size: 0.8rem;
     }
 `;
+
+export const Button = styled.h2`
+padding: 10px;
+width: 50%;
+margin: 0 auto;
+font-size: 1.1rem;
+border-radius: .7rem;
+cursor: pointer;
+border: none;
+font-weight: 500;
+cursor: pointer;
+background-color: #DEC6C6;
+font-family: 'Inria Sans', sans-serif;
+
+`;
+
+

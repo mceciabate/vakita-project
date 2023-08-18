@@ -2,7 +2,9 @@ import { styled } from "styled-components";
 
 export const Image = styled.img`
     /* height: 40%; */
-    @media (min-width: 769px) {
+   
+
+    @media (max-width: 766px) {
         width: 6rem;
     }
     
