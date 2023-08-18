@@ -255,7 +255,9 @@ public class VakitaService implements IVakitaService {
         VakitaDTO vakitaToDrain = this.getVakitaById(id);
         Long userCreator = vakitaToDrain.getIdCreatorUser();
         Double cumulativeAmountFromVakitaToDrain = vakitaToDrain.getCumulativeAmount();
-        UserForTransactionRabbitDTO user = new UserForTransactionRabbitDTO(userCreator, cumulativeAmountFromVakitaToDrain);
+        UserForTransactionRabbitDTO user = new UserForTransactionRabbitDTO();
+        user.setId(userCreator);
+        user.setAmount(cumulativeAmountFromVakitaToDrain);
         if (!vakitaToDrain.getIsActive()){
             vakitaToDrain.setCumulativeAmount(0.0);
             this.updateVakita(id, vakitaToDrain);

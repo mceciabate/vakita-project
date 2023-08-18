@@ -2,6 +2,7 @@ package com.grupo3.msusuarios.event;
 
 import com.grupo3.msusuarios.config.RabbitMQConfig;
 import com.grupo3.msusuarios.model.dto.UserDTO;
+import com.grupo3.msusuarios.model.dto.UserRabbitAmountDTO;
 import com.grupo3.msusuarios.model.entity.User;
 import com.grupo3.msusuarios.repository.IUserRepository;
 import com.grupo3.msusuarios.service.impl.UserService;
@@ -20,22 +21,23 @@ import java.io.Serializable;
 @Component
 public class NewVakitaEventConsumer {
 
+    //TODO, LE PEGO AL SERVICE, HAY QUE MODIFICAR ESTO EN VAKITA TAMBIEN
     @Autowired
-    private IUserRepository userRepository;
+    private UserService service;
 
 
     @RabbitListener(queues = RabbitMQConfig.QUEUE_NEW_USER_AMOUNT)
-        public void executeAmount(NewVakitaEventConsumer.Data data)  {
-        User newSetAmount = new User();
-        BeanUtils.copyProperties(data.getUser(), newSetAmount);
-        User userOptional = userRepository.findById(newSetAmount.getId()).orElse(null);
-        userOptional.setAccount_balance(newSetAmount.getAccount_balance());
-        userRepository.save(userOptional);
+        public void executeAmount(NewVakitaEventConsumer.Data data) throws Exception {
+        try {
+            UserRabbitAmountDTO user = new UserRabbitAmountDTO();
+            BeanUtils.copyProperties(data.getUser(), user);
+            service.updateAccountBalance(user.getId(), user.getAmount());
+        }
+        catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
 
     }
-
-
-
 
     @Getter
     @Setter
