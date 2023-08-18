@@ -20,10 +20,10 @@ spring:
           starttls:
             enable: true
   rabbitmq:
-    username: guest
-    password: guest
-    host: http://54.152.71.174
-    port: 5672
+      host: 54.152.71.174
+      port: 5672
+      username: admin
+      password: admin1234
   datasource:
     #    driverClassName: com.mysql.cj.jdbc.Driver
     driverClassName: com.mysql.jdbc.Driver
