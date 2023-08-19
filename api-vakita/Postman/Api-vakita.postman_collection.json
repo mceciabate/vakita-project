@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "aca788fe-94e6-44f3-b02f-fa6db5aa0bcc",
+		"_postman_id": "f4da3d37-b776-4d99-a06d-597025c5d27f",
 		"name": "Api-vakita",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "20337969"
+		"_exporter_id": "18026395"
 	},
 	"item": [
 		{
@@ -257,6 +257,38 @@
 								"vakita",
 								"inactive",
 								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "postVakitaSaldoAUsuario",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/vakita/drain/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"vakita",
+								"drain",
+								"2"
 							]
 						}
 					},
