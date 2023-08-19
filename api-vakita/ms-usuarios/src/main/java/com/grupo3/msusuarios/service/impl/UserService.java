@@ -24,22 +24,19 @@ public class UserService implements IUserService {
     private final IUserRepository userRepository;
     private final ObjectMapper mapper;
     private final NewUserEventProducer event;
-    private final PasswordEncoder encoder;
+
 
     @Autowired
-    public UserService(IUserRepository userRepository, ObjectMapper mapper, NewUserEventProducer event, PasswordEncoder encoder) {
+    public UserService(IUserRepository userRepository, ObjectMapper mapper, NewUserEventProducer event) {
         this.userRepository = userRepository;
         this.mapper = mapper;
         this.event = event;
-        this.encoder = encoder;
     }
 
     @Override
     @Transactional
     public UserDTO save(UserDTO userDTO) throws Exception {
         try {
-            String encoderPass = this.encoder.encode(userDTO.getPassword());
-            userDTO.setPassword(encoderPass);
             User user = mapper.convertValue(userDTO, User.class);
             log.info("Saving user: " + userDTO.getName());
             userRepository.save(user);
