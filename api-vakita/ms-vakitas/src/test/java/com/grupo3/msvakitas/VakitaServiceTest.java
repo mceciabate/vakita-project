@@ -186,12 +186,12 @@ public class VakitaServiceTest {
     }
     @Test
     public void modifyAmountVakita() throws BadRequestException, ResourceNotFoundException {
-        VakitaDTO vakitaDTO = new VakitaDTO("",1L,"vakita creada","www.img.com",2000.0,3000.0,LocalDate.parse("2023-09-06"),LocalDate.parse("2023-09-06"),true,VakitaTypes.normal);
+        VakitaDTO vakitaDTO = new VakitaDTO("",1L,"vakita creada","www.img.com",3000.0,2000.0,LocalDate.parse("2023-09-06"),LocalDate.parse("2023-09-06"),true,VakitaTypes.normal);
 
         VakitaDTO vakita =vakitaService.createVakita(vakitaDTO);
-        vakitaService.modifyAmount(2500.0,vakita.getId());
+        vakitaService.modifyAmount(1000.0,vakita.getId());
 
-        Assertions.assertTrue(vakita.get);
+        Assertions.assertTrue(vakita.getCumulativeAmount() >=  (vakita.getTotalAmount() - vakita.getCumulativeAmount()));
 
     }
 
