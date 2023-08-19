@@ -130,4 +130,19 @@ public class UserService implements IUserService {
             throw new Exception(e.getMessage());
         }
     }
+
+    @Override
+    @Transactional
+    public void updateAccountBalance(Long id, Double amount) throws Exception {
+        UserDTO userToModify = this.findById(id);
+        try {
+            Double accountBalanceUdate = userToModify.getAccount_balance() + amount;
+            userToModify.setAccount_balance(accountBalanceUdate);
+            this.updateById(id, userToModify);
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+
 }

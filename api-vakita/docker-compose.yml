@@ -25,7 +25,7 @@ services:
     networks:
       - grupo3
   vakitas-container:
-    image: mcabate/pi:vakitas-v1
+    image: mcabate/pi:vakitas-v2
     restart: on-failure
     container_name: vakitas-container
     ports:
@@ -37,7 +37,7 @@ services:
     networks:
       - grupo3
   usuarios-container:
-    image: mcabate/pi:usuarios-v1
+    image: mcabate/pi:usuarios-v2
     restart: on-failure
     container_name: usuarios-container
     ports:
@@ -57,8 +57,6 @@ services:
      - '8761'
     networks:
       - grupo3
-
-
 
 networks:
   grupo3:

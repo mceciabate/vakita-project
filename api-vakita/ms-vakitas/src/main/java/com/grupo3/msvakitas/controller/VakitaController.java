@@ -7,6 +7,7 @@ import com.grupo3.msvakitas.model.dto.VakitaPatchDTO;
 import com.grupo3.msvakitas.service.impl.VakitaService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@Slf4j
 @RequestMapping("api/v1/vakita")
 public class VakitaController {
 
@@ -85,6 +87,16 @@ public class VakitaController {
         vakitaService.partialUpdate(id, vakita.getKey(), vakita.getValue());
         return ResponseEntity.ok().build();
     }
+
+    //ENVIAR EL DINERO AL USUARIO
+    @Operation(summary = "Vaciar una vakita y enviarle el dinero al usuario")
+    @PatchMapping("/drain/{vakitaId}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public ResponseEntity drainVakita(@PathVariable Long vakitaId) throws BadRequestException, ResourceNotFoundException {
+        vakitaService.drainVakita(vakitaId);
+        return ResponseEntity.ok().build();
+    }
+
 
     //MODIFICAR TODA LA VAKITA
     @Operation(summary = "Modificar una vakita")
