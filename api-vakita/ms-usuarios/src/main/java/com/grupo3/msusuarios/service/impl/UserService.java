@@ -24,6 +24,7 @@ public class UserService implements IUserService {
     private final ObjectMapper mapper;
     private final NewUserEventProducer event;
 
+
     @Autowired
     public UserService(IUserRepository userRepository, ObjectMapper mapper, NewUserEventProducer event) {
         this.userRepository = userRepository;

@@ -6,6 +6,7 @@ import com.grupo3.msusuarios.model.entity.ConfirmationToken;
 import com.grupo3.msusuarios.repository.ConfirmationTokenRepository;
 import com.grupo3.msusuarios.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -19,22 +20,26 @@ public class ConfirmationTokenService {
     private final IUserService userService;
     private final ObjectMapper mapper;
 
+    private final PasswordEncoder encoder;
+
     @Autowired
-    public ConfirmationTokenService(ConfirmationTokenRepository tokenRepository, EmailService emailService, IUserService userService, ObjectMapper mapper) {
+    public ConfirmationTokenService(ConfirmationTokenRepository tokenRepository, EmailService emailService, IUserService userService, ObjectMapper mapper, PasswordEncoder encoder) {
         this.tokenRepository = tokenRepository;
         this.emailService = emailService;
         this.userService = userService;
         this.mapper = mapper;
+        this.encoder = encoder;
     }
 
     public void sendConfirmationEmail(UserDTO userDTO) throws Exception {
         try {
+            String encoderPass = this.encoder.encode(userDTO.getPassword());
             ConfirmationToken token = new ConfirmationToken();
             token.setUserName(userDTO.getName());
             token.setUserLastName(userDTO.getLastName());
             token.setUserDni(userDTO.getDni());
             token.setUserEmail(userDTO.getEmail());
-            token.setUserPassword(userDTO.getPassword());
+            token.setUserPassword(encoderPass);
             token.setUserBirthdate(userDTO.getBirthdate());
             token.setAccount_balance(userDTO.getAccount_balance());
             token.setToken(UUID.randomUUID().toString());
