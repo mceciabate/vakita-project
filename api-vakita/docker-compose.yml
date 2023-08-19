@@ -9,7 +9,7 @@ services:
       - "15672:15672"
     expose:
       - 15672
-     - 5672
+      - 5672
     networks:
       - grupo3
   gateway-container:
@@ -25,7 +25,7 @@ services:
     networks:
       - grupo3
   vakitas-container:
-    image: mcabate/pi:vakitas-v1
+    image: mcabate/pi:vakitas-v2
     restart: on-failure
     container_name: vakitas-container
     ports:
@@ -37,7 +37,7 @@ services:
     networks:
       - grupo3
   usuarios-container:
-    image: mcabate/pi:usuarios-v1
+    image: mcabate/pi:usuarios-v2
     restart: on-failure
     container_name: usuarios-container
     ports:
