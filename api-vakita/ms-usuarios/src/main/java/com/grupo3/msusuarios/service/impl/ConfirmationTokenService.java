@@ -36,6 +36,7 @@ public class ConfirmationTokenService {
             token.setUserEmail(userDTO.getEmail());
             token.setUserPassword(userDTO.getPassword());
             token.setUserBirthdate(userDTO.getBirthdate());
+            token.setAccount_balance(userDTO.getAccount_balance());
             token.setToken(UUID.randomUUID().toString());
             token.setExpirationDate(LocalDateTime.now().plusDays(1));
             tokenRepository.save(token);

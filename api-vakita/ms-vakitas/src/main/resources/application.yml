@@ -5,7 +5,6 @@ spring:
   cloud:
   application:
     name: ms-vakitas
-
   rabbitmq:
     username: guest
     password: guest
@@ -17,6 +16,7 @@ spring:
     url: jdbc:mysql://db.ctd.academy:3306/0723TDPI2N1C01LAED1021FT_GRUPO3?createDatabaseIfNotExist=true
     username: 0723TDPI2N1C01LAED1021FT_GRUPO3
     password: ahjoh5Lu
+
   jpa:
     hibernate.ddl-auto: update
     generate-ddl: true
@@ -51,3 +51,6 @@ management:
       version: 1.0.0
       description: Microservicios Vakitas
 
+spring-doc:
+  api-docs:
+    path: /swagger-vakitas

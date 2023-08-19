@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -47,7 +46,8 @@ public class User implements Serializable {
     @NotNull(message = "No puede ingresar una fecha vacia")
     @Column(name = "BIRTHDATE", nullable = false)
     private LocalDate birthdate;
-//
-//    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
-//    private List<Vakita> vakitas;
+
+    @Column(name = "ACCOUNT_BALANCE")
+    private Double account_balance = 0.0;
+
 }

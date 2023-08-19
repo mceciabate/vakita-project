@@ -1,6 +1,7 @@
 --CREATE SCHEMA IF NOT EXISTS `usersdb` ;
 --USE `usersdb`;
 
+
 insert into 0723TDPI2N1C01LAED1021FT_GRUPO3.users values( default, '1995-01-17',  '22222222', 'mglendinning0@correo.com',  'Menon', 'Maria', '4321');
 insert into 0723TDPI2N1C01LAED1021FT_GRUPO3.users values( default, '2001-01-17',  '33333333', 'rrmaria@micorreo.com','Santiago', 'Maria', '6789');
 insert into 0723TDPI2N1C01LAED1021FT_GRUPO3.users values(default, '1994-01-17',  '44444444', 'andreagal@micorreo.com',  'Escalante', 'Andrea', '9876');
