@@ -184,17 +184,17 @@ public class VakitaServiceTest {
         Assertions.assertTrue(vakita.getExpirationDate() != vakitaUpdateDate.getExpirationDate());
 
     }
-
     @Test
-    public void modifyVakitaState() throws BadRequestException, ResourceNotFoundException {
+    public void modifyAmountVakita() throws BadRequestException, ResourceNotFoundException {
         VakitaDTO vakitaDTO = new VakitaDTO("",1L,"vakita creada","www.img.com",2000.0,3000.0,LocalDate.parse("2023-09-06"),LocalDate.parse("2023-09-06"),true,VakitaTypes.normal);
 
         VakitaDTO vakita =vakitaService.createVakita(vakitaDTO);
-        Assertions.assertTrue((vakita.getName() != null && vakita.getCumulativeAmount() >0.0 && vakita.getExpirationDate().isAfter(LocalDate.now())&&( vakita.getIdCreatorUser() != null ||!vakita.getContributors().isEmpty())));
+        vakitaService.modifyAmount(2500.0,vakita.getId());
+
+        Assertions.assertTrue(vakita.get);
 
     }
 
-    
 
 }
 
