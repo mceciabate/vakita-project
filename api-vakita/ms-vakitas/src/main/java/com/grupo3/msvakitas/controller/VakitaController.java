@@ -7,6 +7,7 @@ import com.grupo3.msvakitas.model.dto.VakitaPatchDTO;
 import com.grupo3.msvakitas.service.impl.VakitaService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +17,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@Slf4j
 @RequestMapping("api/v1/vakita")
 public class VakitaController {
 
     @Autowired
     private VakitaService vakitaService;
+
+//TODO: Comento el evento acá porque es responsabilidad del service
+
+//    @Autowired
+//    private NewVakitaEventProducer event;
 
     //TODO ESTA DEVOLVIENDO 200
     //CREAR UNA VAKITA
@@ -77,6 +84,19 @@ public class VakitaController {
         return ResponseEntity.ok(vakitaService.getVakitasByContributors(userId));
     }
 
+//    //ENVIAR SALDO A USUARIO
+//    @Operation(summary = "Enviar saldo a usuario")
+//    @GetMapping("/amount/{userId}/{vakitaId}")
+//    @ResponseStatus(code = HttpStatus.OK)
+//    public ResponseEntity<?> sendAmount(@PathVariable Long userId,@PathVariable Long vakitaId) throws BadRequestException, ResourceNotFoundException {
+//        VakitaDTO vakitaDTO = vakitaService.getVakitaById(vakitaId);
+//        UserForTransactionDTO sendAmountRabbitDTO = new UserForTransactionDTO(userId, vakitaDTO.getCumulativeAmount());
+//        event.executeAmount(sendAmountRabbitDTO);
+//        //ACA TENDRIA QUE VACIAR VAKITA A CERO O ELIMINARLA
+//        //vakitaService.deleteVakita(vakitaId);
+//        return ResponseEntity.ok().build();
+//    }
+
     //MODIFICAR DESCRIPCION, IMAGEN O FECHA DE EXPIRACION(ALARGAR EL PLAZO DE VENCIMIENTO)
     @Operation(summary = "Modificar descripcion, imagen o fecha de expiracion")
     @PatchMapping("/{id}")
@@ -85,6 +105,16 @@ public class VakitaController {
         vakitaService.partialUpdate(id, vakita.getKey(), vakita.getValue());
         return ResponseEntity.ok().build();
     }
+
+    //ENVIAR EL DINERO AL USUARIO
+    @Operation(summary = "Vaciar una vakita y enviarle el dinero al usuario")
+    @PatchMapping("/drain/{vakitaId}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public ResponseEntity drainVakita(@PathVariable Long vakitaId) throws BadRequestException, ResourceNotFoundException {
+        vakitaService.drainVakita(vakitaId);
+        return ResponseEntity.ok().build();
+    }
+
 
     //MODIFICAR TODA LA VAKITA
     @Operation(summary = "Modificar una vakita")

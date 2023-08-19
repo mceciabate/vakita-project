@@ -9,7 +9,7 @@ services:
       - "15672:15672"
     expose:
       - 15672
-      - 5672
+     - 5672
     networks:
       - grupo3
   gateway-container:
@@ -57,8 +57,6 @@ services:
      - '8761'
     networks:
       - grupo3
-
-
 
 networks:
   grupo3:
