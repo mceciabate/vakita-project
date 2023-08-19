@@ -10,6 +10,7 @@ import com.grupo3.msusuarios.repository.IUserRepository;
 import com.grupo3.msusuarios.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,18 +24,22 @@ public class UserService implements IUserService {
     private final IUserRepository userRepository;
     private final ObjectMapper mapper;
     private final NewUserEventProducer event;
+    private final PasswordEncoder encoder;
 
     @Autowired
-    public UserService(IUserRepository userRepository, ObjectMapper mapper, NewUserEventProducer event) {
+    public UserService(IUserRepository userRepository, ObjectMapper mapper, NewUserEventProducer event, PasswordEncoder encoder) {
         this.userRepository = userRepository;
         this.mapper = mapper;
         this.event = event;
+        this.encoder = encoder;
     }
 
     @Override
     @Transactional
     public UserDTO save(UserDTO userDTO) throws Exception {
         try {
+            String encoderPass = this.encoder.encode(userDTO.getPassword());
+            userDTO.setPassword(encoderPass);
             User user = mapper.convertValue(userDTO, User.class);
             log.info("Saving user: " + userDTO.getName());
             userRepository.save(user);
