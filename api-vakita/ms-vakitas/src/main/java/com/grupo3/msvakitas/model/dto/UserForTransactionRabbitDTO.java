@@ -12,7 +12,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 
-//TODO: RENOMBRÉ ESTA CLASE
 public class UserForTransactionRabbitDTO implements Serializable {
 
     @Serial
@@ -20,7 +19,4 @@ public class UserForTransactionRabbitDTO implements Serializable {
     private Long id;
     private Double amount;
 
-//    public UserForTransactionRabbitDTO(Double amount) {
-//        this.amount = amount;
-//    }
 }

@@ -17,7 +17,6 @@ import java.io.Serializable;
 @Component
 public class NewVakitaEventConsumer {
 
-    //TODO, LE PEGO AL SERVICE, HAY QUE MODIFICAR ESTO EN VAKITA TAMBIEN
     @Autowired
     private UserService service;
 

@@ -24,11 +24,6 @@ public class VakitaController {
     @Autowired
     private VakitaService vakitaService;
 
-//TODO: Comento el evento acá porque es responsabilidad del service
-
-//    @Autowired
-//    private NewVakitaEventProducer event;
-
     //TODO ESTA DEVOLVIENDO 200
     //CREAR UNA VAKITA
     @Operation(summary = "Crear vakita")
@@ -83,19 +78,6 @@ public class VakitaController {
     public ResponseEntity<List<VakitaDTO>> getVakitasListByContributor(@PathVariable Long userId) throws ResourceNotFoundException {
         return ResponseEntity.ok(vakitaService.getVakitasByContributors(userId));
     }
-
-//    //ENVIAR SALDO A USUARIO
-//    @Operation(summary = "Enviar saldo a usuario")
-//    @GetMapping("/amount/{userId}/{vakitaId}")
-//    @ResponseStatus(code = HttpStatus.OK)
-//    public ResponseEntity<?> sendAmount(@PathVariable Long userId,@PathVariable Long vakitaId) throws BadRequestException, ResourceNotFoundException {
-//        VakitaDTO vakitaDTO = vakitaService.getVakitaById(vakitaId);
-//        UserForTransactionDTO sendAmountRabbitDTO = new UserForTransactionDTO(userId, vakitaDTO.getCumulativeAmount());
-//        event.executeAmount(sendAmountRabbitDTO);
-//        //ACA TENDRIA QUE VACIAR VAKITA A CERO O ELIMINARLA
-//        //vakitaService.deleteVakita(vakitaId);
-//        return ResponseEntity.ok().build();
-//    }
 
     //MODIFICAR DESCRIPCION, IMAGEN O FECHA DE EXPIRACION(ALARGAR EL PLAZO DE VENCIMIENTO)
     @Operation(summary = "Modificar descripcion, imagen o fecha de expiracion")

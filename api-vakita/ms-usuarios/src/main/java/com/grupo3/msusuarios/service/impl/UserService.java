@@ -131,8 +131,6 @@ public class UserService implements IUserService {
         }
     }
 
-    //TODO: Agrego método pára modificar el saldo de un usuario
-
     @Override
     @Transactional
     public void updateAccountBalance(Long id, Double amount) throws Exception {

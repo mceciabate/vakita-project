@@ -248,8 +248,7 @@ public class VakitaService implements IVakitaService {
         this.updateVakita(id, vakitaToCancel);
     }
 
-    //TODO agrego el método para vaciar una vakita, en el metodo delete ya estaba establecido que la vakita fuera vacía.
-
+    //Este método devuelve el dinero total acumulado de una vakita al usuario que la creo
     @Override
     public void drainVakita(Long id) throws ResourceNotFoundException, BadRequestException {
         VakitaDTO vakitaToDrain = this.getVakitaById(id);

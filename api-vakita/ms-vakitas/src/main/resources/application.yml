@@ -7,9 +7,6 @@ spring:
       enabled: false
   application:
     name: ms-vakitas
-#  zipkin:
-#    baseUrl: http://localhost:9411/
-#    enabled: true
   rabbitmq:
     username: guest
     password: guest
