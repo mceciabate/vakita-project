@@ -20,7 +20,7 @@ export const ModalContainer = styled.article`
     width: 100%;
     min-height: 100vh;
     background-color: rgba(0, 0, 0, 0.60);
-    display: ${props => props.isOpen ? "flex" : "none"};
+    display: ${props => props.open ? "flex" : "none"};
     justify-content: flex-start;
     align-items: flex-start;
     //
