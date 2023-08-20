@@ -192,26 +192,35 @@ public class UserController {
    /* METODOS DE CONTROLLER PARA SECURITY*/
     @Operation(summary = "Obtener un token")
     @PostMapping("/token")
-    public String getToken(@RequestBody AuthRequest authRequest) {
+    public ResponseEntity<?> getToken(@RequestBody AuthRequest authRequest) {
         String response = new String();
         try {
             Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
             if (authenticate.isAuthenticated()) {
                 response = userService.generateToken(authRequest.getEmail());
             }
-            return response;
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
         }
         catch (Exception e){
             logg.error(e.getMessage());
             response = "Invalid Access";
-            return  response;
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
     }
 
     @Operation(summary = "Validar un token")
     @GetMapping("/validate")
-    public String validateToken(@RequestParam("token") String token) {
-        userService.validateToken(token);
-        return "Token is valid";
+    public ResponseEntity<?> validateToken(@RequestParam("token") String token) {
+        String response = new String();
+        try {
+            userService.validateToken(token);
+            response = "Token is valid";
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        }
+        catch(Exception e) {
+            logg.error(e.getMessage());
+            response = "Invalid Token";
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+        }
     }
 }
