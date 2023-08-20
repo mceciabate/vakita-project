@@ -36,9 +36,12 @@ public class AppConfig {
                                 "/api/v1/usuarios/confirmar"
                                 )
                         .permitAll()
+
                 )
                 .build();
     }
+
+    //Encoder para el password
 
     @Bean
     public PasswordEncoder encoder() {
