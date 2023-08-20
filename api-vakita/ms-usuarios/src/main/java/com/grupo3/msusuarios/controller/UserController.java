@@ -1,7 +1,7 @@
 package com.grupo3.msusuarios.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.grupo3.msusuarios.model.dto.AuthRequest;
+import com.grupo3.msusuarios.model.dto.AuthRequestDTO;
 import com.grupo3.msusuarios.model.dto.UserDTO;
 import com.grupo3.msusuarios.model.dto.UserWithoutPasswordDTO;
 import com.grupo3.msusuarios.service.IUserService;
@@ -19,8 +19,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.util.HashMap;
 
 @RestController
 @RequestMapping("/api/v1/usuarios")
@@ -192,12 +190,12 @@ public class UserController {
    /* METODOS DE CONTROLLER PARA SECURITY*/
     @Operation(summary = "Obtener un token")
     @PostMapping("/token")
-    public ResponseEntity<?> getToken(@RequestBody AuthRequest authRequest) {
+    public ResponseEntity<?> getToken(@RequestBody AuthRequestDTO authRequestDTO) {
         String response = new String();
         try {
-            Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
+            Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequestDTO.getEmail(), authRequestDTO.getPassword()));
             if (authenticate.isAuthenticated()) {
-                response = userService.generateToken(authRequest.getEmail());
+                response = userService.generateToken(authRequestDTO.getEmail());
             }
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
         }

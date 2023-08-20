@@ -25,10 +25,15 @@ spring:
           uri: lb://ms-usuarios
           predicates:
             - Path=/api/v1/usuarios/**,/swagger-ui/**,/swagger-resources/**,/swagger-ui.html,/v3/api-docs,/webjars/**,/view/**,/swagger-usuarios
+          filters:
+            - AuthenticationFilter
+
         - id: ms-vakitas
           uri: lb://ms-vakitas
           predicates:
             - Path=/api/v1/vakita/**,/swagger-ui/**,/swagger-resources/**,/swagger-ui.html,/v3/api-docs,/webjars/**,/view/**,/swagger-vakitas
+          filters:
+            - AuthenticationFilter
 
 eureka:
   client:
