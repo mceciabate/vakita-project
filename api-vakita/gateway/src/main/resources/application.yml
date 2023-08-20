@@ -24,9 +24,9 @@ spring:
         - id: ms-usuarios
           uri: lb://ms-usuarios
           predicates:
-            - Path=/api/v1/usuarios/**,/swagger-ui/**,/swagger-resources/**,/swagger-ui.html,/v3/api-docs,/webjars/**,/view/**,/swagger-usuarios
-          filters:
-            - AuthenticationFilter
+            - Path=/api/v1/usuarios/**, /swagger-ui/**,/swagger-resources/**,/swagger-ui.html,/v3/api-docs,/webjars/**,/view/**,/swagger-usuarios
+#          filters:
+#            - AuthenticationFilter
 
         - id: ms-vakitas
           uri: lb://ms-vakitas
