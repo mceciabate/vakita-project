@@ -33,7 +33,15 @@ public class AppConfig {
                                 "/api/v1/usuarios/register",
                                 "/api/v1/usuarios/token",
                                 "/api/v1/usuarios/validate",
-                                "/api/v1/usuarios/confirmar"
+                                "/api/v1/usuarios/confirmar",
+                                "api/v1/usuarios/**",
+                                "/swagger-ui/**",
+                                "/swagger-resources/**",
+                                "/swagger-ui.html",
+                                "/v3/api-docs",
+                                "/webjars/**",
+                                "/view/**",
+                                "/swagger-usuarios"
                                 )
                         .permitAll()
 
