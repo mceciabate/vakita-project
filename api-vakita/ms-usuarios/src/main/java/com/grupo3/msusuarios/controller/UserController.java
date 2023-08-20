@@ -1,6 +1,7 @@
 package com.grupo3.msusuarios.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.grupo3.msusuarios.model.dto.AuthRequest;
 import com.grupo3.msusuarios.model.dto.UserDTO;
 import com.grupo3.msusuarios.model.dto.UserWithoutPasswordDTO;
 import com.grupo3.msusuarios.service.IUserService;
@@ -12,9 +13,14 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("/api/v1/usuarios")
@@ -25,11 +31,15 @@ public class UserController {
     private final ObjectMapper mapper;
     private final ConfirmationTokenService confirmationTokenService;
 
+    //Lo inyecto para poder validar las credenciales y generar token de acceso
+    private final AuthenticationManager authenticationManager;
+
     @Autowired
-    public UserController(IUserService userService, ObjectMapper mapper, ConfirmationTokenService confirmationTokenService) {
+    public UserController(IUserService userService, ObjectMapper mapper, ConfirmationTokenService confirmationTokenService, AuthenticationManager authenticationManager) {
         this.userService = userService;
         this.confirmationTokenService = confirmationTokenService;
         this.mapper = mapper;
+        this.authenticationManager = authenticationManager;
     }
 
     @Operation(summary = "Busca todos los registros de usuarios")
@@ -80,7 +90,8 @@ public class UserController {
     }
 
     @Operation(summary = "Agrega un usuario")
-    @PostMapping
+    //TODO: AGREGO UN NOMBRE A LA RUTA PARA PODER LIBERARLA EN EL FILTERCHAIN
+    @PostMapping("/register")
     public ResponseEntity<?> createUser(@Valid @RequestBody UserDTO userDTO, BindingResult result) {
         logg.info("Metodo createUser");
         logg.info(userDTO.toString());
@@ -176,5 +187,31 @@ public class UserController {
             logg.error(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
         }
+    }
+
+   /* METODOS DE CONTROLLER PARA SECURITY*/
+    @Operation(summary = "Obtener un token")
+    @PostMapping("/token")
+    public String getToken(@RequestBody AuthRequest authRequest) {
+        String response = new String();
+        try {
+            Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
+            if (authenticate.isAuthenticated()) {
+                response = userService.generateToken(authRequest.getEmail());
+            }
+            return response;
+        }
+        catch (Exception e){
+            logg.error(e.getMessage());
+            response = "Invalid Access";
+            return  response;
+        }
+    }
+
+    @Operation(summary = "Validar un token")
+    @GetMapping("/validate")
+    public String validateToken(@RequestParam("token") String token) {
+        userService.validateToken(token);
+        return "Token is valid";
     }
 }
