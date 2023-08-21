@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import LandingComponent from "../components/Landing"
 import Login from '../components/Login/Login';
-// import Register from "../components/Register"
 import Register from '../components/Register/Register';
 import Header from '../components/Header';
 import Protected from '../guards/Protected';
@@ -11,6 +10,7 @@ import NewVakita from '../pages/newVakita/NewVakita';
 import MyVakita from '../pages/myVakita/MyVakita';
 import Menu from '../components/Menu/Menu';
 import { useUser } from '../context/UserProvider';
+import Perfil from '../components/Perfil/Perfil';
 
 const Routers = () => {
     const { logged } = useUser();
@@ -34,6 +34,8 @@ const Routers = () => {
             <Route index element={<Dashboard />} />
             <Route path="crear-vaca" element={<NewVakita />} />
             <Route path="mis-vaquitas" element={<MyVakita/>} />
+            <Route path="mi-perfil" element={<Perfil/>} />
+
           </Route>
                   
                    </Route> 

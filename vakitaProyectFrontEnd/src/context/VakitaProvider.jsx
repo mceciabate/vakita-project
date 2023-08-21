@@ -11,7 +11,7 @@ const VakitaProvider = ({ children }) => {
         setDataVakita((prevDataVakita) => [...prevDataVakita, dataVakita]);
       };
 
-      console.log(dataVakita)
+      // console.log(dataVakita)
 
     return (
         <>

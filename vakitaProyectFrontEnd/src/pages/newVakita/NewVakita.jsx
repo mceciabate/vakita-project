@@ -19,7 +19,7 @@ import CustomDatePicker from './CustomDatePicker';
 const NewVakita = () => {
  
   
-  const {addNewVakita} = useContext(VakitaContext)
+  // const {addNewVakita} = useContext(VakitaContext)
   
   const [emails, setEmails] = useState([]);
   const [emailExists, setEmailExists] = useState(null);
@@ -68,7 +68,7 @@ const NewVakita = () => {
     
    
 
-  console.log(arrayMembers);
+  // console.log(arrayMembers);
     const dataToSend = {
       name:values.name,
       idCreatorUser: 8,
@@ -83,8 +83,8 @@ const NewVakita = () => {
       // contributors: emails.filter((email) => email !== ''), // Filtrar emails vacíos
       contributors: arrayMembers,
     };
-    console.log(dataToSend);
-    addNewVakita(dataToSend);
+    // console.log(dataToSend);
+    // addNewVakita(dataToSend);
 
 
      // Validar todos los emails antes de guardarlos solo si no hay emails vacíos

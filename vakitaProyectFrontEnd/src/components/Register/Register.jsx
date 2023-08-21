@@ -1,17 +1,25 @@
-import React from "react";
 import * as Yup from "yup";
 import {useFormik} from "formik";
 import Swal from "sweetalert2";
 import logoVaca from "../../assets/logoVacaInicio.png";
 import {Input, ContainerInput, FormContainer, BoxText, ContainerGeneral, TituloCrearCuenta, Label, Button, GeneralFormContainer,ImgVaca} from './Register.styled.jsx';
-
-
+import axios from "axios";
 
 function Register() {
+
+  const maxYear = () => {
+
+    let maxYear = new Date().getFullYear() - 18;
+    const currentDate = new Date();
+
+    return new Date(currentDate.getDay() + "/" + currentDate.getMonth() + "/" + maxYear)
+  }
 
   const formik = useFormik({
     initialValues: {
       name: "",
+      lastName: "",
+      dni: "",
       email: "",
       birthdate: "",
       password: "",
@@ -19,21 +27,53 @@ function Register() {
     },
     validationSchema: Yup.object({
       name: Yup.string().required("Nombre es requerido"),
+      lastName: Yup.string().required("Apellido es requerido"),
       email: Yup.string().email("No es un correo valido").required("Correo es requerido"),
-      birthdate: Yup.string().required("Fecha de nacimiento es requerida"),
+      birthdate: Yup.date().max(maxYear(), "Se debe ser mayor de 18 años").required("Fecha de nacimiento es requerida"),
       password: Yup.string().min(4, "Debe contener 4 digitos o más").max(50).required("Contraseña es requerida"),
       passwordConfirm:  Yup.string().min(4, "Debe contener 4 digitos o más").max(50).required("Confirmación de contraseña es requerida").oneOf([Yup.ref("password")], "Las contraseñas no coinciden")
         }),
-    onSubmit: (values) => {
-        
-      Swal.fire({
-        title: 'Registro realizado con éxito',
-        text:'Ahora puedes iniciar sesión',
-        icon:'success'
-    })
+    onSubmit: async (values) => {    
+      try {
+
+        const response = await axios.post("http://localhost:8080/api/v1/usuarios", {
+          "name": values.name,
+          "lastName": values.lastName,
+          "dni": values.dni,
+          "email": values.email,
+          "password": values.password,
+          "birthdate": values.birthdate
+        })
+
+        console.log(response);
+
+        if (response.status == 201) {
+          Swal.fire({
+            title: 'Registro realizado con éxito',
+            text:'Revisa tu correo electrónico para finalizar el registro',
+            icon:'success'
+        })
+
         formik.resetForm();
 
-        console.log(values);
+      } 
+
+        console.log(response);
+
+      } catch (e) {
+        
+        console.log(e);
+
+        Swal.fire({
+          title: 'Algo salió mal :(',
+          text: e.code,
+          icon:'error'
+        })
+
+      }
+
+    formik.resetForm();
+
     }
 });
 
@@ -67,6 +107,32 @@ function Register() {
                   />
                 </ContainerInput>
                 {formik.touched.name && formik.errors.name && <span style={{ color: "red", }}>{formik.errors.name}</span>}
+
+                <ContainerInput>
+                  <Label htmlFor="lastName">Tu apellido</Label>
+                  <Input
+                    type="text"
+                    name="lastName"
+                    id="lastName"
+                    value={formik.values.lastName}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                </ContainerInput>
+                {formik.touched.lastName && formik.errors.lastName && <span style={{ color: "red", }}>{formik.errors.lastName}</span>}
+
+                <ContainerInput>
+                  <Label htmlFor="dni">Tu dni</Label>
+                  <Input
+                    type="text"
+                    name="dni"
+                    id="dni"
+                    value={formik.values.dni}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                </ContainerInput>
+                {formik.touched.dni && formik.errors.dni && <span style={{ color: "red", }}>{formik.errors.dni}</span>}
 
                 <ContainerInput>
                   <Label htmlFor="email">Correo electrónico</Label>

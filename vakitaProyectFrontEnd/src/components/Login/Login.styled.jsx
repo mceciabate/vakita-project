@@ -147,7 +147,7 @@ export const Button = styled.button`
 
 
 
-export const Questions = styled.p`
+export const Questions = styled.div`
 
 text-align: right;
 font-family: Inria Sans;
@@ -178,7 +178,7 @@ export const ButtonRegister = styled.button`
 
 `;
 
-export const FinalParagraph = styled.p`
+export const FinalParagraph = styled.div`
 color: #000;
 text-align: center;
 font-family: Inria Sans;
