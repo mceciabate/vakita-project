@@ -31,18 +31,11 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                 //LO OBTENGO DEL HEADER Y HAGO UN SUBSTRING PARA VALIDARLO CON JWTUTIL
                 String authHeader = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0);
                 if (authHeader != null && authHeader.startsWith("Bearer ")) {
-
                     authHeader = authHeader.substring(7);
                     jwtUtil.validateToken(authHeader);
                     System.out.println("token " + authHeader);
                 }
-//                try {
-//
-//
-//                } catch (Exception e) {
-//                    System.out.println("invalid access...!");
-//                    throw new RuntimeException("un authorized access to application");
-//                }
+
             }
             return chain.filter(exchange);
         });

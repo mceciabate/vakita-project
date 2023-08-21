@@ -99,8 +99,14 @@ public class UserController {
         }
         try {
             logg.info("saved");
-            confirmationTokenService.sendConfirmationEmail(userDTO);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Usuario registrado. Se ha enviado un correo de confirmación.");
+            boolean response = confirmationTokenService.sendConfirmationEmail(userDTO);
+            if (response) {
+                return ResponseEntity.status(HttpStatus.CREATED).body("Usuario registrado. Se ha enviado un correo de confirmación.");
+            }
+            else {
+                logg.info("Mail duplicado");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El mail ya se encuentra registrado");
+            }
         } catch (Exception e) {
             logg.error("error: "+ e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor, intente mas tarde.\"}");

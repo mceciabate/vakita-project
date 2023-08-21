@@ -150,14 +150,26 @@ public class UserService implements IUserService {
 
     //MÉTODO PARA CREAR TOKEN
     @Override
-    public String generateToken(String email) {
-        return jwtService.generateToken(email);
+    public String generateToken(String email) throws Exception {
+        try{
+           return jwtService.generateToken(email);
+        }
+        catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+
+
     }
 
     //MÉTODO PARA VALIDAR TOKEN
     @Override
-    public void validateToken(String token) {
-        jwtService.validateToken(token);
+    public void validateToken(String token) throws Exception {
+        try {
+            jwtService.validateToken(token);
+        }
+        catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
     }
 
 
