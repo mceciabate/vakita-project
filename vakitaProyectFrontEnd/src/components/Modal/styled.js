@@ -53,7 +53,7 @@ export const ModalContainer = styled.article`
         
     }
 
-    .modal-container button {
+    .btnExit {
         width: 100%;
         background-color:black;
         color: white;
