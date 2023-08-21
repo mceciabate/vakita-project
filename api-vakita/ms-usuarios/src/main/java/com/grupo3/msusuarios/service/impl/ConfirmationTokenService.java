@@ -31,25 +31,32 @@ public class ConfirmationTokenService {
         this.encoder = encoder;
     }
 
-    public void sendConfirmationEmail(UserDTO userDTO) throws Exception {
+    public boolean sendConfirmationEmail(UserDTO userDTO) throws Exception {
         try {
-            String encoderPass = this.encoder.encode(userDTO.getPassword());
-            ConfirmationToken token = new ConfirmationToken();
-            token.setUserName(userDTO.getName());
-            token.setUserLastName(userDTO.getLastName());
-            token.setUserDni(userDTO.getDni());
-            token.setUserEmail(userDTO.getEmail());
-            token.setUserPassword(encoderPass);
-            token.setUserBirthdate(userDTO.getBirthdate());
-            token.setAccount_balance(userDTO.getAccount_balance());
-            token.setToken(UUID.randomUUID().toString());
-            token.setExpirationDate(LocalDateTime.now().plusDays(1));
-            tokenRepository.save(token);
+            UserDTO validation = userService.findByEmail(userDTO.getEmail());
+            if (validation != null){
+                return false;
+            }
+            else {
+                String encoderPass = this.encoder.encode(userDTO.getPassword());
+                ConfirmationToken token = new ConfirmationToken();
+                token.setUserName(userDTO.getName());
+                token.setUserLastName(userDTO.getLastName());
+                token.setUserDni(userDTO.getDni());
+                token.setUserEmail(userDTO.getEmail());
+                token.setUserPassword(encoderPass);
+                token.setUserBirthdate(userDTO.getBirthdate());
+                token.setAccount_balance(userDTO.getAccount_balance());
+                token.setToken(UUID.randomUUID().toString());
+                token.setExpirationDate(LocalDateTime.now().plusDays(1));
+                tokenRepository.save(token);
 
-            String subject = "Confirmación de Registro";
-            String body = "Haz clic en el siguiente enlace para confirmar tu cuenta: http://localhost:8080/api/v1/usuarios/confirmar?token=" + token.getToken();
+                String subject = "Confirmación de Registro";
+                String body = "Haz clic en el siguiente enlace para confirmar tu cuenta: http://localhost:8080/api/v1/usuarios/confirmar?token=" + token.getToken();
 
-            emailService.sendEmail(userDTO.getEmail(), subject, body);
+                emailService.sendEmail(userDTO.getEmail(), subject, body);
+                return true;
+            }
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }

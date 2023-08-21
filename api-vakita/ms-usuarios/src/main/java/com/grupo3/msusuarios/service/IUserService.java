@@ -15,4 +15,10 @@ public interface IUserService {
     Boolean deleteById(Long id) throws Exception;
     List<UserWithoutPasswordDTO> findAll() throws Exception;
     void updateAccountBalance(Long id, Double amount) throws Exception;
+
+    //MÉTODO PARA CREAR TOKEN
+    String generateToken(String email) throws Exception;
+
+    //MÉTODO PARA VALIDAR TOKEN
+    void validateToken(String token) throws Exception;
 }

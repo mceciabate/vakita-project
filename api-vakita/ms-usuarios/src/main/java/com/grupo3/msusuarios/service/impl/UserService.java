@@ -24,12 +24,15 @@ public class UserService implements IUserService {
     private final ObjectMapper mapper;
     private final NewUserEventProducer event;
 
+    private final JwtService jwtService;
+
 
     @Autowired
-    public UserService(IUserRepository userRepository, ObjectMapper mapper, NewUserEventProducer event) {
+    public UserService(IUserRepository userRepository, ObjectMapper mapper, NewUserEventProducer event, JwtService jwtService) {
         this.userRepository = userRepository;
         this.mapper = mapper;
         this.event = event;
+        this.jwtService = jwtService;
     }
 
     @Override
@@ -141,6 +144,30 @@ public class UserService implements IUserService {
             userToModify.setAccount_balance(accountBalanceUdate);
             this.updateById(id, userToModify);
         } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    //MÉTODO PARA CREAR TOKEN
+    @Override
+    public String generateToken(String email) throws Exception {
+        try{
+           return jwtService.generateToken(email);
+        }
+        catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+
+
+    }
+
+    //MÉTODO PARA VALIDAR TOKEN
+    @Override
+    public void validateToken(String token) throws Exception {
+        try {
+            jwtService.validateToken(token);
+        }
+        catch (Exception e){
             throw new Exception(e.getMessage());
         }
     }
