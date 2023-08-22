@@ -24,15 +24,18 @@ spring:
         - id: ms-usuarios
           uri: lb://ms-usuarios
           predicates:
-            - Path=/api/v1/usuarios/**,/swagger-ui/**,/swagger-resources/**,/swagger-ui.html,/v3/api-docs,/webjars/**,/view/**,/swagger-usuarios
+            - Path=/api/v1/usuarios/**, /swagger-ui/**,/swagger-resources/**,/swagger-ui.html,/v3/api-docs,/webjars/**,/view/**,/swagger-usuarios
+
         - id: ms-vakitas
           uri: lb://ms-vakitas
           predicates:
             - Path=/api/v1/vakita/**,/swagger-ui/**,/swagger-resources/**,/swagger-ui.html,/v3/api-docs,/webjars/**,/view/**,/swagger-vakitas
+          filters:
+            - AuthenticationFilter
 
 eureka:
   client:
-    registerWithEureka: false
+    registerWithEureka: true
     fetchRegistry: true
     serviceURL:
       defaultZone: http://eureka-server-container:8761/eureka
@@ -46,6 +49,9 @@ management:
       exposure:
 #        include: "*"
         include: gateway
+
+jwt:
+  secret: "5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437"
 
 
 info:

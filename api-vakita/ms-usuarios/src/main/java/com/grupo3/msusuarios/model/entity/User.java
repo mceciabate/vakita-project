@@ -40,7 +40,7 @@ public class User implements Serializable {
     private String email;
 
     @NotBlank(message = "No puede ingresar un password vacio")
-    @Column(name = "PASSWORD", nullable = false, length = 50)
+    @Column(name = "PASSWORD", nullable = false, length = 255)
     private String password;
 
     @NotNull(message = "No puede ingresar una fecha vacia")
