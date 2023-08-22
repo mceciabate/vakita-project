@@ -4,6 +4,6 @@ spring:
   cloud:
     config:
       enabled: true
-      uri: http://35.173.127.195:8888/
+      uri: http://54.236.118.65:8888/
 
 
