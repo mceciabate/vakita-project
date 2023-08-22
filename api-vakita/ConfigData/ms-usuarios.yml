@@ -37,8 +37,6 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
 
-
-#Inicializacion de data en la bd, toma el script que está en resources al iniciar el ms
 eureka:
   client:
     registerWithEureka: true

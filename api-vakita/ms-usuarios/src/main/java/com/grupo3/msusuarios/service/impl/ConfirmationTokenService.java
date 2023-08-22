@@ -6,6 +6,7 @@ import com.grupo3.msusuarios.model.entity.ConfirmationToken;
 import com.grupo3.msusuarios.repository.ConfirmationTokenRepository;
 import com.grupo3.msusuarios.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import java.util.UUID;
 
 @Service
 public class ConfirmationTokenService {
+
 
     private final ConfirmationTokenRepository tokenRepository;
     private final EmailService emailService;
@@ -52,7 +54,7 @@ public class ConfirmationTokenService {
                 tokenRepository.save(token);
 
                 String subject = "Confirmación de Registro";
-                String body = "Haz clic en el siguiente enlace para confirmar tu cuenta: http://localhost:8080/api/v1/usuarios/confirmar?token=" + token.getToken();
+                String body = "Haz clic en el siguiente enlace para confirmar tu cuenta: http://18.207.194.96:9090/api/v1/usuarios/confirmar?token=" + token.getToken();
 
                 emailService.sendEmail(userDTO.getEmail(), subject, body);
                 return true;
