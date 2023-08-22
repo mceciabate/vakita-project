@@ -13,9 +13,9 @@ spring:
     username: admin
     password: admin1234
   datasource:
-    url: jdbc:mysql://3.81.143.14:3306/vakitadb?createDatabaseIfNotExist=true
-    username: admin
-#    password: admin
+    url: jdbc:mysql://54.173.235.41:3306/vakitadb?createDatabaseIfNotExist=true
+    username: grupo3
+    password: grupo3
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate.ddl-auto: create-drop
