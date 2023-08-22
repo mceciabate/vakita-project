@@ -1,4 +1,4 @@
-import imgBanner from "../../assets/WhatsApp Image 2023-07-30 at 9.59.18 AM.jpeg"
+import imgBanner from "../../assets/vacamoneda.jpg"
 import { DashboardDiv, H2, Image, SpanText,Button } from "./styled"
 
 const BannerDashboard = () => {
