@@ -27,7 +27,7 @@ spring:
             - Path=/api/v1/usuarios/**, /swagger-ui/**,/swagger-resources/**,/swagger-ui.html,/v3/api-docs,/webjars/**,/view/**,/swagger-usuarios
 
         - id: ms-vakitas
-          uri: lb://ms-vakitas
+          uri: http://52.90.211.151:9090/
           predicates:
             - Path=/api/v1/vakita/**,/swagger-ui/**,/swagger-resources/**,/swagger-ui.html,/v3/api-docs,/webjars/**,/view/**,/swagger-vakitas
           filters:
