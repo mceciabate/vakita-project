@@ -27,7 +27,7 @@ const ModalMenu = ({children, isOpen, closeModal}) => {
     return (
         <ModalContainer open={isOpen}>
             <div ref={modalRef} className="modal-container">
-                <BtnClose onClick={closeModal}>x</BtnClose>
+                <BtnClose className="btnExit" onClick={closeModal}>x</BtnClose>
                 {children}
             </div>
         </ModalContainer>

@@ -1,12 +1,14 @@
 import { BloqueOptions,HeaderMenuLateral, MenuDiv, MenuLateral,MenuSinLoguear } from "./styled";
 import  Avatar from "../../assets/vaquitaPerfil.png";
-import { Link, Outlet} from 'react-router-dom'
+import { Link, Outlet, useNavigate} from 'react-router-dom'
 import { useUser } from "../../context/UserProvider";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons"
 
 const Menu = () => {
    
     const { logged, setLogged } = useUser()
+    const navigate= useNavigate();
    
     return (
         <>
@@ -28,18 +30,24 @@ const Menu = () => {
                 <Link to="/dashboard/mis-vaquitas">Mis Vaquitas</Link>
                 <hr />
                 <Link to="/dashboard/mi-perfil">Mi perfil</Link>
-                <Link to="/dashboard/datos-financieros">Datos financieros</Link>
+                <Link to="/dashboard/mis-datos-financieros">Datos financieros</Link>
                 <hr />
                 <Link to="/dashboard/necesito-mi-dinero">Necesito mi dinero</Link>
                 <Link to="/dashboard/ayuda">Ayuda</Link>
-            </BloqueOptions>
-            <button onClick={() => {
+
+                <button onClick={() => {
              
-              window.top.location.reload();
-              setLogged(false);
-              }
-              }
-              className="botonSalir">Salir</button>
+             
+             setLogged(false);
+             navigate("/")
+             window.top.location.reload();
+             }
+             }
+             className="botonSalir"> <p className="textExit">Salir</p> <FontAwesomeIcon icon={faRightFromBracket} />
+             </button>
+                
+            </BloqueOptions>
+           
            
            
            

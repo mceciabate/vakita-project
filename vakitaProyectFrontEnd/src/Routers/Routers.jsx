@@ -11,6 +11,7 @@ import MyVakita from '../pages/myVakita/MyVakita';
 import Menu from '../components/Menu/Menu';
 import { useUser } from '../context/UserProvider';
 import Perfil from '../components/Perfil/Perfil';
+import CreditCard from '../components/CreditCard/CreditCard';
 
 const Routers = () => {
     const { logged } = useUser();
@@ -35,6 +36,7 @@ const Routers = () => {
             <Route path="crear-vaca" element={<NewVakita />} />
             <Route path="mis-vaquitas" element={<MyVakita/>} />
             <Route path="mi-perfil" element={<Perfil/>} />
+            <Route path="mis-datos-financieros" element={<CreditCard/>} />
 
           </Route>
                   
