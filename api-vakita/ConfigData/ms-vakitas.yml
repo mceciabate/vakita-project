@@ -8,14 +8,14 @@ spring:
   application:
     name: ms-vakitas
   rabbitmq:
-    username: guest
-    password: guest
-    host: localhost
+    host: 54.152.71.174
     port: 5672
+    username: admin
+    password: admin1234
   datasource:
-    url: jdbc:mysql://localhost:3306/vakitadb?createDatabaseIfNotExist=true
-    username: root
-    password: root
+    url: jdbc:mysql://3.81.143.14:3306/vakitadb?createDatabaseIfNotExist=true
+    username: admin
+    password: admin
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate.ddl-auto: create-drop
@@ -33,7 +33,7 @@ eureka:
     registerWithEureka: true
     fetchRegistry: false
     serviceURL:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://107.22.65.36:8761/eureka/
   instance:
     instance-id: ${spring.application.name}:${random.int}
     preferIpAddress: true
