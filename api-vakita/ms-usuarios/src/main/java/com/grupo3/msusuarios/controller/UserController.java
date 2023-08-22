@@ -1,6 +1,7 @@
 package com.grupo3.msusuarios.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.grupo3.msusuarios.model.dto.AuthRequestDTO;
 import com.grupo3.msusuarios.model.dto.UserDTO;
 import com.grupo3.msusuarios.model.dto.UserWithoutPasswordDTO;
 import com.grupo3.msusuarios.service.IUserService;
@@ -12,6 +13,9 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -25,11 +29,15 @@ public class UserController {
     private final ObjectMapper mapper;
     private final ConfirmationTokenService confirmationTokenService;
 
+    //Lo inyecto para poder validar las credenciales y generar token de acceso
+    private final AuthenticationManager authenticationManager;
+
     @Autowired
-    public UserController(IUserService userService, ObjectMapper mapper, ConfirmationTokenService confirmationTokenService) {
+    public UserController(IUserService userService, ObjectMapper mapper, ConfirmationTokenService confirmationTokenService, AuthenticationManager authenticationManager) {
         this.userService = userService;
         this.confirmationTokenService = confirmationTokenService;
         this.mapper = mapper;
+        this.authenticationManager = authenticationManager;
     }
 
     @Operation(summary = "Busca todos los registros de usuarios")
@@ -80,7 +88,8 @@ public class UserController {
     }
 
     @Operation(summary = "Agrega un usuario")
-    @PostMapping
+    //TODO: AGREGO UN NOMBRE A LA RUTA PARA PODER LIBERARLA EN EL FILTERCHAIN
+    @PostMapping("/register")
     public ResponseEntity<?> createUser(@Valid @RequestBody UserDTO userDTO, BindingResult result) {
         logg.info("Metodo createUser");
         logg.info(userDTO.toString());
@@ -90,14 +99,21 @@ public class UserController {
         }
         try {
             logg.info("saved");
-            confirmationTokenService.sendConfirmationEmail(userDTO);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Usuario registrado. Se ha enviado un correo de confirmación.");
+            boolean response = confirmationTokenService.sendConfirmationEmail(userDTO);
+            if (response) {
+                return ResponseEntity.status(HttpStatus.CREATED).body("Usuario registrado. Se ha enviado un correo de confirmación.");
+            }
+            else {
+                logg.info("Mail duplicado");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El mail ya se encuentra registrado");
+            }
         } catch (Exception e) {
             logg.error("error: "+ e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor, intente mas tarde.\"}");
         }
     }
 
+    @Operation(hidden = true)
     @GetMapping("/confirmar")
     public ResponseEntity<?> confirmUserRegistration(@RequestParam("token") String token) {
         logg.info("Metodo confirmUserRegistration");
@@ -174,6 +190,41 @@ public class UserController {
         } catch (Exception e) {
             logg.error(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+        }
+    }
+
+   /* METODOS DE CONTROLLER PARA SECURITY*/
+    @Operation(summary = "Obtener un token")
+    @PostMapping("/token")
+    public ResponseEntity<?> getToken(@RequestBody AuthRequestDTO authRequestDTO) {
+        String response = new String();
+        try {
+            Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequestDTO.getEmail(), authRequestDTO.getPassword()));
+            if (authenticate.isAuthenticated()) {
+                response = userService.generateToken(authRequestDTO.getEmail());
+            }
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        }
+        catch (Exception e){
+            logg.error(e.getMessage());
+            response = "Invalid Access";
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+        }
+    }
+
+    @Operation(summary = "Validar un token")
+    @GetMapping("/validate")
+    public ResponseEntity<?> validateToken(@RequestParam("token") String token) {
+        String response = new String();
+        try {
+            userService.validateToken(token);
+            response = "Token is valid";
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        }
+        catch(Exception e) {
+            logg.error(e.getMessage());
+            response = "Invalid Token";
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
     }
 }

@@ -25,7 +25,6 @@ spring:
       username: admin
       password: admin1234
   datasource:
-    #    driverClassName: com.mysql.cj.jdbc.Driver
     driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://db.ctd.academy:3306/0723TDPI2N1C01LAED1021FT_GRUPO3?createDatabaseIfNotExist=true
     username: 0723TDPI2N1C01LAED1021FT_GRUPO3
@@ -58,3 +57,10 @@ management:
       name: ms-usuarios
       version: 1.0.0
       description: Microservicios Usuarios
+
+jwt:
+  secret: "5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437"
+
+spring-doc:
+  api-docs:
+    path: /swagger-usuarios

@@ -1,23 +1,8 @@
 version: '3.9'
 services:
-#  Zipkin y Sleuth ya no son compatibles con SpringBoot +3 version
-#  zipkin-server-container:
-#    image: openzipkin/zipkin-slim
-#    container_name: zipkin-server-container
-#    environment:
-#      - STORAGE_TYPE=mem
-#    ports:
-#      - "9411:9411"
-#    expose:
-#      - 9411
-#    depends_on:
-#      - storage-aux-container
-#  storage-aux-container:
-#    image: busybox:1.31.0
-#    container_name: storage-aux-container
   rabbitmq-container:
-    image: rabbitmq:3-management
-    container_name: rabbitmq-container
+    image: rabbitmq:3.9-management
+    container_name: rabbit-container
     hostname: rabbitmq
     ports:
       - "5672:5672"
@@ -25,3 +10,53 @@ services:
     expose:
       - 15672
       - 5672
+    networks:
+      - grupo3
+  gateway-container:
+    image: mcabate/pi:gateway-v4
+    restart: on-failure
+    container_name: gateway-container
+    ports:
+      - "8080:8080"
+    expose:
+      - '8080'
+    depends_on:
+      - eureka-server-container
+    networks:
+      - grupo3
+  vakitas-container:
+    image: mcabate/pi:vakitas-v2
+    restart: on-failure
+    container_name: vakitas-container
+    ports:
+      - "9091:9091"
+    expose:
+      - '9091'
+    depends_on:
+      - eureka-server-container
+    networks:
+      - grupo3
+  usuarios-container:
+    image: mcabate/pi:usuarios-v3
+    restart: on-failure
+    container_name: usuarios-container
+    ports:
+      - "9090:9090"
+    expose:
+      - '9090'
+    depends_on:
+      - eureka-server-container
+    networks:
+      - grupo3
+  eureka-server-container:
+    image: mcabate/pi:eureka-v1
+    container_name: eureka-server-container
+    ports:
+     - "8761:8761"
+    expose:
+     - '8761'
+    networks:
+      - grupo3
+
+networks:
+  grupo3:

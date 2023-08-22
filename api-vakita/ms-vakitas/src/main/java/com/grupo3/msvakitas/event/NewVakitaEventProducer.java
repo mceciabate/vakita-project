@@ -1,8 +1,7 @@
-package com.grupo3.msusuarios.event;
+package com.grupo3.msvakitas.event;
 
-
-import com.grupo3.msusuarios.config.RabbitMQConfig;
-import com.grupo3.msusuarios.model.dto.UserRabbitDTO;
+import com.grupo3.msvakitas.configuration.RabbitMQConfig;
+import com.grupo3.msvakitas.model.dto.UserForTransactionRabbitDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,23 +18,25 @@ import java.io.Serializable;
 @Component
 @Slf4j
 @EnableRabbit
-public class NewUserEventProducer {
+public class NewVakitaEventProducer {
+
     private final RabbitTemplate rabbitTemplate;
 
-    public NewUserEventProducer(RabbitTemplate rabbitTemplate) {
+    public NewVakitaEventProducer(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
     }
-    public void execute(UserRabbitDTO newUser){
-        NewUserEventProducer.Data data= new NewUserEventProducer.Data();
-        BeanUtils.copyProperties(newUser, data.getUser());
-        rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, RabbitMQConfig.TOPIC_NEW_USER, data);
+
+    public void executeAmount(UserForTransactionRabbitDTO newAmountTransaction){
+        NewVakitaEventProducer.Data data = new NewVakitaEventProducer.Data();
+        BeanUtils.copyProperties(newAmountTransaction, data.getUser());
+        rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME_USER_AMOUNT, RabbitMQConfig.TOPIC_NEW_USER_AMOUNT, data);
     }
+
     @Getter
     @Setter
     @NoArgsConstructor
     @AllArgsConstructor
-
-    public static class Data implements Serializable{
+    public static class Data implements Serializable {
         @Serial
         private static final long serialVersionUID = 1L;
         private Data.UserDto user = new Data.UserDto();
@@ -48,10 +49,7 @@ public class NewUserEventProducer {
             @Serial
             private static final long serialVersionUID = 1L;
             private Long id;
-            private String email;
-
+            private Double amount;
         }
-
-
     }
 }

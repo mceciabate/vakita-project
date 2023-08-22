@@ -13,11 +13,24 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-    public static final String EXCHANGE_NAME = "vakitaExchange";
+    //Inicio userAmountExchange
+    public static final String EXCHANGE_NAME_USER_AMOUNT = "userAmountExchange";
+    public static final String TOPIC_NEW_USER_AMOUNT = "com.grupo3.msvakitas.newSetAmount";
+    //Fin userAmountExchange
+
+    public static final String EXCHANGE_NAME = "userExchange";
 
     public static final String TOPIC_NEW_USER = "com.grupo3.msusuarios.newUser";
 
     public static final String QUEUE_NEW_USER = "newUserQueue";
+
+
+    //Inicio userAmountExchange
+    @Bean
+    public TopicExchange appExchangeAmount() {
+        return new TopicExchange(EXCHANGE_NAME_USER_AMOUNT);
+    }
+    //Fin userAmountExchange
 
     @Bean
     public TopicExchange appExchange() {
