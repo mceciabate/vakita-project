@@ -163,6 +163,69 @@ public class VakitaServiceTest {
 
     }
 
+    @Test
+    public void createVakitaValidations() throws BadRequestException, ResourceNotFoundException {
+        VakitaDTO vakitaDTO = new VakitaDTO("",1L,"vakita creada","www.img.com",2000.0,3000.0,LocalDate.parse("2023-09-06"),LocalDate.parse("2023-09-06"),true,VakitaTypes.normal);
+
+        VakitaDTO vakita =vakitaService.createVakita(vakitaDTO);
+        Assertions.assertTrue((vakita.getName() != null && vakita.getCumulativeAmount() >0.0 && vakita.getExpirationDate().isAfter(LocalDate.now())&&( vakita.getIdCreatorUser() != null ||!vakita.getContributors().isEmpty())));
+
+    }
+
+    @Test
+    public void updateVakitaPartially() throws BadRequestException, ResourceNotFoundException {
+        VakitaDTO vakitaDTO = new VakitaDTO("",1L,"esto es una descripcion","link",2000.0,3000.0,LocalDate.parse("2023-09-06"),LocalDate.parse("2023-09-06"),true,VakitaTypes.normal);
+
+        VakitaDTO vakita =vakitaService.createVakita(vakitaDTO);
+        VakitaDTO vakitaUpdateDes = vakitaService.partialUpdate(vakita.getId(),"descripcion","se modifico");
+        VakitaDTO vakitaUpdateImg = vakitaService.partialUpdate(vakita.getId(),"imagen","imagen nueva");
+        VakitaDTO vakitaUpdateDate = vakitaService.partialUpdate(vakita.getId(),"fecha-expiracion","2023-10-06");
+        Assertions.assertTrue(vakita.getDescription() != vakitaUpdateDes.getDescription());
+        Assertions.assertTrue(vakita.getImgURL() != vakitaUpdateImg.getImgURL());
+        Assertions.assertTrue(vakita.getExpirationDate() != vakitaUpdateDate.getExpirationDate());
+
+    }
+    @Test
+    public void modifyAmountVakita() throws BadRequestException, ResourceNotFoundException {
+        VakitaDTO vakitaDTO = new VakitaDTO("",1L,"vakita creada","www.img.com",3000.0,2000.0,LocalDate.parse("2023-09-06"),LocalDate.parse("2023-09-06"),true,VakitaTypes.normal);
+
+        VakitaDTO vakita =vakitaService.createVakita(vakitaDTO);
+        vakitaService.modifyAmount(1000.0,vakita.getId());
+
+        Assertions.assertTrue(vakita.getCumulativeAmount() >=  (vakita.getTotalAmount() - vakita.getCumulativeAmount()));
+
+    }
+
+    @Test
+    public void modifyActive() throws BadRequestException, ResourceNotFoundException {
+        VakitaDTO vakitaDTO = new VakitaDTO("",1L,"vakita creada","www.img.com",3000.0,2000.0,LocalDate.parse("2023-09-06"),LocalDate.parse("2023-09-06"),true,VakitaTypes.normal);
+
+        VakitaDTO vakita =vakitaService.createVakita(vakitaDTO);
+        vakitaService.inactiveVakita(vakita.getId());
+        VakitaDTO vakitaId =vakitaService.getVakitaById(vakita.getId());
+
+        Assertions.assertTrue(!vakitaId.getIsActive());
+
+    }
+
+    @Test
+    public void addContributors() throws BadRequestException, ResourceNotFoundException {
+        VakitaDTO vakitaDTO = new VakitaDTO("",1L,"vakita creada","www.img.com",3000.0,2000.0,LocalDate.parse("2023-09-06"),LocalDate.parse("2023-09-06"),true,VakitaTypes.normal);
+
+        VakitaDTO vakita =vakitaService.createVakita(vakitaDTO);
+        vakitaService.addContributor(vakita.getId(),2L);
+        vakitaService.addContributor(vakita.getId(),3L);
+        vakitaService.addContributor(vakita.getId(),4L);
+        vakitaService.addContributor(vakita.getId(),5L);
+        vakitaService.addContributor(vakita.getId(),6L);
+        vakitaService.addContributor(vakita.getId(),7L);
+        vakitaService.addContributor(vakita.getId(),8L);
+        vakitaService.addContributor(vakita.getId(),9L);
+        
+        Assertions.assertTrue(vakita.getContributors().size()<=10);
+
+    }
+
 }
 
 
