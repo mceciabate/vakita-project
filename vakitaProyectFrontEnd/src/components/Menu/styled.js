@@ -138,3 +138,14 @@ export const MenuDiv=styled.div`
 
     
 `;
+
+export const MenuSinLoguear=styled.div`
+    
+    button{
+        background-color:white !important;
+        border: none;
+    }
+    a{
+        color:black ;
+    }
+`;

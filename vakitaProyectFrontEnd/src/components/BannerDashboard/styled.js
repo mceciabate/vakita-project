@@ -49,7 +49,7 @@ export const SpanText = styled.div`
 
 export const H2 = styled.h2`
     font-size: 1.1rem;
-    width: 90%;
+    width: 100%;
     margin-bottom:25px;
 
     @media (max-width: 768px){
@@ -59,7 +59,7 @@ export const H2 = styled.h2`
 
 export const Button = styled.h2`
 padding: 10px;
-width: 50%;
+width: 40%;
 margin: 0 auto;
 font-size: 1.1rem;
 border-radius: .7rem;
@@ -67,9 +67,14 @@ cursor: pointer;
 border: none;
 font-weight: 500;
 cursor: pointer;
-background-color: #DEC6C6;
+background-color: #FFBEBE;
 font-family: 'Inria Sans', sans-serif;
-
+@media (max-width: 970px){
+  width: 60%;
+}
+@media (max-width: 768px){
+  width: 60%;
+}
 `;
 
 

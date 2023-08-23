@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.grupo3.msvakitas.VakitaServiceTest
--------------------------------------------------------------------------------
-Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.413 s - in com.grupo3.msvakitas.VakitaServiceTest

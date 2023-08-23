@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import logoVaca from "../../assets/logoVacaInicio.png";
+
 import Swal from "sweetalert2";
 import { useUser } from '../../context/UserProvider';
-import { ContainerGeneral, FormContainer, ContainerInput, Input, Label, BoxText, Button, Questions, TituloBienvenida, FinalParagraph, GeneralFormContainer, ButtonRegister, Compania,ImgVaca } from './Login.styled.jsx';
+import { ContainerGeneral, FormContainer, ContainerInput, Input, Label, BoxText, Button, Questions, FinalParagraph, GeneralFormContainer, ButtonRegister } from './Login.styled.jsx';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -21,7 +21,7 @@ function Login() {
   
     
     const formik = useFormik({
-        
+
         initialValues: {
             email: loginData.email,
             password: loginData.password
@@ -97,27 +97,18 @@ function Login() {
 
         <ContainerGeneral>
 
-            
-         
-         <ImgVaca src={logoVaca} alt="logo" /> 
-
-
-
             <GeneralFormContainer>
-
-                <TituloBienvenida>
-                    <h1>Bienvenido a su vaca virtual</h1>
-                </TituloBienvenida>
 
 
                 <FormContainer onSubmit={formik.handleSubmit}>
 
                     <BoxText>
-                        <h2>Inicio de sesión</h2>
+                        <h4 className='titulo-card'>VAKITA</h4>
+                        <h2 className='titulo-card'>Inicio de sesión</h2>
                     </BoxText>
 
                     <ContainerInput>
-                        <Label htmlFor="Email">Ingresa tu Email</Label>
+                        <Label htmlFor="Email" className='input-email'>Ingresa tu Email</Label>
                         <Input
                             type="email"
                             name="email"
@@ -125,12 +116,12 @@ function Login() {
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                         />
-                        {formik.touched.email && formik.errors.email && <span style={{ color: "red", marginLeft: "20px" }}>{formik.errors.email}</span>}
+                        {formik.touched.email && formik.errors.email && <span style={{ color: "red", marginLeft: "87px" }}>{formik.errors.email}</span>}
 
                     </ContainerInput>
 
                     <ContainerInput>
-                        <Label htmlFor="Contraseña">Ingresa tu contraseña</Label>
+                        <Label htmlFor="Contraseña" className='input-contraseña'>Ingresa tu contraseña</Label>
                         <Input
                             type="password"
                             name="password"
@@ -138,14 +129,14 @@ function Login() {
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                         />
-                        {formik.touched.password && formik.errors.password && <span style={{ color: "red", marginLeft: "20px" }}>{formik.errors.password}</span>}
+                        {formik.touched.password && formik.errors.password && <span style={{ color: "red", marginLeft: "87px" }}>{formik.errors.password}</span>}
                     </ContainerInput>
 
                     <Button className="continuar" type='submit'>Continuar </Button>
 
                     <Questions>
-                        <h5>¿Olvidaste tu email?</h5>
-                        <h5>¿Olvidaste tu contraseña?</h5>
+                        <h5 className='preguntas'>¿Olvidaste tu email?</h5>
+                        <h5 className='preguntas'>¿Olvidaste tu contraseña?</h5>
                     </Questions>
 
                 </FormContainer>
@@ -155,9 +146,7 @@ function Login() {
 
                 </FinalParagraph>
 
-                <Compania>
-                    Cow company <br /> De colombia y argentina pal mundo
-                </Compania>
+
 
 
             </GeneralFormContainer>
