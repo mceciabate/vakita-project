@@ -192,7 +192,7 @@ public class VakitaServiceTest {
         VakitaDTO vakita =vakitaService.createVakita(vakitaDTO);
         vakitaService.modifyAmount(1000.0,vakita.getId());
 
-        Assertions.assertTrue(vakita.getCumulativeAmount() >=  (vakita.getTotalAmount() - vakita.getCumulativeAmount()));
+        Assertions.assertTrue((vakita.getCumulativeAmount() >=  (vakita.getTotalAmount() - vakita.getCumulativeAmount()))&&vakita.getIsActive());
 
     }
 
@@ -221,10 +221,24 @@ public class VakitaServiceTest {
         vakitaService.addContributor(vakita.getId(),7L);
         vakitaService.addContributor(vakita.getId(),8L);
         vakitaService.addContributor(vakita.getId(),9L);
-        
+        vakitaService.addContributor(vakita.getId(),10L);
+
         Assertions.assertTrue(vakita.getContributors().size()<=10);
 
     }
+    @Test
+    public void createVakitaAmount() throws BadRequestException, ResourceNotFoundException {
+        VakitaDTO vakitaDTO = new VakitaDTO("",1L,"vakita creada","www.img.com",3000.0,2000.0,LocalDate.parse("2023-09-06"),LocalDate.parse("2023-09-06"),true,VakitaTypes.normal);
+
+        VakitaDTO vakita =vakitaService.createVakita(vakitaDTO);
+
+
+        Assertions.assertTrue(v);
+
+    }
+
+
+
 
 }
 
