@@ -12,29 +12,13 @@ import axios from 'axios';
 
 function Login() {
   
-  const [listUsers, setListUsers]=useState([])
-    const { loginData, setUserId, setLogged } = useUser();
+
+    const { loginData,  setLogged } = useUser();
 
     const navigate = useNavigate();
 
 
-   useEffect(() => {
-        const loadData = async () => {
-          await axios.get("http://107.22.65.36:8080/api/v1/usuarios").then((res) => {
-           
-        setListUsers(res.data)
-          });
-        };
-        loadData();
-      }, []);
-
-    //   const matchingUser = listUsers.find(user => user.email === userEmail);
-
-    //   if (matchingUser) {
-    //       const userId = matchingUser.id;
-    //       setUserId(userId); 
-        
-    //   }
+  
     
     const formik = useFormik({
         
