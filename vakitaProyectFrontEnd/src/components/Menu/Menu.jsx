@@ -40,7 +40,7 @@ const Menu = () => {
              
              setLogged(false);
              navigate("/")
-             window.top.location.reload();
+             window.localStorage.clear();
              }
              }
              className="botonSalir"> <p className="textExit">Salir</p> <FontAwesomeIcon icon={faRightFromBracket} />

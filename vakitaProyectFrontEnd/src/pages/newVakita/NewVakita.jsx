@@ -13,6 +13,7 @@ import { VakitaContext } from '../../context/VakitaProvider';
 import axiosVakita from "../../helper/axiosVakita"
 import axios from 'axios';
 import CustomDatePicker from './CustomDatePicker';
+import { useUser } from '../../context/UserProvider';
 
 
 
@@ -28,13 +29,14 @@ const NewVakita = () => {
   const [getUsers, setGetUsers] = useState([]);
   const [arrayMembers, setArrayMembers] = useState([]);
 
-  
+  const {userId} = useUser();
   
   useEffect(() => {
     const loadData = async () => {
-      await axios.get("http://localhost:8080/api/v1/usuarios").then((res) => {
+      await axios.get("http://107.22.65.36:8080/api/v1/usuarios").then((res) => {
         
         setGetUsers(res.data)
+      
       });
     };
     loadData();
@@ -71,7 +73,7 @@ const NewVakita = () => {
   // console.log(arrayMembers);
     const dataToSend = {
       name:values.name,
-      idCreatorUser: 8,
+      idCreatorUser: userId,
       description:values.description,
       imgURL: "url",
       totalAmount:values.amount,
@@ -102,14 +104,16 @@ const NewVakita = () => {
      
    
      
-
+     const token = JSON.parse(localStorage.getItem("token"));
     axiosVakita
       .post(
         "",
      dataToSend,
         {
           headers: {
-            "Content-type": "application/json",          },
+            "Content-type": "application/json",   
+            Authorization: `Bearer ${token}`,
+                 },
         }
       )
       .then((res) => {

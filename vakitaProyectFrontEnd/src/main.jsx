@@ -8,12 +8,12 @@ import VakitaProvider from './context/VakitaProvider.jsx'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // <React.StrictMode>
 
     <UserProvider>
     <VakitaProvider>
     <App />
     </VakitaProvider>
     </UserProvider>
-  </React.StrictMode>
+  // </React.StrictMode>
 )

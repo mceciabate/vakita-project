@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import logoVaca from "../../assets/logoVacaInicio.png";
@@ -6,15 +6,35 @@ import Swal from "sweetalert2";
 import { useUser } from '../../context/UserProvider';
 import { ContainerGeneral, FormContainer, ContainerInput, Input, Label, BoxText, Button, Questions, TituloBienvenida, FinalParagraph, GeneralFormContainer, ButtonRegister, Compania,ImgVaca } from './Login.styled.jsx';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 
 
 function Login() {
+  
+  const [listUsers, setListUsers]=useState([])
+    const { loginData, setUserId, setLogged } = useUser();
+
     const navigate = useNavigate();
-    const { loginData, setLoginData, setLogged } = useUser();
 
 
+   useEffect(() => {
+        const loadData = async () => {
+          await axios.get("http://107.22.65.36:8080/api/v1/usuarios").then((res) => {
+           
+        setListUsers(res.data)
+          });
+        };
+        loadData();
+      }, []);
 
+    //   const matchingUser = listUsers.find(user => user.email === userEmail);
+
+    //   if (matchingUser) {
+    //       const userId = matchingUser.id;
+    //       setUserId(userId); 
+        
+    //   }
     
     const formik = useFormik({
         
@@ -27,76 +47,67 @@ function Login() {
             password: Yup.string().min(4, "Debe contener 4 digitos o más").max(50).required("Contraseña es requerida")
         }),
         onSubmit: async (values) => {
-             //código para probar con el back      
-    //         try {
-    //             const response = await axios.post('URL_DEL_BACKEND/login', {
-    //                 email: values.email,
-    //                 password: values.password
-    //             });
+          
+            axios.post(
+                "http://107.22.65.36:8080/api/v1/usuarios/token",
+                {
+                  email: values.email,
+                  password: values.password,
+                },
+                {
+                  headers: {
+                    "Content-type": "application/json",
+                    "Accept": "application/json",
+                     
+                  },
+                }
+              )
+              .then((res) => {
+           
+                if (res.status === 201) {
+                  const token = JSON.stringify(res.data)
+                  localStorage.setItem('token',token);
+             
+           
+                  Swal.fire({
+                            title: 'Inicio exitoso',
+                            text: 'Inició tu sesión',
+                            icon: 'success'
+                        });
 
-    //             // Manejar la respuesta del backend 
-    //             if (response.data.success) {
-    //                 Swal.fire({
-    //                     title: 'Inicio exitoso',
-    //                     text: 'Inició tu sesión',
-    //                     icon: 'success'
-    //                 });
+                   setLogged(true); 
+                   navigate('/dashboard');
 
-    //                 formik.resetForm();
+                
 
-    //                 setLoginData({
-    //                     email: values.email,
-    //                     password: values.password
-    //                 });
-    //             } else {
-    //                 // Mostrar mensaje de error
-    //                 Swal.fire({
-    //                     title: 'Error',
-    //                     text: 'Inicio de sesión fallido',
-    //                     icon: 'error'
-    //                 });
-    //             }
-    //         } catch (error) {
-    //             // Manejar errores de la solicitud
-    //             Swal.fire({
-    //                 title: 'Error',
-    //                 text: 'Hubo un problema al intentar iniciar sesión',
-    //                 icon: 'error'
-    //             });
-    //         }
-    //     }
-    // });
 
-    
-// Simulación de datos hardcodeados para inicio de sesión
-const hardcodedEmail = 'test@gmail.com';
-const hardcodedPassword = '1234';
 
-if (values.email === hardcodedEmail && values.password === hardcodedPassword) {
-    Swal.fire({
-        title: 'Inicio exitoso',
-        text: 'Inició tu sesión',
-        icon: 'success'
+                } else if (res.status === 400) {
+                  console.log("respuesta1 ", res.data.data);
+                }else{
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Credenciales incorrectas',
+                        icon: 'error'
+                    })
+
+                }
+              })
+              .catch((error) =>
+             
+
+                    Swal.fire({
+                                        title: 'Error',
+                                        text: 'Hubo un problema al intentar iniciar sesión',
+                                        icon: 'error'
+                                    })
+                    
+              );
+        }
     });
 
-    formik.resetForm();
+     
 
-    setLoginData({
-        email: values.email,
-        password: values.password
-    });
-
-    setLogged(true); // Establece el estado de inicio de sesión como verdadero
-    navigate('/dashboard'); // Redirige al dashboard
-} else {
-    Swal.fire({
-        title: 'Error',
-        text: 'Credenciales incorrectas',
-        icon: 'error'
-    });
-}
-}
-});
 
     return (
 
