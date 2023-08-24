@@ -12,9 +12,10 @@ import { useUser } from '../../context/UserProvider';
 const MyVakita = () => {
  
   const [allMyVakita, setAllMyVakita] = useState([]);
-  const {userId} = useUser();
+
 
   const token = JSON.parse(localStorage.getItem("token"));
+  const userId = localStorage.getItem("userId")
 
  
 

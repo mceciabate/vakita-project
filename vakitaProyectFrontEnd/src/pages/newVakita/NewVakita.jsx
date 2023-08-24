@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCirclePlus, faCircleInfo } from "@fortawesome/free-solid-svg-icons"
 import Swal from 'sweetalert2'
 import ShareButton from './SharedButton';
-import { VakitaContext } from '../../context/VakitaProvider';
+
 import axiosVakita from "../../helper/axiosVakita"
 import axios from 'axios';
 import CustomDatePicker from './CustomDatePicker';
@@ -18,8 +18,7 @@ import { useUser } from '../../context/UserProvider';
 
 
 const NewVakita = () => {
-  
-  // const {addNewVakita} = useContext(VakitaContext)
+
   
   const [emails, setEmails] = useState([]);
   const [emailExists, setEmailExists] = useState(null);
@@ -28,7 +27,8 @@ const NewVakita = () => {
   const [getUsers, setGetUsers] = useState([]);
   const [arrayMembers, setArrayMembers] = useState([]);
 
-  const {userId} = useUser();
+
+  const userId= localStorage.getItem("userId")
   
   useEffect(() => {
     const loadData = async () => {

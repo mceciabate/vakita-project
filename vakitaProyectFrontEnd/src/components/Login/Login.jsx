@@ -10,6 +10,7 @@ import axios from 'axios';
 
 
 
+
 function Login() {
   
 
@@ -17,7 +18,8 @@ function Login() {
 
     const navigate = useNavigate();
 
-
+   
+          
   
     
     const formik = useFormik({
@@ -49,10 +51,15 @@ function Login() {
               .then((res) => {
            
                 if (res.status === 201) {
-                  const token = JSON.stringify(res.data)
+                  const token = JSON.stringify(res.data.token)
                   localStorage.setItem('token',token);
-             
-           
+                  const userId = JSON.stringify(res.data.userId)
+                  localStorage.setItem('userId',userId);
+                 
+              
+               
+              
+
                   Swal.fire({
                             title: 'Inicio exitoso',
                             text: 'Inició tu sesión',
