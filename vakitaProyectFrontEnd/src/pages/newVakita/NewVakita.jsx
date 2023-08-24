@@ -7,13 +7,12 @@ import "../../styles/newVakitaPage.css"
 import EmailList from './EmailList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCirclePlus, faCircleInfo } from "@fortawesome/free-solid-svg-icons"
-import Swal from 'sweetalert2'
 import ShareButton from './SharedButton';
-
 import axiosVakita from "../../helper/axiosVakita"
 import axios from 'axios';
 import CustomDatePicker from './CustomDatePicker';
-import { useUser } from '../../context/UserProvider';
+import Swal from 'sweetalert2'
+
 
 
 

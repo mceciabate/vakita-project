@@ -6,19 +6,53 @@ import { faUser, faHandHoldingDollar} from '@fortawesome/free-solid-svg-icons';
 import { Doughnut } from 'react-chartjs-2';
 import 'chart.js/auto';
 import axios from 'axios';
-import { useUser } from '../../context/UserProvider';
+import Swal from "sweetalert2";
 
 
 const MyVakita = () => {
  
   const [allMyVakita, setAllMyVakita] = useState([]);
+  const [cardNumber, setCardNumber] = useState("");
+  const [amount, setAmount] = useState(0);
 
 
   const token = JSON.parse(localStorage.getItem("token"));
   const userId = localStorage.getItem("userId")
 
- 
+  const payVakita= ()=>{
+    Swal.fire({
+      title: 'Cargar fondos',
+      html:
+        '<input id="card-number" class="swal2-input" placeholder="Nro de tarjeta">' +
+        '<input id="amount" class="swal2-input" placeholder="Importe a cargar">',
+      showCancelButton: true,
+      confirmButtonText: 'Guardar',
+      preConfirm: () => {
+        const cardNumber = document.getElementById('card-number').value;
+        const amountValue = parseFloat(document.getElementById('amount').value);
+        if (!cardNumber || isNaN(amountValue) || amountValue <= 0) {
+          Swal.showValidationMessage('Por favor, complete correctamente los campos.');
+        }
+        
+         setCardNumber(cardNumber);
+         setAmount(amountValue);
 
+         
+      },
+    }).then(result => {
+      if (!result.isDismissed) {
+      
+        Swal.fire({
+          icon: 'success',
+          title: 'Ingreso de dinero exitoso',
+          showConfirmButton: false,
+          timer: 1500  
+        });
+      }
+    });
+  }
+
+  
       useEffect(() => {
         if (userId !== null) {
           const loadData = async () => {
@@ -55,7 +89,7 @@ const MyVakita = () => {
         <div className="cardMyVakita" key={index}>
 
           <div > 
-          <button className='save-button' ><FontAwesomeIcon icon={faHandHoldingDollar} /></button>
+          <button className='save-button'onClick={() => {payVakita()}} ><FontAwesomeIcon icon={faHandHoldingDollar} /></button>
             <div>
         
              <h3 className='titleMyVaquita'>{vakita.name}</h3>
