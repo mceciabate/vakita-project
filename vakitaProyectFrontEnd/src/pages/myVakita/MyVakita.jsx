@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import '../../styles/myVakitaPage.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faHandHoldingDollar} from '@fortawesome/free-solid-svg-icons';
 import { Doughnut } from 'react-chartjs-2';
 import 'chart.js/auto';
 import axios from 'axios';
@@ -52,13 +52,19 @@ const MyVakita = () => {
       const remainingPercentage = 100 - totalPercentage;
       return (
         <div className="cardMyVakita" key={index}>
-          <div>
+
+          <div > 
+          <button className='save-button' ><FontAwesomeIcon icon={faHandHoldingDollar} /></button>
             <div>
-              <h3 className='titleMyVaquita'>{vakita.name}</h3>
+        
+             <h3 className='titleMyVaquita'>{vakita.name}</h3>
+          
             </div>
+            
             <div>
               <h3 className="titleMyVaquita">{ "Meta: $" + vakita.totalAmount}</h3>
             </div>
+            
           </div>
           <div className='BoxMembersAndChart'>
             <div className='chartContainer'>
@@ -67,7 +73,7 @@ const MyVakita = () => {
                   labels: ['Contribuido', 'Restante'],
                   datasets: [
                     {
-                      // data: [totalPercentage, remainingPercentage],
+                    
                       data: [totalPercentage, remainingPercentage],
                       backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(255, 99, 132, 0.6)'],
                     },
@@ -95,8 +101,10 @@ const MyVakita = () => {
                     </div>
                     <p>{contributor.email}</p>
                   </div>
+                  
                 </div>
               ))}
+              
             </div>
           </div>
         </div>
