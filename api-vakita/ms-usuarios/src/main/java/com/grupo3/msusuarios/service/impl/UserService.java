@@ -2,6 +2,7 @@ package com.grupo3.msusuarios.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.grupo3.msusuarios.event.NewUserEventProducer;
+import com.grupo3.msusuarios.model.dto.AuthResponseDTO;
 import com.grupo3.msusuarios.model.dto.UserDTO;
 import com.grupo3.msusuarios.model.dto.UserRabbitDTO;
 import com.grupo3.msusuarios.model.dto.UserWithoutPasswordDTO;
@@ -150,9 +151,14 @@ public class UserService implements IUserService {
 
     //MÉTODO PARA CREAR TOKEN
     @Override
-    public String generateToken(String email) throws Exception {
+    public AuthResponseDTO generateToken(String email) throws Exception {
         try{
-           return jwtService.generateToken(email);
+            AuthResponseDTO response = new AuthResponseDTO();
+            Long userId = this.findByEmail(email).getId();
+            String token = jwtService.generateToken(email);
+            response.setUserId(userId);
+            response.setToken(token);
+            return response;
         }
         catch (Exception e){
             throw new Exception(e.getMessage());

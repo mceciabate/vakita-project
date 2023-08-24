@@ -2,6 +2,7 @@ package com.grupo3.msusuarios.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.grupo3.msusuarios.model.dto.AuthRequestDTO;
+import com.grupo3.msusuarios.model.dto.AuthResponseDTO;
 import com.grupo3.msusuarios.model.dto.UserDTO;
 import com.grupo3.msusuarios.model.dto.UserWithoutPasswordDTO;
 import com.grupo3.msusuarios.service.IUserService;
@@ -196,8 +197,8 @@ public class UserController {
    /* METODOS DE CONTROLLER PARA SECURITY*/
     @Operation(summary = "Obtener un token")
     @PostMapping("/token")
-    public ResponseEntity<?> getToken(@RequestBody AuthRequestDTO authRequestDTO) {
-        String response = new String();
+    public ResponseEntity<?> getToken(@RequestBody AuthRequestDTO authRequestDTO) throws Exception {
+        AuthResponseDTO response = new AuthResponseDTO();
         try {
             Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequestDTO.getEmail(), authRequestDTO.getPassword()));
             if (authenticate.isAuthenticated()) {
@@ -207,7 +208,8 @@ public class UserController {
         }
         catch (Exception e){
             logg.error(e.getMessage());
-            response = "Invalid Access";
+            response.setUserId(userService.findByEmail(authRequestDTO.getEmail()).getId());
+            response.setToken("Invalid Access");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
     }

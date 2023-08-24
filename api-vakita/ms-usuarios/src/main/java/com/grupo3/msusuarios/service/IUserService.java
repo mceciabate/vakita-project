@@ -1,5 +1,6 @@
 package com.grupo3.msusuarios.service;
 
+import com.grupo3.msusuarios.model.dto.AuthResponseDTO;
 import com.grupo3.msusuarios.model.dto.UserDTO;
 import com.grupo3.msusuarios.model.dto.UserWithoutPasswordDTO;
 
@@ -17,7 +18,7 @@ public interface IUserService {
     void updateAccountBalance(Long id, Double amount) throws Exception;
 
     //MÉTODO PARA CREAR TOKEN
-    String generateToken(String email) throws Exception;
+    AuthResponseDTO generateToken(String email) throws Exception;
 
     //MÉTODO PARA VALIDAR TOKEN
     void validateToken(String token) throws Exception;
