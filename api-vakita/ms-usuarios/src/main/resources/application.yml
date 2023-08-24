@@ -26,9 +26,9 @@ spring:
     port: 5672
   datasource:
       driverClassName: com.mysql.jdbc.Driver
-      url: jdbc:mysql://db.ctd.academy:3306/0723TDPI2N1C01LAED1021FT_GRUPO3?createDatabaseIfNotExist=true
-      username: 0723TDPI2N1C01LAED1021FT_GRUPO3
-      password: ahjoh5Lu
+      url: jdbc:mysql://localhost:3307/backend?createDatabaseIfNotExist=true
+      username: grupo3
+      password: grupo3
   jpa:
     hibernate.ddl-auto: update
     generate-ddl: true
