@@ -1,51 +1,46 @@
 // import 'semantic-ui-css/semantic.min.css'
-import { Container, Divider,Icon,List, Segment} from 'semantic-ui-react'
-
-
+import { Hr, Li, ListDiv, PerfilContainer, ProfileHeader } from './styled';
+import { useState } from "react";
 
 const Perfil = () => {
-     
+  const [user, setUser] = useState([])
+  // useEffect(() => {
+  //   fetch("http://107.22.65.36:8080/api/v1/usuarios{id}")
+  //     .then((response) => response.json())
+  //     .then(setUser(json));
+  // }, []);
+
     return (
-      
-      <Container textAlign='center'>
+      <PerfilContainer>
+        <ProfileHeader>
+          <h2>
+            <img src="" />
+            Mi Perfil
+          </h2>
+          <p>Acá puedes ver tus datos de cuenta</p>
+        </ProfileHeader>
 
-<div  icon>
+        <Hr />
 
-<h2 ><Icon name='settings' />
-Mi Perfil
-</h2>
-
-  </div>
-  
-    <Divider />
-    <Container >
-
-    <p>Acá puedes ver tus datos de cuenta</p>
-
-    
-
-    <Segment.Group>
-    <List>
-    <Segment secondary color='pink'>
-    <List.Item icon='user circle' content='nombre y apellido'/>
-     <List.Item icon='address card'
-      content='DNI'
-    />
-    <List.Item icon='calendar'
-      content='Fecha de nacimiento'
-    />
-    </Segment>
-    <Segment secondary color='pink'>
-    <List.Item
-      icon='mail'
-      content='email'
-    />
-        </Segment>
-  </List>
-</Segment.Group>
-    </Container>
-
-    </Container>
+        <ListDiv>
+          <Li>
+            <h5>Nombre</h5>
+            <p>{user.nombre}</p>
+          </Li>
+          <Li>
+            <h5>DNI</h5>
+            <p>{user.nombre}</p>
+          </Li>
+          <Li>
+            <h5>Email</h5>
+            <p>{user.nombre}</p>
+          </Li>
+          <Li>
+            <h5>Fecha de nacimiento</h5>
+            <p>{user.nombre}</p>
+          </Li>
+        </ListDiv>
+      </PerfilContainer>
     );
   };
   
