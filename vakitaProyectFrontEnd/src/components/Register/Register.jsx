@@ -36,7 +36,7 @@ function Register() {
     onSubmit: async (values) => {    
       try {
 
-        const response = await axios.post("http://localhost:8080/api/v1/usuarios", {
+        const response = await axios.post("http://107.22.65.36:8080/api/v1/usuarios/register", {
           "name": values.name,
           "lastName": values.lastName,
           "dni": values.dni,
