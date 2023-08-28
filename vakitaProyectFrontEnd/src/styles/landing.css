@@ -1,5 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inria+Sans:wght@400;700&display=swap');
 
-  @import url('https://fonts.googleapis.com/css2?family=Inria+Sans:wght@400;700&display=swap');
 
 .landing {
     width: 100%;
@@ -7,74 +7,267 @@
 
 .propaganda {
     width: 100%;
-    height: 25rem;
+    height: 27rem;
     display: flex;
-    background-image: url('../assets/pexels-cottonbro-studio-3943720.jpg');
+    align-items: center;
+    flex-direction: column;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    background-image: url("../assets/Wave.svg");
+}
+
+.Titulo-propaganda {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Inria Sans', sans-serif;
+    color: white;
+    margin-top: 130px;
+    font-size: 80px;
+}
+
+.Texto-propaganda {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Inria Sans', sans-serif;
+    color: white;
+    margin-top: 10px;
+    font-size: 20px;
+    width: 78%;
+    font-weight: 900;
 }
 
 
-.conteneedor-cards {
+.contenedor-cards {
     width: 100%;
     display: flex;
     justify-content: center;
-    flex-flow: column wrap;
+    align-items: center;
+    background: #423163;
+
 
 }
 
-.propaganda-texto {
-    width: 100%;
-    margin-top: 60px;
-    text-align: center;
-    font-family: 'Inria Sans', sans-serif;
-}
-
-.cards{
+.cards {
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: column nowrap;
     width: 100%;
-    height: 200px;
+    height: 600px;
     text-align: center;
-    justify-content: space-evenly;
-    margin-top: 60px;
+    justify-content: space-around;
+    align-content: space-around;
+    align-items: center;
+    margin-top: 30px;
+
+
+
 }
 
-
-.cards-text{
+.cards-text {
     display: flex;
-    background-color: #E7E1E1;
-    width: 20%;
-    height: 150px;
-    padding: 15px;
-    border-radius: 20px;
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-family: 'Inria Sans', sans-serif;
-    box-shadow: 5px 5px 5px rgb(197, 193, 193);
+    background: white;
+    box-shadow: 2px 5px 26px #aca7a9, -5px -5px 56px #ffffff;
+    width: 60%;
+    height: 150px;
+    padding: 5px;
+    margin: 0 auto;
+    border-radius: 20px;
 }
 
-@media only screen and (max-width: 769px) {
-    .cards{
+
+
+
+
+@media only screen and (min-width: 768px) {
+
+    .contenedor-cards {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .cards {
         display: flex;
         flex-flow: column nowrap;
-        width: 100%;
-        height: 700px;
-        text-align: center;
+        width: 50%;
+        height: 600px;
         justify-content: space-around;
         align-content: space-around;
         align-items: center;
-        margin-top: 60px;
+        margin-top: 30px;
+
     }
-    
-    .cards-text{
+
+    .cards-text {
         display: flex;
-        background-color: #E7E1E1;
-        width: 60%;
-        height: 150px;
-        
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background: white;
+        box-shadow: 2px 5px 16px #9085a6, -5px -5px 10px #261151;
+        width: 80%;
+        height: 90px;
+        padding: 13px;
+        margin: 0 auto;
+        margin-right: 30px;
+        border-radius: 100px;
     }
-   
+
+    .imagen-cash {
+
+        background-image: url("../assets/personas.png");
+        display: flex;
+        width: 60%;
+        height: 800px;
+        z-index: 100;
+        background-position: center;
+        background-size: 53% 100%;
+        background-repeat: no-repeat;
+    }
+}
+
+.for-all {
+    width: 100%;
+    height: auto;
+    top: 0;
+    color: rgb(255, 255, 255);
+    max-width: 100%;
+    max-height: none;
+    background-color: #423163;
+    align-items: center;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    display: flex;
+    position: relative;
+    flex-flow: column;
+
+    bottom: 10px;
+    overflow: hidden;
+
+
+}
+
+.for-all__text {
+    display: flex;
+    position: -webkit-sticky;
+    width: 100%;
+    height: 40%;
+    white-space: nowrap;
+    will-change: transform;
+    animation: for-all__text 10s linear infinite;
+
+
+}
+.for-all__text-2 {
+    display: flex;
+    position: -webkit-sticky;
+    width: 100%;
+    height: 40%;
+    white-space: nowrap;
+    will-change: transform;
+    animation: for-all__text 10s linear infinite;
+    margin-top: 10px;
+
+}
+
+.for-all__text--h2 {
+
+    -webkit-text-stroke: 1px white;
+    color: transparent;
+    font-size: 30px;
+
+}
+
+@keyframes for-all__text {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0%); }
+  }
+
+
+@media only screen and (max-width: 1000px) {
+
+
+    .imagen-cash {
+        background-size: 80% 80%;
+    }
+
+    .cards-text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background: white;
+        box-shadow: 2px 5px 16px #9085a6, -5px -5px 10px #261151;
+        width: 80%;
+        height: 90px;
+        padding: 13px;
+        margin: 0 auto;
+        margin-left: 50px;
+        border-radius: 100px;
+    }
+}
+
+@media only screen and (max-width: 1300px) {
+
+
+    .imagen-cash {
+        background-size: 80% 90%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+
+
+    .imagen-cash {
+        background-size: 80% 80%;
+    }
+
+    .cards-text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background: white;
+        box-shadow: 2px 5px 16px #9085a6, -5px -5px 10px #261151;
+        width: 80%;
+        height: 90px;
+        padding: 13px;
+        margin: 0 auto;
+        border-radius: 100px;
+    }
+}
+
+
+
+
+
+@media only screen and (min-width: 1000px) {
+
+    .Titulo-propaganda {
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-family: 'Inria Sans', sans-serif;
+        color: white;
+        margin-top: 90px;
+        font-size: 150px;
+    }
+
+    .Texto-propaganda {
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-family: 'Inria Sans', sans-serif;
+        color: white;
+        margin-top: 10px;
+        font-size: 25px;
+        width: 78%;
+        font-weight: 900;
+    }
+
 }

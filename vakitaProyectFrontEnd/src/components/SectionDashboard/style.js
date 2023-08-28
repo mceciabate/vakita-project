@@ -30,6 +30,9 @@ export const DivContainer = styled.div`
     &:hover {
         background-color: #FFBEBE;
     }
+    a:hover {
+        color: #4A4A4A;
+    }
 
     @media (max-width: 769px) {
         display: ${props => !props.displayMobile ? "flex" : "none"};

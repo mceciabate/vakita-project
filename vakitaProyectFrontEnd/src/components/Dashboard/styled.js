@@ -2,7 +2,8 @@ import { styled } from "styled-components";
 
 
 export const DashboardDiv = styled.div`
-    background-color: #E7E1E1;
+    background-color: #CCC3C3;
+    background: -webkit-linear-gradient(#FFFFFF, #CCC3C3);
     width:  100%;
 `;
 

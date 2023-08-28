@@ -8,7 +8,23 @@ display: none;
     
     font-family: 'Inria Sans', sans-serif;
     
-    
+    .botonSalir{
+        width: 100%;
+        background-color:black;
+        color: white;
+        margin: 0px;
+        padding:0.8rem;
+        display: flex;
+        justify-content: flex-end;
+        position: fixed;
+        bottom: 0;
+        width: 375px;
+       
+    }
+
+    .textExit{
+        padding-right: 4px;
+    }
 
 
     /* Aqui se establece que el boton salir no se mostrara en desktop*/
@@ -19,14 +35,24 @@ width: 18rem;
     
     font-family: 'Inria Sans', sans-serif;
        
-        .botonSalir {
-            display: block;
-        flex-direction: row;
-        background: transparent;
-        border: none;
-        outline: none;
-        display: none;
-        opacity: 1;
+        .botonSalir {  
+        
+    outline: none;
+    font-size: 16px;
+
+    letter-spacing: 0.05rem;
+    width: auto; 
+    background-color:black; 
+    margin: 0; 
+    position: static; 
+    bottom: auto; 
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    width: 5rem;
+    padding: 0.3rem;
+    align-self:center;
+    border-radius: 8px;
         
         }
     }`;
@@ -111,4 +137,15 @@ export const MenuDiv=styled.div`
     }
 
     
+`;
+
+export const MenuSinLoguear=styled.div`
+    
+    button{
+        background-color:white !important;
+        border: none;
+    }
+    a{
+        color:black ;
+    }
 `;

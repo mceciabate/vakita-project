@@ -7,19 +7,17 @@ import "../../styles/newVakitaPage.css"
 import EmailList from './EmailList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCirclePlus, faCircleInfo } from "@fortawesome/free-solid-svg-icons"
-import Swal from 'sweetalert2'
 import ShareButton from './SharedButton';
-import { VakitaContext } from '../../context/VakitaProvider';
 import axiosVakita from "../../helper/axiosVakita"
 import axios from 'axios';
 import CustomDatePicker from './CustomDatePicker';
+import Swal from 'sweetalert2'
+
 
 
 
 const NewVakita = () => {
- 
-  
-  const {addNewVakita} = useContext(VakitaContext)
+
   
   const [emails, setEmails] = useState([]);
   const [emailExists, setEmailExists] = useState(null);
@@ -28,13 +26,15 @@ const NewVakita = () => {
   const [getUsers, setGetUsers] = useState([]);
   const [arrayMembers, setArrayMembers] = useState([]);
 
-  
+
+  const userId= localStorage.getItem("userId")
   
   useEffect(() => {
     const loadData = async () => {
-      await axios.get("http://localhost:8080/api/v1/usuarios").then((res) => {
+      await axios.get("http://107.22.65.36:8080/api/v1/usuarios").then((res) => {
         
         setGetUsers(res.data)
+      
       });
     };
     loadData();
@@ -68,10 +68,10 @@ const NewVakita = () => {
     
    
 
-  console.log(arrayMembers);
+  // console.log(arrayMembers);
     const dataToSend = {
       name:values.name,
-      idCreatorUser: 8,
+      idCreatorUser: userId,
       description:values.description,
       imgURL: "url",
       totalAmount:values.amount,
@@ -83,8 +83,8 @@ const NewVakita = () => {
       // contributors: emails.filter((email) => email !== ''), // Filtrar emails vacíos
       contributors: arrayMembers,
     };
-    console.log(dataToSend);
-    addNewVakita(dataToSend);
+    // console.log(dataToSend);
+    // addNewVakita(dataToSend);
 
 
      // Validar todos los emails antes de guardarlos solo si no hay emails vacíos
@@ -102,14 +102,16 @@ const NewVakita = () => {
      
    
      
-
+     const token = JSON.parse(localStorage.getItem("token"));
     axiosVakita
       .post(
         "",
      dataToSend,
         {
           headers: {
-            "Content-type": "application/json",          },
+            "Content-type": "application/json",   
+            Authorization: `Bearer ${token}`,
+                 },
         }
       )
       .then((res) => {
@@ -230,14 +232,14 @@ const NewVakita = () => {
             <div className='boxOne'>
           <div className="boxItems">
             <label htmlFor="name"></label>
-            <Field type="text" id="name" name="name" placeholder="Nombre de la vaca"/>
+            <Field  className="inputText" type="text" id="name" name="name" placeholder="Nombre de la vaca"/>
             <div className='error'>
             <ErrorMessage name="name" component="div" />
             </div>
           </div>
           <div className="boxItems">
             <label htmlFor="amount"></label>
-            <Field type="number" id="amount" name="amount" placeholder="Importe total" />
+            <Field className="inputNumber" type="number" id="amount" name="amount" placeholder="Importe total" />
             <div className='error'>
             <ErrorMessage name="amount" component="div" />
             </div>
@@ -245,10 +247,10 @@ const NewVakita = () => {
           
 
          
-            <Field  id="startDate"  name="startDate" label="Fecha inicio de ahorro" component={CustomDatePicker}/>
+            <Field className="inputDate"  id="startDate"  name="startDate" label="Fecha inicio de ahorro" component={CustomDatePicker}/>
             
        
-            <Field  id="endDate" name="endDate" label="Fecha final de ahorro" component={CustomDatePicker}/>
+            <Field className="inputDate"  id="endDate" name="endDate" label="Fecha final de ahorro" component={CustomDatePicker}/>
            
 
           <div className="boxItems">
@@ -261,7 +263,7 @@ const NewVakita = () => {
 
           <div className="boxItems">
             <label htmlFor="cumulativeAmount"></label>
-            <Field type="number" id="cumulativeAmount" name="cumulativeAmount" placeholder="Importe a cargar en la vakita" />
+            <Field className="inputNumber" type="number" id="cumulativeAmount" name="cumulativeAmount" placeholder="Importe a cargar en la vakita" />
             <div className='error'>
             <ErrorMessage name="cumulativeAmount" component="div" />
             </div>
@@ -293,7 +295,7 @@ const NewVakita = () => {
         <div>
         <div className="boxItems">
               <label htmlFor="email"></label>
-              <Field type="email" id="email" name="email" placeholder="Agregar integrante con su email" />
+              <Field className="inputEmail" type="email" id="email" name="email" placeholder="Agregar integrante con su email" />
               <div className='error'>
               <ErrorMessage name="email" component="div" />
               </div>
@@ -326,7 +328,7 @@ const NewVakita = () => {
       
             </div>
             <div>
-              <button type="button" disabled={!values.email.includes('@')} className="buttonAdd" onClick={() => handleAddEmail(values)}>
+              <button type="button"  disabled={!values.email.includes('@')} className="buttonAdd" onClick={() => handleAddEmail(values)}>
               <FontAwesomeIcon icon={faCirclePlus}  />
               </button>
               
@@ -347,7 +349,7 @@ const NewVakita = () => {
 
 <div className='buttonSubmitBox'>
  
-          <button className={!emailValid || !emailExists || !values.name || !values.amount || !values.endDate ||  !values.startDate|| !values.description || !values.name || !values.amount ||  !values.description?"buttonSubmit":"buttonSubmitActive"}  type="submit"  disabled={!emailValid || !emailExists || !values.name || !values.amount || !values.endDate ||  !values.startDate|| !values.description || !values.name || !values.amount || !values.description}>Crear Vaca</button>
+          <button id="buttonNewVakita" className={!emailValid || !emailExists || !values.name || !values.amount || !values.endDate ||  !values.startDate|| !values.description || !values.name || !values.amount ||  !values.description?"buttonSubmit":"buttonSubmitActive"}  type="submit"  disabled={!emailValid || !emailExists || !values.name || !values.amount || !values.endDate ||  !values.startDate|| !values.description || !values.name || !values.amount || !values.description}>Crear Vaca</button>
          
           
           </div>

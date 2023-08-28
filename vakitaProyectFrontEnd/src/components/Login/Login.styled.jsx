@@ -3,128 +3,108 @@ import styled from 'styled-components';
 
 export const ContainerGeneral = styled.div`
    width: 100%;
-   height: 725PX;
+   height: 100vh !important;
    display: flex;
    flex-direction: row wrap;
    align-items: center;
-
-   /* En esta seccion cambiara en mobile*/
-@media (max-width: 1300px){
-  width: 100%;
-  height: 725px;
-  display: flex;
-  flex-direction: column;
-  
-}
-`;
-
-
-export const ImgVaca = styled.img`
-display:flex; 
-width: 60%;
-height: 100%;
-margin-top:24px;
-padding:70px;
-background-color:black;
-
-@media (max-width: 1450px){
-  width: 55%;
-}
-
-/* En esta seccion no se mostrara en mobile*/
-@media (max-width: 1300px){
-    border: none;
-    outline: none;
-    display: none;
-    opacity: 0;
-}
+   background: linear-gradient(0deg, rgba(200,185,224,1) 11%, rgba(217,181,195,1) 89%);
 `;
 
 
 export const GeneralFormContainer = styled.div`
    width: 100%;
-   height: 725PX;
+   height: 100vh !important;
    display: flex;
    flex-direction: column;
    align-items: center;
 `;
 
 
-export const TituloBienvenida = styled.div`
-color:black;
-font-size:14px;
-margin-top:40px;
-
-/* En esta seccion cambiara en desktop*/
-@media (min-width: 1300px){
-
-  margin-top: 35px;
-  text-align: center;
-  padding:10px;
-  background-color:black;
-  color:white;
-  width:98%;
-}
-
-`;
 
 
 export const FormContainer = styled.form`
-height: 400px;
-width: 320px;
-margin-top: 40px;
+height: 550px;
+width: 37%;
+margin-top: 90px;
 font-family: 'Inria Sans';
 display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-background-color: #FFFFFF;
-border: 1px solid #A39D9D;
+background: linear-gradient(0deg, #EEE9FF 6%, #FCE8E9 91%);
+border-radius:50px;
 
-/* En esta seccion cambiara en desktop*/
-@media (min-width: 1300px){
 
-  margin-top: 90px;
+/* En esta seccion cambiara en mobile*/
+@media (max-width: 1400px){
+
+  width: 45%;
 }
 
+/* En esta seccion cambiara en mobile*/
+@media (max-width: 900px){
+
+  width: 58%;
+}
+
+/* En esta seccion cambiara en mobile*/
+@media (max-width: 600px){
+  width: 80%;
+}
 `;
 
 
 export const BoxText = styled.div`
-display:flex;
 width: 106%;
-height: 74px; 
-background-color: black; 
-color: white;
+height: 54px; 
+color: black;
 font-family: 'Inria Sans';
-font-size: 12px;
-align-items: center;
-justify-content: center;
-margin-top: -35px;
-margin-bottom: 5px;
+flex-direction: column;
+margin-bottom: 70px;
+margin-top:-10px;
+
+.titulo-card {
+  display: flex; 
+  justify-content: start;
+  margin-left:8%;
+  
+}
 `;
+
 
 
 export const ContainerInput = styled.div`
     width: 100%;
-    height: 100px;
+    height: 120px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+
+    .input-email {
+      
+      margin-top:30px;
+      margin-bottom:10px;
+    }
+
+    .input-contraseña {
+      margin-top:30px;
+      margin-bottom:10px;
+      
+    }
 `;
 
 
 export const Label = styled.label`
     width: 100%;
-    margin-top: 10px;  
-    margin-left: 20px;
+    margin-left: 12.4%;
+
 `;
 
 export const Input = styled.input`
 height: 35px !important;
-width: 85% !important;
+width: 75% !important;
 border-radius: 10px !important;
-background-color: #E4E4E4 !important; 
+background-color: white !important; 
 outline: none !important;
 border: none !important;
 margin:0 auto  !important;
@@ -135,50 +115,72 @@ padding: 2px !important;
 
 
 export const Button = styled.button`
-  background-color: #DEC6C6;
+  background-color: transparent;
   height: 40px;
   border-radius: 10px;
-  border-style: none;
+  border-style: solid;
+  border-top-color: #BB75CB;
+  border-right-color: #D18EBA;
+  border-bottom-color: #E68C8C;
+  border-left-color: #D18EBA;
   width: 120px;
   font-size: 14px;
-  margin-top: 15px;
+  margin-top: 35px;
   cursor: pointer;
-  `
+  font-weight: medium;
+
+  /* Estilo en hover */
+  &:hover {
+    color:white;
+    background-color: #AD8FF3;
+  }
+`;
 
 
 
-export const Questions = styled.p`
+export const Questions = styled.div`
 
 text-align: right;
 font-family: Inria Sans;
-width: 245px;
-height: 52px;
-margin-top: 17px;
+width: 90%;
+height: 50px;
+margin-top: 27px;
 display: flex;
 flex-direction: column;
-justify-content: space-around;
-`
+justify-content: end;
+
+.preguntas {
+  justify-content: end;
+  margin-top:-10px;
+  margin-bottom: 15px;
+  
+ 
+
+}
+
+`;
 
 
 
 export const ButtonRegister = styled.button`
   text-decoration: none;
-  color: #C05454; 
+  color: #423163; 
   background-color: transparent;
   border: none;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 14px;
   padding: 0;
   font-family: 'Inria Sans';
- font-weight: bold;
+ font-weight:bold;
 
-  :hover{
-    text-decoration: underline;
-}
+ /* Estilo en hover */
+ &:hover {
+   color:#E68C8C;
+ }
 
 `;
 
-export const FinalParagraph = styled.p`
+export const FinalParagraph = styled.div`
 color: #000;
 text-align: center;
 font-family: Inria Sans;
@@ -189,12 +191,3 @@ margin-bottom: 10px;
 
 `;
 
-export const Compania = styled.p`
-color: #000;
-text-align: center;
-font-family: Inria Sans;
-width: 100%;
-height: 52px;
-margin-top: 17px;
-font-size: 10px;
-`;
