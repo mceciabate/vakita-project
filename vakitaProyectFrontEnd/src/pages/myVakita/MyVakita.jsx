@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../../styles/myVakitaPage.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faHandHoldingDollar} from '@fortawesome/free-solid-svg-icons';
@@ -46,12 +46,11 @@ const MyVakita = () => {
       },
     }).then(result => {
       if (!result.isDismissed) {
-      
         Swal.fire({
-          icon: 'success',
-          title: 'Ingreso de dinero exitoso',
+          icon: "success",
+          title: "Ingreso de dinero exitoso",
           showConfirmButton: false,
-          timer: 1500  
+          timer: 1500,
         });
       }
     });
