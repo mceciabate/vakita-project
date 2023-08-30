@@ -1,4 +1,8 @@
-
+.App-payment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .boxCreditCard{
 
   font-family: sans-serif;
@@ -8,6 +12,8 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+  
+ 
 }
 
 .form-group{
@@ -15,9 +21,11 @@
 }
 .boxCard{
   padding: 1rem;
-
+display: flex;
+justify-content: center;
 
 }
+
 
 .buttonCardCredit button{
   
@@ -59,6 +67,7 @@
 .formCardCredit {
   display: flex;
   flex-direction: column;
+
  
 }
 
@@ -120,16 +129,27 @@ small{
 
  thead tr { background-color:  rgb(122, 67, 204); color: #ffffff; text-align: middle; }
 
-
-
- th,  td { padding: 12px 15px; }
-
-
-
  tbody tr { border-bottom: 1px solid #dddddd; }
  tbody tr:nth-of-type(even) { background-color: #f3f3f3; } 
- tbody tr:last-of-type { border-bottom: 2px solid #009879; }
+ tbody tr:last-of-type { 
+  border-bottom: 2px solid #009879; 
+}
 
+
+
+
+th, td {
+  text-align: left;
+  padding: 12px 0px;
+  
+}
+
+.saved-cardGeneral{
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  
+
+}
  .buttonDeletedC{
   background: none;
   color: inherit;
@@ -158,7 +178,7 @@ justify-content: center;
     height: 5rem;
   }
   
- 
+  th,  td { padding: 12px 15px; }
 
 }
 

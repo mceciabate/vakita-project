@@ -10,13 +10,15 @@ function SavedCardsTable({ savedCards, onDeleteCard }) {
   }
 
   return (
+  <>
     <div className="saved-cards">
       <h3>Medio de pago asociado</h3>
+    <div className="table-container">
       <table>
         <thead>
           <tr>
             <th>Nombre de tarjeta</th>
-            <th>Numero de tarjeta</th>
+            <th>Ultimos 4 números</th>
             <th>Vencimiento</th>
             <th>CVC</th>
             <th>Acciones</th>
@@ -28,7 +30,7 @@ function SavedCardsTable({ savedCards, onDeleteCard }) {
               <td>{card.name}</td>
               <td>{card.number}</td>
               <td>{card.expiry}</td>
-              <td>{card.cvc}</td>
+              <td>***</td>
               <td>
                 <button className="buttonDeletedC" onClick={() => onDeleteCard(index)}> <FontAwesomeIcon icon={faTrashCan} /></button>
               </td>
@@ -37,6 +39,8 @@ function SavedCardsTable({ savedCards, onDeleteCard }) {
         </tbody>
       </table>
     </div>
+    </div>
+    </>
   );
 }
 

@@ -31,18 +31,24 @@ function PaymentForm({ paymentDetails, onPaymentDetailsChange }) {
     initialValues: paymentDetails,
     validationSchema: validationSchema,
     onSubmit: values => {
-      // Handle submission if needed
-      if (values.number) {
-        setSavedCards([...savedCards, values]);
-        onPaymentDetailsChange({
-          number: '',
-          name: '',
-          expiry: '',
-          cvc: '',
-          focused: '',
-        });
-        formik.resetForm();
-      }
+        if (values.number) {
+            const lastFourDigits = values.number.slice(-4); 
+            const cardData = {
+              name: values.name,
+              number: lastFourDigits, 
+              expiry: values.expiry,
+              cvc: values.cvc,
+            };
+            setSavedCards([...savedCards, cardData]);
+            onPaymentDetailsChange({
+              number: '',
+              name: '',
+              expiry: '',
+              cvc: '',
+              focused: '',
+            });
+            formik.resetForm();
+          }
     },
   });
 
@@ -158,7 +164,7 @@ function PaymentForm({ paymentDetails, onPaymentDetailsChange }) {
                     <small>CVC:</small>
                   </div>
                   <input
-                    type="tel"
+                    type="password"
                     name="cvc"
                     className="form-control"
                     placeholder=""
@@ -181,7 +187,7 @@ function PaymentForm({ paymentDetails, onPaymentDetailsChange }) {
           </div>
         </form>
 
-        <div className="saved-cards">
+        <div className="saved-cardGeneral">
           <SavedCardsTable savedCards={savedCards} onDeleteCard={handleDeleteCard} />
         </div>
       </div>
