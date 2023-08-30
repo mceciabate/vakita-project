@@ -5,25 +5,16 @@ export const PerfilContainer = styled.div`
     flex-direction: column;
     align-items: center;
     width: 100%;
-    margin: 1rem 0;
+    margin: 2rem 0;
     background: -webkit-linear-gradient(#FFFFFF, #CCC3C3);
     height: 100vh;
 `;
 
-export const ProfileHeader = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
+export const H2 = styled.h2`
     margin-bottom: 1rem;
-
-    img {
-        width: 20px;
-    }
-
-    h2 {
-        font-size: 1.5rem;
-    }
+    width: 90%;
+    font-size: 1.2rem;
+    text-align: left;
 `;
 
 export const Hr = styled.hr`

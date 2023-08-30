@@ -1,4 +1,5 @@
-import { Hr, Li, ListDiv, PerfilContainer, ProfileHeader } from './styled';
+import PanelProfile from '../../assets/PanelProfile/PanelProfile';
+import { H2, Li, ListDiv, PerfilContainer } from "./styled";
 import { useState, useEffect } from "react";
 
 const Perfil = () => {
@@ -11,23 +12,13 @@ const Perfil = () => {
       .then(response => response.json())
       .then(data => setUser(data))
       .catch(error => console.error(error));
-  },[]);
-
-  useEffect(() => {
-    console.log(user);
-  },[user])
+  },[userId]);
 
     return (
       <PerfilContainer>
-        <ProfileHeader>
-          <h2>
-            <img src="" />
-            Mi Perfil
-          </h2>
-          <p>Acá puedes ver tus datos de cuenta</p>
-        </ProfileHeader>
+          <H2>Mi Perfil</H2>
 
-        <Hr />
+        <PanelProfile img={"https://i.pinimg.com/1200x/b1/27/ec/b127ec5f10f9c07ecb04996116d1306e.jpg"} nameUser={user.name} subtitle='VAKITA USER'/>
 
         <ListDiv>
           <Li>
