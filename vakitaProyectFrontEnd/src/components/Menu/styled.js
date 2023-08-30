@@ -5,7 +5,7 @@ export const MenuLateral = styled.section`
 display: none;
     
     padding: 2.5rem 1rem;
-    
+    background-color: #664E94;
     font-family: 'Inria Sans', sans-serif;
     
     .botonSalir{
@@ -19,7 +19,6 @@ display: none;
         position: fixed;
         bottom: 0;
         width: 375px;
-       
     }
 
     .textExit{
@@ -94,14 +93,11 @@ export const BloqueOptions = styled.div`
     width: 100%;
     height: 100%;
     margin-top: 10px;
-   
-    
-    /* margin-top: 50px; */
 
     a {
         padding: 0.8rem;
         cursor: pointer;
-        color:black;
+        color: #fff;
         font-family: arial;
         
     }
@@ -109,6 +105,7 @@ export const BloqueOptions = styled.div`
     hr {
         margin-top:30px;
         margin-bottom:50px;
+        border: 2px solid rgba(0, 0, 0, 0.17);
     }
 
     @media (max-width: 768px){
