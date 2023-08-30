@@ -11,6 +11,7 @@ import com.grupo3.msusuarios.repository.IUserRepository;
 import com.grupo3.msusuarios.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,13 +28,16 @@ public class UserService implements IUserService {
 
     private final JwtService jwtService;
 
+    private final PasswordEncoder encoder;
+
 
     @Autowired
-    public UserService(IUserRepository userRepository, ObjectMapper mapper, NewUserEventProducer event, JwtService jwtService) {
+    public UserService(IUserRepository userRepository, ObjectMapper mapper, NewUserEventProducer event, JwtService jwtService, PasswordEncoder encoder) {
         this.userRepository = userRepository;
         this.mapper = mapper;
         this.event = event;
         this.jwtService = jwtService;
+        this.encoder = encoder;
     }
 
     @Override
@@ -101,7 +105,8 @@ public class UserService implements IUserService {
         try {
             User user = userRepository.findById(id).orElse(null);
             if(user != null){
-                user.setPassword(newPassword);
+                String encoderPass = this.encoder.encode(newPassword);
+                user.setPassword(encoderPass);
                 userRepository.save(user);
                 return true;
             }else {
