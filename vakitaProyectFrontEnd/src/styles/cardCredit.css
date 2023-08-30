@@ -1,88 +1,164 @@
-.App {
-    font-family: sans-serif;
-    text-align: left;
 
+.boxCreditCard{
+
+  font-family: sans-serif;
+  text-align: left;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.form-group{
+  margin-top: 1.5rem;
+}
+.boxCard{
+  padding: 1rem;
+
+
+}
+
+.buttonCardCredit button{
+  
+ 
+  display: inline-block;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 500;
+  border-radius: 4px;
+  font-size: 14px;
+  height: 40px;
+  padding: 0px 15px;
+  text-shadow: rgb(0 0 0 / 25%) 0px 3px 8px;
+  background: linear-gradient(92.88deg, rgb(69, 94, 181) 9.16%, rgb(86, 67, 204) 43.89%, rgb(103, 63, 215) 64.72%);
+  transition: all 0.5s ease 0s;
+  
+  
+
+  
+}
+
+.buttonCardCredit button:hover{
+  box-shadow: rgb(80 63 205 / 50%) 0px 1px 40px;
+  transition: all 0.1s ease 0s;
+}
+
+.formCardCredit{
+  background: linear-gradient(0deg, #EEE9FF 6%, #FCE8E9 91%);
+  box-shadow: 0 6px 8px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 0px );
+  -webkit-backdrop-filter: blur( 0px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+
+.formCardCredit {
+  display: flex;
+  flex-direction: column;
+ 
+}
+
+.dataCardCredit{
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.column-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin: 0 10px; 
+ 
+}
+
+
+.boxCard {
+  width: 50%;
+}
+
+
+.buttonCardCredit {
+display: flex;
+  align-self: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.errorCreditCard{
+  display: block;
+  color: red;
+  font-style: italic;
+
+}
+
+.boxInput input{
+  height: 35px !important;
+width: 100% !important;
+border-radius: 10px !important;
+background-color: white !important; 
+outline: none !important;
+border: none !important;
+/* margin:0 auto  !important; */
+padding: 2px !important;
+}
+
+.boxInput{
+ 
+  height: 6rem;
+}
+
+small{
+  font-weight: 500;
+  font-size: 16px;
+
+}
+
+ thead tr { background-color:  rgb(122, 67, 204); color: #ffffff; text-align: middle; }
+
+
+
+ th,  td { padding: 12px 15px; }
+
+
+
+ tbody tr { border-bottom: 1px solid #dddddd; }
+ tbody tr:nth-of-type(even) { background-color: #f3f3f3; } 
+ tbody tr:last-of-type { border-bottom: 2px solid #009879; }
+
+ .buttonDeletedC{
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  font-size: 20px;
+  color:#bf1717 ;
+  display: flex;
+width: 100%;
+justify-content: center;
+
+
+}
+@media only screen and (min-width: 767px) {
+  .App-payment {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
-  
   }
-  .form {
-    margin: 30px auto 0;
-    max-width: 400px;
-  }
-  .front {
-    position: relative;
-    transform: rotateY(0deg);
-    background-color: red;
-  }
-  .back {
-    position: relative;
-    transform: rotateY(180deg);
-    background-color: yellow;
-  }
-  .rccs__card {
-    height: 182.873px;
-    margin-top: 10;
-    margin-bottom: 10;
-    position: relative;
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-    -webkit-transition: all 0.4s linear;
-    transition: all 0.4s linear;
-    width: 290px;
-  
-    /* background: linear-gradient(
-     25deg
-  , #986, #234); */
+
+  .boxInput{
+ 
+    height: 5rem;
   }
   
-  .front1 {
-    display: flex;
-    margin-top: 30px;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    background-color: red;
-  }
-  
-  .back1 {
-    transform: rotateY(360deg);
-    margin-bottom: 30px !important;
-    background-color: yellow;
-  }
-  .App-cards-list {
-    display: flex;
-    margin-top: 30px;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  
-  .App-cards-list > * {
-    transform: scale(0.8);
-    margin-bottom: 30px !important;
-  }
-  
-  .back3 {
-    display: flex;
-    position: relative;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    background-image: url("../../public/images/6.jpeg");
-  }
-  /* rccs-signature-background: repeating-linear-gradient(
-    0.1deg,
-    #fff 20%,
-    #fff 40%,
-    #fea 40%,
-    #fea 44%,
-    #fff 44%
-  );
-  rccs-default-background: linear-gradient(25deg, #d32121, #178a63);
-  rccs-unknown-background: linear-gradient(25deg, rgb(160, 18, 101), #999);
-  rccs-background-transition: 0.5s;
-  rccs-animate-background: true; */
-  
-  .rccs__card--unknown > div {
-    background-image: url("../../public/images/6.jpeg");
-  }
+ 
+
+}
+
