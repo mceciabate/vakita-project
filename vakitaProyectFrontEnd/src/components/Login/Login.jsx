@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { Link } from 'react-router-dom';
 
 import Swal from "sweetalert2";
 import { useUser } from '../../context/UserProvider';
@@ -12,14 +13,79 @@ import axios from 'axios';
 
 
 function Login() {
-  
+    
+
+
 
     const { loginData,  setLogged } = useUser();
 
     const navigate = useNavigate();
 
-   
-          
+    const handlePasswordChange = () => {
+        Swal.fire({
+            title: 'Cambiar Contraseña',
+            html:
+                `<input type="password" id="newPassword" class="swal2-input" placeholder="Nueva Contraseña">
+                 <input type="password" id="confirmNewPassword" class="swal2-input" placeholder="Confirmar">`,
+            focusConfirm: false,
+            showCancelButton: true,
+            cancelButtonText: 'Cancelar',
+            preConfirm: () => {
+                const newPassword = Swal.getPopup().querySelector('#newPassword').value;
+                const confirmNewPassword = Swal.getPopup().querySelector('#confirmNewPassword').value;
+                
+                if (!newPassword || !confirmNewPassword || newPassword !== confirmNewPassword) {
+                    Swal.showValidationMessage('Por favor, completa los campos y asegúrate de que las contraseñas coincidan');
+                }
+                
+                return { newPassword, confirmNewPassword };
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const newPassword = result.value.newPassword;
+                const userId = localStorage.getItem("userId"); 
+        
+                axios.put(
+                    `http://107.22.65.36:8080/api/v1/usuarios/${userId}`,
+                    {
+                        password: newPassword,
+                    },
+                    {
+                        headers: {
+                            "Content-type": "application/json",
+                            "Accept": "application/json",
+                            
+                        },
+                    }
+                )
+                .then((response) => {
+                    // La contraseña se ha cambiado exitosamente en el servidor
+                    console.log("Contraseña cambiada exitosamente:", response.data);
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Contraseña Cambiada',
+                        text: '¡Tu contraseña ha sido cambiada exitosamente!',
+                    });
+                })
+                .catch((error) => {
+                    console.error("Error al cambiar contraseña:", error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Hubo un problema al intentar cambiar la contraseña',
+                    });
+                });
+            }
+        });
+        
+    };
+    
+    
+    
+    
+    
+    
+    
   
     
     const formik = useFormik({
@@ -154,17 +220,18 @@ function Login() {
                     <Button className="continuar" type='submit'>Continuar </Button>
 
                     <Questions>
-                        <h5 className='preguntas'>¿Olvidaste tu email?</h5>
-                        <h5 className='preguntas'>¿Olvidaste tu contraseña?</h5>
+                       
+                    <h5 className='preguntas'>
+      ¿Olvidaste tu contraseña? <ButtonRegister type="button" onClick={handlePasswordChange} >Click Aquí</ButtonRegister> </h5>
+                        <h5 className='preguntas'>¿No tienes una cuenta?  <Link to="/register"> <ButtonRegister type="button"  >Creala aquí</ButtonRegister></Link> </h5>
                     </Questions>
 
                 </FormContainer>
 
-                <FinalParagraph>
+                {/* <FinalParagraph>
                     <h5>¿No tienes una cuenta?, <ButtonRegister >Creala aquí</ButtonRegister>  </h5>
 
-                </FinalParagraph>
-
+                </FinalParagraph> */}
 
 
 
