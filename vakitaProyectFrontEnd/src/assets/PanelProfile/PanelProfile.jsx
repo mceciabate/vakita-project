@@ -1,13 +1,13 @@
-import { ProfileContainer } from "./styled"
+import { ImgProfile, ProfileContainer, Subtitle, UserName } from "./styled"
 
 // eslint-disable-next-line react/prop-types
 const PanelProfile = ({img, nameUser, subtitle=""}) => {
 
     return (
         <ProfileContainer>
-            <img src={img} />
-            <h2>{nameUser}</h2>
-            {subtitle !== "" ? <h5>{subtitle}</h5> : <></>}
+            <ImgProfile src={img} />
+            <UserName>{nameUser}</UserName>
+            {subtitle !== "" ? <Subtitle>{subtitle}</Subtitle> : <></>}
         </ProfileContainer>
     )
 }

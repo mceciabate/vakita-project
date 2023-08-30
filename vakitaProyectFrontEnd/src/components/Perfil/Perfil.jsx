@@ -18,7 +18,7 @@ const Perfil = () => {
       <PerfilContainer>
           <H2>Mi Perfil</H2>
 
-        <PanelProfile img={"https://i.pinimg.com/1200x/b1/27/ec/b127ec5f10f9c07ecb04996116d1306e.jpg"} nameUser={user.name} subtitle='VAKITA USER'/>
+        <PanelProfile img={"https://i.pinimg.com/1200x/b1/27/ec/b127ec5f10f9c07ecb04996116d1306e.jpg"} nameUser={user.name + " " + user.lastName} subtitle='VAKITA USER'/>
 
         <ListDiv>
           <Li>

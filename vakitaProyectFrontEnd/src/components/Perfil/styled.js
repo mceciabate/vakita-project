@@ -6,8 +6,9 @@ export const PerfilContainer = styled.div`
     align-items: center;
     width: 100%;
     margin: 2rem 0;
-    background: -webkit-linear-gradient(#FFFFFF, #CCC3C3);
+    /* background: -webkit-linear-gradient(#FFFFFF, #CCC3C3); */
     height: 100vh;
+    gap: 3rem;
 `;
 
 export const H2 = styled.h2`
