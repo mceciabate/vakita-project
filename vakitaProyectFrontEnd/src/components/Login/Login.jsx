@@ -25,59 +25,105 @@ function Login() {
         Swal.fire({
             title: 'Cambiar Contraseña',
             html:
-                `<input type="password" id="newPassword" class="swal2-input" placeholder="Nueva Contraseña">
-                 <input type="password" id="confirmNewPassword" class="swal2-input" placeholder="Confirmar">`,
+                `<input type="email" id="email" class="swal2-input" placeholder="Email">`,
             focusConfirm: false,
             showCancelButton: true,
             cancelButtonText: 'Cancelar',
             preConfirm: () => {
-                const newPassword = Swal.getPopup().querySelector('#newPassword').value;
-                const confirmNewPassword = Swal.getPopup().querySelector('#confirmNewPassword').value;
-                
-                if (!newPassword || !confirmNewPassword || newPassword !== confirmNewPassword) {
-                    Swal.showValidationMessage('Por favor, completa los campos y asegúrate de que las contraseñas coincidan');
+                const email = Swal.getPopup().querySelector('#email').value;
+    
+                if (!email) {
+                    Swal.showValidationMessage('Por favor, ingresa un correo electrónico válido');
                 }
-                
-                return { newPassword, confirmNewPassword };
+    
+                return { email };
             }
         }).then((result) => {
             if (result.isConfirmed) {
-                const newPassword = result.value.newPassword;
-                const userId = localStorage.getItem("userId"); 
-        
-                axios.put(
-                    `http://107.22.65.36:8080/api/v1/usuarios/${userId}`,
-                    {
-                        password: newPassword,
-                    },
-                    {
-                        headers: {
-                            "Content-type": "application/json",
-                            "Accept": "application/json",
-                            
-                        },
-                    }
-                )
-                .then((response) => {
-                    // La contraseña se ha cambiado exitosamente en el servidor
-                    console.log("Contraseña cambiada exitosamente:", response.data);
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Contraseña Cambiada',
-                        text: '¡Tu contraseña ha sido cambiada exitosamente!',
+                const { email } = result.value;
+    
+                
+                axios.get('http://107.22.65.36:8080/api/v1/usuarios')
+                    .then((response) => {
+                        const users = response.data;
+                        const userWithMatchingEmail = users.find(user => user.email === email);
+    
+                        if (userWithMatchingEmail) {
+                            const userId = userWithMatchingEmail.id;
+    
+                            Swal.fire({
+                                title: 'Cambiar Contraseña',
+                                html:
+                                    `<input type="password" id="newPassword" class="swal2-input" placeholder="Nueva Contraseña">
+                                     <input type="password" id="confirmNewPassword" class="swal2-input" placeholder="Confirmar">`,
+                                focusConfirm: false,
+                                showCancelButton: true,
+                                cancelButtonText: 'Cancelar',
+                                preConfirm: () => {
+                                    const newPassword = Swal.getPopup().querySelector('#newPassword').value;
+                                    const confirmNewPassword = Swal.getPopup().querySelector('#confirmNewPassword').value;
+    
+                                    if (!newPassword || !confirmNewPassword || newPassword !== confirmNewPassword) {
+                                        Swal.showValidationMessage('Por favor, completa los campos y asegúrate de que las contraseñas coincidan');
+                                    }
+    
+                                    return { userId, newPassword, confirmNewPassword };
+                                }
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    const { userId, newPassword, confirmNewPassword } = result.value;
+    
+                                    
+                                    axios.patch(
+                                        `http://107.22.65.36:8080/api/v1/usuarios/${userId}`,
+                                        {
+                                            password: newPassword,
+                                        },
+                                        {
+                                            headers: {
+                                                "Content-type": "application/json",
+                                                "Accept": "application/json",
+                                            
+                                            },
+                                        }
+                                    )
+                                    .then((response) => {
+                                        
+                                        console.log("Contraseña cambiada exitosamente:", response.data);
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'Contraseña Cambiada',
+                                            text: '¡Tu contraseña ha sido cambiada exitosamente!',
+                                        });
+                                    })
+                                    .catch((error) => {
+                                        console.error("Error al cambiar contraseña:", error);
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Error',
+                                            text: 'Hubo un problema al intentar cambiar la contraseña',
+                                        });
+                                    });
+                                }
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Usuario no encontrado',
+                                text: 'No se encontró ningún usuario con el correo electrónico proporcionado',
+                            });
+                        }
+                    })
+                    .catch((error) => {
+                        console.error("Error al obtener usuarios:", error);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Hubo un problema al intentar obtener la lista de usuarios',
+                        });
                     });
-                })
-                .catch((error) => {
-                    console.error("Error al cambiar contraseña:", error);
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Hubo un problema al intentar cambiar la contraseña',
-                    });
-                });
             }
         });
-        
     };
     
     
@@ -228,10 +274,7 @@ function Login() {
 
                 </FormContainer>
 
-                {/* <FinalParagraph>
-                    <h5>¿No tienes una cuenta?, <ButtonRegister >Creala aquí</ButtonRegister>  </h5>
-
-                </FinalParagraph> */}
+              
 
 
 
