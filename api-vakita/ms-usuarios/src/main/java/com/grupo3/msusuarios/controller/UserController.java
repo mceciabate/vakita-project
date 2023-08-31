@@ -96,7 +96,7 @@ public class UserController {
         logg.info(userDTO.toString());
         if (result.hasErrors()) {
             logg.error("error: "+ FormatMessage.formatMessage(result));
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, FormatMessage.formatMessage(result));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(FormatMessage.formatMessage(result));
         }
         try {
             logg.info("saved");
@@ -105,8 +105,8 @@ public class UserController {
                 return ResponseEntity.status(HttpStatus.CREATED).body("Usuario registrado. Se ha enviado un correo de confirmación.");
             }
             else {
-                logg.info("Mail duplicado");
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El mail ya se encuentra registrado");
+                logg.error("error: email duplicado");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. El email ya se encuentra registrado.\"}");
             }
         } catch (Exception e) {
             logg.error("error: "+ e.getMessage());
@@ -121,7 +121,57 @@ public class UserController {
         try {
             logg.info("confirmed");
             confirmationTokenService.confirmUser(token);
-            return ResponseEntity.status(HttpStatus.OK).body("Cuenta confirmada exitosamente.");
+            return ResponseEntity.status(HttpStatus.OK).body("<!DOCTYPE html>\n" +
+                    "<html lang=\"en\">\n" +
+                    "<head>\n" +
+                    "    <meta charset=\"UTF-8\">\n" +
+                    "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
+                    "    <title>Account Created</title>\n" +
+                    "    <style>\n" +
+                    "        .header {\n" +
+                    "          width: 100%;\n" +
+                    "          height: 100px;\n" +
+                    "          display: flex;\n" +
+                    "          align-items: center;\n" +
+                    "          justify-content: space-between;\n" +
+                    "          background: linear-gradient(0deg, #664e94 10%, #423163 90%);\n" +
+                    "          position: sticky;\n" +
+                    "          z-index: 999;\n" +
+                    "          box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.20); \n" +
+                    "        }\n" +
+                    "        .body {\n" +
+                    "          width: 100%;\n" +
+                    "          height: 100vh;\n" +
+                    "          display: flex;\n" +
+                    "          justify-content: center;\n" +
+                    "          align-items: center;\n" +
+                    "          background: linear-gradient(0deg, rgba(200,185,224,1) 11%, rgba(217,181,195,1) 89%);\n" +
+                    "        }\n" +
+                    "        .container{\n" +
+                    "          height: 300px;\n" +
+                    "          margin-top: -8px;\n" +
+                    "          width: 50%;\n" +
+                    "          display: flex;\n" +
+                    "          font-family: 'Inria Sans';\n" +
+                    "          justify-content: center;\n" +
+                    "          align-items: center;\n" +
+                    "          flex-direction: column;\n" +
+                    "          background: linear-gradient(0deg, #EEE9FF 6%, #FCE8E9 91%);\n" +
+                    "          border-radius:50px;\n" +
+                    "          margin-bottom: 100px;\n" +
+                    "        }\n" +
+                    "      </style>\n" +
+                    "</head>\n" +
+                    "<body>\n" +
+                    "    <div class=\"header\"></div>\n" +
+                    "  <div class=\"body\">\n" +
+                    "    <div class=\"container\">\n" +
+                    "      <h1>Cuenta confirmada exitosamente!</h1>\n" +
+                    "      <h2>Ir al login</h2>\n" +
+                    "    </div>\n" +
+                    "  </div>\n" +
+                    "</body>\n" +
+                    "</html>");
         } catch (Exception e) {
             logg.error("error: "+ e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor, intente mas tarde.\"}");
@@ -135,11 +185,10 @@ public class UserController {
         logg.info(userDTO.toString());
         if (result.hasErrors()) {
             logg.error("error: "+ FormatMessage.formatMessage(result));
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, FormatMessage.formatMessage(result));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(FormatMessage.formatMessage(result));
         }
         try {
             if (!userDTO.getId().equals(id)) {
-//                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "{\"error\":\"Los Ids no coinciden\"}");
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Los Ids no coinciden\"}");
             }
             UserDTO findUserDTO = userService.findById(id);
