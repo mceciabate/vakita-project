@@ -1,10 +1,7 @@
 package com.grupo3.msusuarios.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.grupo3.msusuarios.model.dto.AuthRequestDTO;
-import com.grupo3.msusuarios.model.dto.AuthResponseDTO;
-import com.grupo3.msusuarios.model.dto.UserDTO;
-import com.grupo3.msusuarios.model.dto.UserWithoutPasswordDTO;
+import com.grupo3.msusuarios.model.dto.*;
 import com.grupo3.msusuarios.service.IUserService;
 import com.grupo3.msusuarios.service.impl.ConfirmationTokenService;
 import com.grupo3.msusuarios.util.FormatMessage;
@@ -180,7 +177,7 @@ public class UserController {
 
     @Operation(summary = "Actualiza un usuario por el id")
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateUserById(@PathVariable Long id, @Valid @RequestBody UserDTO userDTO, BindingResult result) {
+    public ResponseEntity<?> updateUserById(@PathVariable Long id, @Valid @RequestBody UserUpdateDTO userDTO, BindingResult result) {
         logg.info("Metodo updateUserById");
         logg.info(userDTO.toString());
         if (result.hasErrors()) {
@@ -188,9 +185,6 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(FormatMessage.formatMessage(result));
         }
         try {
-            if (!userDTO.getId().equals(id)) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Los Ids no coinciden\"}");
-            }
             UserDTO findUserDTO = userService.findById(id);
             if (findUserDTO == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"No se encontraron registros con ese ID.\"}");
@@ -205,12 +199,12 @@ public class UserController {
 
     @Operation(summary = "Actualiza password del usuario por el id")
     @PatchMapping("/{id}")
-    public ResponseEntity<?> changeUserPasswordById(@PathVariable Long id, @Valid @RequestBody UserDTO newPassword, BindingResult result) {
+    public ResponseEntity<?> changeUserPasswordById(@PathVariable Long id, @Valid @RequestBody UserPasswordDTO newPassword, BindingResult result) {
         logg.info("Metodo changeUserPasswordById");
         logg.info(newPassword);
         if (result.hasErrors()) {
             logg.error("error: "+ FormatMessage.formatMessage(result));
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, FormatMessage.formatMessage(result));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(FormatMessage.formatMessage(result));
         }
         try {
             boolean changePassword = userService.changePassword(id, newPassword.getPassword());
