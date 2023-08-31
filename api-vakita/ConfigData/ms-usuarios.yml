@@ -30,7 +30,7 @@ spring:
     username: 0723TDPI2N1C01LAED1021FT_GRUPO3
     password: ahjoh5Lu
   jpa:
-    hibernate.ddl-auto: create-drop
+    hibernate.ddl-auto: update
     generate-ddl: true
     show-sql: true
     properties:
