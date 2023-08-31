@@ -86,7 +86,7 @@ public class VakitaServiceTest {
 
     @Test
     public void eModifyAmount() throws ResourceNotFoundException, BadRequestException{
-        vakitaService.modifyAmount(100.0, 1L);
+        vakitaService.modifyAmount(1L,100.0, 1L);
         VakitaDTO vakitaModificada = vakitaService.getVakitaById(1L);
         Assertions.assertTrue(vakitaModificada.getCumulativeAmount().equals(100.0));
     }

@@ -29,7 +29,6 @@ public class User implements Serializable{
     private List<Vakita> vakitas;
 
 
-
     //CONTRUCTOR SIN ARRAY DE VAKITAS
     public User(Long id, String email) {
         this.id = id;

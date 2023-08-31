@@ -3,10 +3,13 @@ package com.grupo3.msvakitas.service.impl;
 import com.grupo3.msvakitas.event.NewVakitaEventProducer;
 import com.grupo3.msvakitas.handler.BadRequestException;
 import com.grupo3.msvakitas.handler.ResourceNotFoundException;
+import com.grupo3.msvakitas.model.dto.TransactionDTO;
 import com.grupo3.msvakitas.model.dto.UserForTransactionRabbitDTO;
 import com.grupo3.msvakitas.model.dto.UserDTO;
 import com.grupo3.msvakitas.model.dto.VakitaDTO;
+import com.grupo3.msvakitas.model.entity.Transaction;
 import com.grupo3.msvakitas.model.entity.Vakita;
+import com.grupo3.msvakitas.repository.ITransactionRepository;
 import com.grupo3.msvakitas.repository.IVakitaRepository;
 import com.grupo3.msvakitas.service.IVakitaService;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +39,9 @@ public class VakitaService implements IVakitaService {
 
     @Autowired
     private UsuarioService usuarioService;
+
+    @Autowired
+    private ITransactionRepository tRepository;
 
 
 
@@ -103,7 +109,7 @@ public class VakitaService implements IVakitaService {
 
     //Método para modificar el saldo de una vaquita
     @Override
-    public void modifyAmount(Double amount, Long vakitaId) throws ResourceNotFoundException, BadRequestException{
+    public void modifyAmount(Long userID, Double amount, Long vakitaId) throws ResourceNotFoundException, BadRequestException{
         VakitaDTO vakitaModify = this.getVakitaById(vakitaId);
         Double amountDiference = vakitaModify.getTotalAmount() - vakitaModify.getCumulativeAmount();
         if(vakitaModify.getIsActive() && amount <= amountDiference ){
@@ -111,6 +117,8 @@ public class VakitaService implements IVakitaService {
             vakitaModify.setCumulativeAmount(deposit);
             log.info("Success, amount update: "+ vakitaModify.getCumulativeAmount());
             this.updateVakita(vakitaId, vakitaModify);
+            TransactionDTO transactionDTO = new TransactionDTO(userID, vakitaId, amount);
+            tRepository.save(mapper.map(transactionDTO, Transaction.class));
         }
         else if(!vakitaModify.getIsActive()){
             throw new BadRequestException("Para depositar dinero la vakita debe estar activa");
