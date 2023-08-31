@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../../styles/myVakitaPage.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faHandHoldingDollar} from '@fortawesome/free-solid-svg-icons';
@@ -7,6 +7,7 @@ import { Doughnut } from 'react-chartjs-2';
 import 'chart.js/auto';
 import axios from 'axios';
 import Swal from "sweetalert2";
+import jwt_decode from "jwt-decode";
 
 
 const MyVakita = () => {
@@ -14,10 +15,14 @@ const MyVakita = () => {
   const [allMyVakita, setAllMyVakita] = useState([]);
   const [cardNumber, setCardNumber] = useState("");
   const [amount, setAmount] = useState(0);
-
+  
 
   const token = JSON.parse(localStorage.getItem("token"));
   const userId = localStorage.getItem("userId")
+
+  const decoded = jwt_decode(token);
+  const emailUser= decoded.sub
+
 
   const payVakita= ()=>{
     Swal.fire({
@@ -41,12 +46,11 @@ const MyVakita = () => {
       },
     }).then(result => {
       if (!result.isDismissed) {
-      
         Swal.fire({
-          icon: 'success',
-          title: 'Ingreso de dinero exitoso',
+          icon: "success",
+          title: "Ingreso de dinero exitoso",
           showConfirmButton: false,
-          timer: 1500  
+          timer: 1500,
         });
       }
     });
@@ -72,6 +76,7 @@ const MyVakita = () => {
   
 
   const renderDataMyVakita = () => {
+    
     return allMyVakita?.map((vakita, index) => {
       // const totalContributed = vakita.contributors.reduce(
       //   (total, contributor) => total + contributor.amount,
@@ -85,6 +90,14 @@ const MyVakita = () => {
       const remainingAmount = vakita.totalAmount - totalContributed;
       const totalPercentage = (totalContributed / vakita.totalAmount) * 100;
       const remainingPercentage = 100 - totalPercentage;
+
+      const sortedContributors = [...vakita.contributors];
+      const matchingContributorIndex = sortedContributors.findIndex(contributor => contributor.email === emailUser);
+  
+      if (matchingContributorIndex !== -1) {
+        const matchingContributor = sortedContributors.splice(matchingContributorIndex, 1)[0];
+        sortedContributors.unshift(matchingContributor);
+      }
       return (
         <div className="cardMyVakita" key={index}>
 
@@ -128,17 +141,19 @@ const MyVakita = () => {
               />
             </div>
             <div className='memebersMyVakita'>
-              {vakita.contributors.map((contributor, index) => (
-                <div key={index}>
-                  <div className='usersMyVakita'>
-                    <div className='userIcon'>
-                      <FontAwesomeIcon icon={faUser} />
-                    </div>
-                    <p>{contributor.email}</p>
-                  </div>
-                  
-                </div>
-              ))}
+            {sortedContributors.map((contributor, cIndex) => (
+            <div
+              key={cIndex}
+              className={`usersMyVakita ${
+                contributor.email === emailUser ? 'highlighted' : ''
+              }`}
+            >
+              <div className={`userIcon ${contributor.email === emailUser ? 'youIcon' : ''}`}>
+                <FontAwesomeIcon icon={faUser} />
+              </div>
+              <p>{contributor.email === emailUser ? 'Tú' : contributor.email}</p>
+            </div>
+          ))}
               
             </div>
           </div>

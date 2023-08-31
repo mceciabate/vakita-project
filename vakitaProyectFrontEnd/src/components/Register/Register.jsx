@@ -14,7 +14,7 @@ import {
 } from "./Register.styled.jsx";
 
 
-function Register() {
+function Registerr() {
 
   const maxYear = () => {
 
@@ -38,6 +38,7 @@ function Register() {
     validationSchema: Yup.object({
       name: Yup.string().required("Nombre es requerido"),
       lastName: Yup.string().required("Apellido es requerido"),
+     dni: Yup.string().required("Dni es requerido"),
       email: Yup.string().email("No es un correo valido").required("Correo es requerido"),
       birthdate: Yup.date().max(maxYear(), "Se debe ser mayor de 18 años").required("Fecha de nacimiento es requerida"),
       password: Yup.string().min(4, "Debe contener 4 digitos o más").max(50).required("Contraseña es requerida"),
@@ -121,7 +122,7 @@ function Register() {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.name && formik.errors.name && (<ErrorSpan>{formik.errors.lastName}</ErrorSpan>)}
+              {formik.touched.lastName && formik.errors.lastName && (<ErrorSpan>{formik.errors.lastName}</ErrorSpan>)}
 
 
               <Label htmlFor="dni">Tu dni</Label>
@@ -133,7 +134,7 @@ function Register() {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.name && formik.errors.name && (<ErrorSpan>{formik.errors.dni}</ErrorSpan>)}
+              {formik.touched.dni && formik.errors.dni && (<ErrorSpan>{formik.errors.dni}</ErrorSpan>)}
 
 
 
@@ -146,7 +147,7 @@ function Register() {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.name && formik.errors.name && (<ErrorSpan>{formik.errors.email}</ErrorSpan>)}
+              {formik.touched.email && formik.errors.email && (<ErrorSpan>{formik.errors.email}</ErrorSpan>)}
 
               {/* Añade más campos aquí según tus necesidades */}
             </div>
@@ -162,7 +163,7 @@ function Register() {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.name && formik.errors.name && (<ErrorSpan>{formik.errors.birthdate}</ErrorSpan>)}
+             {formik.touched.birthdate && formik.errors.birthdate && (<ErrorSpan>{formik.errors.birthdate}</ErrorSpan>)}
               <Label htmlFor="password">Contraseña</Label>
               <Input
                 type="password"
@@ -173,7 +174,7 @@ function Register() {
                 onBlur={formik.handleBlur}
               />
 
-              {formik.touched.name && formik.errors.name && (<ErrorSpan>{formik.errors.password}</ErrorSpan>)}
+             {formik.touched.password && formik.errors.password && (<ErrorSpan>{formik.errors.password}</ErrorSpan>)}
 
               <Label htmlFor="passwordConfirm">Confirmar contraseña</Label>
               <Input
@@ -184,7 +185,7 @@ function Register() {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.name && formik.errors.name && (<ErrorSpan>{formik.errors.passwordConfirm}</ErrorSpan>)}
+              {formik.touched.passwordConfirm && formik.errors.passwordConfirm && (<ErrorSpan>{formik.errors.passwordConfirm}</ErrorSpan>)}
 
               <Button className="continuar" type='submit'>Continuar </Button>
 
@@ -199,4 +200,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default Registerr;

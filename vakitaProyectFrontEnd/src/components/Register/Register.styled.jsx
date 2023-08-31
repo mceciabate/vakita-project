@@ -62,7 +62,11 @@ width: 100%;
 height: 100px;
 display: flex;
 flex-direction: row;
+<<<<<<< HEAD
 justify-content: between;
+=======
+justify-content: space-between;
+>>>>>>> e49e78e38682ae221f3b372d0cbc75a0a7418200
 margin-left:13%;
 
 .contedor-form1 {
@@ -82,7 +86,11 @@ margin-left:13%;
 export const Label = styled.label`
 width: 100%;
 margin-top: 10px;  
+<<<<<<< HEAD
 text-aling:right;
+=======
+/* text-align:right; */
+>>>>>>> e49e78e38682ae221f3b372d0cbc75a0a7418200
 margin-top: 10px !important;
 `;
 export const Input = styled.input`

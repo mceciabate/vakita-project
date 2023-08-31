@@ -128,7 +128,19 @@ background-color: #D18EBA;
 color: #fdfde7;
 }
    
+.highlighted  {
+    color: #e3d7de;
+    font-weight: 800;
+    background-color: #7c4d86;
+   
+   
+  }
 
+
+  .usersMyVakita .youIcon {
+    
+    color: #D18EBA;
+  }
 @media only screen and (min-width: 767px) {
     .chartContainer{
  

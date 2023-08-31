@@ -232,14 +232,14 @@ const NewVakita = () => {
             <div className='boxOne'>
           <div className="boxItems">
             <label htmlFor="name"></label>
-            <Field type="text" id="name" name="name" placeholder="Nombre de la vaca"/>
+            <Field  className="inputText" type="text" id="name" name="name" placeholder="Nombre de la vaca"/>
             <div className='error'>
             <ErrorMessage name="name" component="div" />
             </div>
           </div>
           <div className="boxItems">
             <label htmlFor="amount"></label>
-            <Field type="number" id="amount" name="amount" placeholder="Importe total" />
+            <Field className="inputNumber" type="number" id="amount" name="amount" placeholder="Importe total" />
             <div className='error'>
             <ErrorMessage name="amount" component="div" />
             </div>
@@ -247,10 +247,10 @@ const NewVakita = () => {
           
 
          
-            <Field  id="startDate"  name="startDate" label="Fecha inicio de ahorro" component={CustomDatePicker}/>
+            <Field className="inputDate"  id="startDate"  name="startDate" label="Fecha inicio de ahorro" component={CustomDatePicker}/>
             
        
-            <Field  id="endDate" name="endDate" label="Fecha final de ahorro" component={CustomDatePicker}/>
+            <Field className="inputDate"  id="endDate" name="endDate" label="Fecha final de ahorro" component={CustomDatePicker}/>
            
 
           <div className="boxItems">
@@ -263,7 +263,7 @@ const NewVakita = () => {
 
           <div className="boxItems">
             <label htmlFor="cumulativeAmount"></label>
-            <Field type="number" id="cumulativeAmount" name="cumulativeAmount" placeholder="Importe a cargar en la vakita" />
+            <Field className="inputNumber" type="number" id="cumulativeAmount" name="cumulativeAmount" placeholder="Importe a cargar en la vakita" />
             <div className='error'>
             <ErrorMessage name="cumulativeAmount" component="div" />
             </div>
@@ -295,7 +295,7 @@ const NewVakita = () => {
         <div>
         <div className="boxItems">
               <label htmlFor="email"></label>
-              <Field type="email" id="email" name="email" placeholder="Agregar integrante con su email" />
+              <Field className="inputEmail" type="email" id="email" name="email" placeholder="Agregar integrante con su email" />
               <div className='error'>
               <ErrorMessage name="email" component="div" />
               </div>
@@ -328,7 +328,7 @@ const NewVakita = () => {
       
             </div>
             <div>
-              <button type="button" disabled={!values.email.includes('@')} className="buttonAdd" onClick={() => handleAddEmail(values)}>
+              <button type="button"  disabled={!values.email.includes('@')} className="buttonAdd" onClick={() => handleAddEmail(values)}>
               <FontAwesomeIcon icon={faCirclePlus}  />
               </button>
               
@@ -349,7 +349,7 @@ const NewVakita = () => {
 
 <div className='buttonSubmitBox'>
  
-          <button className={!emailValid || !emailExists || !values.name || !values.amount || !values.endDate ||  !values.startDate|| !values.description || !values.name || !values.amount ||  !values.description?"buttonSubmit":"buttonSubmitActive"}  type="submit"  disabled={!emailValid || !emailExists || !values.name || !values.amount || !values.endDate ||  !values.startDate|| !values.description || !values.name || !values.amount || !values.description}>Crear Vaca</button>
+          <button id="buttonNewVakita" className={!emailValid || !emailExists || !values.name || !values.amount || !values.endDate ||  !values.startDate|| !values.description || !values.name || !values.amount ||  !values.description?"buttonSubmit":"buttonSubmitActive"}  type="submit"  disabled={!emailValid || !emailExists || !values.name || !values.amount || !values.endDate ||  !values.startDate|| !values.description || !values.name || !values.amount || !values.description}>Crear Vaca</button>
          
           
           </div>
