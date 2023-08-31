@@ -25,6 +25,8 @@ public class User implements Serializable{
     @Column(name = "USER_EMAIL", nullable = false, length = 200)
     private String email;
 
+
+
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "contributors")
     private List<Vakita> vakitas;
 
@@ -35,6 +37,7 @@ public class User implements Serializable{
         this.email = email;
     }
 
+    //CONSTRUCTOR CON MAIL
     public User(String email) {
         this.email = email;
     }
