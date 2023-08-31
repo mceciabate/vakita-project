@@ -99,7 +99,7 @@ function LandingComponent() {
 
 
             <div className="nombre-usario">
-              <h1>JUANA</h1>
+              <h1>LA MIAU</h1>
               <h3 className="user">VAKITA USER</h3>
 
             </div>
