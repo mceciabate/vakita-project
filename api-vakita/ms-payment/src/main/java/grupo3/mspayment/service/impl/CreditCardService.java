@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Slf4j
@@ -35,6 +36,19 @@ public class CreditCardService implements ICreditCardService {
         cards.forEach(card -> cardsList.add(mapper.map(card, CreditCardDTO.class)));
         log.info("Get all cards. Size: " + cards.size());
         return cardsList;
+    }
+
+    @Override
+    public CreditCardDTO getCreditCardById(Long creditCardId) throws ResourceNotFoundException {
+        CreditCardDTO creditCard = new CreditCardDTO();
+        Optional<CreditCard> cC = repository.findById(creditCardId);
+        if (cC.isPresent()){
+            creditCard = mapper.map(cC, CreditCardDTO.class);
+            return creditCard;
+        }
+        else {
+            throw new ResourceNotFoundException("No se encuentra la tarjeta copn id: "+ creditCardId);
+        }
     }
 
 
@@ -72,6 +86,23 @@ public class CreditCardService implements ICreditCardService {
             repository.deleteById(creditCardId);
         } else {
             throw new ResourceNotFoundException("No se encuentra la tarjeta con id: " + creditCardId);
+        }
+    }
+
+    @Override
+    public boolean updateAliasCreditCard(Long creditCardId, String alias) throws ResourceNotFoundException {
+        CreditCardDTO creditCardDTO = this.getCreditCardById(creditCardId);
+        if(creditCardDTO != null){
+            creditCardDTO.setUserId(creditCardDTO.getUserId());
+            creditCardDTO.setAlias(alias);
+            creditCardDTO.setCardNumber(creditCardDTO.getCardNumber());
+            creditCardDTO.setExpirationDate(creditCardDTO.getExpirationDate());
+            creditCardDTO.setCvv(creditCardDTO.getCvv());
+            repository.save(mapper.map(creditCardDTO, CreditCard.class));
+            return true;
+        }
+        else {
+            throw new ResourceNotFoundException("No se ebncuentra la tarjeta con id : " + creditCardId);
         }
     }
 }
