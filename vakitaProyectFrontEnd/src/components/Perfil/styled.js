@@ -6,7 +6,6 @@ export const PerfilContainer = styled.div`
     align-items: center;
     width: 100%;
     margin: 2rem 0;
-    /* background: -webkit-linear-gradient(#FFFFFF, #CCC3C3); */
     height: 100vh;
     gap: 3rem;
 `;
@@ -24,22 +23,55 @@ export const Hr = styled.hr`
 `;
 
 export const ListDiv = styled.ul`
-    background-color: #FFBEBE;
+    background: linear-gradient(180deg, #FCE8E9 0%, #EEE9FF 100%);
     padding: 1rem;
     margin: 2rem;
     border-radius: 10px;
     width: 80%;
     max-width: 550px;
     box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
 
     @media (min-width: 768px){
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, auto);
     }
 `;
 
+export const TitleH5 = styled.h5`
+    grid-column: 1 / 3;
+    grid-row: 1 / 2;
+
+    @media (min-width: 768px){
+        grid-column: 1 / 2;
+    }
+`
+
+export const Div1 = styled.div`
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+
+    @media (min-width: 768px){
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+    }
+`
+
+export const Div2 = styled.div`
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+
+    @media (min-width: 768px){
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
+    }
+`
+
+
 export const Li = styled.li`
-    display: flex;
-    justify-content: space-between;
-    background-color: white;
+    list-style: none;
     margin: 10px 0;
     padding: 0.5rem;
     border-radius: 10px;
