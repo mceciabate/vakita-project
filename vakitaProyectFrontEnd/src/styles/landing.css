@@ -39,11 +39,10 @@
     font-weight: 900;
 }
 
-
 /*Segundo contenedor*/
 
 .contenedor-quienesSomos {
-    background-color:  #423163;
+    background-color: #423163;
     width: 100%;
     height: 500px;
     display: flex;
@@ -62,19 +61,16 @@
     margin-bottom: 60px;
 }
 
-
 .texto-infoQuienes {
     width: 100%;
     text-align: justify;
     font-size: 20px;
 }
 
-.imagen-equipo{
-   width: 25%;
-   height: auto;
+.imagen-equipo {
+    width: 25%;
+    height: auto;
 }
-
-
 
 @media only screen and (max-width: 900px) {
     .contenedor-quienesSomos {
@@ -82,39 +78,36 @@
         height: auto;
     }
 
-    
-.info-quienesSomos {
-   
-    width: 80%;
-    height: auto;
-}
+    .info-quienesSomos {
+        width: 80%;
+        height: auto;
+    }
 
-.titulo-infoQuienes {
-    padding-top: 60px;
-    width: 100%;
-    margin-bottom: 60px;
-}
+    .titulo-infoQuienes {
+        padding-top: 60px;
+        width: 100%;
+        margin-bottom: 60px;
+    }
 
 
-.texto-infoQuienes {
-    width: 100%;
-    text-align: justify;
-    font-size: 16px;
-}
+    .texto-infoQuienes {
+        width: 100%;
+        text-align: justify;
+        font-size: 16px;
+    }
 
-.imagen-equipo{
-   width: 250px;
-   height: auto;
-   padding-top: 40px;
-   padding-bottom: 40px;
-}
-
+    .imagen-equipo {
+        width: 250px;
+        height: auto;
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
 }
 
 
 /*Tercer contenedor*/
 .contenedor-descubreVakita {
-    background-color:  #609AA6;
+    background-color: #609AA6;
     width: 100%;
     height: 500px;
     display: flex;
@@ -134,70 +127,61 @@
     margin-bottom: 60px;
 }
 
-
 .texto-infoDescubre {
     width: 100%;
     text-align: justify;
     font-size: 22px;
 }
 
-
-.imagen-telefonoMoneda{
+.imagen-telefonoMoneda {
     width: 20%;
     height: auto;
-    
- }
+}
 
 
 @media only screen and (max-width: 1750px) {
-  
-
-    .imagen-telefonoMoneda{
+    .imagen-telefonoMoneda {
         width: 350px;
     }
-    }
+}
 
- @media only screen and (max-width: 900px) {
-    .contenedor-descubreVakita{
+@media only screen and (max-width: 900px) {
+    .contenedor-descubreVakita {
         flex-direction: column-reverse;
         height: auto;
     }
 
-    
-.info-descubreVakita{
-   
-    width: 80%;
-    height: auto;
-}
+    .info-descubreVakita {
+        width: 80%;
+        height: auto;
+    }
 
-.titulo-infoDescubre {
-    padding-top: 60px;
-    width: 100%;
-    margin-bottom: 60px;
-}
+    .titulo-infoDescubre {
+        padding-top: 60px;
+        width: 100%;
+        margin-bottom: 60px;
+    }
 
+    .texto-infoDescubre {
+        width: 100%;
+        text-align: justify;
+        font-size: 16px;
+    }
 
-.texto-infoDescubre {
-    width: 100%;
-    text-align: justify;
-    font-size: 16px;
-}
-
-.imagen-telefonoMoneda{
-    width: 250px;
-   height: auto;
-   margin-left: 67px;
-   padding-top: 40px;
-   padding-bottom: 40px;
-}
-
+    .imagen-telefonoMoneda {
+        width: 250px;
+        height: auto;
+        margin-left: 67px;
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
 }
 
 
 /*Cuarto contenedor*/
 
 .contenedor-comoFunciona {
-    background-color:   #423163;
+    background-color: #423163;
     width: 100%;
     height: 500px;
     display: flex;
@@ -206,18 +190,12 @@
     flex-direction: column;
 }
 
-
-
-
-
 .cardsContainer-comoFunciona {
     width: 100%;
     display: flex;
     justify-content: space-evenly;
     flex-direction: row wrap;
 }
-
-
 
 .cards-comoFunciona {
     background: linear-gradient(0deg, rgba(200, 185, 224, 0.458) 11%, rgba(217, 181, 195, 0.743) 89%);
@@ -251,22 +229,22 @@
 .contenedor-serviciosOfrecidos {
     background-color: #D18BAA;
     width: 100%;
-    height: 700px;
+    height: 600px;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     flex-direction: row wrap;
 }
+
 .serviciosOfrecidos {
     flex-direction: column;
-    width: 40%;
-   
+    width: 54%;
 }
 
 
 .titulo-serviciosOfrecidos {
     width: 100%;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
     color: white;
 }
 
@@ -283,14 +261,18 @@
     color: white;
 }
 
+.info-serviciosOfrecidos2 {
+    width: 100%;
+    height: auto;
+    margin-bottom: 0px;
+    font-size: 21px;
+    color: white;
+}
 
-
-
-.imagen-telefono{
+.imagen-telefono {
     width: 20%;
     height: auto;
-
- }
+}
 
 
 /*Sexto contenedor*/
@@ -308,11 +290,8 @@
     display: flex;
     position: relative;
     flex-flow: column;
-
     bottom: 10px;
     overflow: hidden;
-
-
 }
 
 .for-all__text {
@@ -323,9 +302,8 @@
     white-space: nowrap;
     will-change: transform;
     animation: for-all__text 10s linear infinite;
-
-
 }
+
 .for-all__text-2 {
     display: flex;
     position: -webkit-sticky;
@@ -339,7 +317,6 @@
 }
 
 .for-all__text--h2 {
-
     -webkit-text-stroke: 1px white;
     color: transparent;
     font-size: 30px;
@@ -347,12 +324,17 @@
 }
 
 @keyframes for-all__text {
-    from { transform: translateX(-50%); }
-    to { transform: translateX(0%); }
-  }
+    from {
+        transform: translateX(-50%);
+    }
+
+    to {
+        transform: translateX(0%);
+    }
+}
 
 
-  .contenedor-comentarios-usuaio {
+.contenedor-comentarios-usuaio {
 
     background-color: #609AA6;
     display: flex;
@@ -384,7 +366,7 @@
 .imagen-usuario {
     width: 30%;
     height: auto;
-    
+
 }
 
 .nombre-usario {
@@ -392,6 +374,7 @@
     flex-direction: column;
     justify-content: center;
 }
+
 .user {
     color: #A9A9A9;
 }
@@ -405,8 +388,8 @@
 
 @media only screen and (max-width: 1334px) {
 
-    .imagen-telefono{
-        width: 30%;   
+    .imagen-telefono {
+        width: 30%;
     }
 }
 
@@ -414,82 +397,80 @@
 
     .card-usuario {
         width: 25%;
-        
     }
 
     .cards-comoFunciona {
         width: 25%;
     }
-
-  
-  
 }
+
 @media only screen and (max-width: 890px) {
     .contenedor-comentarios-usuaio {
         display: flex;
         width: 100%;
-        height:1150px;
+        height: 1150px;
         justify-content: space-evenly;
         flex-direction: column;
         align-items: center;
     }
+
     .card-usuario {
         width: 300px;
         height: 280px;
     }
-
 
     .cards-comoFunciona {
         width: 300px;
         height: 280px;
     }
 
-    
-.contenedor-comoFunciona {
-    background-color:   #423163;
-    height:1170px;
-}
+    .contenedor-comoFunciona {
+        background-color: #423163;
+        height: 1170px;
+    }
 
-.cardsContainer-comoFunciona {
-    width: 100%;
-    height:1170px;
-    flex-direction: column;
-    align-items: center;
-}
+    .cardsContainer-comoFunciona {
+        width: 100%;
+        height: 1170px;
+        flex-direction: column;
+        align-items: center;
+    }
 
-.titulo-Funciona {
-    margin-top: 60px;
-}
+    .titulo-Funciona {
+        margin-top: 60px;
+    }
 
+    .contenedor-serviciosOfrecidos {
+        background-color: #D18BAA;
+        width: 100%;
+        height: 760px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-direction: column;
+    }
 
+    .serviciosOfrecidos {
+        flex-direction: column;
+        width: 89%;
+        height: auto;
+        margin-top: -50px;
+    }
 
-.contenedor-serviciosOfrecidos {
-    background-color: #D18BAA;
-    width: 100%;
-    height:1100px;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-direction: column;
-}
-.serviciosOfrecidos {
-    flex-direction: column;
-    width: 80%;
-    height:auto;
-   
-}
-.titulo-serviciosOfrecidos {
-    margin-top: 60px;
-}
+    .titulo-serviciosOfrecidos {
+        margin-top: 60px;
+        width: 100%;
+    }
 
-.imagen-telefono{
-    width: 330px;
-    height: auto;
+    .texto-serviciosOfrecidos {
+        width: 100%;
+        font-size: 16px;
+    }
 
-}
-
-
-
+    .imagen-telefono {
+        width: 330px;
+        height: auto;
+    }
 
 }
 

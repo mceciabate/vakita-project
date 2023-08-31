@@ -25,7 +25,6 @@ function LandingComponent() {
 
 
 
-
       <div className="contenedor-quienesSomos">
 
         <div className="info-quienesSomos">
@@ -77,27 +76,12 @@ function LandingComponent() {
       </div >
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       <div className="contenedor-serviciosOfrecidos">
-
 
 
         <div className="serviciosOfrecidos" >
 
-        <h1 className="titulo-serviciosOfrecidos">Servicios que Ofrecemos</h1>
+          <h1 className="titulo-serviciosOfrecidos">Servicios que Ofrecemos</h1>
 
           <div className="info-serviciosOfrecidos">
             <p className="texto-serviciosOfrecidos">🤝 Plataforma Intuitiva: Nuestra aplicación fácil de usar te permite crear y gestionar tu Vakita en pocos pasos. No se requieren conocimientos técnicos. </p>
@@ -107,7 +91,7 @@ function LandingComponent() {
             <p className="texto-serviciosOfrecidos">🌎 Conexiones con otros: Vakita te une con personas apasionadas como tú. A través de nuestra plataforma colabora con individuos que comparten tus intereses.</p>
           </div>
 
-          <div className="info-serviciosOfrecidos">
+          <div className="info-serviciosOfrecidos2">
             <p className="texto-serviciosOfrecidos">📊 Seguimiento Transparente: Mantén un registro de cada contribución y observa cómo tu objetivo se acerca. La transparencia es la base de nuestra plataforma.</p>
           </div>
 
