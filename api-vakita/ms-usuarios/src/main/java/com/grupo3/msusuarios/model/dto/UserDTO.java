@@ -1,5 +1,6 @@
 package com.grupo3.msusuarios.model.dto;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -14,6 +15,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class UserDTO {
 
+    @Hidden
     private Long id;
     @NotBlank(message = "No puede ingresar un nombre vacio")
     @Size(max = 30 ,message = "El nombre no puede contener mas de 30 caracteres")
@@ -29,5 +31,6 @@ public class UserDTO {
     private String password;
     @NotNull(message = "No puede ingresar una fecha vacia")
     private LocalDate birthdate;
+    @Hidden
     private Double account_balance = 0.0;
 }

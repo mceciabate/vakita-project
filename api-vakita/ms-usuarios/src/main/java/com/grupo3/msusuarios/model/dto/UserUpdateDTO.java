@@ -1,5 +1,6 @@
 package com.grupo3.msusuarios.model.dto;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserUpdateDTO {
 
+    @Hidden
     private Long id;
     @NotBlank(message = "No puede ingresar un nombre vacio")
     @Size(max = 30 ,message = "El nombre no puede contener mas de 30 caracteres")
