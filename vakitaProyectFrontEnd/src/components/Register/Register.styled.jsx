@@ -4,41 +4,11 @@ import styled from "styled-components";
 
 export const ContainerGeneral = styled.div`
 width: 100%;
-height: 725PX;
+height: 100vh !important;
 display: flex;
 flex-direction: row wrap;
 align-items: center;
-
-/* En esta seccion cambiara en mobile*/
-@media (max-width: 1300px){
-width: 100%;
-height: 725px;
-display: flex;
-flex-direction: column;
-
-}
-`;
-
-
-export const ImgVaca = styled.img`
-display:flex; 
-width: 60%;
-height: 100%;
-margin-top:24px;
-padding:70px;
-background-color:black;
-
-@media (max-width: 1450px){
-  width: 55%;
-}
-
-/* En esta seccion no se mostrara en mobile*/
-@media (max-width: 1300px){
-    border: none;
-    outline: none;
-    display: none;
-    opacity: 0;
-}
+background: linear-gradient(0deg, rgba(200,185,224,1) 11%, rgba(217,181,195,1) 89%);
 `;
 
 export const GeneralFormContainer = styled.div`
@@ -49,93 +19,121 @@ export const GeneralFormContainer = styled.div`
    align-items: center;
 `;
 
-
-export const TituloCrearCuenta = styled.div`
-color:black;
-font-size:14px;
-margin-top:40px;
-
-/* En esta seccion cambiara en desktop*/
-@media (min-width: 1300px){
-
-  margin-top: 35px;
-  text-align: center;
-  padding:10px;
-  background-color:black;
-  color:white;
-  width:98%;
-}
-`;
-
 export const FormContainer = styled.form`
-  border-radius: 15px;
-  height: 780px;
-  width: 320px;
-  margin-top: 60px;
-  font-family: 'Inria Sans';
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #FFFFFF;
-  border: 1px solid #A39D9D;
-
-  /* En esta seccion cambiara en desktop*/
-@media (min-width: 1300px){
-
-  margin-top: 60px;
-}
+height: 600px;
+width: 50%;
+margin-top: -8px;
+font-family: 'Inria Sans';
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+background: linear-gradient(0deg, #EEE9FF 6%, #FCE8E9 91%);
+border-radius:50px;
   `;
 
 
-export const BoxText = styled.div`
-display:flex;
+
+export const BoxTexts = styled.div`
 width: 106%;
-height: 74px; 
-background-color: black; 
-color: white;
+height: 54px; 
+color: black;
 font-family: 'Inria Sans';
-font-size: 12px;
-align-items: center;
-justify-content: center;
-margin-top: -35px;
-margin-bottom: 5px;
+flex-direction: column;
+margin-bottom: 70px;
+margin-top:-350px;
+
+.titulo-card {
+  display: flex; 
+  justify-content: start;
+  margin-left:8%;
+  
+}
+
 `;
 
 
-export const ContainerInput = styled.div`
+
+
+
+
+export const ContainerInputs = styled.div`
 width: 100%;
 height: 100px;
 display: flex;
-flex-direction: column;
-justify-content: space-around;
+flex-direction: row;
+justify-content: between;
+margin-left:13%;
+
+.contedor-form1 {
+  width: 50%;
+
+}
+.contedor-form2 {
+  width: 50% !important;
+    
+  }
+
+
+
 `;
+
 
 export const Label = styled.label`
 width: 100%;
 margin-top: 10px;  
-margin-left: 20px;
+text-aling:right;
+margin-top: 10px !important;
+`;
+export const Input = styled.input`
+  height: 35px;
+  width: 70% !important;
+  border-radius: 10px !important;
+  background-color: white !important;
+  outline: none ;
+  border:none;
+  padding: 2px ;
+  margin-top: 8px !important;
+
 `;
 
-export const Input = styled.input`
-  height: 35px !important;
-  width: 85% !important;
-  border-radius: 10px !important;
-  background-color: #eee !important;
-  outline: none !important;
-  border: 0 !important;
-  margin-left: 20px !important;
-  padding: 2px !important;
+/* Estilos para los mensajes de error */
+export const ErrorSpan = styled.span`
+display:flex;
+  color: red;
+  font-size: 14px;
+  margin-left: 1px;
+ 
 `;
+
+
+
+
+
+
 
 export const Button = styled.button`
-background-color: #DEC6C6;
-height: 40px;
-border-radius: 10px;
-border-style: none;
-width: 120px;
-font-size: 14px;
-margin-top: 15px;
-margin-bottom: 25px;
-cursor: pointer;
-  `;
+  background-color: transparent;
+  height: 40px;
+  border-radius: 10px;
+  border-style: solid;
+  border-top-color: #BB75CB;
+  border-right-color: #D18EBA;
+  border-bottom-color: #E68C8C;
+  border-left-color: #D18EBA;
+  width: 120px;
+  font-size: 14px;
+  margin-top: 35px;
+  margin-left: 15%;
+  margin-right: 15%;
+  cursor: pointer;
+  font-weight: medium;
+  
+  
+
+  /* Estilo en hover */
+  &:hover {
+    color:white;
+    background-color: #AD8FF3;
+  }
+`;
