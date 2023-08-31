@@ -25,10 +25,11 @@ public class User implements Serializable{
     @Column(name = "USER_EMAIL", nullable = false, length = 200)
     private String email;
 
-
-
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "contributors")
     private List<Vakita> vakitas;
+
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Transaction> transactions;
 
 
     //CONTRUCTOR SIN ARRAY DE VAKITAS

@@ -20,14 +20,17 @@ public class Transaction {
     @Column(name = "TRANSACTION_ID", unique = true, nullable = false)
     private Long id;
 
-    @Column(name = "USER_ID", nullable = false)
-    private Long userID;
+    @ManyToOne()
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Column(name = "VAKITA_ID", nullable = false)
     private Long vakitaId;
 
     @Column(name = "AMOUNT", nullable = false)
     private Double amount;
+
+
 
 
 }

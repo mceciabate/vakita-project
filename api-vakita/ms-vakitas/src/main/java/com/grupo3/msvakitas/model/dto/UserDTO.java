@@ -16,6 +16,8 @@ public class UserDTO {
     private String email;
     @JsonIgnore
     private List<VakitaDTO> vakitas;
+    @JsonIgnore
+    private List<TransactionDTO> transactions;
 
     //constructor sin vakitas
 
