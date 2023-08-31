@@ -19,7 +19,6 @@ public class ConfirmationTokenService {
     private final EmailService emailService;
     private final IUserService userService;
     private final ObjectMapper mapper;
-
     private final PasswordEncoder encoder;
 
     @Autowired
@@ -52,7 +51,56 @@ public class ConfirmationTokenService {
                 tokenRepository.save(token);
 
                 String subject = "Confirmación de Registro";
-                String body = "Haz clic en el siguiente enlace para confirmar tu cuenta: http://localhost:8080/api/v1/usuarios/confirmar?token=" + token.getToken();
+//                String body = "Haz clic en el siguiente enlace para confirmar tu cuenta: http://localhost:8080/api/v1/usuarios/confirmar?token=" + token.getToken();
+                String body = "<!DOCTYPE html>\n" +
+                        "<html lang=\"en\">\n" +
+                        "<head>\n" +
+                        "    <meta charset=\"UTF-8\">\n" +
+                        "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
+                        "    <title>Account Created</title>\n" +
+                        "    <style>\n" +
+                        "        .header {\n" +
+                        "          width: 50%;\n" +
+                        "          height: 50px;\n" +
+                        "          display: flex;\n" +
+                        "          align-items: center;\n" +
+                        "          justify-content: space-between;\n" +
+                        "          background: linear-gradient(0deg, #664e94 10%, #423163 90%);\n" +
+                        "          position: sticky;\n" +
+                        "          z-index: 999;\n" +
+                        "          box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.20); \n" +
+                        "        }\n" +
+                        "        .body {\n" +
+                        "          width: 50%;\n" +
+                        "          height: 30vh;\n" +
+                        "          display: flex;\n" +
+                        "          background: linear-gradient(0deg, rgba(200,185,224,1) 11%, rgba(217,181,195,1) 89%);\n" +
+                        "        }\n" +
+                        "        .container{\n" +
+                        "          height: 150px;\n" +
+                        "          width: 100%;\n" +
+                        "          margin-top: 40px;\n" +
+                        "          padding-left: 10px;\n" +
+                        "          padding-bottom: 10px;\n" +
+                        "          font-family: 'Inria Sans';\n" +
+                        "          background: linear-gradient(0deg, #EEE9FF 6%, #FCE8E9 91%);\n" +
+                        "          border-radius:20px;\n" +
+                        "        }\n" +
+                        "      </style>\n" +
+                        "</head>\n" +
+                        "<body>\n" +
+                        "    <div class=\"header\"></div>\n" +
+                        "  <div class=\"body\">\n" +
+                        "    <div class=\"container\">\n" +
+                        "      <br>\n" +
+                        "      <br>\n" +
+                        "      <br>\n" +
+                        "      <h2 style=\"margin-left: 50px; display: inline;\">Haz clic en el siguiente enlace para confirmar tu cuenta:</h2>\n" +
+                        "      <a style=\"margin-left: 50px; font-size: 20px;\" href=\"http://localhost:8080/api/v1/usuarios/confirmar?token=" + token.getToken() +"\">Link</a>\n" +
+                        "    </div>\n" +
+                        "  </div>\n" +
+                        "</body>\n" +
+                        "</html>";
 
                 emailService.sendEmail(userDTO.getEmail(), subject, body);
                 return true;
