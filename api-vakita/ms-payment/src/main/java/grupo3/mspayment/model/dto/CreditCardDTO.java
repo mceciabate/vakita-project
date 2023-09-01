@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class CreditCardDTO {
 
-    private Long creditCardId;
+    private String creditCardId;
     private Long userId;
     private String alias;
     private String cardNumber;

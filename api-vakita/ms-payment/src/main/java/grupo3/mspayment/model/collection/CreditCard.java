@@ -16,15 +16,22 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Document(collection = "credit_cards")
 public class CreditCard implements Serializable {
+
     @Serial
     private static final long serialVersionUID = 1L;
     @Id
-    private Long creditCardId;
+    private String creditCardId;
     private Long userId;
     private String alias;
     private String cardNumber;
     private LocalDate expirationDate;
     private String cvv;
 
-
+    public CreditCard(Long userId, String alias, String cardNumber, LocalDate expirationDate, String cvv) {
+        this.userId = userId;
+        this.alias = alias;
+        this.cardNumber = cardNumber;
+        this.expirationDate = expirationDate;
+        this.cvv = cvv;
+    }
 }
