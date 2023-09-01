@@ -6,13 +6,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class TransactionDTO {
 
     private Long id;
-    private Long userId;
     private Long vakitaId;
+
+    private Long userId;
     private Double amount;
 
     public TransactionDTO(Long userId, Long vakitaId, Double amount) {

@@ -16,16 +16,17 @@ public class Transaction {
     @Serial
     private static final long serialVersionUID = 1L;
 
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "TRANSACTION_ID", unique = true, nullable = false)
     private Long id;
 
     @ManyToOne()
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "vakita_id")
+    private Vakita vakita;
 
-    @Column(name = "VAKITA_ID", nullable = false)
-    private Long vakitaId;
+    @Column(name = "USER_ID", nullable = false)
+    private Long userId;
 
     @Column(name = "AMOUNT", nullable = false)
     private Double amount;
