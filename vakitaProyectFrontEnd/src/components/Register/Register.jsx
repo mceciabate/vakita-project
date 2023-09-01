@@ -56,8 +56,6 @@ function Registerr() {
               "birthdate": values.birthdate
             })
     
-            console.log(response);
-    
             if (response.status == 201) {
               Swal.fire({
                 title: 'Registro realizado con éxito',
@@ -68,8 +66,6 @@ function Registerr() {
             formik.resetForm();
     
           } 
-    
-            console.log(response);
     
           } catch (e) {
             
@@ -111,7 +107,9 @@ function Registerr() {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.name && formik.errors.name && (<ErrorSpan>{formik.errors.name}</ErrorSpan>)}
+              {formik.touched.name && formik.errors.name && (
+                <ErrorSpan>{formik.errors.name}</ErrorSpan>
+              )}
 
               <Label htmlFor="lastName">Tu apellido</Label>
               <Input
@@ -122,8 +120,9 @@ function Registerr() {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.lastName && formik.errors.lastName && (<ErrorSpan>{formik.errors.lastName}</ErrorSpan>)}
-
+              {formik.touched.lastName && formik.errors.lastName && (
+                <ErrorSpan>{formik.errors.lastName}</ErrorSpan>
+              )}
 
               <Label htmlFor="dni">Tu dni</Label>
               <Input
@@ -134,9 +133,9 @@ function Registerr() {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.dni && formik.errors.dni && (<ErrorSpan>{formik.errors.dni}</ErrorSpan>)}
-
-
+              {formik.touched.dni && formik.errors.dni && (
+                <ErrorSpan>{formik.errors.dni}</ErrorSpan>
+              )}
 
               <Label htmlFor="email">Correo electrónico</Label>
               <Input
@@ -147,7 +146,9 @@ function Registerr() {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.email && formik.errors.email && (<ErrorSpan>{formik.errors.email}</ErrorSpan>)}
+              {formik.touched.email && formik.errors.email && (
+                <ErrorSpan>{formik.errors.email}</ErrorSpan>
+              )}
 
               {/* Añade más campos aquí según tus necesidades */}
             </div>
@@ -163,7 +164,9 @@ function Registerr() {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-             {formik.touched.birthdate && formik.errors.birthdate && (<ErrorSpan>{formik.errors.birthdate}</ErrorSpan>)}
+              {formik.touched.birthdate && formik.errors.birthdate && (
+                <ErrorSpan>{formik.errors.birthdate}</ErrorSpan>
+              )}
               <Label htmlFor="password">Contraseña</Label>
               <Input
                 type="password"
@@ -174,7 +177,9 @@ function Registerr() {
                 onBlur={formik.handleBlur}
               />
 
-             {formik.touched.password && formik.errors.password && (<ErrorSpan>{formik.errors.password}</ErrorSpan>)}
+              {formik.touched.password && formik.errors.password && (
+                <ErrorSpan>{formik.errors.password}</ErrorSpan>
+              )}
 
               <Label htmlFor="passwordConfirm">Confirmar contraseña</Label>
               <Input
@@ -185,15 +190,17 @@ function Registerr() {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.passwordConfirm && formik.errors.passwordConfirm && (<ErrorSpan>{formik.errors.passwordConfirm}</ErrorSpan>)}
+              {formik.touched.passwordConfirm &&
+                formik.errors.passwordConfirm && (
+                  <ErrorSpan>{formik.errors.passwordConfirm}</ErrorSpan>
+                )}
 
-              <Button className="continuar" type='submit'>Continuar </Button>
+              <Button className="continuar" type="submit">
+                Continuar{" "}
+              </Button>
 
-              {/* Añade más campos aquí según tus necesidades */}
             </div>
           </ContainerInputs>
-
-
         </FormContainer>
       </GeneralFormContainer>
     </ContainerGeneral>

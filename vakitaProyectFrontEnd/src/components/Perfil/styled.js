@@ -22,7 +22,7 @@ export const Hr = styled.hr`
     width: 80%;
 `;
 
-export const ListDiv = styled.ul`
+export const ListDiv = styled.form`
     background: linear-gradient(180deg, #FCE8E9 0%, #EEE9FF 100%);
     padding: 1.5rem;
     margin: 2rem;
@@ -95,12 +95,18 @@ export const Label = styled.p`
 
 
 export const Input = styled.input`
-    border: none;
+    border: 0.3px solid #664E94;
     padding: 7px;
     border-radius: 8px;
     min-width: 100%;
     max-width: 300px;
-`
+
+    &:disabled {
+        color: #000;
+        background-color: #eaeaea;
+    }
+
+`;
 
 export const Button = styled.button`
     justify-self: flex-end;
