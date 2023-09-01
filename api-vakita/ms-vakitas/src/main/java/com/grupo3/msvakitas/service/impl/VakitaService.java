@@ -108,6 +108,7 @@ public class VakitaService implements IVakitaService {
     }
 
     //Método para modificar el saldo de una vaquita
+    //TODO: FALTA LA VALIDACION DE USUARIO
     @Override
     public void modifyAmount(Long userID, Long vakitaId, Double amount) throws ResourceNotFoundException, BadRequestException{
         VakitaDTO vakitaModify = this.getVakitaById(vakitaId);
@@ -117,8 +118,8 @@ public class VakitaService implements IVakitaService {
             vakitaModify.setCumulativeAmount(deposit);
             log.info("Success, amount update: "+ vakitaModify.getCumulativeAmount());
             this.updateVakita(vakitaId, vakitaModify);
-            System.out.println("vakita: " +vakitaId + "user: "+ userID +"amount : " + amount);
             TransactionDTO transactionDTO = new TransactionDTO(userID, vakitaId, amount);
+            log.info("creando nueva transacción en la vakita con id : " + vakitaId);
             tRepository.save(mapper.map(transactionDTO, Transaction.class));
         }
         else if(!vakitaModify.getIsActive()){
@@ -217,6 +218,7 @@ public class VakitaService implements IVakitaService {
     }
 
     //Este método es para agregarme como contribuyente a una vakita
+    //TODO: VALIDAR SI EL USUARIO YA ES PARTE DE LA LISTA
     @Override
     public void addContributor(Long vakitaId, Long userId) throws ResourceNotFoundException, BadRequestException {
         UserDTO newContributor = usuarioService.getUserById(userId);
