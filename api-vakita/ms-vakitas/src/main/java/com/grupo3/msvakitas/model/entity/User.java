@@ -25,9 +25,12 @@ public class User implements Serializable{
     @Column(name = "USER_EMAIL", nullable = false, length = 200)
     private String email;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "USER_ID")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private List<Transaction> transactions;
+
+//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JoinColumn(name = "USER_ID")
+//    private List<Transaction> transactions;
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "contributors")
     private List<Vakita> vakitas;
