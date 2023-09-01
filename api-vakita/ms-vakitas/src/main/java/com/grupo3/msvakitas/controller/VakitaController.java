@@ -52,6 +52,7 @@ public class VakitaController {
     @ResponseStatus(code = HttpStatus.OK)
     //    @PreAuthorized("hasRole('ADMIN')")
     public ResponseEntity<List<VakitaDTO>> getAllVakitas(){
+
         return ResponseEntity.ok(vakitaService.getAllVakitas());
     }
 
