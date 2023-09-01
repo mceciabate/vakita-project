@@ -96,7 +96,7 @@ public class VakitaService implements IVakitaService {
     @Override
     public VakitaDTO createVakita(VakitaDTO vakita) throws BadRequestException, ResourceNotFoundException {
         if(vakita.getExpirationDate().equals(LocalDate.now()) || vakita.getName() == null || vakita.getIdCreatorUser() == null){
-            throw new BadRequestException("No se puede crear la vakita, corrobore los datos");
+            throw new BadRequestException("No se puede crear la vakita, corrobore los datos: fecha_expiración(debe ser distinta al día actual),name(no pued ser nulo), idCreatorUser(no puede ser nulo) ");
         } else {
             UserDTO userToAdd = usuarioService.getUserById(vakita.getIdCreatorUser());
             vakita.getContributors().add(userToAdd);
@@ -188,6 +188,7 @@ public class VakitaService implements IVakitaService {
         vakitaToModify.setIsActive(vakita.getIsActive());
         vakitaToModify.setType(vakita.getType());
         vakitaToModify.setContributors(vakita.getContributors());
+        vakitaToModify.setTransactions(vakita.getTransactions());
 
         if(vakitaRepository.existsById(vakitaToModify.getId())){
             Vakita vakitaToSave = mapper.map(vakitaToModify, Vakita.class);
