@@ -1,5 +1,5 @@
 import PanelProfile from '../../assets/PanelProfile/PanelProfile';
-import { Div1, Div2, H2, Li, ListDiv, PerfilContainer, TitleH5 } from "./styled";
+import { Div1, Div2, H2, Label, Input, Li, ListDiv, PerfilContainer, TitleH5, Button } from "./styled";
 import { useState, useEffect } from "react";
 
 const Perfil = () => {
@@ -59,26 +59,26 @@ const Perfil = () => {
         />
 
         <ListDiv>
-          <TitleH5>¿Quieres cambiar tus datos?</TitleH5>
+          <TitleH5>Acá puedes actualizar tus datos</TitleH5>
 
           <Div1>
             <Li>
-              <h5>Nombre</h5>
-              <input
+              <Label>Nombre</Label>
+              <Input
                 value={dataUser.name}
                 onChange={(e) => onChangeData("name", e.target.value)}
               />
             </Li>
             <Li>
-              <h5>Apellido</h5>
-              <input
+              <Label>Apellido</Label>
+              <Input
                 value={dataUser.lastName}
                 onChange={(e) => onChangeData("lastName", e.target.value)}
               />
             </Li>
             <Li>
-              <h5>DNI</h5>
-              <input
+              <Label>DNI</Label>
+              <Input
                 value={dataUser.dni}
                 onChange={(e) => onChangeData("dni", e.target.value)}
               />
@@ -87,21 +87,21 @@ const Perfil = () => {
 
           <Div2>
             <Li>
-              <h5>Email</h5>
-              <input
+              <Label>Email</Label>
+              <Input
                 value={dataUser.email}
                 onChange={(e) => onChangeData("email", e.target.value)}
               />
             </Li>
             <Li>
-              <h5>Fecha de nacimiento</h5>
-              <input
+              <Label>Fecha de nacimiento</Label>
+              <Input
                 value={dataUser.birthdate}
                 onChange={(e) => onChangeData("birthdate", e.target.value)}
               />
             </Li>
 
-            <button>Guardar cambios</button>
+            <Button>Guardar cambios</Button>
           </Div2>
         </ListDiv>
 

@@ -24,11 +24,11 @@ export const Hr = styled.hr`
 
 export const ListDiv = styled.ul`
     background: linear-gradient(180deg, #FCE8E9 0%, #EEE9FF 100%);
-    padding: 1rem;
+    padding: 1.5rem;
     margin: 2rem;
-    border-radius: 10px;
+    border-radius: 20px;
     width: 80%;
-    max-width: 550px;
+    max-width: 800px;
     box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
     display: grid;
     grid-template-columns: 1fr;
@@ -43,6 +43,8 @@ export const ListDiv = styled.ul`
 export const TitleH5 = styled.h5`
     grid-column: 1 / 3;
     grid-row: 1 / 2;
+    font-size: 1.2rem;
+    margin: 0.7rem 0.7rem 1.5rem 0.7rem;
 
     @media (min-width: 768px){
         grid-column: 1 / 2;
@@ -50,8 +52,12 @@ export const TitleH5 = styled.h5`
 `
 
 export const Div1 = styled.div`
+    width: 100%;
     grid-column: 1 / 2;
     grid-row: 2 / 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     @media (min-width: 768px){
         grid-column: 1 / 2;
@@ -62,6 +68,10 @@ export const Div1 = styled.div`
 export const Div2 = styled.div`
     grid-column: 1 / 2;
     grid-row: 3 / 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 
     @media (min-width: 768px){
         grid-column: 2 / 3;
@@ -69,10 +79,41 @@ export const Div2 = styled.div`
     }
 `
 
-
 export const Li = styled.li`
     list-style: none;
     margin: 10px 0;
     padding: 0.5rem;
     border-radius: 10px;
+    width: 80%;
+`
+
+export const Label = styled.p`
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+`
+
+
+export const Input = styled.input`
+    border: none;
+    padding: 7px;
+    border-radius: 8px;
+    min-width: 100%;
+    max-width: 300px;
+`
+
+export const Button = styled.button`
+    justify-self: flex-end;
+    margin: 18px 0;
+    padding: 0.5rem;
+    border: 2px solid #C38FCF;
+    background: none;
+    border-radius: 10px;
+    font-weight: 600;
+
+    &:hover {
+        background-color: #C38FCF;
+        color: white;
+        cursor: pointer;
+    }
 `
