@@ -40,14 +40,14 @@ public class CreditCardService implements ICreditCardService {
 
     @Override
     public CreditCardDTO getCreditCardById(Long creditCardId) throws ResourceNotFoundException {
-        CreditCardDTO creditCard = new CreditCardDTO();
+        CreditCardDTO creditCard;
         Optional<CreditCard> cC = repository.findById(creditCardId);
         if (cC.isPresent()){
             creditCard = mapper.map(cC, CreditCardDTO.class);
             return creditCard;
         }
         else {
-            throw new ResourceNotFoundException("No se encuentra la tarjeta copn id: "+ creditCardId);
+            throw new ResourceNotFoundException("No se encuentra la tarjeta con id: "+ creditCardId);
         }
     }
 
@@ -102,7 +102,7 @@ public class CreditCardService implements ICreditCardService {
             return true;
         }
         else {
-            throw new ResourceNotFoundException("No se ebncuentra la tarjeta con id : " + creditCardId);
+            throw new ResourceNotFoundException("No se encuentra la tarjeta con id : " + creditCardId);
         }
     }
 }

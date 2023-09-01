@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class CreditCardDTO {
 
@@ -18,4 +17,12 @@ public class CreditCardDTO {
     private String cardNumber;
     private LocalDate expirationDate;
     private String cvv;
+
+    public CreditCardDTO(Long userId, String alias, String cardNumber, LocalDate expirationDate, String cvv) {
+        this.userId = userId;
+        this.alias = alias;
+        this.cardNumber = cardNumber;
+        this.expirationDate = expirationDate;
+        this.cvv = cvv;
+    }
 }
