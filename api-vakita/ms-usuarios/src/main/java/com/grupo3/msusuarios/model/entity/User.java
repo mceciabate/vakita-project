@@ -22,12 +22,12 @@ public class User implements Serializable {
     private Long id;
 
     @NotBlank(message = "No puede ingresar un nombre vacio")
-    @Size(max = 30 ,message = "El nombre no puede contener mas de 20 caracteres")
+    @Size(max = 30 ,message = "El nombre no puede contener mas de 30 caracteres")
     @Column(name = "NAME", nullable = false, length = 30)
     private String name;
 
     @NotBlank(message = "No puede ingresar un apellido vacio")
-    @Size(max = 30 ,message = "El apellido no puede contener mas de 20 caracteres")
+    @Size(max = 30 ,message = "El apellido no puede contener mas de 30 caracteres")
     @Column(name = "LAST_NAME", nullable = false, length = 30)
     private String lastName;
 
@@ -35,8 +35,8 @@ public class User implements Serializable {
     @Column(name = "DNI", nullable = false, length = 20)
     private String dni;
 
-    @NotBlank(message = "No puede ingresar un email vacio")
-    @Column(name = "EMAIL", nullable = false, length = 50)
+    @NotBlank(message = "No puede ingresar un email vacio o email existente")
+    @Column(name = "EMAIL", unique = true, nullable = false, length = 50)
     private String email;
 
     @NotBlank(message = "No puede ingresar un password vacio")

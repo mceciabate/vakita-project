@@ -2,10 +2,7 @@ package com.grupo3.msusuarios.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.grupo3.msusuarios.event.NewUserEventProducer;
-import com.grupo3.msusuarios.model.dto.AuthResponseDTO;
-import com.grupo3.msusuarios.model.dto.UserDTO;
-import com.grupo3.msusuarios.model.dto.UserRabbitDTO;
-import com.grupo3.msusuarios.model.dto.UserWithoutPasswordDTO;
+import com.grupo3.msusuarios.model.dto.*;
 import com.grupo3.msusuarios.model.entity.User;
 import com.grupo3.msusuarios.repository.IUserRepository;
 import com.grupo3.msusuarios.service.IUserService;
@@ -85,13 +82,15 @@ public class UserService implements IUserService {
 
     @Override
     @Transactional
-    public UserDTO updateById(Long id, UserDTO userDTO) throws Exception {
+    public UserWithoutPasswordDTO updateById(Long id, UserUpdateDTO userDTO) throws Exception {
         try {
-            Optional<User> findUser = userRepository.findById(id);
-            if(findUser.isPresent()){
-                User user = mapper.convertValue(userDTO, User.class);
-                userRepository.save(user);
-                return userDTO;
+            User findUser = userRepository.findById(id).orElse(null);
+            if(findUser != null){
+                findUser.setName(userDTO.getName());
+                findUser.setLastName(userDTO.getLastName());
+                UserWithoutPasswordDTO userUpdateDTO = mapper.convertValue(findUser, UserWithoutPasswordDTO.class);
+                userRepository.save(findUser);
+                return userUpdateDTO;
             }
             return null;
         }catch (Exception e){
@@ -148,7 +147,7 @@ public class UserService implements IUserService {
         try {
             Double accountBalanceUdate = userToModify.getAccount_balance() + amount;
             userToModify.setAccount_balance(accountBalanceUdate);
-            this.updateById(id, userToModify);
+            userRepository.save(mapper.convertValue(userToModify, User.class));
         } catch (Exception e){
             throw new Exception(e.getMessage());
         }
