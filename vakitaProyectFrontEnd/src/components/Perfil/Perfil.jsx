@@ -1,8 +1,23 @@
-import { Hr, Li, ListDiv, PerfilContainer, ProfileHeader } from './styled';
+import PanelProfile from '../../assets/PanelProfile/PanelProfile';
+import { Div1, Div2, H2, Label, Input, Li, ListDiv, PerfilContainer, TitleH5, Button } from "./styled";
 import { useState, useEffect } from "react";
 
 const Perfil = () => {
-  const [user, setUser] = useState([])
+  const [user, setUser] = useState({
+    name: "",
+    lastName: "",
+    dni: "",
+    email: "",
+    birthdate: "",
+  });
+
+  const [dataUser, setDataUser] = useState({
+    name: "",
+    lastName: "",
+    dni: "",
+    email: "",
+    birthdate: "",
+  })
 
   const userId = localStorage.getItem("userId");
 
@@ -11,46 +26,85 @@ const Perfil = () => {
       .then(response => response.json())
       .then(data => setUser(data))
       .catch(error => console.error(error));
-  },[]);
+  },[userId]);
+
 
   useEffect(() => {
-    console.log(user);
-  },[user])
+    setDataUser({
+      name: user.name,
+      lastName: user.lastName,
+      dni: user.dni,
+      email: user.email,
+      birthdate: user.birthdate,
+    });
+  }, [user]);
+
+  
+  const onChangeData = (key, value) => {
+        const updateDataUser = { ...dataUser };
+        updateDataUser[key] = value;
+        setDataUser(updateDataUser)
+  }
 
     return (
       <PerfilContainer>
-        <ProfileHeader>
-          <h2>
-            <img src="" />
-            Mi Perfil
-          </h2>
-          <p>Acá puedes ver tus datos de cuenta</p>
-        </ProfileHeader>
+        <H2>Mi Perfil</H2>
 
-        <Hr />
+        <PanelProfile
+          img={
+            "https://i.pinimg.com/1200x/b1/27/ec/b127ec5f10f9c07ecb04996116d1306e.jpg"
+          }
+          nameUser={user.name + " " + user.lastName}
+          subtitle="VAKITA USER"
+        />
 
         <ListDiv>
-          <Li>
-            <h5>Nombre</h5>
-            <p>{user.name}</p>
-          </Li>
-          <Li>
-            <h5>Apellido</h5>
-            <p>{user.lastName}</p>
-          </Li>
-          <Li>
-            <h5>DNI</h5>
-            <p>{user.dni}</p>
-          </Li>
-          <Li>
-            <h5>Email</h5>
-            <p>{user.email}</p>
-          </Li>
-          <Li>
-            <h5>Fecha de nacimiento</h5>
-            <p>{user.birthdate}</p>
-          </Li>
+          <TitleH5>Acá puedes actualizar tus datos</TitleH5>
+
+          <Div1>
+            <Li>
+              <Label>Nombre</Label>
+              <Input
+                value={dataUser.name}
+                onChange={(e) => onChangeData("name", e.target.value)}
+              />
+            </Li>
+            <Li>
+              <Label>Apellido</Label>
+              <Input
+                value={dataUser.lastName}
+                onChange={(e) => onChangeData("lastName", e.target.value)}
+              />
+            </Li>
+            <Li>
+              <Label>DNI</Label>
+              <Input
+                value={dataUser.dni}
+                onChange={(e) => onChangeData("dni", e.target.value)}
+              />
+            </Li>
+          </Div1>
+
+          <Div2>
+            <Li>
+              <Label>Email</Label>
+              <Input
+                value={dataUser.email}
+                onChange={(e) => onChangeData("email", e.target.value)}
+              />
+            </Li>
+            <Li>
+              <Label>Fecha de nacimiento</Label>
+              <Input
+                value={dataUser.birthdate}
+                onChange={(e) => onChangeData("birthdate", e.target.value)}
+              />
+            </Li>
+
+            <Button>Guardar cambios</Button>
+          </Div2>
         </ListDiv>
+
       </PerfilContainer>
     );
   };
