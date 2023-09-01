@@ -118,7 +118,7 @@ public class VakitaService implements IVakitaService {
             log.info("Success, amount update: "+ vakitaModify.getCumulativeAmount());
             this.updateVakita(vakitaId, vakitaModify);
             System.out.println("vakita: " +vakitaId + "user: "+ userID +"amount : " + amount);
-            TransactionDTO transactionDTO = new TransactionDTO(vakitaId, userID, amount);
+            TransactionDTO transactionDTO = new TransactionDTO(userID, vakitaId, amount);
             tRepository.save(mapper.map(transactionDTO, Transaction.class));
         }
         else if(!vakitaModify.getIsActive()){

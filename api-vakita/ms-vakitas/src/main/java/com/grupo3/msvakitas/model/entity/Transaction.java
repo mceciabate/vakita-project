@@ -25,13 +25,15 @@ public class Transaction implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(name = "vakita_ID")
-    private Long vakita_Id;
+    @Column(name = "vakita_id", nullable = false)
+    private Long vakitaId;
 
     @Column(name = "AMOUNT", nullable = false)
     private Double amount;
 
-
-
-
+    public Transaction(User user, Long vakitaId, Double amount) {
+        this.user = user;
+        this.vakitaId = vakitaId;
+        this.amount = amount;
+    }
 }
