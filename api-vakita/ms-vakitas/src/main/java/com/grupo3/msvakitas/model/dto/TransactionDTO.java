@@ -7,13 +7,15 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class TransactionDTO {
 
-    private Long id;
+    private Long transactionId;
     private Long userId;
     private Long vakitaId;
     private Double amount;
 
+    //CONSTRUCTOR SIN ID
     public TransactionDTO(Long userId, Long vakitaId, Double amount) {
         this.userId = userId;
         this.vakitaId = vakitaId;

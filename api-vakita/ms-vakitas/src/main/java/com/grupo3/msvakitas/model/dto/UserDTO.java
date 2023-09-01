@@ -15,10 +15,12 @@ import java.util.List;
 public class UserDTO {
     private Long id;
     private String email;
+
+    private List<TransactionDTO> transactions = new ArrayList<>();
+
     @JsonIgnore
     private List<VakitaDTO> vakitas;
 
-    private List<TransactionDTO> transactions = new ArrayList<>();
 
     //constructor sin vakitas
 

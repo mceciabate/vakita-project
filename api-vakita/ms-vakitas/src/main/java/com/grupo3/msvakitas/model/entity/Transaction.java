@@ -1,17 +1,17 @@
 package com.grupo3.msvakitas.model.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serial;
+import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
 @Entity
 @Table(name = "transaction")
-public class Transaction {
+public class Transaction implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -19,13 +19,13 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "TRANSACTION_ID", unique = true, nullable = false)
-    private Long id;
+    private Long transactionId;
 
     @ManyToOne()
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(name = "vakita_ID", nullable = false)
+    @Column(name = "vakita_ID")
     private Long vakita_Id;
 
     @Column(name = "AMOUNT", nullable = false)
