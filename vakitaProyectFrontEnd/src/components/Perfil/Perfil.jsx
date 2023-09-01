@@ -37,7 +37,6 @@ const Perfil = () => {
     onSubmit: async (values) => {
       if(changed) {
         try {
-          console.log(formik);
           const response = await axios.put(
             "http://107.22.65.36:8080/api/v1/usuarios/" + userId,
             {
@@ -86,7 +85,7 @@ const Perfil = () => {
 
     const {name, lastName} = formik.values
 
-    if(name !== user.name && lastName !== user.lastName) {
+    if(name !== user.name || lastName !== user.lastName) {
       setChanged(true)
     }
     

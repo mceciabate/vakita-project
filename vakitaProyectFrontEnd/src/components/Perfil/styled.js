@@ -95,17 +95,18 @@ export const Label = styled.p`
 
 
 export const Input = styled.input`
-    border: none;
-padding: 7px;
+    border: 0.3px solid #664E94;
+    padding: 7px;
     border-radius: 8px;
     min-width: 100%;
     max-width: 300px;
 
     &:disabled {
         color: #000;
-        background-color: #fff;
+        background-color: #eaeaea;
     }
-`
+
+`;
 
 export const Button = styled.button`
     justify-self: flex-end;
