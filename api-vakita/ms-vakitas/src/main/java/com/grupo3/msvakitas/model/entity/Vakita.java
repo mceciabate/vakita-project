@@ -65,9 +65,13 @@ public class Vakita implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> contributors = new ArrayList<>();
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "vakita")
+    private List<Transaction> transactions;
+
 
     //CONSTRUCTOR SIN ID
-    public Vakita(String name, Long idCreatorUser, String description, String imgURL, Double totalAmount, Double cumulativeAmount, LocalDate creationDate, LocalDate expirationDate, Boolean isActive, VakitaTypes type, List<User> contributors) {
+
+    public Vakita(String name, Long idCreatorUser, String description, String imgURL, Double totalAmount, Double cumulativeAmount, LocalDate creationDate, LocalDate expirationDate, Boolean isActive, VakitaTypes type, List<User> contributors, List<Transaction> transactions) {
         this.name = name;
         this.idCreatorUser = idCreatorUser;
         this.description = description;
@@ -79,5 +83,6 @@ public class Vakita implements Serializable {
         this.isActive = isActive;
         this.type = type;
         this.contributors = contributors;
+        this.transactions = transactions;
     }
 }

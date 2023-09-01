@@ -16,7 +16,7 @@ public class UserDTO {
     private Long id;
     private String email;
 
-    private List<TransactionDTO> transactions = new ArrayList<>();
+
 
     @JsonIgnore
     private List<VakitaDTO> vakitas;
@@ -27,12 +27,6 @@ public class UserDTO {
     public UserDTO(Long id, String email) {
         this.id = id;
         this.email = email;
-    }
-
-    public UserDTO(Long id, String email, List<TransactionDTO> transactions) {
-        this.id = id;
-        this.email = email;
-        this.transactions = transactions;
     }
 
     //constructor in id y sin vakitas

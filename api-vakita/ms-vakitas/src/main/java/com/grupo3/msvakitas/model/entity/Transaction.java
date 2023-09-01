@@ -21,19 +21,20 @@ public class Transaction implements Serializable {
     @Column(name = "TRANSACTION_ID", unique = true, nullable = false)
     private Long transactionId;
 
-    @ManyToOne()
-    @JoinColumn(name = "user_id")
-    private User user;
 
-    @Column(name = "vakita_id", nullable = false)
-    private Long vakitaId;
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
+
+    @ManyToOne()
+    @JoinColumn(name = "vakita_id")
+    private Vakita vakita;
 
     @Column(name = "AMOUNT", nullable = false)
     private Double amount;
 
-    public Transaction(User user, Long vakitaId, Double amount) {
-        this.user = user;
-        this.vakitaId = vakitaId;
+    public Transaction(Long userId, Vakita vakita, Double amount) {
+        this.userId = userId;
+        this.vakita = vakita;
         this.amount = amount;
     }
 }

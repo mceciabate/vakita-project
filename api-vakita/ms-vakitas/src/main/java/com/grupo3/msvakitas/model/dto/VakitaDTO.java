@@ -29,11 +29,12 @@ public class VakitaDTO {
     private VakitaTypes type;
     private List<UserDTO> contributors = new ArrayList<>();
 
+    private List<TransactionDTO> transactions = new ArrayList<>();
+
 
     //CONSTRUCTOR SIN ID
 
-
-    public VakitaDTO(String name, Long idCreatorUser, String description, String imgURL, Double totalAmount, Double cumulativeAmount, LocalDate creationDate, LocalDate expirationDate, Boolean isActive, VakitaTypes type, List<UserDTO> contributors) {
+    public VakitaDTO(String name, Long idCreatorUser, String description, String imgURL, Double totalAmount, Double cumulativeAmount, LocalDate creationDate, LocalDate expirationDate, Boolean isActive, VakitaTypes type, List<UserDTO> contributors, List<TransactionDTO> transactions) {
         this.name = name;
         this.idCreatorUser = idCreatorUser;
         this.description = description;
@@ -45,11 +46,11 @@ public class VakitaDTO {
         this.isActive = isActive;
         this.type = type;
         this.contributors = contributors;
+        this.transactions = transactions;
     }
 
 
-
-    //CONSTRUCTOR SIN ID NI CONTRIBUYENTES
+    //CONSTRUCTOR SIN ID NI CONTRIBUYENTES/TRANSACTIONS
 
     public VakitaDTO(String name, Long idCreatorUser, String description, String imgURL, Double totalAmount, Double cumulativeAmount, LocalDate creationDate, LocalDate expirationDate, Boolean isActive, VakitaTypes type) {
         this.name = name;
