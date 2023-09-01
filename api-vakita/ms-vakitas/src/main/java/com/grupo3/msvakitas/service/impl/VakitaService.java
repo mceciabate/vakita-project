@@ -109,7 +109,7 @@ public class VakitaService implements IVakitaService {
 
     //Método para modificar el saldo de una vaquita
     @Override
-    public void modifyAmount(Long userID, Double amount, Long vakitaId) throws ResourceNotFoundException, BadRequestException{
+    public void modifyAmount(Long userID, Long vakitaId, Double amount) throws ResourceNotFoundException, BadRequestException{
         VakitaDTO vakitaModify = this.getVakitaById(vakitaId);
         Double amountDiference = vakitaModify.getTotalAmount() - vakitaModify.getCumulativeAmount();
         if(vakitaModify.getIsActive() && amount <= amountDiference ){
@@ -117,7 +117,8 @@ public class VakitaService implements IVakitaService {
             vakitaModify.setCumulativeAmount(deposit);
             log.info("Success, amount update: "+ vakitaModify.getCumulativeAmount());
             this.updateVakita(vakitaId, vakitaModify);
-            TransactionDTO transactionDTO = new TransactionDTO(userID, vakitaId, amount);
+            System.out.println("vakita: " +vakitaId + "user: "+ userID +"amount : " + amount);
+            TransactionDTO transactionDTO = new TransactionDTO(vakitaId, userID, amount);
             tRepository.save(mapper.map(transactionDTO, Transaction.class));
         }
         else if(!vakitaModify.getIsActive()){

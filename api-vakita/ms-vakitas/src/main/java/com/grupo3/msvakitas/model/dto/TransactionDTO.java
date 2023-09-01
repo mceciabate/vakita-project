@@ -10,9 +10,8 @@ import lombok.NoArgsConstructor;
 public class TransactionDTO {
 
     private Long id;
-    private Long vakitaId;
-
     private Long userId;
+    private Long vakitaId;
     private Double amount;
 
     public TransactionDTO(Long userId, Long vakitaId, Double amount) {

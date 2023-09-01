@@ -25,6 +25,10 @@ public class User implements Serializable{
     @Column(name = "USER_EMAIL", nullable = false, length = 200)
     private String email;
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "USER_ID")
+    private List<Transaction> transactions;
+
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "contributors")
     private List<Vakita> vakitas;
 
@@ -32,6 +36,13 @@ public class User implements Serializable{
     public User(Long id, String email) {
         this.id = id;
         this.email = email;
+    }
+
+    //CONSTRUCTOR CON TRANSACCIONES
+    public User(Long id, String email, List<Transaction> transactions) {
+        this.id = id;
+        this.email = email;
+        this.transactions = transactions;
     }
 
     //CONSTRUCTOR CON MAIL

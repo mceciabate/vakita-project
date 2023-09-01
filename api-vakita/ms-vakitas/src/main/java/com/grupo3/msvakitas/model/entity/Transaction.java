@@ -22,11 +22,11 @@ public class Transaction {
     private Long id;
 
     @ManyToOne()
-    @JoinColumn(name = "vakita_id")
-    private Vakita vakita;
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    @Column(name = "USER_ID", nullable = false)
-    private Long userId;
+    @Column(name = "vakita_ID", nullable = false)
+    private Long vakita_Id;
 
     @Column(name = "AMOUNT", nullable = false)
     private Double amount;

@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -16,8 +17,8 @@ public class UserDTO {
     private String email;
     @JsonIgnore
     private List<VakitaDTO> vakitas;
-    @JsonIgnore
-    private List<TransactionDTO> transactions;
+
+    private List<TransactionDTO> transactions = new ArrayList<>();
 
     //constructor sin vakitas
 
@@ -25,6 +26,13 @@ public class UserDTO {
         this.id = id;
         this.email = email;
     }
+
+    public UserDTO(Long id, String email, List<TransactionDTO> transactions) {
+        this.id = id;
+        this.email = email;
+        this.transactions = transactions;
+    }
+
     //constructor in id y sin vakitas
     public UserDTO(String email) {
         this.email = email;
