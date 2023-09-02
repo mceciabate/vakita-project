@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: ms-payment
+  cloud:
+    config:
+      enabled: true
+      uri: http://54.236.118.65:8888/
+
+
+
+

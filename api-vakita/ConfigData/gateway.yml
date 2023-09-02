@@ -22,7 +22,7 @@ spring:
           enabled: true
       routes:
         - id: ms-payment
-          uri: lb://ms-payment
+          uri: http://54.159.202.105:9090/
           predicates:
             - Path=/api/v1/payment/**
           filters:
