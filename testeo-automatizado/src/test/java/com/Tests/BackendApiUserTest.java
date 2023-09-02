@@ -23,7 +23,7 @@ public class BackendApiUserTest {
     static ExtentReports report;
     ExtentTest test;
 
-    private String baseURLUsuarios = "http://localhost:8080/api/v1/usuarios";
+    private String baseURLUsuarios = "http://107.22.65.36:8080/api/v1/usuarios";
 
 
     @BeforeAll
@@ -51,7 +51,7 @@ public class BackendApiUserTest {
                 contentType("application/json")
                 .body(user.toString())
                 .when()
-                .post(baseURLUsuarios)
+                .post(baseURLUsuarios+"/register")
                 .then()
                 .assertThat()
                 .statusCode(201);
@@ -67,7 +67,7 @@ public class BackendApiUserTest {
         test.log(Status.INFO, "Inicia el Test");
         test.log(Status.INFO, "Se configura la petición");
         given()
-                .pathParam("usuarioId", 1)
+                .pathParam("usuarioId", 27)
                 .when()
                 .get(baseURLUsuarios+"/{usuarioId}")
                 .then()
@@ -116,7 +116,7 @@ public class BackendApiUserTest {
         test.log(Status.INFO, "Se configura la petición");
         given().config(RestAssured.config().encoderConfig(encoderConfig().appendDefaultContentCharsetToContentTypeIfUndefined(false))).
                 contentType("application/json")
-                .pathParam("usuarioId", 1)
+                .pathParam("usuarioId", 27)
                 .body(user.toString())
                 .when()
                 .put(baseURLUsuarios+"/{usuarioId}")
