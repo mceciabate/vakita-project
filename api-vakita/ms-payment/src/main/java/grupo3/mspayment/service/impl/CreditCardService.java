@@ -30,9 +30,9 @@ public class CreditCardService implements ICreditCardService {
 
     @Autowired
     private ModelMapper mapper;
-
-    @Autowired
-    private PasswordEncoder encoder;
+//
+//    @Autowired
+//    private PasswordEncoder encoder;
 
     @Autowired
     private ICreditCardMongoRepository repository;
@@ -97,10 +97,10 @@ public class CreditCardService implements ICreditCardService {
 
     @Override
     public void registerCreditCard(CreditCardDTO creditCard){
-        String creditCardNumberEncoder = encoder.encode(creditCard.getCardNumber());
-        String encoderCvv = encoder.encode(creditCard.getCvv());
-        creditCard.setCardNumber(creditCardNumberEncoder);
-        creditCard.setCvv(encoderCvv);
+//        String creditCardNumberEncoder = encoder.encode(creditCard.getCardNumber());
+//        String encoderCvv = encoder.encode(creditCard.getCvv());
+//        creditCard.setCardNumber(creditCardNumberEncoder);
+//        creditCard.setCvv(encoderCvv);
         CreditCard newCreditCard = mapper.map(creditCard, CreditCard.class);
         repository.save(newCreditCard);
         log.info("Saving CreditCard");

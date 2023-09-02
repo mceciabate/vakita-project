@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 
-@SpringBootApplication(exclude = {SecurityAutoConfiguration.class,
-		org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration.class})
+@SpringBootApplication/*(exclude = {SecurityAutoConfiguration.class,
+		org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration.class})*/
 @EnableMongoRepositories
 public class MsPaymentApplication {
 

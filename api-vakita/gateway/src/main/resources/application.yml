@@ -21,6 +21,13 @@ spring:
         locator:
           enabled: true
       routes:
+        - id: ms-payment
+          uri: lb://ms-payment
+          predicates:
+            - Path=/api/v1/payment/**
+          filters:
+            - AuthenticationFilter
+
         - id: ms-usuarios
           uri: lb://ms-usuarios
           predicates:
