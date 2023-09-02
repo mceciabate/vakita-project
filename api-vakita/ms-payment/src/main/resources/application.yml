@@ -20,7 +20,6 @@ eureka:
     instance-id: ${spring.application.name}:${random.int}
     preferIpAddress: true
     lease-renewal-interval-in-seconds: 30
-
 management:
   endpoints:
     web:

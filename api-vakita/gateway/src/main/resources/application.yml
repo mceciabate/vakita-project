@@ -21,6 +21,11 @@ spring:
         locator:
           enabled: true
       routes:
+        - id: ms-payment
+          uri: lb://ms-payment
+          predicates:
+            - Path=/api/v1/payment/**
+
         - id: ms-usuarios
           uri: lb://ms-usuarios
           predicates:
@@ -33,10 +38,7 @@ spring:
           filters:
             - AuthenticationFilter
 
-        - id: ms-payment
-          uri: lb://ms-payment
-          predicates:
-            - Path=/api/v1/payment/**
+
 
 eureka:
   client:
