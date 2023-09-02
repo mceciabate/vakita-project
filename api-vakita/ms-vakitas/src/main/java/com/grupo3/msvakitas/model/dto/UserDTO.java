@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -14,8 +15,12 @@ import java.util.List;
 public class UserDTO {
     private Long id;
     private String email;
+
+
+
     @JsonIgnore
     private List<VakitaDTO> vakitas;
+
 
     //constructor sin vakitas
 
@@ -23,6 +28,7 @@ public class UserDTO {
         this.id = id;
         this.email = email;
     }
+
     //constructor in id y sin vakitas
     public UserDTO(String email) {
         this.email = email;

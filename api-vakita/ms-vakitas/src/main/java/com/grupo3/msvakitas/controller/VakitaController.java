@@ -115,8 +115,8 @@ public class VakitaController {
     @PutMapping("/deposit")
     @ResponseStatus(code = HttpStatus.OK)
     //    @PreAuthorized("hasRole('USER')")
-    public ResponseEntity deposit(@RequestParam Double amount, @RequestParam Long vakitaId) throws BadRequestException, ResourceNotFoundException {
-        vakitaService.modifyAmount(amount, vakitaId);
+    public ResponseEntity deposit(@RequestParam Long userId,  @RequestParam Long vakitaId, @RequestParam Double amount) throws BadRequestException, ResourceNotFoundException {
+        vakitaService.modifyAmount(userId, vakitaId, amount);
         return ResponseEntity.ok().build();
     }
 
