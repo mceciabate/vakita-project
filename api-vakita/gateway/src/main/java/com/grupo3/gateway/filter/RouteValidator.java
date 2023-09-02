@@ -17,6 +17,7 @@ public class RouteValidator {
             "/api/v1/usuarios/token",
             "/api/v1/usuarios/validate",
             "/api/v1/usuarios/**",
+//            "/api/v1/payment/**",
             "/swagger-ui/**",
             "/swagger-resources/**",
             "/swagger-ui.html",
