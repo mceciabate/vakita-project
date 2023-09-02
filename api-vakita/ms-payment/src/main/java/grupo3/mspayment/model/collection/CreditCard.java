@@ -23,13 +23,13 @@ public class CreditCard {
 
     @Id
     private int creditCardId;
-    private Long userId;
+    private Integer userId;
     private String alias;
     private String cardNumber;
     private LocalDate expirationDate;
     private String cvv;
 
-    public CreditCard(Long userId, String alias, String cardNumber, LocalDate expirationDate, String cvv) {
+    public CreditCard(Integer userId, String alias, String cardNumber, LocalDate expirationDate, String cvv) {
         this.userId = userId;
         this.alias = alias;
         this.cardNumber = cardNumber;

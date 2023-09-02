@@ -13,13 +13,13 @@ import java.time.LocalDate;
 public class CreditCardDTO {
 
     private int creditCardId;
-    private Long userId;
+    private Integer userId;
     private String alias;
     private String cardNumber;
     private LocalDate expirationDate;
     private String cvv;
 
-    public CreditCardDTO(Long userId, String alias, String cardNumber, LocalDate expirationDate, String cvv) {
+    public CreditCardDTO(Integer userId, String alias, String cardNumber, LocalDate expirationDate, String cvv) {
         this.userId = userId;
         this.alias = alias;
         this.cardNumber = cardNumber;

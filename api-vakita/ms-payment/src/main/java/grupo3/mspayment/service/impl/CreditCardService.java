@@ -51,7 +51,6 @@ public class CreditCardService implements ICreditCardService {
                 .findAndModify(query,
                         update, options().returnNew(true).upsert(true),
                         DbSequence.class);
-
         return !Objects.isNull(counter) ? counter.getSeq() : 1;
     }
 
@@ -87,11 +86,12 @@ public class CreditCardService implements ICreditCardService {
                 cardsByUser.add(creditCardDTO);
             }
         }
-        if(cardsByUser.size() > 0){
-            return cardsByUser;
+        if(cardsByUser.size() == 0){
+            throw new ResourceNotFoundException("El usuario no tiene tarjetas para mostrar");
         }
         else {
-            throw new ResourceNotFoundException("El usuario no tiene tarjetas para mostrar");
+           log.info("Cards del user : " + userId);
+           return cardsByUser;
         }
     }
 
