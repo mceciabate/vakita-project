@@ -1,6 +1,7 @@
 package com.grupo3.msusuarios.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -35,5 +36,8 @@ public class ConfirmationToken implements Serializable {
     private String userEmail;
     private String userPassword;
     private LocalDate userBirthdate;
+    @Lob
+    @Column(name = "avatar", columnDefinition = "LONGBLOB")
+    private byte[] avatar;
     private Double account_balance;
 }

@@ -88,6 +88,7 @@ public class UserService implements IUserService {
             if(findUser != null){
                 findUser.setName(userDTO.getName());
                 findUser.setLastName(userDTO.getLastName());
+                findUser.setAvatar(userDTO.getAvatar());
                 UserWithoutPasswordDTO userUpdateDTO = mapper.convertValue(findUser, UserWithoutPasswordDTO.class);
                 userRepository.save(findUser);
                 return userUpdateDTO;

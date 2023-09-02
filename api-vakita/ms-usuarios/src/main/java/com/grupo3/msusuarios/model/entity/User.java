@@ -47,6 +47,11 @@ public class User implements Serializable {
     @Column(name = "BIRTHDATE", nullable = false)
     private LocalDate birthdate;
 
+    @Lob
+    @Column(name = "AVATAR", columnDefinition = "LONGBLOB")
+    @Size(max = 1024 * 1024, message = "El tamaño máximo del avatar es de 1 MB")
+    private byte[] avatar;
+
     @Column(name = "ACCOUNT_BALANCE")
     private Double account_balance = 0.0;
 }

@@ -17,5 +17,6 @@ public class UserWithoutPasswordDTO {
     private String dni;
     private String email;
     private LocalDate birthdate;
+    private byte[] avatar;
     private Double account_balance;
 }

@@ -1,6 +1,8 @@
 package com.grupo3.msusuarios.model.dto;
 
 import io.swagger.v3.oas.annotations.Hidden;
+import jakarta.persistence.Column;
+import jakarta.persistence.Lob;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -31,6 +33,8 @@ public class UserDTO {
     private String password;
     @NotNull(message = "No puede ingresar una fecha vacia")
     private LocalDate birthdate;
+    @Size(max = 1024 * 1024, message = "El tamaño máximo del avatar es de 1 MB")
+    private byte[] avatar;
     @Hidden
     private Double account_balance = 0.0;
 }
