@@ -7,7 +7,7 @@ spring:
 
   data:
     mongodb:
-      database: paymentsdb
+      database: admin
       port: 27017
       host: 3.90.249.195
 eureka:
@@ -26,12 +26,12 @@ management:
     web:
       exposure:
         include: info
-info:
-  env:
-    enabled: true
-  app:
-    name: ms-payment
-    version: 1.0.0
-    description: Microservicios de Pagos
+  info:
+    env:
+      enabled: true
+    app:
+      name: ms-payment
+      version: 1.0.0
+      description: Microservicios de Pagos
 
 

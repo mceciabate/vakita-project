@@ -2,6 +2,7 @@ package grupo3.mspayment.controller;
 
 
 import grupo3.mspayment.handler.ResourceNotFoundException;
+import grupo3.mspayment.model.collection.CreditCard;
 import grupo3.mspayment.model.dto.CreditCardDTO;
 import grupo3.mspayment.service.impl.CreditCardService;
 import jakarta.validation.Valid;
@@ -25,6 +26,7 @@ public class PaymentController {
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public ResponseEntity createCC(@Valid @RequestBody CreditCardDTO cc){
+        cc.setCreditCardId(ccService.getSequenceNumber(CreditCard.SEQUENCE_NAME));
         ccService.registerCreditCard(cc);
         return ResponseEntity.ok().build();
     }
@@ -37,19 +39,19 @@ public class PaymentController {
 
     @GetMapping("/{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public ResponseEntity<CreditCardDTO> getCCById(@PathVariable Long id) throws ResourceNotFoundException {
+    public ResponseEntity<CreditCardDTO> getCCById(@PathVariable Integer id) throws ResourceNotFoundException {
         return ResponseEntity.ok(ccService.getCreditCardById(id));
     }
 
     @GetMapping("/personal/{userId}")
     @ResponseStatus(code = HttpStatus.OK)
-    public ResponseEntity<List<CreditCardDTO>> getCCByUser(@PathVariable Long userId) throws ResourceNotFoundException {
+    public ResponseEntity<List<CreditCardDTO>> getCCByUser(@PathVariable Integer userId) throws ResourceNotFoundException {
         return ResponseEntity.ok(ccService.getCardsByUser(userId));
     }
 
     @PatchMapping("/alias/{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public ResponseEntity modifyAliasCC(@PathVariable Long id, @RequestParam String alias) throws ResourceNotFoundException {
+    public ResponseEntity modifyAliasCC(@PathVariable Integer id, @RequestParam String alias) throws ResourceNotFoundException {
         ccService.updateAliasCreditCard(id, alias);
         return ResponseEntity.ok().build();
     }
@@ -57,7 +59,7 @@ public class PaymentController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public ResponseEntity deleteCC(@PathVariable Long id) throws ResourceNotFoundException {
+    public ResponseEntity deleteCC(@PathVariable Integer id) throws ResourceNotFoundException {
         ccService.deleteCreditCard(id);
         return ResponseEntity.ok().build();
     }

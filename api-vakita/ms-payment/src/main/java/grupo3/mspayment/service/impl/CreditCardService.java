@@ -2,18 +2,26 @@ package grupo3.mspayment.service.impl;
 
 import grupo3.mspayment.handler.ResourceNotFoundException;
 import grupo3.mspayment.model.collection.CreditCard;
+import grupo3.mspayment.model.collection.DbSequence;
 import grupo3.mspayment.model.dto.CreditCardDTO;
 import grupo3.mspayment.repository.ICreditCardMongoRepository;
 import grupo3.mspayment.service.ICreditCardService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+
+import static org.springframework.data.mongodb.core.FindAndModifyOptions.options;
 
 
 @Slf4j
@@ -29,6 +37,24 @@ public class CreditCardService implements ICreditCardService {
     @Autowired
     private ICreditCardMongoRepository repository;
 
+    @Autowired
+    private MongoOperations mongoOperations;
+
+    //Establezco un alogica para generar un id numerico autoincremental
+    public int getSequenceNumber(String sequenceName) {
+        //paso la secuencia a la query
+        Query query = new Query(Criteria.where("id").is(sequenceName));
+        //establezco el patron para aumentar la frecuencia
+        Update update = new Update().inc("seq", 1);
+        //Modifico la secuencia en la clase que creé
+        DbSequence counter = mongoOperations
+                .findAndModify(query,
+                        update, options().returnNew(true).upsert(true),
+                        DbSequence.class);
+
+        return !Objects.isNull(counter) ? counter.getSeq() : 1;
+    }
+
     @Override
     public List<CreditCardDTO> getAllCards(){
         List<CreditCardDTO> cardsList = new ArrayList<>();
@@ -39,7 +65,7 @@ public class CreditCardService implements ICreditCardService {
     }
 
     @Override
-    public CreditCardDTO getCreditCardById(Long creditCardId) throws ResourceNotFoundException {
+    public CreditCardDTO getCreditCardById(Integer creditCardId) throws ResourceNotFoundException {
         CreditCardDTO creditCard;
         Optional<CreditCard> cC = repository.findById(creditCardId);
         if (cC.isPresent()){
@@ -53,7 +79,7 @@ public class CreditCardService implements ICreditCardService {
 
 
     @Override
-    public List<CreditCardDTO> getCardsByUser(Long userId) throws ResourceNotFoundException {
+    public List<CreditCardDTO> getCardsByUser(Integer userId) throws ResourceNotFoundException {
         List<CreditCardDTO> cardList = this.getAllCards();
         List<CreditCardDTO> cardsByUser = new ArrayList<>();
         for (CreditCardDTO creditCardDTO : cardList) {
@@ -81,7 +107,7 @@ public class CreditCardService implements ICreditCardService {
     }
 
     @Override
-    public void deleteCreditCard(Long creditCardId) throws ResourceNotFoundException {
+    public void deleteCreditCard(Integer creditCardId) throws ResourceNotFoundException {
         if (repository.existsById(creditCardId)) {
             repository.deleteById(creditCardId);
         } else {
@@ -90,7 +116,7 @@ public class CreditCardService implements ICreditCardService {
     }
 
     @Override
-    public boolean updateAliasCreditCard(Long creditCardId, String alias) throws ResourceNotFoundException {
+    public boolean updateAliasCreditCard(Integer creditCardId, String alias) throws ResourceNotFoundException {
         CreditCardDTO creditCardDTO = this.getCreditCardById(creditCardId);
         if(creditCardDTO != null){
             creditCardDTO.setUserId(creditCardDTO.getUserId());

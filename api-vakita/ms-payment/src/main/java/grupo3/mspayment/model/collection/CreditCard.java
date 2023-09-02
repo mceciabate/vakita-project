@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serial;
@@ -15,12 +16,13 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(collection = "credit_cards")
-public class CreditCard implements Serializable {
+public class CreditCard {
 
-    @Serial
-    private static final long serialVersionUID = 1L;
+    @Transient
+    public static final String SEQUENCE_NAME = "cc_sequence";
+
     @Id
-    private String creditCardId;
+    private int creditCardId;
     private Long userId;
     private String alias;
     private String cardNumber;

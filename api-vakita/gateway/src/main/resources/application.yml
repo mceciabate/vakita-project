@@ -32,6 +32,7 @@ spring:
             - Path=/api/v1/vakita/**,/swagger-ui/**,/swagger-resources/**,/swagger-ui.html,/v3/api-docs,/webjars/**,/view/**,/swagger-vakitas
           filters:
             - AuthenticationFilter
+
         - id: ms-payment
           uri: lb://ms-payment
           predicates:

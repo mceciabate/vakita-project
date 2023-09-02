@@ -8,13 +8,13 @@ import java.util.List;
 public interface ICreditCardService {
     List<CreditCardDTO> getAllCards();
 
-    CreditCardDTO getCreditCardById(Long creditCardId) throws ResourceNotFoundException;
+    CreditCardDTO getCreditCardById(Integer creditCardId) throws ResourceNotFoundException;
 
-    List<CreditCardDTO> getCardsByUser(Long userId) throws ResourceNotFoundException;
+    List<CreditCardDTO> getCardsByUser(Integer userId) throws ResourceNotFoundException;
 
     void registerCreditCard(CreditCardDTO creditCard);
 
-    void deleteCreditCard(Long creditCardId) throws ResourceNotFoundException;
+    void deleteCreditCard(Integer creditCardId) throws ResourceNotFoundException;
 
-    boolean updateAliasCreditCard(Long creditCardId, String alias) throws ResourceNotFoundException;
+    boolean updateAliasCreditCard(Integer creditCardId, String alias) throws ResourceNotFoundException;
 }

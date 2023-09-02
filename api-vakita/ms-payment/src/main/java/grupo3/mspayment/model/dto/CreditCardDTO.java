@@ -9,9 +9,10 @@ import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class CreditCardDTO {
 
-    private String creditCardId;
+    private int creditCardId;
     private Long userId;
     private String alias;
     private String cardNumber;
