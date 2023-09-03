@@ -229,13 +229,15 @@ const NewVakita = () => {
 {({values}) => (
         <Form className='formNewVakita'>
           <div className='boxReverseBanner'>
+
             <div className='boxOne'>
           <div className="boxItems">
             <label htmlFor="name"></label>
             <Field  className="inputText" type="text" id="name" name="name" placeholder="Nombre de la vaca"/>
-            <div className='error'>
-            <ErrorMessage name="name" component="div" />
-            </div>
+            <span className='error'>
+            <ErrorMessage name="name" component="span" />
+            </span>
+            
           </div>
           <div className="boxItems">
             <label htmlFor="amount"></label>
@@ -255,10 +257,10 @@ const NewVakita = () => {
 
           <div className="boxItems">
             <label htmlFor="description"></label>
-            <Field as="textarea" id="description" name="description" placeholder="Descripción" />
-            <div className='error'>
+            <Field type="text"  className="inputDescription"  id="description" name="description" placeholder="Descripción" />
+            <span className='error'>
             <ErrorMessage name="description" component="div" />
-            </div>
+            </span>
           </div>
 
           <div className="boxItems">
@@ -288,6 +290,7 @@ const NewVakita = () => {
       <div className='halfBackground'>
 
 <div >
+  <div className='membersDesktop'>
 <div className="boxItems">
 
           <EmailList emails={emails} onRemove={removeMember} />
@@ -295,7 +298,7 @@ const NewVakita = () => {
         <div>
         <div className="boxItems">
               <label htmlFor="email"></label>
-              <Field className="inputEmail" type="email" id="email" name="email" placeholder="Agregar integrante con su email" />
+              <Field className="inputEmail" type="email" id="email" name="email" placeholder="Agregar email del integrante" />
               <div className='error'>
               <ErrorMessage name="email" component="div" />
               </div>
@@ -335,7 +338,7 @@ const NewVakita = () => {
             </div>
           
             </div>
-
+            </div>
 
 
     
@@ -353,13 +356,6 @@ const NewVakita = () => {
          
           
           </div>
-          </div>
-        </Form>
-         )}
-
-         
-      </Formik>
-
       <div className='info'>
         
         <div className='infoText'>
@@ -373,6 +369,13 @@ const NewVakita = () => {
         
         
         </div>
+          </div>
+        </Form>
+         )}
+
+         
+      </Formik>
+
 
 
     </div>

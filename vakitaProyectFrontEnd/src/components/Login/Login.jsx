@@ -89,7 +89,7 @@ function Login() {
                                     )
                                     .then((response) => {
                                         
-                                        console.log("Contraseña cambiada exitosamente:", response.data);
+                                       
                                         Swal.fire({
                                             icon: 'success',
                                             title: 'Contraseña Cambiada',
@@ -97,7 +97,7 @@ function Login() {
                                         });
                                     })
                                     .catch((error) => {
-                                        console.error("Error al cambiar contraseña:", error);
+                                     
                                         Swal.fire({
                                             icon: 'error',
                                             title: 'Error',
@@ -115,7 +115,7 @@ function Login() {
                         }
                     })
                     .catch((error) => {
-                        console.error("Error al obtener usuarios:", error);
+                        
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
@@ -198,7 +198,7 @@ function Login() {
 
 
                 } else if (res.status === 400) {
-                  console.log("respuesta1 ", res.data.data);
+                 
                 }else{
                     Swal.fire({
                         title: 'Error',
