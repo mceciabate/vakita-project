@@ -24,7 +24,7 @@ spring:
         - id: ms-payment
           uri: http://54.159.202.105:9090/
           predicates:
-            - Path=/api/v1/payment/**
+            - Path=/api/v1/payment/**, /swagger-ui/**,/swagger-resources/**,/swagger-ui.html,/v3/api-docs,/webjars/**,/view/**,/swagger-payment
           filters:
             - AuthenticationFilter
 
