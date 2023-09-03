@@ -26,6 +26,15 @@ build_usuarios:
     - cd ./api-vakita/ms-usuarios 
     - mvn compile
 
+build_payment:
+  stage: build
+  only:
+    - backend
+  script:
+    - echo "Maven compile started on payment"
+    - cd ./api-vakita/ms-payment
+    - mvn compile
+
 build_vakitas:
   stage: build
   only:
@@ -83,6 +92,18 @@ package_users:
   script:
     - echo "Maven package started on usuarios"
     - cd ./api-vakita/ms-usuarios
+    - mvn package
+
+package_payment: 
+  stage: package
+  only:
+    - backend
+  artifacts:
+    paths:
+    - api-vakita/ms-payment/target/*.jar
+  script:
+    - echo "Maven package started on payment"
+    - cd ./api-vakita/ms-payment
     - mvn package
 
 package_vakitas: 
