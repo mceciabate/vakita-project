@@ -149,7 +149,7 @@ public class BackendApiUserTest {
     @Test
     @Tag("smoke")
     public void fEliminarUsuarioNoexistente(){
-        test = report.createTest("Test de eliminar Usuario por Id");
+        test = report.createTest("Test de eliminar Usuario por Id no existente");
         test.log(Status.INFO, "Inicia el Test");
         test.log(Status.INFO, "Se configura la petición");
         given()

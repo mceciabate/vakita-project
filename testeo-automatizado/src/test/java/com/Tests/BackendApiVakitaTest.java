@@ -219,7 +219,7 @@ public class BackendApiVakitaTest {
     @Test
     @Tag("smoke")
     public void hValidarAgregarContribuidorDuplicadoAVakita(){
-        test = report.createTest("Test Agregar contribuidor a Vakita");
+        test = report.createTest("Test Agregar contribuidor a Vakita duplicado");
         test.log(Status.INFO, "Inicia el Test");
         test.log(Status.INFO, "Se configura la petición");
         given()
