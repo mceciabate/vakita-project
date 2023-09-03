@@ -34,4 +34,4 @@ deploy:
     - pip install awscli
     - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
     - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-    - aws s3 sync builds/ctd/hispanos/proyecto-integrador-2/proyecto-integrador-0723/1021ft-c1/equipo-03/vakitaProyectFrontEnd/dist s3://$S3_BUCKET_NAME 
+    - aws s3 sync /builds/ctd/hispanos/proyecto-integrador-2/proyecto-integrador-0723/1021ft-c1/equipo-03/vakitaProyectFrontEnd/dist s3://$S3_BUCKET_NAME 
