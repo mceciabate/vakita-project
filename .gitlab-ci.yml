@@ -1,0 +1,68 @@
+variables:
+
+  MAVEN_OPTS: -Dmaven.repo.local=.m2/repository
+
+image: maven:latest
+
+stages:
+  - package
+  - deploy
+
+cache:
+  paths:
+    - .m2/repository
+    - target
+
+
+#Artefactos para los resource server
+# package_users: 
+#   stage: package
+#   only:
+#     - backend
+#   artifacts:
+#     paths:
+#     - api-vakita/ms-usuarios/target/*.jar
+#   script:
+#     - echo "Maven package started on usuarios"
+#     - cd ./api-vakita/ms-usuarios
+#     - mvn package
+
+package_payment: 
+  stage: package
+  only:
+    - backend
+  artifacts:
+    paths:
+    - api-vakita/ms-payment/target/*.jar
+  script:
+    - echo "Maven package started on payment"
+    - cd ./api-vakita/ms-payment
+    - mvn package -DskipTests
+
+deploy_payment: 
+  stage: deploy 
+  image: alpine:3.16
+  before_script: 
+    - apk update && apk add openssh-client bash 
+    - mkdir -p ~/.ssh 
+    - eval $(ssh-agent -s) 
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null 
+    - touch ~/.ssh/config 
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config 
+    - ssh-keyscan -H $CLOUD_PAYMENT_IP >> ~/.ssh/known_hosts 
+  script: 
+    # - ssh ubuntu@$CLOUD_PAYMENT_IP "sudo systemctl stop payment.service" 
+    - scp ./api-vakita/ms-payment/target/ms-payment-0.0.1-SNAPSHOT.jar ubuntu@$CLOUD_PAYMENT_IP:~/payment-app/ 
+    - ssh ubuntu@$CLOUD_PAYMENT_IP "sudo systemctl restart payment.service"
+
+# package_vakitas: 
+#   stage: package
+#   only:
+#     - backend
+#   artifacts:
+#     paths:
+#     - api-vakita/ms-vakitas/target/*.jar
+#   script:
+#     - echo "Maven package started on vakitas"
+#     - cd ./api-vakita/ms-vakitas
+#     - mvn package
