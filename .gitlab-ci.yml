@@ -19,9 +19,9 @@ build:
   script: 
     - npm i
     - pwd && ls -la
+    - npm run build
   artifacts:
    paths:
-     - /builds/ctd/proyecto-integrador-0822/1021-ft/grupo-10/integrador/build/*
      - /builds/ctd/hispanos/proyecto-integrador-2/proyecto-integrador-0723/1021ft-c1/equipo-03/vakitaProyectFrontEnd/dist/*
 
 deploy: 
