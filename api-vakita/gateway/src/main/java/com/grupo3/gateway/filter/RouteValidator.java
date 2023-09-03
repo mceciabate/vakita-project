@@ -20,6 +20,8 @@ public class RouteValidator {
             "/swagger-ui/**",
             "/swagger-resources/**",
             "/swagger-ui.html",
+            "/swagger-ui/index.html",
+            "/swagger-ui/**",
             "/v3/api-docs",
             "/webjars/**",
             "/view/**",
