@@ -1,0 +1,37 @@
+variables:
+   AWS_ACCESS_KEY_ID: "$AWS_ACCESS_KEY_ID"
+   AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+   S3_BUCKET_NAME: $S3_BUCKET_NAME
+
+stages:
+  - build
+  - deploy
+
+cache:
+  paths:
+    - node_modules/
+
+build:
+  image: node:18
+  stage: build
+  before_script:
+    - cd ./vakitaProyectFrontEnd
+  script: 
+    - npm i
+    - pwd && ls -la
+  artifacts:
+   paths:
+     - /builds/ctd/proyecto-integrador-0822/1021-ft/grupo-10/integrador/build/*
+     - /builds/ctd/hispanos/proyecto-integrador-2/proyecto-integrador-0723/1021ft-c1/equipo-03/vakitaProyectFrontEnd/dist/*
+
+deploy: 
+  image: python:latest
+  stage: deploy
+  before_script:
+    - cd ./vakitaProyectFrontEnd
+  script:
+    - pwd && ls -la
+    - pip install awscli
+    - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+    - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+    - aws s3 sync builds/ctd/hispanos/proyecto-integrador-2/proyecto-integrador-0723/1021ft-c1/equipo-03/vakitaProyectFrontEnd/dist s3://$S3_BUCKET_NAME 
