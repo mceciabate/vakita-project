@@ -106,13 +106,13 @@ public class BackendApiUserTest {
         test = report.createTest("Test de Modificar datos de usuario");
         test.log(Status.INFO, "Inicia el Test");
         JSONObject user = new JSONObject();
-        user.put("id", 1);
-        user.put("name", "Cosme");
-        user.put("lastName", "Fulanito");
-        user.put("dni", "11111111");
-        user.put("email", "fulanito@mail.com");
-        user.put("password", "password");
-        user.put("birthdate", "1994-05-01");
+        user.put("id", 27);
+        user.put("name", "Lore");
+        user.put("lastName", "Escobar");
+        user.put("dni", "123456789");
+        user.put("email", "loreperez2003@gmail.com");
+        user.put("password", "0000");
+        user.put("birthdate", "2003-11-07");
         test.log(Status.INFO, "Se configura la petición");
         given().config(RestAssured.config().encoderConfig(encoderConfig().appendDefaultContentCharsetToContentTypeIfUndefined(false))).
                 contentType("application/json")
@@ -163,6 +163,110 @@ public class BackendApiUserTest {
         test.log(Status.PASS, "Se ejecuta la petición de manera exitosa");
         test.log(Status.PASS, "Se obtiene respuesta acorde al error");
     }
+
+    @Test
+    @Tag("smoke")
+    public void aCrearUsuarioMenorDeEdad(){
+        test = report.createTest("Test de Crear Usuario menor de edad");
+        test.log(Status.INFO, "Inicia el Test");
+        JSONObject user = new JSONObject();
+        user.put("name", "Juan");
+        user.put("lastName", "Ruiz");
+        user.put("dni", "11111111");
+        user.put("email", "juanr@gmail.com");
+        user.put("password", "password");
+        user.put("birthdate", "2019-05-01");
+        test.log(Status.INFO, "Se configura la petición");
+        given().config(RestAssured.config().encoderConfig(encoderConfig().appendDefaultContentCharsetToContentTypeIfUndefined(false))).
+                contentType("application/json")
+                .body(user.toString())
+                .when()
+                .post(baseURLUsuarios+"/register")
+                .then()
+                .assertThat()
+                .statusCode(400);
+        test.log(Status.INFO, "Se resuelve la petición");
+        test.log(Status.PASS, "Se ejecuta la petición de manera exitosa");
+        test.log(Status.PASS, "Se obtiene respuesta exitosa");
+    }
+
+    @Test
+    @Tag("smoke")
+    public void aCrearUsuarioSinCorreo(){
+        test = report.createTest("Test de Crear Usuario sin correo");
+        test.log(Status.INFO, "Inicia el Test");
+        JSONObject user = new JSONObject();
+        user.put("name", "Juan");
+        user.put("lastName", "Ruiz");
+        user.put("dni", "11111111");
+//        user.put("email", "juanr@gmail.com");
+        user.put("password", "password");
+        user.put("birthdate", "2019-05-01");
+        test.log(Status.INFO, "Se configura la petición");
+        given().config(RestAssured.config().encoderConfig(encoderConfig().appendDefaultContentCharsetToContentTypeIfUndefined(false))).
+                contentType("application/json")
+                .body(user.toString())
+                .when()
+                .post(baseURLUsuarios+"/register")
+                .then()
+                .assertThat()
+                .statusCode(400);
+        test.log(Status.INFO, "Se resuelve la petición");
+        test.log(Status.PASS, "Se ejecuta la petición de manera exitosa");
+        test.log(Status.PASS, "Se obtiene respuesta exitosa");
+    }
+    @Test
+    @Tag("smoke")
+    public void aCrearUsuarioConcorreoExistente(){
+        test = report.createTest("Test de Crear Usuario con correo existente");
+        test.log(Status.INFO, "Inicia el Test");
+        JSONObject user = new JSONObject();
+        user.put("name", "Juan");
+        user.put("lastName", "Ruiz");
+        user.put("dni", "11111111");
+        user.put("email", "loreperez2003@gmail.com");
+        user.put("password", "password");
+        user.put("birthdate", "2019-05-01");
+        test.log(Status.INFO, "Se configura la petición");
+        given().config(RestAssured.config().encoderConfig(encoderConfig().appendDefaultContentCharsetToContentTypeIfUndefined(false))).
+                contentType("application/json")
+                .body(user.toString())
+                .when()
+                .post(baseURLUsuarios+"/register")
+                .then()
+                .assertThat()
+                .statusCode(400);
+        test.log(Status.INFO, "Se resuelve la petición");
+        test.log(Status.PASS, "Se ejecuta la petición de manera exitosa");
+        test.log(Status.PASS, "Se obtiene respuesta exitosa");
+    }
+
+    @Test
+    @Tag("smoke")
+    public void LogInUsuario(){
+        test = report.createTest("Test de Logear Usuario");
+        test.log(Status.INFO, "Inicia el Test");
+        JSONObject user = new JSONObject();
+        user.put("email", "loreperez2003@gmail.com");
+        user.put("password", "1234");
+        test.log(Status.INFO, "Se configura la petición");
+        given().config(RestAssured.config().encoderConfig(encoderConfig().appendDefaultContentCharsetToContentTypeIfUndefined(false))).
+                contentType("application/json")
+                .body(user.toString())
+                .when()
+                .post(baseURLUsuarios+"/token")
+                .then()
+                .assertThat()
+                .statusCode(201);
+        test.log(Status.INFO, "Se resuelve la petición");
+        test.log(Status.PASS, "Se ejecuta la petición de manera exitosa");
+        test.log(Status.PASS, "Se obtiene respuesta exitosa");
+    }
+
+
+
+
+
 
     @AfterAll
     public void cerrarReporte(){
