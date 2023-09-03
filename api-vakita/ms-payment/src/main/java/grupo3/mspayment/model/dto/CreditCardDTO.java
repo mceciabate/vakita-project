@@ -1,6 +1,7 @@
 package grupo3.mspayment.model.dto;
 
 
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class CreditCardDTO {
 
+
+    @Hidden
     private int creditCardId;
     private Integer userId;
     private String alias;

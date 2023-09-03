@@ -33,4 +33,7 @@ management:
       version: 1.0.0
       description: Microservicios de Pagos
 
+spring-doc:
+  api-docs:
+    path: /swagger-payment
 
