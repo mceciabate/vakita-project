@@ -16,7 +16,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/api/v1/usuarios")
@@ -164,7 +163,7 @@ public class UserController {
                     "  <div class=\"body\">\n" +
                     "    <div class=\"container\">\n" +
                     "      <h1>Cuenta confirmada exitosamente!</h1>\n" +
-                    "      <h2>Ir al login</h2>\n" +
+                    "      <a style=\"text-decoration: none;\" href=\"http://vakita.ddns.net\"><h2>Ir al login</h2></a>\n" +
                     "    </div>\n" +
                     "  </div>\n" +
                     "</body>\n" +

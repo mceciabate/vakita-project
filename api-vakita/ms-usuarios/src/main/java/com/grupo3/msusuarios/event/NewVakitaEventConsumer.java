@@ -20,7 +20,6 @@ public class NewVakitaEventConsumer {
     @Autowired
     private UserService service;
 
-
     @RabbitListener(queues = RabbitMQConfig.QUEUE_NEW_USER_AMOUNT)
         public void executeAmount(NewVakitaEventConsumer.Data data) throws Exception {
         try {

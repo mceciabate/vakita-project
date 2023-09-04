@@ -17,7 +17,6 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private UserService service;
 
-
     @SneakyThrows
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

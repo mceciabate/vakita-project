@@ -31,6 +31,11 @@ public class User implements Serializable {
     @Column(name = "LAST_NAME", nullable = false, length = 30)
     private String lastName;
 
+    @NotBlank(message = "No puede ingresar un alias vacio")
+    @Size(max = 30 ,message = "El alias no puede contener mas de 30 caracteres")
+    @Column(name = "ALIAS", nullable = false, length = 30)
+    private String alias;
+
     @NotBlank(message = "No puede ingresar un dni vacio")
     @Column(name = "DNI", nullable = false, length = 20)
     private String dni;
@@ -47,7 +52,11 @@ public class User implements Serializable {
     @Column(name = "BIRTHDATE", nullable = false)
     private LocalDate birthdate;
 
+    @Lob
+    @Column(name = "AVATAR", columnDefinition = "LONGBLOB")
+    @Size(max = 1024 * 1024, message = "El tamaño máximo del avatar es de 1 MB")
+    private byte[] avatar;
+
     @Column(name = "ACCOUNT_BALANCE")
     private Double account_balance = 0.0;
-
 }
