@@ -27,6 +27,6 @@ public class SwaggerConfig {
                         .description("SpringShop Wiki Documentation")
                         .url("https://springshop.wiki.github.org/docs"))
                 .servers(Arrays.asList(
-                        new Server().url("http://localhost:8080").description("Gateway Server")));
+                        new Server().url("http://107.22.65.36:8080").description("Gateway Server")));
     }
 }
