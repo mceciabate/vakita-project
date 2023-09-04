@@ -34,6 +34,7 @@ public class UserDTO {
     private String password;
     @NotNull(message = "No puede ingresar una fecha vacia")
     private LocalDate birthdate;
+    @Hidden
     @Size(max = 1024 * 1024, message = "El tamaño máximo del avatar es de 1 MB")
     private byte[] avatar;
     @Hidden
