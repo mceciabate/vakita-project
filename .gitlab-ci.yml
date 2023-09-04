@@ -7,9 +7,6 @@ image: maven:latest
 stages:
   - build
   - test
-  - package
-
-#  - deploy
 
 cache:
   paths:
@@ -81,39 +78,5 @@ test_vakitas:
    - cd ./api-vakita/ms-vakitas
    - mvn clean test
 
-#Artefactos para los resource server
-package_users: 
-  stage: package
-  only:
-    - backend
-  artifacts:
-    paths:
-    - api-vakita/ms-usuarios/target/*.jar
-  script:
-    - echo "Maven package started on usuarios"
-    - cd ./api-vakita/ms-usuarios
-    - mvn package
 
-package_payment: 
-  stage: package
-  only:
-    - backend
-  artifacts:
-    paths:
-    - api-vakita/ms-payment/target/*.jar
-  script:
-    - echo "Maven package started on payment"
-    - cd ./api-vakita/ms-payment
-    - mvn package
 
-package_vakitas: 
-  stage: package
-  only:
-    - backend
-  artifacts:
-    paths:
-    - api-vakita/ms-vakitas/target/*.jar
-  script:
-    - echo "Maven package started on vakitas"
-    - cd ./api-vakita/ms-vakitas
-    - mvn package
