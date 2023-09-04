@@ -14,6 +14,7 @@ public class UserWithoutPasswordDTO {
     private Long id;
     private String name;
     private String lastName;
+    private String alias;
     private String dni;
     private String email;
     private LocalDate birthdate;

@@ -1,8 +1,6 @@
 package com.grupo3.msusuarios.model.dto;
 
 import io.swagger.v3.oas.annotations.Hidden;
-import jakarta.persistence.Column;
-import jakarta.persistence.Lob;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -25,6 +23,9 @@ public class UserDTO {
     @NotBlank(message = "No puede ingresar un apellido vacio")
     @Size(max = 30 ,message = "El apellido no puede contener mas de 30 caracteres")
     private String lastName;
+    @NotBlank(message = "No puede ingresar un alias vacio")
+    @Size(max = 30 ,message = "El alias no puede contener mas de 30 caracteres")
+    private String alias;
     @NotBlank(message = "No puede ingresar un dni vacio")
     private String dni;
     @NotBlank(message = "No puede ingresar un email vacio o email existente")

@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "e9157cfd-ac7c-453d-ad5c-db979d372e77",
+		"_postman_id": "17df2f53-ff10-4e34-91c8-b2442f03a8c4",
 		"name": "MS-usuarios",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "20337969"
+		"_exporter_id": "18026395"
 	},
 	"item": [
 		{
@@ -15,7 +15,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/v1/usuarios/7",
+					"raw": "http://localhost:8080/api/v1/usuarios/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -25,7 +25,7 @@
 						"api",
 						"v1",
 						"usuarios",
-						"7"
+						"1"
 					]
 				}
 			},
@@ -56,44 +56,13 @@
 			"response": []
 		},
 		{
-			"name": "validateToken",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/v1/usuarios/validate?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtLmNlY2lsaWEuYWJhdGVAZ21haWwuY29tIiwiaWF0IjoxNjkyNTU3NzE5LCJleHAiOjE2OTI1NTk1MTl9.Cn6LLykgbVWPZtZsM5nrFh-Wxk8OyDvqzw2PMNg_jBQ",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"v1",
-						"usuarios",
-						"validate"
-					],
-					"query": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtLmNlY2lsaWEuYWJhdGVAZ21haWwuY29tIiwiaWF0IjoxNjkyNTU3NzE5LCJleHAiOjE2OTI1NTk1MTl9.Cn6LLykgbVWPZtZsM5nrFh-Wxk8OyDvqzw2PMNg_jBQ"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Insertar Usuario",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Mike\",\r\n    \"lastName\": \"Mayers\",\r\n    \"dni\": \"11111111\",\r\n    \"email\": \"m.cecilia.abate@gmail.com\",\r\n    \"password\": \"1234\",\r\n    \"birthdate\": \"1994-05-01\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Mike\",\r\n    \"lastName\": \"Mayers\",\r\n    \"alias\": \"Austin Powers\",\r\n    \"dni\": \"11111111\",\r\n    \"email\": \"example@mail.com\",\r\n    \"password\": \"1234\",\r\n    \"birthdate\": \"1994-05-01\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -118,13 +87,78 @@
 			"response": []
 		},
 		{
+			"name": "validateToken",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/usuarios/validate?token=ACA VA EL TOKEN",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"usuarios",
+						"validate"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "ACA VA EL TOKEN"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modificar Usuario",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Mike MOD\",\r\n    \"lastName\": \"Mayers MOD\",\r\n    \"alias\": \"Austin Powers MOD\",\r\n    \"avatar\": \"ACA VA LA IMAGEN DE AVATAR O OMITIR ESTE CAMPO\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/usuarios/11",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"usuarios",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "token",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n   \r\n    \"email\": \"m.cecilia.abate@gmail.com\",\r\n    \"password\": \"1234\"\r\n \r\n}",
+					"raw": "{\r\n    \"email\": \"example@mail.com\",\r\n    \"password\": \"1234\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -149,40 +183,6 @@
 			"response": []
 		},
 		{
-			"name": "Modificar Usuario",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Cosme MOD\",\r\n    \"lastName\": \"Mayers MOD\",\r\n    \"dni\": \"11111111 MOD\",\r\n    \"email\": \"usuario1@vakitas.com MOD\",\r\n    \"password\": \"password1 MOD\",\r\n    \"birthdate\": \"1888-08-08\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/api/v1/usuarios/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"v1",
-						"usuarios",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Modificar password Usuario por ID",
 			"request": {
 				"auth": {
@@ -192,7 +192,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"password\": \"NewPassword1 MOD\"\r\n}",
+					"raw": "{\r\n    \"password\": \"passwordMOD\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
