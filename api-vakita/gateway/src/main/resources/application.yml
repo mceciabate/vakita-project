@@ -21,17 +21,17 @@ spring:
         locator:
           enabled: true
       routes:
-        - id: ms-usuarios
-          uri: lb://ms-usuarios
-          predicates:
-            - Path=/api/v1/usuarios/**,/swagger-ui/**,/swagger-resources/**,/swagger-ui.html,/v3/api-docs,/webjars/**,/view/**,/swagger-usuarios
-
         - id: ms-payment
           uri: lb://ms-payment
           predicates:
             - Path=/api/v1/payment/**,/swagger-ui/**,/swagger-resources/**,/swagger-ui.html,/v3/api-docs,/webjars/**,/view/**,/swagger-payment
           filters:
             - AuthenticationFilter
+
+        - id: ms-usuarios
+          uri: lb://ms-usuarios
+          predicates:
+            - Path=/api/v1/usuarios/**, /swagger-ui/**,/swagger-resources/**,/swagger-ui.html,/v3/api-docs,/webjars/**,/view/**,/swagger-usuarios
 
         - id: ms-vakitas
           uri: lb://ms-vakitas
