@@ -29,15 +29,13 @@ cache:
 
 package_payment: 
   stage: package
-  only:
-    - backend
   artifacts:
     paths:
     - api-vakita/ms-payment/target/*.jar
   script:
     - echo "Maven package started on payment"
     - cd ./api-vakita/ms-payment
-    - mvn compile && mvn package -DskipTests
+    - mvn package -DskipTests
 
 deploy_payment: 
   stage: deploy 
