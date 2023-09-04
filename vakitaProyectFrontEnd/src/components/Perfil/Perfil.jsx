@@ -53,7 +53,7 @@ const Perfil = () => {
             });
 
             setTimeout(() => {
-              location.reload();
+              window.location.reload();
             }, "2000");
           } else {
             Swal.fire({

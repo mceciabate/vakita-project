@@ -13,18 +13,13 @@ function PaymentApp() {
     formData: null,
   });
 
-  const handlePaymentDetailsChange = (updatedDetails) => {
-    setPaymentDetails((prevDetails) => ({
-      ...prevDetails,
-      ...updatedDetails,
-    }));
-  };
+ 
 
   return (
     <div className='boxCreditCard'>
       <PaymentForm
         paymentDetails={paymentDetails}
-        onPaymentDetailsChange={handlePaymentDetailsChange}
+    
       />
     </div>
   );

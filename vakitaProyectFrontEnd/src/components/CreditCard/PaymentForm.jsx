@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Card from 'react-credit-cards-2';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -10,6 +10,9 @@ import {
 import 'react-credit-cards-2/dist/es/styles-compiled.css';
 import '../../styles/cardCredit.css';
 import SavedCardsTable from './SavedCardsList';
+import Axios from 'axios';
+import Swal from 'sweetalert2';
+
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
@@ -24,41 +27,173 @@ const validationSchema = Yup.object().shape({
     .required('CVC is required'),
 });
 
-function PaymentForm({ paymentDetails, onPaymentDetailsChange }) {
+function PaymentForm({ paymentDetails }) {
   const [savedCards, setSavedCards] = useState([]);
+  const [loading, setLoading] = useState(false);
 
 
+  const userId= localStorage.getItem("userId")
+  const token = JSON.parse(localStorage.getItem("token"));
 
+  const formatExpirationDate = (expiry) => {
+
+    const [month, year] = expiry.split('/');
+  
+ 
+    const formattedDate = `20${year}-${month}-01`;
+  
+    return formattedDate;
+  };
+
+  const formatDateForDisplay = (date) => {
+    const parts = date.split('-');
+    const month = parts[1];
+    const year = parts[0].slice(-2);
+    return `${month}/${year}`;
+  };
+
+useEffect(() => {
+    fetchSavedCardData(); 
+  }, []);
+
+
+  const fetchSavedCardData = async () => {
+    try {
+      setLoading(true); 
+  
+      const response = await Axios.get(
+        `http://107.22.65.36:8080/api/v1/payment/personal/${userId}`,
+        {
+          headers: {
+            'Content-type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+  
+      setLoading(false); 
+  
+      if (response.status === 200) {
+        // console.log(response.data);
+        const formattedData = response.data.map((card) => ({
+          alias: card.alias,
+          cardNumber: card.cardNumber.slice(-4),
+          expirationDate: formatDateForDisplay(card.expirationDate),
+          cvc: '***',
+          creditCardId: card.creditCardId,
+        }));
+        setSavedCards(formattedData);
+      } else {
+        console.error('Failed to fetch saved card data');
+      }
+      
+    } catch (error) {
+      setLoading(false); 
+      console.error('An error occurred while fetching saved card data', error);
+    }
+  };
+
+  
+ 
   const formik = useFormik({
     initialValues: paymentDetails,
     validationSchema: validationSchema,
-    onSubmit: values => {
-        if (values.number) {
-            const lastFourDigits = values.number.slice(-4); 
-            const cardData = {
-              name: values.name,
-              number: lastFourDigits, 
-              expiry: values.expiry,
-              cvc: values.cvc,
-            };
-            setSavedCards([...savedCards, cardData]);
-            onPaymentDetailsChange({
-              number: '',
-              name: '',
-              expiry: '',
-              cvc: '',
-              focused: '',
+    onSubmit: async (values) => {
+      if (values.number) {
+        const cardData = {
+          userId: userId,
+          alias: values.name,
+          cardNumber: values.number, 
+          expirationDate: formatExpirationDate(values.expiry), 
+          cvv: values.cvc,
+        };
+       
+    
+        try {
+       
+          const response = await Axios.post(
+            'http://107.22.65.36:8080/api/v1/payment',
+            cardData,
+            {
+              headers: {
+                "Content-type": "application/json",   
+                Authorization: `Bearer ${token}`,
+                     },
+            }
+          );
+    
+          if (response.status === 200) {
+          
+            console.log('Card data saved successfully');
+            fetchSavedCardData();
+
+            Swal.fire({
+              icon: 'success',
+              title: 'OK',
+              text: 'La tarjeta se ha guardado correctamente.',
             });
-            formik.resetForm();
+          } else {
+            
+            console.error('Failed to save card data');
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'No se pudo guardar la tarjeta. Por favor, inténtalo de nuevo.',
+            });
+           
           }
+          
+        } catch (error) {
+      
+          console.error('An error occurred while sending the request', error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Hubo un error al enviar la solicitud. Por favor, inténtalo de nuevo más tarde.',
+          });
+        }
+    
+      
+        formik.resetForm();
+      }
     },
+    
   });
 
-  const handleDeleteCard = index => {
-    const updatedCards = savedCards.filter((_, i) => i !== index);
-    setSavedCards(updatedCards);
+
+  const deleteCard = async (creditCardId) => {
+    try {
+      const response = await Axios.delete(
+        `http://107.22.65.36:8080/api/v1/payment/${creditCardId}`,
+        {
+          headers: {
+            'Content-type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+  
+      if (response.status === 200) {
+        console.log('Card data deleted successfully');
+      
+        const updatedCards = savedCards.filter((card) => card.creditCardId !== creditCardId);
+        setSavedCards(updatedCards);
+        fetchSavedCardData();
+
+        
+      } else {
+        console.error('Failed to delete card data');
+        
+      }
+    } catch (error) {
+      console.error('An error occurred while sending the request', error);
+    }
   };
 
+  const handleDeleteCard = (creditCardId) => {
+    deleteCard(creditCardId);
+  };
+ 
   const handleInputFocus = ({ target }) => {
     formik.setFieldValue('focused', target.name);
   };
@@ -188,10 +323,13 @@ function PaymentForm({ paymentDetails, onPaymentDetailsChange }) {
             <button type="submit">Guardar</button>
           </div>
         </form>
-
+        {loading ? (
+  <p>Cargando...</p>
+) : (
         <div className="saved-cardGeneral">
           <SavedCardsTable savedCards={savedCards} onDeleteCard={handleDeleteCard} />
         </div>
+        )}
       </div>
     </div>
   );

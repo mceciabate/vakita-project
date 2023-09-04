@@ -25,14 +25,14 @@ function SavedCardsTable({ savedCards, onDeleteCard }) {
           </tr>
         </thead>
         <tbody>
-          {savedCards.map((card, index) => (
+          {savedCards?.map((card, index) => (
             <tr key={index}>
-              <td>{card.name}</td>
-              <td>{card.number}</td>
-              <td>{card.expiry}</td>
+              <td>{card.alias}</td>
+              <td>{card.cardNumber}</td>
+              <td>{card.expirationDate}</td>
               <td>***</td>
               <td>
-                <button className="buttonDeletedC" onClick={() => onDeleteCard(index)}> <FontAwesomeIcon icon={faTrashCan} /></button>
+                <button className="buttonDeletedC" onClick={() => onDeleteCard(card.creditCardId)}> <FontAwesomeIcon icon={faTrashCan} /></button>
               </td>
             </tr>
           ))}
