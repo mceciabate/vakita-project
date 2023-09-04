@@ -8,7 +8,6 @@ import Swal from 'sweetalert2';
 import { ErrorSpan } from '../Register/Register.styled';
 
 const Perfil = () => {
-  const [changed, setChanged] = useState(false)
   const [user, setUser] = useState({
     name: "",
     lastName: "",
@@ -22,7 +21,7 @@ const Perfil = () => {
   const formik = useFormik({
     initialValues: {
       name: user.name,
-      lastName: user.name,
+      lastName: user.lastName,
     },
     validationSchema: Yup.object({
       name: Yup.string()
@@ -35,66 +34,47 @@ const Perfil = () => {
         .required("Apellido es requerido"),
     }),
     onSubmit: async (values) => {
-      if(changed) {
-        try {
-          const response = await axios.put(
-            "http://107.22.65.36:8080/api/v1/usuarios/" + userId,
-            {
-              name: values.name,
-              lastName: values.lastName,
-            }
-          );
-
-          if (response.status == 200) {
-            Swal.fire({
-              title: "Datos actualizados",
-              text: "",
-              icon: "success",
-            });
-
-            setTimeout(() => {
-              window.location.reload();
-            }, "2000");
-          } else {
-            Swal.fire({
-              title: "No has modificado tus datos",
-              text: "",
-              icon: "warning",
-            });
+      try {
+        const response = await axios.put(
+          "http://107.22.65.36:8080/api/v1/usuarios/" + userId,
+          {
+            name: values.name,
+            lastName: values.lastName,
           }
-        } catch (e) {
-          console.log(e);
+        );
+
+        if (response.status === 200) {
+          // Update the user's name in the state after a successful PUT request
+          setUser({
+            ...user,
+            name: values.name,
+            lastName: values.lastName,
+          });
 
           Swal.fire({
-            title: "No se pudieron actualizar los datos :(",
-            text: e.code,
-            icon: "error",
+            title: "Datos actualizados",
+            text: "",
+            icon: "success",
+          });
+        } else {
+          Swal.fire({
+            title: "No has modificado tus datos",
+            text: "",
+            icon: "warning",
           });
         }
-      } else {
+      } catch (e) {
+        console.log(e);
+
         Swal.fire({
-          title: "No has modificado ningún dato",
-          text: "",
-          icon: "warning",
+          title: "No se pudieron actualizar los datos :(",
+          text: e.code,
+          icon: "error",
         });
       }
     },
   });
 
-  useEffect(() => {
-
-    const {name, lastName} = formik.values
-
-    if(name !== user.name || lastName !== user.lastName) {
-      setChanged(true)
-    }
-    
-  }, [formik.values])
-  
-
-  useEffect(() => {
-
-  }, [formik.values.lastName, formik.values.name])
   useEffect(() => {
     fetch("http://107.22.65.36:8080/api/v1/usuarios/" + userId)
       .then((response) => response.json())
@@ -106,7 +86,7 @@ const Perfil = () => {
         });
       })
       .catch((error) => console.error(error));
-  }, []);
+  }, [userId]);
 
   return (
     <PerfilContainer>
@@ -175,4 +155,4 @@ const Perfil = () => {
   );
 };
   
-  export default Perfil;
+export default Perfil;
