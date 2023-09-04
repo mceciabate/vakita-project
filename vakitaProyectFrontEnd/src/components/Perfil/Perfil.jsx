@@ -14,14 +14,36 @@ const Perfil = () => {
     dni: "",
     email: "",
     birthdate: "",
+    alias: "",
+    avatar: "",
   });
 
   const userId = localStorage.getItem("userId");
+
+  //Logica avatar
+  function handleAvatarInputChange(event) {
+    const avatarInput = event.target;
+    const file = avatarInput.files[0];
+  
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        // Aquí tienes los datos binarios de la imagen en e.target.result
+        const binaryImageData = e.target.result.split(",");
+        formik.values.avatar = String(binaryImageData[1]);
+      };
+  
+      // Lee el contenido del archivo como datos binarios
+      reader.readAsDataURL(file);
+    }
+  }
 
   const formik = useFormik({
     initialValues: {
       name: user.name,
       lastName: user.lastName,
+      alias: user.alias,
+      avatar: user.avatar,
     },
     validationSchema: Yup.object({
       name: Yup.string()
@@ -32,6 +54,10 @@ const Perfil = () => {
         .min(1, "Debe contener al menos un caracter")
         .max(50)
         .required("Apellido es requerido"),
+      alias: Yup.string()
+        .min(1, "Debe contener al menos un caracter")
+        .max(50)
+        .required("Alias es requerido"),
     }),
     onSubmit: async (values) => {
       try {
@@ -40,6 +66,8 @@ const Perfil = () => {
           {
             name: values.name,
             lastName: values.lastName,
+            alias: values.alias,
+            avatar: values.avatar,
           }
         );
 
@@ -49,6 +77,8 @@ const Perfil = () => {
             ...user,
             name: values.name,
             lastName: values.lastName,
+            alias: values.alias,
+            avatar: values.avatar,
           });
 
           Swal.fire({
@@ -83,6 +113,8 @@ const Perfil = () => {
         formik.setValues({
           name: data.name,
           lastName: data.lastName,
+          alias: data.alias,
+          avatar: "data:image/jpeg;base64," + data.avatar,
         });
       })
       .catch((error) => console.error(error));
@@ -92,13 +124,24 @@ const Perfil = () => {
     <PerfilContainer>
       <H2>Mi Perfil</H2>
 
-      <PanelProfile
-        img={
-          "https://i.pinimg.com/1200x/b1/27/ec/b127ec5f10f9c07ecb04996116d1306e.jpg"
-        }
-        nameUser={user.name + " " + user.lastName}
-        subtitle="VAKITA USER"
-      />
+      {/* Renderiza si hay imagen, sino deja la que viene por defecto */}
+      {user.avatar != null && user.avatar != "" ?
+        <PanelProfile
+          img={
+            "data:image/jpeg;base64," + user.avatar
+          }
+          nameUser={user.name + " " + user.lastName}
+          subtitle={user.alias}
+        />
+        :
+        <PanelProfile
+          img={
+            "https://i.pinimg.com/1200x/b1/27/ec/b127ec5f10f9c07ecb04996116d1306e.jpg"
+          }
+          nameUser={user.name + " " + user.lastName}
+          subtitle={user.alias}
+        />
+      }
 
       <ListDiv onSubmit={formik.handleSubmit}>
         <TitleH5>Acá puedes actualizar tus datos</TitleH5>
@@ -133,6 +176,20 @@ const Perfil = () => {
             )}
           </Li>
           <Li>
+            <Label>Nombre de usuario</Label>
+            <Input
+              type="text"
+              name="alias"
+              id="alias"
+              value={formik.values.alias}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.alias && formik.errors.alias && (
+              <ErrorSpan>{formik.errors.alias}</ErrorSpan>
+            )}
+          </Li>
+          <Li>
             <Label>DNI</Label>
             <Input disabled value={user.dni} />
           </Li>
@@ -146,6 +203,17 @@ const Perfil = () => {
           <Li>
             <Label>Fecha de nacimiento</Label>
             <Input disabled value={user.birthdate} />
+          </Li>
+          <Li>
+            <Label>Avatar</Label>
+            <Input
+              type="file"
+              name="avatar"
+              id="avatar"
+              accept="image/*"
+              onChange={handleAvatarInputChange}
+              onBlur={formik.handleBlur}
+            />
           </Li>
 
           <Button type="submit" >Guardar cambios</Button>
