@@ -1,6 +1,5 @@
 package com.grupo3.msusuarios.config;
 
-
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;

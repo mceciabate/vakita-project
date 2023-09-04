@@ -41,10 +41,12 @@ public class ConfirmationTokenService {
                 ConfirmationToken token = new ConfirmationToken();
                 token.setUserName(userDTO.getName());
                 token.setUserLastName(userDTO.getLastName());
+                token.setUserAlias(userDTO.getAlias());
                 token.setUserDni(userDTO.getDni());
                 token.setUserEmail(userDTO.getEmail());
                 token.setUserPassword(encoderPass);
                 token.setUserBirthdate(userDTO.getBirthdate());
+                token.setUserAvatar(userDTO.getAvatar());
                 token.setAccount_balance(userDTO.getAccount_balance());
                 token.setToken(UUID.randomUUID().toString());
                 token.setExpirationDate(LocalDateTime.now().plusDays(1));
@@ -117,10 +119,13 @@ public class ConfirmationTokenService {
                 UserDTO userDTO = new UserDTO();
                 userDTO.setName(confirmationToken.getUserName());
                 userDTO.setLastName(confirmationToken.getUserLastName());
+                userDTO.setAlias(confirmationToken.getUserAlias());
                 userDTO.setDni(confirmationToken.getUserDni());
                 userDTO.setEmail(confirmationToken.getUserEmail());
                 userDTO.setPassword(confirmationToken.getUserPassword());
                 userDTO.setBirthdate(confirmationToken.getUserBirthdate());
+                userDTO.setAvatar(confirmationToken.getUserAvatar());
+                userDTO.setAccount_balance(confirmationToken.getAccount_balance());
                 userService.save(userDTO);
                 tokenRepository.deleteById(confirmationToken.getId());
             }
