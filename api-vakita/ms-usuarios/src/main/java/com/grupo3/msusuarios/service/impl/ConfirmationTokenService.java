@@ -6,7 +6,6 @@ import com.grupo3.msusuarios.model.entity.ConfirmationToken;
 import com.grupo3.msusuarios.repository.ConfirmationTokenRepository;
 import com.grupo3.msusuarios.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +14,6 @@ import java.util.UUID;
 
 @Service
 public class ConfirmationTokenService {
-
 
     private final ConfirmationTokenRepository tokenRepository;
     private final EmailService emailService;
@@ -43,18 +41,18 @@ public class ConfirmationTokenService {
                 ConfirmationToken token = new ConfirmationToken();
                 token.setUserName(userDTO.getName());
                 token.setUserLastName(userDTO.getLastName());
+                token.setUserAlias(userDTO.getAlias());
                 token.setUserDni(userDTO.getDni());
                 token.setUserEmail(userDTO.getEmail());
                 token.setUserPassword(encoderPass);
                 token.setUserBirthdate(userDTO.getBirthdate());
+                token.setUserAvatar(userDTO.getAvatar());
                 token.setAccount_balance(userDTO.getAccount_balance());
                 token.setToken(UUID.randomUUID().toString());
                 token.setExpirationDate(LocalDateTime.now().plusDays(1));
                 tokenRepository.save(token);
 
                 String subject = "Confirmación de Registro";
-
-
 //                String body = "Haz clic en el siguiente enlace para confirmar tu cuenta: http://localhost:8080/api/v1/usuarios/confirmar?token=" + token.getToken();
                 String body = "<!DOCTYPE html>\n" +
                         "<html lang=\"en\">\n" +
@@ -100,12 +98,11 @@ public class ConfirmationTokenService {
                         "      <br>\n" +
                         "      <br>\n" +
                         "      <h2 style=\"margin-left: 50px; display: inline;\">Haz clic en el siguiente enlace para confirmar tu cuenta:</h2>\n" +
-                        "      <a style=\"margin-left: 50px; font-size: 20px; font-weight: bold; text-decoration: none;\" href=\"http://107.22.65.36:8080/api/v1/usuarios/confirmar?token=" + token.getToken() +"\">Link</a>\n" +
+                        "      <a style=\"margin-left: 50px; font-size: 20px; font-weight: bold; text-decoration: none;\" href=\"http://localhost:8080/api/v1/usuarios/confirmar?token=" + token.getToken() +"\">Link</a>\n" +
                         "    </div>\n" +
                         "  </div>\n" +
                         "</body>\n" +
                         "</html>";
-
 
                 emailService.sendEmail(userDTO.getEmail(), subject, body);
                 return true;
@@ -122,10 +119,13 @@ public class ConfirmationTokenService {
                 UserDTO userDTO = new UserDTO();
                 userDTO.setName(confirmationToken.getUserName());
                 userDTO.setLastName(confirmationToken.getUserLastName());
+                userDTO.setAlias(confirmationToken.getUserAlias());
                 userDTO.setDni(confirmationToken.getUserDni());
                 userDTO.setEmail(confirmationToken.getUserEmail());
                 userDTO.setPassword(confirmationToken.getUserPassword());
                 userDTO.setBirthdate(confirmationToken.getUserBirthdate());
+                userDTO.setAvatar(confirmationToken.getUserAvatar());
+                userDTO.setAccount_balance(confirmationToken.getAccount_balance());
                 userService.save(userDTO);
                 tokenRepository.deleteById(confirmationToken.getId());
             }
