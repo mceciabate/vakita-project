@@ -12,13 +12,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-
 @Component
 public class JwtService {
 
     @Value("${jwt.secret}")
     private String secret;
-
 
     public void validateToken(final String token) {
         Jwts.parserBuilder().setSigningKey(getSignKey()).build().parseClaimsJws(token);

@@ -40,7 +40,7 @@ public class CreditCardService implements ICreditCardService {
     @Autowired
     private MongoOperations mongoOperations;
 
-    //Establezco un alogica para generar un id numerico autoincremental
+    //Establezco un logica para generar un id numerico autoincremental
     public int getSequenceNumber(String sequenceName) {
         //paso la secuencia a la query
         Query query = new Query(Criteria.where("id").is(sequenceName));

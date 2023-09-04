@@ -22,6 +22,7 @@ spring:
           enabled: true
       routes:
         - id: ms-usuarios
+<<<<<<< HEAD:api-vakita/ConfigData/gateway.yml
           uri: http://18.207.194.96:9090/
           predicates:
             - Path=/api/v1/usuarios/**,/swagger-ui/**,/swagger-resources/**,/swagger-ui.html,/v3/api-docs,/webjars/**,/view/**,/swagger-usuarios
@@ -33,10 +34,23 @@ spring:
           filters:
             - AuthenticationFilter
 
+=======
+          uri: lb://ms-usuarios
+          predicates:
+            - Path=/api/v1/usuarios/**,/swagger-ui/**,/swagger-resources/**,/swagger-ui.html,/v3/api-docs,/webjars/**,/view/**,/swagger-usuarios
+
+>>>>>>> e9e374b554a1ce17998be8575089bc02e9e0f70c:api-vakita/gateway/src/main/resources/application.yml
         - id: ms-vakitas
           uri: http://52.90.211.151:9090/
           predicates:
             - Path=/api/v1/vakita/**,/swagger-ui/**,/swagger-resources/**,/swagger-ui.html,/v3/api-docs,/webjars/**,/view/**,/swagger-vakitas
+          filters:
+            - AuthenticationFilter
+
+        - id: ms-payment
+          uri: lb://ms-payment
+          predicates:
+            - Path=/api/v1/payment/**,/swagger-ui/**,/swagger-resources/**,/swagger-ui.html,/v3/api-docs,/webjars/**,/view/**,/swagger-payment
           filters:
             - AuthenticationFilter
 
@@ -67,9 +81,11 @@ management:
 jwt:
   secret: "5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437"
 
-
 info:
   app:
     name: ${spring.application.name}
+<<<<<<< HEAD:api-vakita/ConfigData/gateway.yml
 
 
+=======
+>>>>>>> e9e374b554a1ce17998be8575089bc02e9e0f70c:api-vakita/gateway/src/main/resources/application.yml

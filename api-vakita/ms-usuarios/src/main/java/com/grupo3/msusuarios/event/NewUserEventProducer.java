@@ -1,6 +1,5 @@
 package com.grupo3.msusuarios.event;
 
-
 import com.grupo3.msusuarios.config.RabbitMQConfig;
 import com.grupo3.msusuarios.model.dto.UserRabbitDTO;
 import lombok.AllArgsConstructor;

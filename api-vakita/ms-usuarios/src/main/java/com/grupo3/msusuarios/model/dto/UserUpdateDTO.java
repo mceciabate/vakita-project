@@ -20,4 +20,9 @@ public class UserUpdateDTO {
     @NotBlank(message = "No puede ingresar un apellido vacio")
     @Size(max = 30 ,message = "El apellido no puede contener mas de 30 caracteres")
     private String lastName;
+    @NotBlank(message = "No puede ingresar un alias vacio")
+    @Size(max = 30 ,message = "El alias no puede contener mas de 30 caracteres")
+    private String alias;
+    @Size(max = 1024 * 1024, message = "El tamaño máximo del avatar es de 1 MB")
+    private byte[] avatar;
 }

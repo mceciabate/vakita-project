@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Slf4j
@@ -26,7 +25,6 @@ public class UserService implements IUserService {
     private final JwtService jwtService;
 
     private final PasswordEncoder encoder;
-
 
     @Autowired
     public UserService(IUserRepository userRepository, ObjectMapper mapper, NewUserEventProducer event, JwtService jwtService, PasswordEncoder encoder) {
@@ -88,6 +86,8 @@ public class UserService implements IUserService {
             if(findUser != null){
                 findUser.setName(userDTO.getName());
                 findUser.setLastName(userDTO.getLastName());
+                findUser.setAlias(userDTO.getAlias());
+                findUser.setAvatar(userDTO.getAvatar());
                 UserWithoutPasswordDTO userUpdateDTO = mapper.convertValue(findUser, UserWithoutPasswordDTO.class);
                 userRepository.save(findUser);
                 return userUpdateDTO;
@@ -168,7 +168,6 @@ public class UserService implements IUserService {
             throw new Exception(e.getMessage());
         }
 
-
     }
 
     //MÉTODO PARA VALIDAR TOKEN
@@ -181,6 +180,5 @@ public class UserService implements IUserService {
             throw new Exception(e.getMessage());
         }
     }
-
 
 }
