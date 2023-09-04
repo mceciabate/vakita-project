@@ -168,7 +168,6 @@ public class UserService implements IUserService {
             throw new Exception(e.getMessage());
         }
 
-
     }
 
     //MÉTODO PARA VALIDAR TOKEN
