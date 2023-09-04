@@ -26,7 +26,6 @@ public class UserService implements IUserService {
 
     private final PasswordEncoder encoder;
 
-
     @Autowired
     public UserService(IUserRepository userRepository, ObjectMapper mapper, NewUserEventProducer event, JwtService jwtService, PasswordEncoder encoder) {
         this.userRepository = userRepository;
@@ -182,6 +181,5 @@ public class UserService implements IUserService {
             throw new Exception(e.getMessage());
         }
     }
-
 
 }
