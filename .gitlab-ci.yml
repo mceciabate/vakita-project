@@ -37,7 +37,7 @@ package_payment:
   script:
     - echo "Maven package started on payment"
     - cd ./api-vakita/ms-payment
-    - mvn package -DskipTests
+    - mvn compile && mvn package -DskipTests
 
 deploy_payment: 
   stage: deploy 
