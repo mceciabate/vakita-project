@@ -28,7 +28,7 @@ public class PaymentController {
     @Autowired
     private CreditCardService ccService;
 
-    @Operation(summary = "Registrar una trajeta de crédito")
+    @Operation(summary = "Registrar una tarjeta de crédito")
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public ResponseEntity createCC(@Valid @RequestBody CreditCardDTO cc){
@@ -51,7 +51,7 @@ public class PaymentController {
         return ResponseEntity.ok(ccService.getCreditCardById(id));
     }
 
-    @Operation(summary = "Obtener las tarjetas de crétido de un usaurio")
+    @Operation(summary = "Obtener las tarjetas de crédito de un usuario")
     @GetMapping("/personal/{userId}")
     @ResponseStatus(code = HttpStatus.OK)
     public ResponseEntity<List<CreditCardDTO>> getCCByUser(@PathVariable Integer userId) throws ResourceNotFoundException {
