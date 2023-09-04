@@ -15,16 +15,17 @@ import Swal from 'sweetalert2';
 
 
 const validationSchema = Yup.object().shape({
-  name: Yup.string().required('Name is required'),
+  name: Yup.string().required('Campo requerido'),
+  alias: Yup.string().required('Campo requerido'),
   number: Yup.string()
     // .matches(/^\d{1,16}$/, 'Invalid card number')
-    .required('Card number is required'),
+    .required('Campo requerido'),
   expiry: Yup.string()
     .matches(/^\d{2}\/\d{2}$/, 'Invalid expiry date')
-    .required('Expiry date is required'),
+    .required('Campo requerido'),
   cvc: Yup.string()
     .matches(/^\d{3}$/, 'Invalid CVC')
-    .required('CVC is required'),
+    .required('Campo requerido'),
 });
 
 function PaymentForm({ paymentDetails }) {
@@ -102,7 +103,7 @@ useEffect(() => {
       if (values.number) {
         const cardData = {
           userId: userId,
-          alias: values.name,
+          alias: values.alias,
           cardNumber: values.number, 
           expirationDate: formatExpirationDate(values.expiry), 
           cvv: values.cvc,
@@ -249,6 +250,25 @@ useEffect(() => {
                   </div>
                   {formik.touched.name && formik.errors.name && (
                     <span className="errorCreditCard">{formik.errors.name}</span>
+                  )}
+                </div>
+              </div>
+              <div className="form-group">
+                <div className='boxInput'>
+                  <small>Alias:</small>
+                  <input
+                    type="text"
+                    name="alias"
+                    className="form-control"
+                    placeholder="Ej: Banco Provincia"
+                    required
+                    onChange={handleInputChange}
+                    onFocus={handleInputFocus}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.alias}
+                  />
+                  {formik.touched.alias && formik.errors.alias && (
+                    <span className="errorCreditCard">{formik.errors.alias}</span>
                   )}
                 </div>
               </div>

@@ -29,6 +29,7 @@ function Registerr() {
     initialValues: {
       name: "",
       lastName: "",
+      alias: "",
       dni: "",
       email: "",
       birthdate: "",
@@ -38,6 +39,7 @@ function Registerr() {
     validationSchema: Yup.object({
       name: Yup.string().required("Nombre es requerido"),
       lastName: Yup.string().required("Apellido es requerido"),
+      alias: Yup.string().required("Nombre de usuario es requerido"),
      dni: Yup.string().required("Dni es requerido"),
       email: Yup.string().email("No es un correo valido").required("Correo es requerido"),
       birthdate: Yup.date().max(maxYear(), "Se debe ser mayor de 18 años").required("Fecha de nacimiento es requerida"),
@@ -50,6 +52,7 @@ function Registerr() {
             const response = await axios.post("http://107.22.65.36:8080/api/v1/usuarios/register", {
               "name": values.name,
               "lastName": values.lastName,
+              "alias": values.alias,
               "dni": values.dni,
               "email": values.email,
               "password": values.password,
@@ -124,6 +127,19 @@ function Registerr() {
                 <ErrorSpan>{formik.errors.lastName}</ErrorSpan>
               )}
 
+             <Label htmlFor="lastName">Nombre de usuario</Label>
+              <Input
+                type="text"
+                name="alias"
+                id="alias"
+                value={formik.values.alias}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              />
+              {formik.touched.alias && formik.errors.alias && (
+                <ErrorSpan>{formik.errors.alias}</ErrorSpan>
+              )}
+
               <Label htmlFor="dni">Tu dni</Label>
               <Input
                 type="text"
@@ -137,7 +153,14 @@ function Registerr() {
                 <ErrorSpan>{formik.errors.dni}</ErrorSpan>
               )}
 
-              <Label htmlFor="email">Correo electrónico</Label>
+             
+
+              {/* Añade más campos aquí según tus necesidades */}
+            </div>
+
+            {/* Segundo contenedor */}
+            <div className="contedor-form2">
+            <Label htmlFor="email">Correo electrónico</Label>
               <Input
                 type="email"
                 name="email"
@@ -150,11 +173,6 @@ function Registerr() {
                 <ErrorSpan>{formik.errors.email}</ErrorSpan>
               )}
 
-              {/* Añade más campos aquí según tus necesidades */}
-            </div>
-
-            {/* Segundo contenedor */}
-            <div className="contedor-form2">
               <Label htmlFor="birthdate">Fecha de nacimiento</Label>
               <Input
                 type="date"
