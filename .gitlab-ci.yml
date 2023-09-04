@@ -27,6 +27,16 @@ cache:
 #     - cd ./api-vakita/ms-usuarios
 #     - mvn package
 
+package_usuarios: 
+  stage: package
+  artifacts:
+    paths:
+    - api-vakita/ms-usuarios/target/*.jar
+  script:
+    - echo "Maven package started on usuarios"
+    - cd ./api-vakita/ms-usuarios
+    - mvn package -DskipTests
+
 package_payment: 
   stage: package
   artifacts:
@@ -36,6 +46,22 @@ package_payment:
     - echo "Maven package started on payment"
     - cd ./api-vakita/ms-payment
     - mvn package -DskipTests
+
+deploy_usuarios: 
+  stage: deploy 
+  image: alpine:3.16
+  before_script: 
+    - apk update && apk add openssh-client bash 
+    - mkdir -p ~/.ssh 
+    - eval $(ssh-agent -s) 
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null 
+    - touch ~/.ssh/config 
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config 
+    - pwd
+    - ssh-keyscan -H $CLOUD_USUARIOS_IP >> ~/.ssh/known_hosts 
+  script:
+    - scp /builds/ctd/hispanos/proyecto-integrador-2/proyecto-integrador-0723/1021ft-c1/equipo-03/api-vakita/ms-usuarios/target/ms-usuarios-0.0.1-SNAPSHOT.jar ubuntu@$CLOUD_USUARIOS_IP:~/usuarios-app/ 
+    - ssh ubuntu@$CLOUD_USUARIOS_IP "sudo systemctl restart usuariosapp.service"
 
 deploy_payment: 
   stage: deploy 
