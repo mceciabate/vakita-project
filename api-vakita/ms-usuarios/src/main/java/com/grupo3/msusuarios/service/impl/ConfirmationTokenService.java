@@ -98,7 +98,7 @@ public class ConfirmationTokenService {
                         "      <br>\n" +
                         "      <br>\n" +
                         "      <h2 style=\"margin-left: 50px; display: inline;\">Haz clic en el siguiente enlace para confirmar tu cuenta:</h2>\n" +
-                        "      <a style=\"margin-left: 50px; font-size: 20px; font-weight: bold; text-decoration: none;\" href=\"http://localhost:8080/api/v1/usuarios/confirmar?token=" + token.getToken() +"\">Link</a>\n" +
+                        "      <a style=\"margin-left: 50px; font-size: 20px; font-weight: bold; text-decoration: none;\" href=\"http://107.22.65.36:8080/api/v1/usuarios/confirmar?token=" + token.getToken() +"\">Link</a>\n" +
                         "    </div>\n" +
                         "  </div>\n" +
                         "</body>\n" +
