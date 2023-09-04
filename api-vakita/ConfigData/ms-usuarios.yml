@@ -43,6 +43,10 @@ eureka:
     fetchRegistry: false
     serviceURL:
       defaultZone: http://107.22.65.36:8761/eureka/
+  instance:
+    instance-id: ${spring.application.name}:${random.int}
+    preferIpAddress: true
+    lease-renewal-interval-in-seconds: 30
 management:
   endpoints:
     web:

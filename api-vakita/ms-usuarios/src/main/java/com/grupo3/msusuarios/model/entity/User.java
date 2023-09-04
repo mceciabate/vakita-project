@@ -59,5 +59,4 @@ public class User implements Serializable {
 
     @Column(name = "ACCOUNT_BALANCE")
     private Double account_balance = 0.0;
-
 }

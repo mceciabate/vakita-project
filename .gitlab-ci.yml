@@ -14,18 +14,25 @@ cache:
     - target
 
 
-#Artefactos para los resource server
-# package_users: 
-#   stage: package
-#   only:
-#     - backend
-#   artifacts:
-#     paths:
-#     - api-vakita/ms-usuarios/target/*.jar
-#   script:
-#     - echo "Maven package started on usuarios"
-#     - cd ./api-vakita/ms-usuarios
-#     - mvn package
+package_usuarios: 
+  stage: package
+  artifacts:
+    paths:
+    - api-vakita/ms-usuarios/target/*.jar
+  script:
+    - echo "Maven package started on usuarios"
+    - cd ./api-vakita/ms-usuarios
+    - mvn package -DskipTests
+
+package_vakitas: 
+  stage: package
+  artifacts:
+    paths:
+    - api-vakita/ms-vakitas/target/*.jar
+  script:
+    - echo "Maven package started on vakitas"
+    - cd ./api-vakita/ms-vakitas
+    - mvn package -DskipTests
 
 package_payment: 
   stage: package
@@ -37,31 +44,50 @@ package_payment:
     - cd ./api-vakita/ms-payment
     - mvn package -DskipTests
 
-deploy_payment: 
-  stage: deploy 
-  image: alpine:3.16
-  before_script: 
-    - apk update && apk add openssh-client bash 
-    - mkdir -p ~/.ssh 
-    - eval $(ssh-agent -s) 
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null 
-    - touch ~/.ssh/config 
-    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config 
-    - pwd
-    - ssh-keyscan -H $CLOUD_PAYMENT_IP >> ~/.ssh/known_hosts 
-  script: 
-    # - ssh ubuntu@$CLOUD_PAYMENT_IP "sudo systemctl stop payment.service" 
-    - scp /builds/ctd/hispanos/proyecto-integrador-2/proyecto-integrador-0723/1021ft-c1/equipo-03/api-vakita/ms-payment/target/ms-payment-0.0.1-SNAPSHOT.jar ubuntu@$CLOUD_PAYMENT_IP:~/payment-app/ 
-    - ssh ubuntu@$CLOUD_PAYMENT_IP "sudo systemctl restart payment.service"
-
-# package_vakitas: 
-#   stage: package
-#   only:
-#     - backend
-#   artifacts:
-#     paths:
-#     - api-vakita/ms-vakitas/target/*.jar
+# deploy_usuarios: 
+#   stage: deploy 
+#   image: alpine:3.16
+#   before_script: 
+#     - apk update && apk add openssh-client bash 
+#     - mkdir -p ~/.ssh 
+#     - eval $(ssh-agent -s) 
+#     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null 
+#     - touch ~/.ssh/config 
+#     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config 
+#     - pwd
+#     - ssh-keyscan -H $CLOUD_USUARIOS_IP >> ~/.ssh/known_hosts 
 #   script:
-#     - echo "Maven package started on vakitas"
-#     - cd ./api-vakita/ms-vakitas
-#     - mvn package
+#     - scp /builds/ctd/hispanos/proyecto-integrador-2/proyecto-integrador-0723/1021ft-c1/equipo-03/api-vakita/ms-usuarios/target/ms-usuarios-0.0.1-SNAPSHOT.jar ubuntu@$CLOUD_USUARIOS_IP:~/usuarios-app/ 
+#     - ssh ubuntu@$CLOUD_USUARIOS_IP "sudo systemctl restart usuariosapp.service"
+
+# deploy_vakitas: 
+#   stage: deploy 
+#   image: alpine:3.16
+#   before_script: 
+#     - apk update && apk add openssh-client bash 
+#     - mkdir -p ~/.ssh 
+#     - eval $(ssh-agent -s) 
+#     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null 
+#     - touch ~/.ssh/config 
+#     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config 
+#     - pwd
+#     - ssh-keyscan -H $CLOUD_VAKITAS_IP >> ~/.ssh/known_hosts 
+#   script:
+#     - scp /builds/ctd/hispanos/proyecto-integrador-2/proyecto-integrador-0723/1021ft-c1/equipo-03/api-vakita/ms-vakitas/target/ms-vakitas-0.0.1-SNAPSHOT.jar ubuntu@$CLOUD_VAKITAS_IP:~/vakita-app/ 
+#     - ssh ubuntu@$CLOUD_VAKITAS_IP "sudo systemctl restart vakita.service"
+
+# deploy_payment: 
+#   stage: deploy 
+#   image: alpine:3.16
+#   before_script: 
+#     - apk update && apk add openssh-client bash 
+#     - mkdir -p ~/.ssh 
+#     - eval $(ssh-agent -s) 
+#     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null 
+#     - touch ~/.ssh/config 
+#     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config 
+#     - pwd
+#     - ssh-keyscan -H $CLOUD_PAYMENT_IP >> ~/.ssh/known_hosts 
+#   script: 
+#     - scp /builds/ctd/hispanos/proyecto-integrador-2/proyecto-integrador-0723/1021ft-c1/equipo-03/api-vakita/ms-payment/target/ms-payment-0.0.1-SNAPSHOT.jar ubuntu@$CLOUD_PAYMENT_IP:~/payment-app/ 
+#     - ssh ubuntu@$CLOUD_PAYMENT_IP "sudo systemctl restart payment.service"

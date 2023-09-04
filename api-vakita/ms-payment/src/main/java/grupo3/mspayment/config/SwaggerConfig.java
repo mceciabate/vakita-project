@@ -40,6 +40,6 @@ public class SwaggerConfig {
                 .addSecurityItem(securityRequirement) // Agregar esquema de seguridad
                 .schemaRequirement("bearerAuth", securityScheme) // Agregar definición de esquema de seguridad
                 .servers(Arrays.asList(
-                        new Server().url("http://localhost:8080").description("Gateway Server")));
+                        new Server().url("http://107.22.65.36:8080").description("Gateway Server")));
     }
 }
