@@ -21,7 +21,6 @@ public class RouteValidator {
             "/swagger-resources/**",
             "/swagger-ui.html",
             "/swagger-ui/index.html",
-            "/swagger-ui/**",
             "/v3/api-docs",
             "/webjars/**",
             "/view/**",
