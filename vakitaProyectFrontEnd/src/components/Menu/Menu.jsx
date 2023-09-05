@@ -39,7 +39,7 @@ const Menu = () => {
                 <button
                   onClick={() => {
                     setLogged(false);
-                    navigate("/");
+                    navigate("/index.html");
                     window.localStorage.clear();
                   }}
                   className="botonSalir"
