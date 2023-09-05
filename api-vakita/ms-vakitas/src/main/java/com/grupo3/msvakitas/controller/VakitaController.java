@@ -2,8 +2,10 @@ package com.grupo3.msvakitas.controller;
 
 import com.grupo3.msvakitas.handler.BadRequestException;
 import com.grupo3.msvakitas.handler.ResourceNotFoundException;
+import com.grupo3.msvakitas.model.dto.TransactionDTO;
 import com.grupo3.msvakitas.model.dto.VakitaDTO;
 import com.grupo3.msvakitas.model.dto.VakitaPatchDTO;
+import com.grupo3.msvakitas.service.impl.TransactionService;
 import com.grupo3.msvakitas.service.impl.VakitaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -15,7 +17,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @Slf4j
@@ -25,6 +30,9 @@ public class VakitaController {
 
     @Autowired
     private VakitaService vakitaService;
+
+    @Autowired
+    private TransactionService tService;
 
     //TODO ESTA DEVOLVIENDO 200
     //CREAR UNA VAKITA
@@ -152,9 +160,27 @@ public class VakitaController {
         return ResponseEntity.ok().build();
     }
 
-
-
-
+    @GetMapping("/transactions")
+    @ResponseStatus(code = HttpStatus.OK)
+    public ResponseEntity<List<TransactionDTO>> filterTrasactions(
+            @RequestParam(value = "userId", required = false) Optional<Long> userId
+            , @RequestParam(value = "vakitaId", required = false) Optional<Long> vakitaId
+            , @RequestParam(value = "incialDate", required = false) Optional<LocalDate> inicialDate
+            , @RequestParam(value = "finalDate", required = false) Optional<LocalDate> finalDate) throws ResourceNotFoundException {
+        List<TransactionDTO> transactionF = new ArrayList<>();
+        if ((!userId.isPresent())&&vakitaId.isPresent()&&inicialDate.isPresent()&&finalDate.isPresent()){
+            transactionF = tService.getTransactionsByVakitaByDate(vakitaId, inicialDate, finalDate);
+        }
+        else if(vakitaId.isPresent()&&!(userId.isPresent()&&inicialDate.isPresent()&&finalDate.isPresent())){
+            transactionF = tService.getTransactionsByVakitaId(vakitaId);
+        }
+        else if(userId.isPresent()&&vakitaId.isPresent()&&!(inicialDate.isPresent()&&finalDate.isPresent())){
+            transactionF = tService.getTransactionsByUserIdVakitaId(userId, vakitaId);
+        } else if (userId.isPresent()&&!(vakitaId.isPresent()&&inicialDate.isPresent()&&finalDate.isPresent())) {
+            transactionF = tService.getTransccionsByUser(userId);
+        }
+        return ResponseEntity.ok(transactionF);
+    }
 }
 
 

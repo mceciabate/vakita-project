@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -23,7 +24,7 @@ public class TransactionService{
     @Autowired
     private ITransactionRepository repository;
 
-    public List<TransactionDTO> getTransactionsByVakitaId(Long vakitaId) throws ResourceNotFoundException {
+    public List<TransactionDTO> getTransactionsByVakitaId(Optional<Long> vakitaId) throws ResourceNotFoundException {
         List<Transaction> transactions = repository.findAll();
         List<TransactionDTO> transactionDTOS = new ArrayList<>();
         for (Transaction transaction : transactions) {
@@ -36,11 +37,11 @@ public class TransactionService{
 
     }
 
-    public List<TransactionDTO> getTransactionsByUserIdVakitaId(Long userId, Long vakitaId) throws ResourceNotFoundException {
+    public List<TransactionDTO> getTransactionsByUserIdVakitaId(Optional<Long> userId, Optional<Long> vakitaId) throws ResourceNotFoundException {
         List<TransactionDTO> tByUser = new ArrayList<>();
         List<TransactionDTO> transactions = this.getTransactionsByVakitaId(vakitaId);
         for (TransactionDTO transaction : transactions) {
-            if(transaction.getUserId() == userId){
+            if(transaction.getUserId() == userId.get()){
                 tByUser.add(transaction);
             }
 
@@ -48,7 +49,7 @@ public class TransactionService{
         return tByUser;
     }
 
-    public List<TransactionDTO> getTransccionsByUser(Long userid) throws ResourceNotFoundException {
+    public List<TransactionDTO> getTransccionsByUser(Optional<Long> userid) throws ResourceNotFoundException {
         List<Transaction> transactions = repository.findAll();
         List<TransactionDTO> transactionByUser = new ArrayList<>();
         for (Transaction transaction : transactions) {
@@ -60,23 +61,17 @@ public class TransactionService{
         return transactionByUser;
     }
 
-    public List<TransactionDTO> getTransactionsByVakitaByDate(Long vakitaId, LocalDate inicialDate, LocalDate finalDate) throws ResourceNotFoundException {
+    public List<TransactionDTO> getTransactionsByVakitaByDate(Optional<Long> vakitaId, Optional<LocalDate> inicialDate, Optional<LocalDate> finalDate) throws ResourceNotFoundException {
         List<TransactionDTO> tByDateFilter = new ArrayList<>();
         List<TransactionDTO> transactionDTOS = this.getTransactionsByVakitaId(vakitaId);
         for (TransactionDTO transactionDTO : transactionDTOS) {
-            if (transactionDTO.getDate().isBefore(finalDate) && transactionDTO.getDate().isAfter(inicialDate)){
+            if (transactionDTO.getDate().isBefore(finalDate.get()) && transactionDTO.getDate().isAfter(inicialDate.get())){
                 tByDateFilter.add(transactionDTO);
             }
             else throw new ResourceNotFoundException("No hay transaccioens disponibles para las fechas solicitadas");
         }
         return tByDateFilter;
     }
-
-
-
-
-
-
 
 
 }
