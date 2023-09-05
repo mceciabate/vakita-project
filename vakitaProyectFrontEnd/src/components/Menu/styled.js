@@ -38,7 +38,7 @@ width: 18rem;
         
     outline: none;
     font-size: 16px;
-
+border: none;
     letter-spacing: 0.05rem;
     width: auto; 
     background-color:#609AA6; 
