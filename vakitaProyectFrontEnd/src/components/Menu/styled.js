@@ -41,11 +41,11 @@ width: 18rem;
 
     letter-spacing: 0.05rem;
     width: auto; 
-    background-color:black; 
+    background-color:#609AA6; 
     margin: 0; 
     position: static; 
     bottom: auto; 
-    margin-top: 1rem;
+    margin-top: 6rem;
     display: flex;
     justify-content: center;
     width: 5rem;
