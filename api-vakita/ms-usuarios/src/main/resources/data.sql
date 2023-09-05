@@ -16,4 +16,3 @@ insert into usersdb.users values('0.0', '1987-11-11', default, '10101010', 'Tinc
 
 
 
-
