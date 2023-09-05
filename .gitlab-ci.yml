@@ -14,7 +14,9 @@ cache:
     - target
 
 
-package_usuarios: 
+package_usuarios:
+  only:
+    - config-server
   stage: package
   artifacts:
     paths:
@@ -24,7 +26,9 @@ package_usuarios:
     - cd ./api-vakita/ms-usuarios
     - mvn package -DskipTests
 
-package_vakitas: 
+package_vakitas:
+  only:
+    - config-server 
   stage: package
   artifacts:
     paths:
@@ -34,7 +38,9 @@ package_vakitas:
     - cd ./api-vakita/ms-vakitas
     - mvn package -DskipTests
 
-package_payment: 
+package_payment:
+  only:
+    - config-server
   stage: package
   artifacts:
     paths:
