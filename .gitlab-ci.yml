@@ -12,6 +12,8 @@ cache:
     - node_modules/
 
 build:
+  only:
+    - front-end
   image: node:18
   stage: build
   before_script:
@@ -25,6 +27,8 @@ build:
      - /builds/ctd/hispanos/proyecto-integrador-2/proyecto-integrador-0723/1021ft-c1/equipo-03/vakitaProyectFrontEnd/dist/*
 
 deploy: 
+  only:
+    - front-end
   image: python:latest
   stage: deploy
   before_script:
