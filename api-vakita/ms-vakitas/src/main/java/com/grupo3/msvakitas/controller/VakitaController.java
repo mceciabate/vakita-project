@@ -160,23 +160,25 @@ public class VakitaController {
         return ResponseEntity.ok().build();
     }
 
+    @Operation(summary = "Filtrar las transacciones")
     @GetMapping("/transactions")
     @ResponseStatus(code = HttpStatus.OK)
     public ResponseEntity<List<TransactionDTO>> filterTrasactions(
-            @RequestParam(value = "userId", required = false) Optional<Long> userId
-            , @RequestParam(value = "vakitaId", required = false) Optional<Long> vakitaId
-            , @RequestParam(value = "incialDate", required = false) Optional<LocalDate> inicialDate
-            , @RequestParam(value = "finalDate", required = false) Optional<LocalDate> finalDate) throws ResourceNotFoundException {
+             @RequestParam(required = false) Optional<Long> userId
+            , @RequestParam(required = false) Optional<Long> vakitaId
+            , @RequestParam(required = false) Optional<LocalDate> inicialDate
+            , @RequestParam(required = false) Optional<LocalDate> finalDate) throws ResourceNotFoundException {
         List<TransactionDTO> transactionF = new ArrayList<>();
-        if ((!userId.isPresent())&&vakitaId.isPresent()&&inicialDate.isPresent()&&finalDate.isPresent()){
+        if (vakitaId.isPresent()&&inicialDate.isPresent()&&finalDate.isPresent()){
             transactionF = tService.getTransactionsByVakitaByDate(vakitaId, inicialDate, finalDate);
         }
-        else if(vakitaId.isPresent()&&!(userId.isPresent()&&inicialDate.isPresent()&&finalDate.isPresent())){
+        else if(userId.isPresent()&&vakitaId.isPresent()) {
+            transactionF = tService.getTransactionsByUserIdVakitaId(userId, vakitaId);
+        }
+        else if(vakitaId.isPresent()&&!(userId.isPresent())) {
             transactionF = tService.getTransactionsByVakitaId(vakitaId);
         }
-        else if(userId.isPresent()&&vakitaId.isPresent()&&!(inicialDate.isPresent()&&finalDate.isPresent())){
-            transactionF = tService.getTransactionsByUserIdVakitaId(userId, vakitaId);
-        } else if (userId.isPresent()&&!(vakitaId.isPresent()&&inicialDate.isPresent()&&finalDate.isPresent())) {
+        else if (userId.isPresent()&&!(vakitaId.isPresent())) {
             transactionF = tService.getTransccionsByUser(userId);
         }
         return ResponseEntity.ok(transactionF);
