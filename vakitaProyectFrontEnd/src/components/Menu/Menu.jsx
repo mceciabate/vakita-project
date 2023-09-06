@@ -34,7 +34,7 @@ const Menu = () => {
                 <Link to="/dashboard/transacciones">
                   Transacciones
                 </Link>
-                <Link to="/dashboard/ayuda">Ayuda</Link>
+                {/* <Link to="/dashboard/ayuda">Ayuda</Link> */}
 
                 <button
                   onClick={() => {
