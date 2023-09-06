@@ -118,7 +118,7 @@ public class VakitaService implements IVakitaService {
             vakitaModify.setCumulativeAmount(deposit);
             log.info("Success, amount update: "+ vakitaModify.getCumulativeAmount());
             this.updateVakita(vakitaId, vakitaModify);
-            TransactionDTO transactionDTO = new TransactionDTO(userID, vakitaId, amount);
+            TransactionDTO transactionDTO = new TransactionDTO(LocalDate.now(), userID, vakitaId, amount);
             log.info("creando nueva transacción en la vakita con id : " + vakitaId);
             tRepository.save(mapper.map(transactionDTO, Transaction.class));
         }

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -21,6 +22,8 @@ public class Transaction implements Serializable {
     @Column(name = "TRANSACTION_ID", unique = true, nullable = false)
     private Long transactionId;
 
+    @Column(name= "date", nullable = false)
+    private LocalDate date;
 
     @Column(name = "user_id", nullable = false)
     private Long userId;
@@ -32,7 +35,8 @@ public class Transaction implements Serializable {
     @Column(name = "AMOUNT", nullable = false)
     private Double amount;
 
-    public Transaction(Long userId, Vakita vakita, Double amount) {
+    public Transaction(LocalDate date, Long userId, Vakita vakita, Double amount) {
+        this.date = date;
         this.userId = userId;
         this.vakita = vakita;
         this.amount = amount;
