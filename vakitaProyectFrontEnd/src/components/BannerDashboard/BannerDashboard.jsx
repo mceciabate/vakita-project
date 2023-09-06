@@ -1,5 +1,5 @@
-import imgBanner from "../../assets/vacamoneda.jpg"
-import { DashboardDiv, H2, Image, SpanText,Button } from "./styled"
+import imgBanner from "../../assets/bienvenida.png"
+import { DashboardDiv, H1, Image, SpanText,H3 } from "./styled"
 
 const BannerDashboard = () => {
 
@@ -7,8 +7,8 @@ const BannerDashboard = () => {
         <DashboardDiv>
             <Image src={imgBanner}/>
             <SpanText>
-                <H2>NO TE PIERDAS LA OPORTUNIDAD DE AYUDAR CON LAS VAQUITAS SOLIDARIAS </H2>
-                <Button>Quiero saber mas</Button>
+                <H1>Hola, Cecilia Abate </H1>
+                <H3>¿Estás listo/a para crear tu vaca virtual?</H3>
             </SpanText>
 
         </DashboardDiv>
