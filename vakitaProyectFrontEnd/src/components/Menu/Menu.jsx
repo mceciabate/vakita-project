@@ -31,15 +31,15 @@ const Menu = () => {
                   Datos financieros
                 </Link>
                 <hr />
-                <Link to="/dashboard/necesito-mi-dinero">
-                  Necesito mi dinero
+                <Link to="/dashboard/transacciones">
+                  Transacciones
                 </Link>
                 <Link to="/dashboard/ayuda">Ayuda</Link>
 
                 <button
                   onClick={() => {
                     setLogged(false);
-                    navigate("/");
+                    navigate("/index.html");
                     window.localStorage.clear();
                   }}
                   className="botonSalir"

@@ -22,10 +22,10 @@ function Header() {
 
   return (
     <header className="header">
-      <Link to="/"><img className="header-logo" src={logoVaca} alt="logo" /></Link>
+      <Link to="/index.html"><img className="header-logo" src={logoVaca} alt="logo" /></Link>
 
       <div className="header-botones">
-        {(currentPath === "/" && !logged || currentPath === "/register") && (
+        {(currentPath === "/index.html" && !logged || currentPath === "/register") && (
           <Link to="/log-in"><button
             className={`nav_item ${activeButton === "Iniciar-sesion" ? "active" : ""}`}
             id="Iniciar-sesion"
@@ -35,7 +35,7 @@ function Header() {
           </button></Link>
         )}
 
-        {(currentPath === "/" && !logged || currentPath === "/log-in") && (
+        {(currentPath === "/index.html" && !logged || currentPath === "/log-in") && (
            <Link to="/register"><button
             className={`nav_item ${activeButton === "Crear-cuenta" ? "active" : ""}`}
             id="Crear-cuenta"
@@ -45,7 +45,7 @@ function Header() {
           </button></Link>
         )}
 
-{(currentPath === "/" && logged) && (
+{(currentPath === "/index.html" && logged) && (
          <Link to="/dashboard"> <button
             className={`nav_item ${activeButton === "Crear-cuenta" ? "active" : ""}`}
             id="dashboard"

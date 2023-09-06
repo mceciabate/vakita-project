@@ -11,6 +11,7 @@ import Menu from '../components/Menu/Menu';
 import { useUser } from '../context/UserProvider';
 import Perfil from '../components/Perfil/Perfil';
 import PaymentApp from "../components/CreditCard/PaymentApp";
+import TransactionPage from "../pages/transaction/TransactionPage";
 
 
 const Routers = () => {
@@ -23,7 +24,7 @@ const Routers = () => {
       </div>
 
       <Routes>
-        <Route path="/" element={<LandingComponent />} />
+        <Route path="/index.html" element={<LandingComponent />} />
         <Route path="/log-in" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route element={<Protected isLogged={logged} />}>
@@ -34,6 +35,7 @@ const Routers = () => {
             <Route path="mis-vaquitas" element={<MyVakita />} />
             <Route path="mi-perfil" element={<Perfil />} />
             <Route path="mis-datos-financieros" element={<PaymentApp />} />
+            <Route path="transacciones" element={<TransactionPage/>} />
           </Route>
         </Route>
       </Routes>
