@@ -14,9 +14,6 @@ background: linear-gradient(0deg, rgba(200,185,224,1) 11%, rgba(217,181,195,1) 8
 
   height: 170vh !important;
 }
-
-
-
 `;
 
 export const GeneralFormContainer = styled.div`
@@ -153,12 +150,28 @@ display:flex;
   color: red;
   font-size: 14px;
   margin-left: 1px;
- 
 `;
 
 
 
+export const CheckSection = styled.div`
+  display: flex;
+  width: 80%;
+  align-items: flex-start;
+  margin-top: 0.8rem;
 
+  label {
+    margin: 0 !important;
+    color: #423163;
+    font-weight: 600;
+  }
+
+  input {
+    margin: 3.5px;
+    width: 20px;
+    height: 20px;
+  }
+`;
 
 
 
@@ -185,6 +198,15 @@ export const Button = styled.button`
   &:hover {
     color:white;
     background-color: #AD8FF3;
+  }
+
+
+  /* Estilo en hover */
+  &:disabled {
+    cursor: initial;
+    background-color: transparent;
+    color: gray;
+    border: 1px solid gray;
   }
 
   @media (max-width: 1778px){
