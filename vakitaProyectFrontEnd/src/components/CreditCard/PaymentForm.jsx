@@ -216,9 +216,8 @@ useEffect(() => {
 
   return (
     <div key="Payment" className='generalCointainer'>
-      <h1 className="titulo-AppPayment">Introduce tus datos de pago</h1>
       <div className="App-payment">
-        
+        <h2>Introduce tus datos de pago</h2>
         <div className='boxCard'>
           <Card
             number={formik.values.number}

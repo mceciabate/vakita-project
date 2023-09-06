@@ -71,6 +71,7 @@ margin-top:-350px;
   display: flex; 
   justify-content: start;
   margin-left:8%;
+  padding-top: 1rem;
   
 }
 
@@ -88,7 +89,7 @@ margin-top:-350px;
 
 export const ContainerInputs = styled.div`
 width: 100%;
-height: 100px;
+height: 180px;
 display: flex;
 flex-direction: row;
 justify-content: space-between;
