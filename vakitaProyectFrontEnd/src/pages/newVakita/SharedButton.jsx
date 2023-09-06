@@ -10,7 +10,7 @@ const ShareButton = ({ url }) => {
   };
 
   return (
-    <button  className='shared' onClick={handleShare}>
+    <button type="button" className='shared' onClick={handleShare}>
        <FontAwesomeIcon icon={faShareNodes}  size="xl" /><p className='textShared'>Invitar</p>
     </button>
   );
