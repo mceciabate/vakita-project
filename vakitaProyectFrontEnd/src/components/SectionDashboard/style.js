@@ -53,11 +53,19 @@ export const DivContainer = styled.div`
 
     @media (max-width: 769px) {
         display: ${props => !props.displayMobile ? "flex" : "none"};
-        width: 15rem;
+        width: 90%;
         height: 8rem;
         font-size: 1.1rem;
         max-width: none;
         margin-top:15px;
+    }
+    .Titulo-DivContainer {
+        width: 70%;
+        font-size:20px;
+        color: #584381;
+        text-align: left;
+        margin-bottom: 15px;
+        
     }
     
 `;

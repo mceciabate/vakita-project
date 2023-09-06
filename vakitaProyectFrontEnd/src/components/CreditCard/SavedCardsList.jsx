@@ -12,7 +12,7 @@ function SavedCardsTable({ savedCards, onDeleteCard }) {
   return (
   <>
     <div className="saved-cards">
-      <h3>Medio de pago asociado</h3>
+      <h3 className='Titulo-savedCards'>Medio de pago asociado</h3>
     <div className="table-container">
       <table>
         <thead>
