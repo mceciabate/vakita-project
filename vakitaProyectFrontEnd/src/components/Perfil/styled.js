@@ -13,8 +13,11 @@ export const PerfilContainer = styled.div`
 export const H2 = styled.h2`
     margin-bottom: 1rem;
     width: 90%;
-    font-size: 1.2rem;
+    font-size: 1.5em;
     text-align: left;
+    margin-top: 1rem;
+    font-weight: bolder;
+   
 `;
 
 export const Hr = styled.hr`
@@ -29,15 +32,18 @@ export const ListDiv = styled.form`
     border-radius: 20px;
     width: 80%;
     max-width: 800px;
+    margin-top: -1rem;
     box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
 
-    @media (min-width: 768px){
-        grid-template-columns: repeat(2, 1fr);
+    @media (min-width: 900px){
+       grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(2, auto);
-    }
+    } 
+
+   
 `;
 
 export const TitleH5 = styled.h5`
@@ -46,7 +52,7 @@ export const TitleH5 = styled.h5`
     font-size: 1.2rem;
     margin: 0.7rem 0.7rem 1.5rem 0.7rem;
 
-    @media (min-width: 768px){
+    @media (min-width: 900px){
         grid-column: 1 / 2;
     }
 `
@@ -59,7 +65,7 @@ export const Div1 = styled.div`
     flex-direction: column;
     align-items: center;
 
-    @media (min-width: 768px){
+    @media (min-width: 900px){
         grid-column: 1 / 2;
         grid-row: 2 / 3;
     }
@@ -73,7 +79,7 @@ export const Div2 = styled.div`
     align-items: center;
     justify-content: space-between;
 
-    @media (min-width: 768px){
+    @media (min-width: 900px){
         grid-column: 2 / 3;
         grid-row: 2 / 3;
     }
@@ -95,16 +101,23 @@ export const Label = styled.p`
 
 
 export const Input = styled.input`
-    border: 0.3px solid #664E94;
-    padding: 7px;
+    border: 2px solid white;
     border-radius: 8px;
     min-width: 100%;
     max-width: 300px;
+    height: 35px;
 
+   
     &:disabled {
-        color: #000;
-        background-color: #eaeaea;
+        color: black;
+        background-color :#CAC1D1;
     }
+
+    &:focus {
+        border-color: #423163; /* Cambiar el color del borde a verde cuando se selecciona */
+        outline: none; /* Quitar el resplandor predeterminado en algunos navegadores */
+    }
+  
 
 `;
 
@@ -112,14 +125,21 @@ export const Button = styled.button`
     justify-self: flex-end;
     margin: 18px 0;
     padding: 0.5rem;
-    border: 2px solid #C38FCF;
     background: none;
     border-radius: 10px;
     font-weight: 600;
+    border-style: 2px solid;
+    border-top-color: #BB75CB;
+    border-right-color: #D18EBA;
+    border-bottom-color: #E68C8C;
+    border-left-color: #D18EBA;
+    cursor: pointer;
+    height: 40px;
+   
+
 
     &:hover {
-        background-color: #C38FCF;
+        background-color: #AD8FF3;
         color: white;
-        cursor: pointer;
     }
 `
