@@ -9,8 +9,6 @@ import io.restassured.RestAssured;
 import org.json.simple.JSONObject;
 import org.junit.jupiter.api.*;
 
-import java.time.LocalDate;
-
 import static io.restassured.RestAssured.given;
 import static io.restassured.config.EncoderConfig.encoderConfig;
 
@@ -169,7 +167,7 @@ public class BackendApiUserTest {
 
     @Test
     @Tag("smoke")
-    public void aCrearUsuarioMenorDeEdad(){
+    public void gCrearUsuarioMenorDeEdad(){
         test = report.createTest("Test de Crear Usuario menor de edad");
         test.log(Status.INFO, "Inicia el Test");
         JSONObject user = new JSONObject();
@@ -195,7 +193,7 @@ public class BackendApiUserTest {
 
     @Test
     @Tag("smoke")
-    public void aCrearUsuarioSinCorreo(){
+    public void hCrearUsuarioSinCorreo(){
         test = report.createTest("Test de Crear Usuario sin correo");
         test.log(Status.INFO, "Inicia el Test");
         JSONObject user = new JSONObject();
@@ -220,7 +218,7 @@ public class BackendApiUserTest {
     }
     @Test
     @Tag("smoke")
-    public void aCrearUsuarioConcorreoExistente(){
+    public void iCrearUsuarioConcorreoExistente(){
         test = report.createTest("Test de Crear Usuario con correo existente");
         test.log(Status.INFO, "Inicia el Test");
         JSONObject user = new JSONObject();
@@ -246,8 +244,8 @@ public class BackendApiUserTest {
 
     @Test
     @Tag("smoke")
-    public void LogInUsuario(){
-        test = report.createTest("Test de Logear Usuario");
+    public void jLogInUsuario(){
+        test = report.createTest("Test de Loguear Usuario");
         test.log(Status.INFO, "Inicia el Test");
         JSONObject user = new JSONObject();
         user.put("email", "loreperez2003@gmail.com");
@@ -265,11 +263,6 @@ public class BackendApiUserTest {
         test.log(Status.PASS, "Se ejecuta la petición de manera exitosa");
         test.log(Status.PASS, "Se obtiene respuesta exitosa");
     }
-
-
-
-
-
 
     @AfterAll
     public void cerrarReporte(){

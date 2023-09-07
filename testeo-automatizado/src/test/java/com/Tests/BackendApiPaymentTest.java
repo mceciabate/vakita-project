@@ -63,6 +63,7 @@ public class BackendApiPaymentTest {
         cc.put("cardNumber", "1234567894560000");
         cc.put("expirationDate", "2024-09-10");
         cc.put("cvv", "123");
+        cc.put("userId", "2");
         test.log(Status.INFO, "Se configura la petición");
         given().config(RestAssured.config().encoderConfig(encoderConfig().appendDefaultContentCharsetToContentTypeIfUndefined(false))).
                 contentType("application/json")
@@ -99,12 +100,12 @@ public class BackendApiPaymentTest {
 
     @Test
     @Tag("smoke")
-    public void bObtenerTarjetasDeUsuario(){
+    public void cObtenerTarjetasDeUsuario(){
         test = report.createTest("Test de Obtener las Tarjetas de un usuario");
         test.log(Status.INFO, "Inicia el Test");
         test.log(Status.INFO, "Se configura la petición");
         given()
-                .pathParam("userId", 14)
+                .pathParam("userId", 4)
                 .header("Authorization","Bearer" + LogInUsuario())
                 .when()
                 .get(baseURLTarjetas+"/personal/{userId}")
@@ -117,14 +118,53 @@ public class BackendApiPaymentTest {
     }
     @Test
     @Tag("smoke")
-    public void bObtenerTarjetas(){
-        test = report.createTest("Test de Obtener totas las Tarjetas");
+    public void dObtenerTarjetas(){
+        test = report.createTest("Test de Obtener todas las Tarjetas");
         test.log(Status.INFO, "Inicia el Test");
         test.log(Status.INFO, "Se configura la petición");
         given()
-//                .pathParam("usuarioId", 3)
+                .header("Authorization","Bearer" + LogInUsuario())
                 .when()
                 .get(baseURLTarjetas)
+                .then()
+                .assertThat()
+                .statusCode(200);
+        test.log(Status.INFO, "Se resuelve la petición");
+        test.log(Status.PASS, "Se ejecuta la petición de manera exitosa");
+        test.log(Status.PASS, "Se obtiene respuesta exitosa");
+    }
+
+    @Test
+    @Tag("smoke")
+    public void eModificarAliasTarjeta(){
+        test = report.createTest("Test de Modificar alias de la tarjeta de credito");
+        test.log(Status.INFO, "Inicia el Test");
+        test.log(Status.INFO, "Se configura la petición");
+        given()
+                .pathParam("id", 4)
+                .queryParam("alias", "Mastercard gold")
+                .header("Authorization","Bearer" + LogInUsuario())
+                .when()
+                .patch(baseURLTarjetas+"/alias/{id}")
+                .then()
+                .assertThat()
+                .statusCode(200);
+        test.log(Status.INFO, "Se resuelve la petición");
+        test.log(Status.PASS, "Se ejecuta la petición de manera exitosa");
+        test.log(Status.PASS, "Se obtiene respuesta exitosa");
+    }
+
+    @Test
+    @Tag("smoke")
+    public void fEliminarTarjetaPorId(){
+        test = report.createTest("Test de Borrar Tarjeta por id");
+        test.log(Status.INFO, "Inicia el Test");
+        test.log(Status.INFO, "Se configura la petición");
+        given()
+                .pathParam("id", 50)
+                .header("Authorization","Bearer" + LogInUsuario())
+                .when()
+                .delete(baseURLTarjetas+"/{id}")
                 .then()
                 .assertThat()
                 .statusCode(200);

@@ -13,8 +13,7 @@ import org.junit.Assert;
 import org.junit.jupiter.api.*;
 
 
-import java.time.LocalDate;
-import java.util.HashMap;
+
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.config.EncoderConfig.encoderConfig;
@@ -176,7 +175,7 @@ public class BackendApiVakitaTest {
     @Test
     @Tag("smoke")
     public void fValidacionDepositoEnVakitaInactiva(){
-        test = report.createTest("Test Validar que no se puede depositar dinero a una vakita");
+        test = report.createTest("Test Validar que no se puede depositar dinero a una vakita inactiva");
         test.log(Status.INFO, "Inicia el Test");
         test.log(Status.INFO, "Se configura la petición");
         given()
