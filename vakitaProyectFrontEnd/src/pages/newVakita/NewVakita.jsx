@@ -361,11 +361,11 @@ const NewVakita = () => {
         
         <div className='infoText'>
 
-        <FontAwesomeIcon icon={faCircleInfo} size="xl" />
+        <FontAwesomeIcon icon={faCircleInfo}  size="xl"style={{ marginBottom: '20px',marginTop: '-40px',marginLeft: '-18px',color: '#4D7B84'}} />
         <p>Recuerda que todos los integrantes 
          tienen que estar registrados en nuestra plataforma.
         </p>
-        <div ><ShareButton url={"http://vakita.ddns.net/"} /></div>
+        <div className='boton-invitar'><ShareButton url={"http://vakita.ddns.net/"} /></div>
         </div>
         
         

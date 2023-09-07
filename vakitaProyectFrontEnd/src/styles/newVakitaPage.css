@@ -1,27 +1,27 @@
-.containerPage{
+.containerPage {
     display: flex;
     height: auto;
     flex-direction: column;
     align-items: center;
     width: 100%;
     background: linear-gradient(0deg, #EEE9FF 6%, #FCE8E9 91%);
-    
-  
-   
-   
+
+
+
+
 }
 
-.boxItems{
+.boxItems {
     display: flex;
     flex-direction: column;
-justify-content: center;
-align-items: center;
-margin: 0.5rem 0px;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem 0px;
 
 
 }
 
-.halfBackground{
+.halfBackground {
     background-color: #FFFFFF;
     margin: 0rem -2.5%;
     margin-bottom: -1.8%;
@@ -56,47 +56,49 @@ margin: 0.5rem 0px;
     margin-left: 1px;
 }
 
-form{
-	width:20rem;
-	padding:0.5rem;
-	border-radius:10px;
-	/* background-color:#CCC3C3; */
+form {
+    width: 20rem;
+    padding: 0.5rem;
+    border-radius: 10px;
+    /* background-color:#CCC3C3; */
     margin-bottom: 1rem;
-   
+
 }
 
-form label{
-	width:72px;
-	font-weight:bold;
-	display:inline-block;
+form label {
+    width: 72px;
+    font-weight: bold;
+    display: inline-block;
 }
 
 .inputText,
 .inputNumber,
 .inputDate,
-.inputEmail, 
-.inputDescription{
-	height: 35px ;
-width: 90% ;
-border-radius: 10px;
-background-color: white; 
-outline: none ;
-border: none !important ;
-margin:0 auto  ;
-padding: 2px ;
-font-size: 15px;
-margin-top: 4px !important;
-text-indent: 10px !important;
+.inputEmail,
+.inputDescription {
+    height: 35px;
+    width: 90%;
+    border-radius: 10px;
+    background-color: white;
+    outline: none;
+    border: none !important;
+    margin: 0 auto;
+    padding: 2px;
+    font-size: 15px;
+    margin-top: 4px !important;
+    text-indent: 10px !important;
 
- 
 
-} 
+
+}
+
 .inputText::placeholder,
 .inputNumber::placeholder,
 .inputDate::placeholder,
 .inputEmail::placeholder,
 .inputDescription::placeholder {
-    color: #5E5E5E; /* Cambia el color del placeholder al que desees (en este caso, verde) */
+    color: #5E5E5E;
+    /* Cambia el color del placeholder al que desees (en este caso, verde) */
     text-indent: 10px;
 }
 
@@ -104,45 +106,47 @@ text-indent: 10px !important;
 label.labelDate {
     margin-left: 3%;
     color: #54848D;
-    
+
 }
- /* la card del lado derecho*/
- .inputEmail{
+
+/* la card del lado derecho*/
+.inputEmail {
     background-color: #E4E4E4;
-    
-} 
 
-form input[type="submit"]{
-	width:100%;
+}
+
+form input[type="submit"] {
+    width: 100%;
     height: 35px;
-	padding:8px 16px;
-	margin-top:32px;
-	border:1px solid #000;
-	border-radius:10px;
-	display:block;
-	color:#fff;
-	background-color:#000;
-} 
+    padding: 8px 16px;
+    margin-top: 32px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    display: block;
+    color: #fff;
+    background-color: #000;
+}
 
-form input[type="submit"]:hover{
-	cursor:pointer;
+form input[type="submit"]:hover {
+    cursor: pointer;
 }
 
 
 /**--------**/
 
-.boxReverseBanner{
+.boxReverseBanner {
     display: flex;
     flex-direction: column;
 }
 
-.boxOne{
-    order:1;
+.boxOne {
+    order: 1;
 }
-.boxTwo{
-    -webkit-box-shadow: 0px 3px 5px -2px rgba(61,59,61,1);
--moz-box-shadow: 0px 3px 5px -2px rgba(61,59,61,1);
-box-shadow: 0px 3px 5px -2px rgba(61,59,61,1);
+
+.boxTwo {
+    -webkit-box-shadow: 0px 3px 5px -2px rgba(61, 59, 61, 1);
+    -moz-box-shadow: 0px 3px 5px -2px rgba(61, 59, 61, 1);
+    box-shadow: 0px 3px 5px -2px rgba(61, 59, 61, 1);
     border-radius: .5rem;
     -webkit-border-radius: .5rem;
     -moz-border-radius: .5rem;
@@ -153,32 +157,33 @@ box-shadow: 0px 3px 5px -2px rgba(61,59,61,1);
     width: 90%;
     background-color: #ffffff;
     margin-top: -15px;
-  
+
 }
 
 
-.img{
+.img {
     display: flex;
     justify-content: center;
     align-items: center;
-    
-   
+
+
 }
-img{
+
+img {
     width: 101%;
     border-radius: .5em .5em 0em 0em;
-  
 
-   
+
+
 }
 
-h4{
+h4 {
     text-align: center;
     margin: 20px 0px;
     font-size: 18px;
 }
 
-.memberAdded{
+.memberAdded {
     background-color: #c5bebe;
     width: 14rem;
     font-size: 16.5px;
@@ -193,43 +198,72 @@ h4{
     padding: 10px;
 }
 
-.userIcon{
+.userIcon {
     display: flex;
     padding-right: 10px;
-   
-}
-.textBanner{
-font-size: 18px;
-letter-spacing: 1px;
-color: #A297B6;
-padding-left: 1rem;
-font-weight: 700;
-margin-top: 4px;
-margin-bottom: 4px;
 
 }
 
-.textBannerActive{
+.textBanner {
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: #A297B6;
+    padding-left: 1rem;
+    font-weight: 700;
+    margin-top: 4px;
+    margin-bottom: 4px;
+
+}
+
+.textBannerActive {
     font-size: 18px;
     letter-spacing: 1px;
     color: #674F95;
     padding-left: 1rem;
     font-weight: 700;
     margin-top: 4px;
-margin-bottom: 4px;
-    }
+    margin-bottom: 4px;
+}
 
-    .textBannerActiveNumber{
-        font-size: 18px;
+.textBannerActiveNumber {
+    font-size: 18px;
     letter-spacing: 1px;
     color: #674F95;
     padding-left: 1rem;
     font-weight: 700;
     margin-top: 4px;
-margin-bottom: 4px;
-    }
+    margin-bottom: 4px;
+}
 
-.buttonSubmit{
+.buttonSubmit {
+    padding: 10px 24px;
+    margin: 2.5rem 0px;
+    font-size: 17px;
+    color: #7c4d86;
+    background-color: transparent;
+    border: 2px solid;
+    border-radius: 8px;
+    cursor: pointer;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    border-radius: 10px;
+    border-style: solid;
+    border-top-color: #BB75CB;
+    border-right-color: #D18EBA;
+    border-bottom-color: #E68C8C;
+    border-left-color: #D18EBA;
+
+}
+
+.buttonSubmit:hover {
+    background-color: #AD8FF3;
+    color: white;
+}
+
+
+.buttonSubmitActive {
     padding: 14px 24px;
     border-radius: .7rem;
     margin: 2.5rem 0px;
@@ -242,22 +276,8 @@ margin-bottom: 4px;
     font-family: 'Inria Sans', sans-serif;
 }
 
+.buttonSubmitActive:hover {
 
-.buttonSubmitActive{
-    padding: 14px 24px;
-    border-radius: .7rem;
-    margin: 2.5rem 0px;
-    font-size: 17px;
-    cursor: pointer;
-    border: none;
-    font-weight: 500;
-    cursor: pointer;
-    background-color: #dfabab;
-    font-family: 'Inria Sans', sans-serif;
-} 
-
-.buttonSubmitActive:hover{
-   
     border-radius: .7rem;
     margin: 2.5rem 0px;
     cursor: pointer;
@@ -266,18 +286,18 @@ margin-bottom: 4px;
     cursor: pointer;
     background-color: rgb(224, 140, 140);
     font-family: 'Inria Sans', sans-serif;
-    -webkit-box-shadow: 0px 3px 5px -2px rgba(61,59,61,1);
--moz-box-shadow: 0px 3px 5px -2px rgba(61,59,61,1);
-box-shadow: 0px 3px 5px -2px rgba(61,59,61,1);
+    -webkit-box-shadow: 0px 3px 5px -2px rgba(61, 59, 61, 1);
+    -moz-box-shadow: 0px 3px 5px -2px rgba(61, 59, 61, 1);
+    box-shadow: 0px 3px 5px -2px rgba(61, 59, 61, 1);
 
 }
 
-.buttonSubmitBox{
+.buttonSubmitBox {
     display: flex;
     justify-content: center;
 }
 
-.buttonDeleted{
+.buttonDeleted {
     background: none;
     color: inherit;
     border: none;
@@ -286,11 +306,11 @@ box-shadow: 0px 3px 5px -2px rgba(61,59,61,1);
     cursor: pointer;
     outline: inherit;
     font-size: 20px;
-    color:#bf1717 ;
+    color: #bf1717;
     display: flex;
-  width: 100%;
-  justify-content: end;
-  
+    width: 100%;
+    justify-content: end;
+
 
 }
 
@@ -298,7 +318,7 @@ box-shadow: 0px 3px 5px -2px rgba(61,59,61,1);
 
 
 
-.buttonAdd{
+.buttonAdd {
     background: none;
     color: inherit;
     border: none;
@@ -307,15 +327,15 @@ box-shadow: 0px 3px 5px -2px rgba(61,59,61,1);
     cursor: pointer;
     outline: inherit;
     font-size: 40px;
-    color:#dcb8b8 ;
-    
+    color: #dcb8b8;
+
 }
 
-.buttonAdd:hover{
-    color:#cf9b9b;
+.buttonAdd:hover {
+    color: #cf9b9b;
 }
 
-.info{
+.info {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -323,28 +343,37 @@ box-shadow: 0px 3px 5px -2px rgba(61,59,61,1);
     text-align: center;
     margin-bottom: 1rem;
     background-color: #423163;
- margin: 0px 2rem;
-    
-    border-radius:10px ;
- 
+    margin: 0px 2rem;
+
+    border-radius: 10px;
+
 }
 
-.infoText{
+.infoText {
     /* width: 15rem; */
-    border-radius:10px ;
-    -webkit-border-radius:10px ;
-    -moz-border-radius:10px ;
-    -ms-border-radius:10px ;
-    -o-border-radius:10px ;
-    border: solid 1px linear-gradient(0deg, rgba(200, 185, 224, 0.458) 11%, rgba(217, 181, 195, 0.743) 89%);
-    background-color: #423163;
-    background: linear-gradient(0deg, rgba(200, 185, 224, 0.458) 11%, rgba(217, 181, 195, 0.743) 89%);
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    border: none;
+    text-align: justify;
+    background: #BBCDD1;
     font-weight: 600;
     letter-spacing: 0.4px;
     padding: 0.5rem;
 }
 
-.shared{
+.boton-invitar {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+
+
+
+}
+
+.shared {
     display: flex;
     background: none;
     color: inherit;
@@ -364,16 +393,20 @@ box-shadow: 0px 3px 5px -2px rgba(61,59,61,1);
     cursor: pointer;
     background-color: #f4f0f0;
     font-family: 'Inria Sans', sans-serif;
-    
+    align-items: center;
+
+
+
+
 }
 
-.textShared{
+.textShared {
     padding-left: 7px;
 }
 
-.labelDate{
+.labelDate {
     width: 93%;
-  color: #3d3c3c;
+    color: #3d3c3c;
 }
 
 
@@ -381,64 +414,65 @@ box-shadow: 0px 3px 5px -2px rgba(61,59,61,1);
 
 
 @media only screen and (min-width: 400px) {
-   .containerPage{
-    background-color: #CCC3C3;
-   }
-    form{
-        width:100%;
-      
+    .containerPage {
+        background-color: #CCC3C3;
     }
 
-    form input[type="email"]{
-      
-        width:100%;
-        
+    form {
+        width: 100%;
+
     }
-   
-    .formNewVakita{
-     
-      width: 95%;
-      margin-left: .4rem;
-        }
+
+    form input[type="email"] {
+
+        width: 100%;
+
+    }
+
+    .formNewVakita {
+
+        width: 95%;
+        margin-left: .4rem;
+    }
 
 
-        
+
 }
 
 
 @media only screen and (min-width: 980px) {
-    
-    .halfBackground{
+
+    .halfBackground {
         width: 93%;
         margin: 0rem 0%;
         margin-left: 1.4rem;
-       
+
     }
 
-    
-         
- }
 
- 
 
- @media only screen and (min-width: 1200px) {
+}
 
-    .containerPage{
+
+
+@media only screen and (min-width: 1200px) {
+
+    .containerPage {
 
         height: 100vh;
     }
 
 
 
-   .formNewVakita{
-    display: flex;
-    justify-content: space-evenly;
-    
-   }
+    .formNewVakita {
+        display: flex;
+        justify-content: space-evenly;
 
-   .halfBackground{
-    width: 35%;
-    
-   }
-         
- }
+    }
+
+    .halfBackground {
+        width: 35%;
+
+    }
+
+}
