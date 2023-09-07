@@ -10,7 +10,7 @@ display: none;
     
     .botonSalir{
         width: 100%;
-        background-color:black;
+        background-color:#664E94;
         color: white;
         margin: 0px;
         padding:0.8rem;
@@ -18,6 +18,7 @@ display: none;
         justify-content: flex-end;
         position: fixed;
         bottom: 0;
+        border: none;
         width: 375px;
     }
 
@@ -64,19 +65,31 @@ export const HeaderMenuLateral = styled.div`
     flex-direction: row;
     background: transparent;
     border: none;
-    background-color:black;
+    background: linear-gradient(0deg, #EEE9FF 50%, #FCE8E9 51%);background: linear-gradient(0deg, rgba(200,185,224,1) 11%, rgba(217,181,195,1) 89%);
     color:white;
     padding: 20px;
-
+    height: 100px;
+    border-radius:20px;
+    margin:20px;
     
       
 
     img.avatar {
     
-        width:40%;
-        height:100%;
+        width:30%;
+        height:auto;
         margin-right:20px;
     }
+
+  .texto-saludoUsuario {
+   color: #664E94;
+   font-size:20px;
+   font-weight:bold;
+   width:100%;
+
+  align-self: center;
+}
+
     
     /* En esta seccion no se mostrara en desktop*/
     @media (min-width: 768px){
@@ -84,6 +97,7 @@ export const HeaderMenuLateral = styled.div`
         outline: none;
         display: none;
         opacity: 0;
+    
     }
 `;
 
@@ -99,9 +113,14 @@ export const BloqueOptions = styled.div`
         cursor: pointer;
         color: #fff;
         font-family: arial;
-        
     }
-
+    a:hover {
+        color: #609AA6/* Cambiar el color a rojo cuando el cursor esté sobre el enlace */
+    }
+    a:active {
+        color:#4D7B84;
+    
+    }
     hr {
         margin-top:30px;
         margin-bottom:50px;
@@ -109,14 +128,20 @@ export const BloqueOptions = styled.div`
     }
 
     @media (max-width: 768px){
+        
         a {
-            margin-left:10px;
-            
+            margin-left:30px;
+            font-weight:medium;
         }
+       }
         hr {
-            margin-left:20px;
-            width:37%
+            margin-left:30px;
+            width:45%
         }
+
+      
+    
+      
     }
 `;
 

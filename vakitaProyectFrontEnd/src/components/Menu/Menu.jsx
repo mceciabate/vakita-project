@@ -1,5 +1,5 @@
 import { BloqueOptions,HeaderMenuLateral, MenuDiv, MenuLateral,MenuSinLoguear } from "./styled";
-import  Avatar from "../../assets/vaquitaPerfil.png";
+import  Avatar from "../../assets/usuario2.png";
 import { Link, Outlet, useNavigate} from 'react-router-dom'
 import { useUser } from "../../context/UserProvider";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -8,6 +8,7 @@ import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons"
 const Menu = () => {
   const { logged, setLogged } = useUser();
   const navigate = useNavigate();
+
   return (
     <>
       <MenuDiv>
@@ -16,9 +17,9 @@ const Menu = () => {
             <MenuLateral>
               <HeaderMenuLateral>
                 <img className="avatar" src={Avatar} alt="Avatar" />
-                <h3>
-                  Hola, <br /> Cecilia Abate
-                </h3>
+
+                <h3 className="texto-saludoUsuario" > Hola, Vakita User</h3>
+               
               </HeaderMenuLateral>
 
               <BloqueOptions>
