@@ -3,12 +3,19 @@ import { styled } from "styled-components";
 export const Image = styled.img`
     /* height: 40%; */
    width: 100px;
+   
 
     @media (max-width: 766px) {
         width: 4rem;
     }
     
 `;
+
+
+export const DivBox = styled.div`
+width:100%;
+`
+
 
 export const DivContainer = styled.div`
     
@@ -50,6 +57,8 @@ export const DivContainer = styled.div`
         font-size:14px;
         text-align: left;
     }
+
+    
 
     @media (max-width: 769px) {
         display: ${props => !props.displayMobile ? "flex" : "none"};
