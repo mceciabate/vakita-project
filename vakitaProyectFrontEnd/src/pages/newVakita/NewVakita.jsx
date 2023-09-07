@@ -203,10 +203,11 @@ const NewVakita = () => {
   return (
     <>
     <div className='containerPage'>
-      <div className="boxItems">
-        <div className='title'>
-    <h2>Hagamos una vaquita</h2>
+    <div className='title'>
+    <h2 className='title2'>Hagamos una vaquita</h2>
     </div>
+      <div className="boxItems">
+        
 
     <div> 
       
@@ -234,7 +235,7 @@ const NewVakita = () => {
             <label htmlFor="name"></label>
             <Field  className="inputText" type="text" id="name" name="name" placeholder="Nombre de la vaca"/>
             <span className='error'>
-            <ErrorMessage name="name" component="span" />
+            <ErrorMessage className='error-mensaje' name="name" component="span" />
             </span>
             
           </div>
@@ -359,11 +360,11 @@ const NewVakita = () => {
         
         <div className='infoText'>
 
-        <FontAwesomeIcon icon={faCircleInfo} size="xl" />
+        <FontAwesomeIcon icon={faCircleInfo}  size="xl"style={{ marginBottom: '20px',marginTop: '-40px',marginLeft: '-18px',color: '#4D7B84'}} />
         <p>Recuerda que todos los integrantes 
          tienen que estar registrados en nuestra plataforma.
         </p>
-        <div ><ShareButton url={"http://vakita.ddns.net/"} /></div>
+        <div className='boton-invitar'><ShareButton url={"http://vakita.ddns.net/"} /></div>
         </div>
         
         
