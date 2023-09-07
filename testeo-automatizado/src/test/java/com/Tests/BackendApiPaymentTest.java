@@ -44,7 +44,11 @@ public class BackendApiPaymentTest {
                 .body(user.toString())
                 .when()
                 .post("http://107.22.65.36:8080/api/v1/usuarios/token");
-        Assert.assertEquals(response.statusCode(),200);
+        response
+                .then()
+                .assertThat()
+                .statusCode(201);
+
         String token = response.body().jsonPath().getString("data.token");
         return token;
     }
@@ -74,9 +78,60 @@ public class BackendApiPaymentTest {
         test.log(Status.PASS, "Se obtiene respuesta exitosa");
     }
 
+    @Test
+    @Tag("smoke")
+    public void bObtenerTarjetaPorId(){
+        test = report.createTest("Test de Obtener Tarjeta por Id");
+        test.log(Status.INFO, "Inicia el Test");
+        test.log(Status.INFO, "Se configura la petición");
+        given()
+                .pathParam("id", 1)
+                .header("Authorization","Bearer" + LogInUsuario())
+                .when()
+                .get(baseURLTarjetas+"/{id}")
+                .then()
+                .assertThat()
+                .statusCode(200);
+        test.log(Status.INFO, "Se resuelve la petición");
+        test.log(Status.PASS, "Se ejecuta la petición de manera exitosa");
+        test.log(Status.PASS, "Se obtiene respuesta exitosa");
+    }
 
-
-
+    @Test
+    @Tag("smoke")
+    public void bObtenerTarjetasDeUsuario(){
+        test = report.createTest("Test de Obtener las Tarjetas de un usuario");
+        test.log(Status.INFO, "Inicia el Test");
+        test.log(Status.INFO, "Se configura la petición");
+        given()
+                .pathParam("userId", 14)
+                .header("Authorization","Bearer" + LogInUsuario())
+                .when()
+                .get(baseURLTarjetas+"/personal/{userId}")
+                .then()
+                .assertThat()
+                .statusCode(200);
+        test.log(Status.INFO, "Se resuelve la petición");
+        test.log(Status.PASS, "Se ejecuta la petición de manera exitosa");
+        test.log(Status.PASS, "Se obtiene respuesta exitosa");
+    }
+    @Test
+    @Tag("smoke")
+    public void bObtenerTarjetas(){
+        test = report.createTest("Test de Obtener totas las Tarjetas");
+        test.log(Status.INFO, "Inicia el Test");
+        test.log(Status.INFO, "Se configura la petición");
+        given()
+//                .pathParam("usuarioId", 3)
+                .when()
+                .get(baseURLTarjetas)
+                .then()
+                .assertThat()
+                .statusCode(200);
+        test.log(Status.INFO, "Se resuelve la petición");
+        test.log(Status.PASS, "Se ejecuta la petición de manera exitosa");
+        test.log(Status.PASS, "Se obtiene respuesta exitosa");
+    }
     @AfterAll
     public void cerrarReporte(){
 
