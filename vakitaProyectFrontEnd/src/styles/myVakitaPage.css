@@ -46,7 +46,7 @@
 
 .cardMyVakita{
    
-    width: 22rem;
+    width: 22.5rem;
 /* height: 20rem; */
 height: fit-content;
 
@@ -88,7 +88,7 @@ margin-top: 2.2rem;
   
 .usersMyVakita{
     background-color: #c5bebe;
-    width: 10.5rem;
+    width: 11rem;
     font-size: 12px;
     margin: 8px 0;
     border-radius: 5px;
@@ -107,7 +107,8 @@ margin-top: 2.2rem;
   
 .chartContainer{
  
-    width: 50%;
+    width: 100px;
+    padding: 0.2rem;
 }
   
 
@@ -153,6 +154,12 @@ color: #fdfde7;
     
     color: #D18EBA;
   }
+
+  .userIconT {
+    display: flex;
+    padding-right: 1px;
+
+}
 @media only screen and (min-width: 601px) {
     .chartContainer{
  
@@ -182,7 +189,7 @@ color: #fdfde7;
         .usersMyVakita{
            
             font-size: 15px;
-            width: 13.2rem;
+            width: 14rem;
         }
         
             .h3{

@@ -79,6 +79,8 @@ export const Div2 = styled.div`
     align-items: center;
     justify-content: space-between;
 
+  
+
     @media (min-width: 900px){
         grid-column: 2 / 3;
         grid-row: 2 / 3;

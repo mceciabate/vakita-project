@@ -4,11 +4,32 @@ import { Link, Outlet, useNavigate} from 'react-router-dom'
 import { useUser } from "../../context/UserProvider";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons"
+import { useState, useEffect } from "react";
+import UserProfileImage from "../Perfil/UserProfileImage";
 
 const Menu = () => {
   const { logged, setLogged } = useUser();
   const navigate = useNavigate();
+  const userId = localStorage.getItem("userId");
+  const [user, setUser] = useState({
+    name: "",
+    lastName: "",
+    dni: "",
+    email: "",
+    birthdate: "",
+    alias: "",
+    avatar: "",
+  });
 
+  useEffect(() => {
+    fetch("http://107.22.65.36:8080/api/v1/usuarios/" + userId)
+      .then((response) => response.json())
+      .then((data) => {
+        setUser(data);
+       
+      })
+      .catch((error) => console.error(error));
+  }, [userId]);
   return (
     <>
       <MenuDiv>
@@ -16,9 +37,8 @@ const Menu = () => {
           <>
             <MenuLateral>
               <HeaderMenuLateral>
-                <img className="avatar" src={Avatar} alt="Avatar" />
-
-                <h3 className="texto-saludoUsuario" > Hola, Vakita User</h3>
+            
+              <UserProfileImage user={user} />
                
               </HeaderMenuLateral>
 

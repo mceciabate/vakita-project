@@ -1,19 +1,39 @@
-import imgBanner from "../../assets/bienvenida.png"
-import { DashboardDiv, H1, Image, SpanText,H3 } from "./styled"
+import imgBanner from "../../assets/bienvenida.png";
+import { DashboardDiv, H1, Image, SpanText, H3 } from "./styled";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 const BannerDashboard = () => {
+    const userId = localStorage.getItem("userId");
+
+    const [alias, setAlias] = useState("");
+
+    useEffect(() => {
+        const getAlias = async () => {
+            try {
+                const response = await axios.get(`http://107.22.65.36:8080/api/v1/usuarios/${userId}`);
+                const aliasUser = response.data.alias; 
+                const aliasUserVakita = JSON.stringify(aliasUser)
+                  localStorage.setItem('alias', aliasUserVakita);
+                
+                setAlias(aliasUser);
+            } catch (error) {
+                console.error("Error getting alias", error);
+            }
+        };
+
+        getAlias();
+    }, [userId]);
 
     return (
         <DashboardDiv>
-            <Image src={imgBanner}/>
+            <Image src={imgBanner} />
             <SpanText>
-                <H1>Hola, Cecilia Abate </H1>
+                <H1>{`Hola, ${alias} `}</H1>
                 <H3>¿Estás listo/a para crear tu vaca virtual?</H3>
             </SpanText>
-
         </DashboardDiv>
-    )
-
+    );
 }
 
-export default BannerDashboard
+export default BannerDashboard;

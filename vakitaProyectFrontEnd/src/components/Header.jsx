@@ -1,5 +1,4 @@
 
-import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import "../styles/header.css";
 import logoVaca from "../assets/LogoVaca.svg";
@@ -8,6 +7,8 @@ import { useModal } from "../hooks/useModal";
 import MenuIcon from "../assets/menu_burger.svg";
 import { Link } from 'react-router-dom';
 import { useUser } from "../context/UserProvider";
+import { useState, useEffect } from "react";
+// import UserProfileImage from "./Perfil/UserProfileImage";
 
 function Header() {
   const [isOpenModal, openModal, closeModal] = useModal(false);
@@ -15,6 +16,27 @@ function Header() {
   const location = useLocation();
   const currentPath = location.pathname;
   const { logged } = useUser();
+
+  // const userId = localStorage.getItem("userId");
+  // const [user, setUser] = useState({
+  //   name: "",
+  //   lastName: "",
+  //   dni: "",
+  //   email: "",
+  //   birthdate: "",
+  //   alias: "",
+  //   avatar: "",
+  // });
+
+  // useEffect(() => {
+  //   fetch("http://107.22.65.36:8080/api/v1/usuarios/" + userId)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setUser(data);
+       
+  //     })
+  //     .catch((error) => console.error(error));
+  // }, [userId]);
 
   const handleButtonClick = (buttonId) => {
     setActiveButton(buttonId === activeButton ? null : buttonId);
@@ -46,6 +68,7 @@ function Header() {
         )}
 
 {(currentPath === "/index.html" && logged) && (
+  <>
          <Link to="/dashboard"> <button
             className={`nav_item ${activeButton === "Crear-cuenta" ? "active" : ""}`}
             id="dashboard"
@@ -53,7 +76,19 @@ function Header() {
           >
             Dashboard
           </button></Link>
+          <div>
+          </div>
+          </>
         )}
+{/* 
+{(currentPath === "/dashboard" && logged) && (
+  <>
+        
+          <div className="boxProfile">
+          <UserProfileImage user={user} />
+          </div>
+          </>
+        )} */}
 
         {/* menu hamburguesa para mobile */}
         <button

@@ -205,7 +205,7 @@ const MyVakita = () => {
                     contributor.email === emailUser ? 'highlighted' : ''
                   }`}
                 >
-                  <div className={`userIcon ${contributor.email === emailUser ? 'youIcon' : ''}`}>
+                  <div className={`userIconT ${contributor.email === emailUser ? 'youIcon' : ''}`}>
                     <FontAwesomeIcon icon={faUser} />
                   </div>
                   <p>{contributor.email === emailUser ? 'Tú' : contributor.email}</p>

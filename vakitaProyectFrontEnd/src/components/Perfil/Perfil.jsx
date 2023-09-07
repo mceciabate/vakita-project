@@ -1,4 +1,3 @@
-import PanelProfile from '../../assets/PanelProfile/PanelProfile';
 import { Div1, Div2, H2, Label, Input, Li, ListDiv, PerfilContainer, TitleH5, Button } from "./styled";
 import { useState, useEffect } from "react";
 import { useFormik } from "formik";
@@ -6,6 +5,7 @@ import * as Yup from "yup";
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { ErrorSpan } from '../Register/Register.styled';
+import UserProfileImage from './UserProfileImage';
 
 const Perfil = () => {
   const [user, setUser] = useState({
@@ -120,28 +120,13 @@ const Perfil = () => {
       .catch((error) => console.error(error));
   }, [userId]);
 
+  
+
   return (
     <PerfilContainer>
       <H2>Mi Perfil</H2>
 
-      {/* Renderiza si hay imagen, sino deja la que viene por defecto */}
-      {user.avatar != null && user.avatar != "" ?
-        <PanelProfile
-          img={
-            "data:image/jpeg;base64," + user.avatar
-          }
-          nameUser={user.name + " " + user.lastName}
-          subtitle={user.alias}
-        />
-        :
-        <PanelProfile
-          img={
-            "https://i.pinimg.com/1200x/b1/27/ec/b127ec5f10f9c07ecb04996116d1306e.jpg"
-          }
-          nameUser={user.name + " " + user.lastName}
-          subtitle={user.alias}
-        />
-      }
+      <UserProfileImage user={user} />
 
       <ListDiv onSubmit={formik.handleSubmit}>
         <TitleH5>Acá puedes actualizar tus datos</TitleH5>

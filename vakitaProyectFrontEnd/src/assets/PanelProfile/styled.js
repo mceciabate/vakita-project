@@ -23,7 +23,7 @@ export const UserName = styled.h2`
 `;
 
 export const Subtitle = styled.h5`
-    color: #A9A9A9;
+   color:#554e5d;
     font-weight: 300;
     font-size: 1rem;
 `;
