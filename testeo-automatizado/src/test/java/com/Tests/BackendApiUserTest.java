@@ -46,6 +46,7 @@ public class BackendApiUserTest {
         user.put("email", "mail@mail.com");
         user.put("password", "password");
         user.put("birthdate", "1994-05-01");
+        user.put("alias", "ceci");
         test.log(Status.INFO, "Se configura la petición");
         given().config(RestAssured.config().encoderConfig(encoderConfig().appendDefaultContentCharsetToContentTypeIfUndefined(false))).
                 contentType("application/json")
@@ -67,7 +68,7 @@ public class BackendApiUserTest {
         test.log(Status.INFO, "Inicia el Test");
         test.log(Status.INFO, "Se configura la petición");
         given()
-                .pathParam("usuarioId", 27)
+                .pathParam("usuarioId", 3)
                 .when()
                 .get(baseURLUsuarios+"/{usuarioId}")
                 .then()
@@ -106,17 +107,19 @@ public class BackendApiUserTest {
         test = report.createTest("Test de Modificar datos de usuario");
         test.log(Status.INFO, "Inicia el Test");
         JSONObject user = new JSONObject();
-        user.put("id", 27);
+        user.put("id",14 );
         user.put("name", "Lore");
         user.put("lastName", "Escobar");
         user.put("dni", "123456789");
         user.put("email", "loreperez2003@gmail.com");
         user.put("password", "0000");
         user.put("birthdate", "2003-11-07");
+        user.put("alias", "lore");
+
         test.log(Status.INFO, "Se configura la petición");
         given().config(RestAssured.config().encoderConfig(encoderConfig().appendDefaultContentCharsetToContentTypeIfUndefined(false))).
                 contentType("application/json")
-                .pathParam("usuarioId", 27)
+                .pathParam("usuarioId", 14)
                 .body(user.toString())
                 .when()
                 .put(baseURLUsuarios+"/{usuarioId}")
@@ -135,7 +138,7 @@ public class BackendApiUserTest {
         test.log(Status.INFO, "Inicia el Test");
         test.log(Status.INFO, "Se configura la petición");
         given()
-                .pathParam("usuarioId", 5)
+                .pathParam("usuarioId", 10)
                 .when()
                 .delete(baseURLUsuarios+"/{usuarioId}")
                 .then()

@@ -58,8 +58,8 @@ public class BackendApiVakitaTest {
         test = report.createTest("Test de Crear Vakita");
         test.log(Status.INFO, "Inicia el Test");
         JSONObject vakita = new JSONObject();
-        vakita.put("name", "una vakita");
-        vakita.put("idCreatorUser", 27);
+        vakita.put("name", "vakia testing");
+        vakita.put("idCreatorUser", 8);
         vakita.put("description", "descripcion de la vakita");
         vakita.put( "imgURL", "la imagen");
         vakita.put( "totalAmount", 5000.0);
@@ -90,13 +90,13 @@ public class BackendApiVakitaTest {
         test.log(Status.INFO, "Inicia el Test");
         JSONObject vakita = new JSONObject();
         vakita.put("name", "una vakita");
-        vakita.put("idCreatorUser", 1);
+        vakita.put("idCreatorUser", 70);
         vakita.put("description", "descripcion de la vakita");
-        vakita.put( "imgURL", "la imagen");
-        vakita.put( "totalAmount", 5000.0);
+        vakita.put("imgURL", "la imagen");
+        vakita.put("totalAmount", 5000.0);
         vakita.put("cumulativeAmount", 0.0);
-        vakita.put("creationDate", LocalDate.now().toString());
-        vakita.put("expirationDate", LocalDate.now().toString());
+        vakita.put("creationDate", "2023-09-10");
+        vakita.put("expirationDate", "2023-09-07");
         vakita.put("isActive", true);
         vakita.put("type", "normal");
         test.log(Status.INFO, "Se configura la petición");
@@ -202,8 +202,8 @@ public class BackendApiVakitaTest {
         test.log(Status.INFO, "Inicia el Test");
         test.log(Status.INFO, "Se configura la petición");
         given()
-                .pathParams("vakitaId", "14")
-                .pathParams("userId", "24")
+                .pathParams("vakitaId", "9")
+                .pathParams("userId", "5")
                 .header("Authorization","Bearer" + LogInUsuario())
                 .when()
                 .put(baseURLVakitas+"/contributors/add/{vakitaId}/{userId}")
@@ -224,7 +224,7 @@ public class BackendApiVakitaTest {
         test.log(Status.INFO, "Se configura la petición");
         given()
                 .pathParams("vakitaId", "14")
-                .pathParams("userId", "24")
+                .pathParams("userId", "5")
                 .header("Authorization","Bearer" + LogInUsuario())
                 .when()
                 .put(baseURLVakitas+"/contributors/add/{vakitaId}/{userId}")
