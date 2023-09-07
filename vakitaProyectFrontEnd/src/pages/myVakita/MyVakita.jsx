@@ -7,6 +7,7 @@ import 'chart.js/auto';
 import axios from 'axios';
 import Swal from "sweetalert2";
 import jwt_decode from "jwt-decode";
+import jsPDF from 'jspdf'; 
 
 const MyVakita = () => {
   const [allMyVakita, setAllMyVakita] = useState([]);
@@ -19,6 +20,25 @@ const MyVakita = () => {
   const decoded = jwt_decode(token);
   const emailUser = decoded.sub;
 
+  const generatePDF = () => {
+    const doc = new jsPDF();
+    doc.text('Mis Vaquitas', 10, 10);
+
+    allMyVakita.forEach((vakita, index) => {
+      doc.text(`Vaquita ${index + 1}`, 10, 20 + index * 10);
+      doc.text(`Nombre de la Vaquita: ${vakita.name}`, 20, 30 + index * 10);
+
+      doc.text('Integrantes:', 10, 40 + index * 10);
+      vakita.contributors.forEach((contributor, cIndex) => {
+        doc.text(`${cIndex + 1}. ${contributor.email}`, 20, 50 + index * 10 + cIndex * 10);
+      });
+
+      doc.addPage(); // Agrega una nueva página para la siguiente vaquita
+    });
+
+    doc.save('mis_vaquitas.pdf');
+  };
+
   useEffect(() => {
     if (userId !== null) {
       const loadCardAliases = async () => {
@@ -27,7 +47,7 @@ const MyVakita = () => {
             headers: {
               "Content-type": "application/json",
               Authorization: `Bearer ${token}`,
-              
+
             },
           });
       
@@ -223,6 +243,9 @@ const MyVakita = () => {
         <div className="containerPageMyVakita">
           {renderDataMyVakita()}
         </div>
+        <button className="generate-pdf-button" onClick={generatePDF}>
+          Generar PDF
+        </button>
       </div>
     </>
   );

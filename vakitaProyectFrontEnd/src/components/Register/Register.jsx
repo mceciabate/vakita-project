@@ -1,4 +1,5 @@
 import * as Yup from "yup";
+import { useState } from "react";
 import { useFormik } from "formik";
 import Swal from "sweetalert2";
 import axios from "axios";
@@ -10,7 +11,7 @@ import {
   ContainerInputs,
   Label,
   Input,
-  Button, ErrorSpan
+  Button, ErrorSpan, CheckSection
 } from "./Register.styled.jsx";
 
 
@@ -24,6 +25,7 @@ function Registerr() {
     return new Date(currentDate.getDay() + "/" + currentDate.getMonth() + "/" + maxYear)
   }
 
+  const [checked, setChecked] = useState(false)
 
   const formik = useFormik({
     initialValues: {
@@ -213,7 +215,16 @@ function Registerr() {
                   <ErrorSpan>{formik.errors.passwordConfirm}</ErrorSpan>
                 )}
 
-              <Button className="continuar" type="submit">
+                <CheckSection>
+                  <input type="checkbox"
+                  onClick={() => setChecked(!checked)}
+                  onChange={() => setChecked(!checked)}
+                  />
+                  <Label>Revisa tus datos antes de continuar porque luego no podrán ser modificados.</Label>
+                </CheckSection>
+
+
+              <Button className="continuar" type="submit" disabled={!checked}>
                 Continuar{" "}
               </Button>
 

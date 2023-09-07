@@ -2,35 +2,44 @@
     display: flex;
   flex-direction: column;
     justify-content: center;
-    align-items: center; 
+    /* align-items: center;  */
     background-color:#E7E1E1;
-    height: 100vh;
+    
+    background: linear-gradient(0deg, #EEE9FF 6%, #FCE8E9 91%);
+    flex-wrap: wrap;
+    align-items: center;
+ 
     
     
 }
 
 .pageMyVakita{
     width: 100%;
-   /* height: 80vh; */
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background: linear-gradient(0deg, #EEE9FF 6%, #FCE8E9 91%);
+ 
+
 }
 
 .h2, .titleMyVaquita{
     text-align: center;
-    margin-top: .2rem;
+
+    
     
     
 }
-.h2{
-    background-color: #E7E1E1;
-}
+
 .titleMyVaquita{
    margin-bottom: .5rem; 
 }
 
 .h3{
-    background-color: #E7E1E1;
-    padding-left: 1rem;
+    height: fit-content;
     font-size: 21px;
+   padding-top: 2rem;
+   margin-left: 1rem;
 }
 
 
@@ -38,7 +47,9 @@
 .cardMyVakita{
    
     width: 22rem;
-height: 20rem;
+/* height: 20rem; */
+height: fit-content;
+
 margin: 0rem 1.5rem;
     background-color: #FFFFFF;
     margin-bottom: 1rem;
@@ -47,6 +58,7 @@ margin: 0rem 1.5rem;
 box-shadow: 0px 3px 5px -2px rgba(61,59,61,1);
     border-radius: .5rem;
     /* margin-bottom: 5rem; */
+
 }
 
 .BoxMembersAndChart{
@@ -141,7 +153,7 @@ color: #fdfde7;
     
     color: #D18EBA;
   }
-@media only screen and (min-width: 767px) {
+@media only screen and (min-width: 601px) {
     .chartContainer{
  
         height: 13.2rem;
@@ -154,8 +166,8 @@ color: #fdfde7;
         display: flex;
         flex-direction: row;
         justify-content: center;
-        align-items: center; 
-        flex-wrap: wrap;
+        height: 100vh;
+        align-items: normal;
     } 
     .cardMyVakita{
       

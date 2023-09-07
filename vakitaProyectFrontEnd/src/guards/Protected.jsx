@@ -5,7 +5,7 @@ const Protected = ({ isLogged }) => {
   if (isLogged) {
     return <Outlet />;
   } else {
-    return <Navigate to="/" />;
+    return <Navigate to="/index.html" />;
   }
 };
 
