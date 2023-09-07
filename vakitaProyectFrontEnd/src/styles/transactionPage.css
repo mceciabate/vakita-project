@@ -1,24 +1,47 @@
 .tranxPage{
-   height: 100vh;
+   height: auto !important;
+   width: 100%;
    display: flex;
    justify-content: center;
    width: 100%;
+   flex-direction: column;
+
 
 }
-
+.h2 {
+    width: 100%;
+    margin-top: 50px;
+    text-align: left;
+    margin-left: 5%;
+}
 .containerTranx{
     
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
+    height: 100%;
+    margin-top: 20px;
+    
     
 }
 
 .tranxTable{
+    width: 90%;
     margin-top: 1.5rem;
+    margin-bottom: 3.5rem;
+
 }
 
+
+@media only screen and (max-width: 900px) {
+
+    .tranxTable{
+        width: 90%;
+        font-size: 12px;
+    
+    }
+}
 .inputTx{
     height: 35px !important;
 
@@ -59,7 +82,7 @@ backdrop-filter: blur(18.2px);
 -webkit-backdrop-filter: blur(18.2px);
 border: 1px solid rgba(192, 122, 253, 0.234);
 padding: 0.7rem;
-margin-top: 1rem;
+margin-top: 2rem;
 font-size: 14px;
 color: rgb(0, 93, 93);
 font-weight: 500;

@@ -112,8 +112,9 @@ const TransactionPage = () => {
 
   return (
     <div className="tranxPage">
+      <h2 className="h2">Movimientos de mis vaquitas</h2>
       <div className="containerTranx">
-        <h2 className="h2">Movimientos de mis vaquitas</h2>
+        
         <div className='containerInput'>
           <input
             className='inputTx'

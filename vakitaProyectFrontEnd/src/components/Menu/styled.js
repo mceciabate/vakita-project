@@ -3,6 +3,7 @@ import { styled } from "styled-components";
 
 export const MenuLateral = styled.section`
 display: none;
+height:100vh;
    
     padding: 2.5rem 1rem;
     background-color: #664E94;
