@@ -80,14 +80,13 @@ const NewVakita = () => {
       cumulativeAmount:values.cumulativeAmount,
       isActive: true,
       type: "normal",
-      // contributors: emails.filter((email) => email !== ''), // Filtrar emails vacíos
+
       contributors: arrayMembers,
     };
-    // console.log(dataToSend);
-    // addNewVakita(dataToSend);
+    
 
 
-     // Validar todos los emails antes de guardarlos solo si no hay emails vacíos
+    
      const allEmailsValid = emails.every((email) => email !== '' && checkEmail(email).exists);
 
      if (allEmailsValid) {
@@ -148,7 +147,7 @@ const NewVakita = () => {
     const emailData = checkEmail(values.email);
 
     if (values.email.trim() === '') {
-      // Ignorar emails vacíos 
+ 
       return;
     }
   
@@ -167,7 +166,7 @@ const NewVakita = () => {
       if (!emails.includes(values.email)) {
         setEmails((prevEmails) => [...prevEmails, values.email]);
 
-         // Find the user with the matching email from getUsers
+   
         const userWithEmail = getUsers.find(user => user.email === values.email);
       
       if (userWithEmail) {
