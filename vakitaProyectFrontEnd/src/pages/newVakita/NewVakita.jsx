@@ -204,10 +204,11 @@ const NewVakita = () => {
   return (
     <>
     <div className='containerPage'>
-      <div className="boxItems">
-        <div className='title'>
-    <h2>Hagamos una vaquita</h2>
+    <div className='title'>
+    <h2 className='title2'>Hagamos una vaquita</h2>
     </div>
+      <div className="boxItems">
+        
 
     <div> 
       
@@ -235,7 +236,7 @@ const NewVakita = () => {
             <label htmlFor="name"></label>
             <Field  className="inputText" type="text" id="name" name="name" placeholder="Nombre de la vaca"/>
             <span className='error'>
-            <ErrorMessage name="name" component="span" />
+            <ErrorMessage className='error-mensaje' name="name" component="span" />
             </span>
             
           </div>

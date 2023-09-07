@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 
 export const MenuLateral = styled.section`
 display: none;
-    
+   
     padding: 2.5rem 1rem;
     background-color: #664E94;
     font-family: 'Inria Sans', sans-serif;
@@ -122,6 +122,7 @@ export const BloqueOptions = styled.div`
     
     }
     hr {
+        width: 70%;
         margin-top:30px;
         margin-bottom:50px;
         border: 2px solid rgba(0, 0, 0, 0.17);
@@ -136,7 +137,7 @@ export const BloqueOptions = styled.div`
        }
         hr {
             margin-left:30px;
-            width:45%
+            width:65%
         }
 
       
