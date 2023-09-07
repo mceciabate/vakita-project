@@ -6,12 +6,10 @@
 }
 .titulo-AppPayment{
 display: flex;
-margin-top: 40px;
+width: 100%;
+margin-top: 50px;
 font-size: 1.5em;
-justify-content: flex-start;
 margin-bottom: 20px;
-
-
 }
 
 .generalCointainer{
@@ -24,17 +22,18 @@ width: 90%;
 
   font-family: sans-serif;
   text-align: left;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-
-
 }
 
 .form-group {
   margin-top: 1.5rem;
+}
+
+.form-control {
+  text-indent: 10px;
 }
 
 .boxCard {

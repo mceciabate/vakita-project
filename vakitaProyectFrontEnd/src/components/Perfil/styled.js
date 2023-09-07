@@ -108,6 +108,7 @@ export const Input = styled.input`
     min-width: 100%;
     max-width: 300px;
     height: 35px;
+    text-indent: 10px;
 
    
     &:disabled {
