@@ -83,7 +83,7 @@ const NewVakita = () => {
 
       contributors: arrayMembers,
     };
-    
+    console.log(dataToSend);
 
 
     

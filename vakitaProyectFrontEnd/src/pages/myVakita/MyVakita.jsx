@@ -8,7 +8,6 @@ import axios from 'axios';
 import Swal from "sweetalert2";
 import jwt_decode from "jwt-decode";
 
-
 const MyVakita = () => {
   const [allMyVakita, setAllMyVakita] = useState([]);
   const [cardAliases, setCardAliases] = useState([]);
@@ -20,8 +19,6 @@ const MyVakita = () => {
   const decoded = jwt_decode(token);
   const emailUser = decoded.sub;
 
-
-
   useEffect(() => {
     if (userId !== null) {
       const loadCardAliases = async () => {
@@ -30,15 +27,13 @@ const MyVakita = () => {
             headers: {
               "Content-type": "application/json",
               Authorization: `Bearer ${token}`,
-
             },
           });
-      
+  
           const aliases = response.data.map(card => card.alias);
-      
+  
           setCardAliases(aliases);
         } catch (error) {
-        
           console.error("Error fetching card aliases:", error);
         }
       };
@@ -57,18 +52,20 @@ const MyVakita = () => {
         }).then((res) => {
           setAllMyVakita(res.data);
           const initialChartData = res.data.map((vakita) => {
+            // Calcula el totalContributed sumando las transacciones y el cumulativeAmount
             const totalContributed = vakita.transactions.reduce(
               (total, transaction) => total + transaction.amount,
               0
-            );
+            ) + vakita.cumulativeAmount; // Aquí se suma el cumulativeAmount
+
             const remainingAmount = vakita.totalAmount - totalContributed;
-    
+
             return {
               totalContributed,
               remainingAmount,
             };
           });
-    
+
           setChartData(initialChartData);
         });
       };
@@ -226,7 +223,6 @@ const MyVakita = () => {
         <div className="containerPageMyVakita">
           {renderDataMyVakita()}
         </div>
-        
       </div>
     </>
   );
