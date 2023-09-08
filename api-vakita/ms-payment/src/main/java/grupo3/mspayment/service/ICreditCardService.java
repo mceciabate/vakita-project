@@ -1,6 +1,7 @@
 package grupo3.mspayment.service;
 
 import grupo3.mspayment.handler.BadRequestException;
+import grupo3.mspayment.handler.ResourceCreateException;
 import grupo3.mspayment.handler.ResourceNotFoundException;
 import grupo3.mspayment.model.dto.CreditCardDTO;
 
@@ -13,7 +14,7 @@ public interface ICreditCardService {
 
     List<CreditCardDTO> getCardsByUser(Integer userId) throws ResourceNotFoundException;
 
-    void registerCreditCard(CreditCardDTO creditCard) throws BadRequestException;
+    void registerCreditCard(CreditCardDTO creditCard) throws ResourceCreateException;
 
     void deleteCreditCard(Integer creditCardId) throws ResourceNotFoundException;
 
