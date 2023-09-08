@@ -1,5 +1,6 @@
 package grupo3.mspayment.service.impl;
 
+import grupo3.mspayment.handler.BadRequestException;
 import grupo3.mspayment.handler.ResourceNotFoundException;
 import grupo3.mspayment.model.collection.CreditCard;
 import grupo3.mspayment.model.collection.DbSequence;
@@ -55,11 +56,15 @@ public class CreditCardService implements ICreditCardService {
     }
 
     @Override
-    public List<CreditCardDTO> getAllCards(){
+    public List<CreditCardDTO> getAllCards() throws ResourceNotFoundException {
         List<CreditCardDTO> cardsList = new ArrayList<>();
         List<CreditCard> cards = repository.findAll();
         cards.forEach(card -> cardsList.add(mapper.map(card, CreditCardDTO.class)));
         log.info("Get all cards. Size: " + cards.size());
+        if (cardsList.size() == 0){
+            throw new ResourceNotFoundException("No hay tarjetas para mostrar");
+        }
+
         return cardsList;
     }
 
@@ -96,12 +101,11 @@ public class CreditCardService implements ICreditCardService {
     }
 
     @Override
-    public void registerCreditCard(CreditCardDTO creditCard){
-//        String creditCardNumberEncoder = encoder.encode(creditCard.getCardNumber());
-//        String encoderCvv = encoder.encode(creditCard.getCvv());
-//        creditCard.setCardNumber(creditCardNumberEncoder);
-//        creditCard.setCvv(encoderCvv);
+    public void registerCreditCard(CreditCardDTO creditCard) throws BadRequestException {
         CreditCard newCreditCard = mapper.map(creditCard, CreditCard.class);
+        if (creditCard.getUserId() == null || creditCard.getCardNumber() == null || creditCard.getCvv() == null){
+            throw new BadRequestException("No se puede ingresar una tarjeta con usuario nulo o número nulo o Cvv nulo");
+        }
         repository.save(newCreditCard);
         log.info("Saving CreditCard");
     }
