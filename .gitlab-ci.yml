@@ -28,7 +28,7 @@ dummy_job:
 package_usuarios:
   stage: package
   rules: 
-  - !reference [.default_rules, rules]
+    - !reference [.default_rules, rules]
   # changes:
   #     - ./api-vakita/ConfigData/ms-usuarios.yml
   #     - ./api-vakita/ms-usuarios/** 
@@ -59,7 +59,8 @@ package_vakitas:
 package_payment:
   stage: package
   rules: 
-  - !reference [.default_rules, rules]
+    - !reference [.default_rules, rules]
+    - changes: ["ms-payment.yml", ms-payment/**]
     # changes:
     #   - /api-vakita/ConfigData/ms-payment.yml
     #   - /api-vakita/ms-payment/**
