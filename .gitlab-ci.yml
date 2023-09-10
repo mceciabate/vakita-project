@@ -64,7 +64,7 @@ package_payment:
       - config-server
     changes:
       - api-vakita/ConfigData/ms-payment.yml
-      - api-vakita/ms-payment/**
+      - api-vakita/ms-payment/**/*
   artifacts:
     paths:
     - api-vakita/ms-payment/target/*.jar
