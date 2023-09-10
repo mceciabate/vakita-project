@@ -13,6 +13,11 @@ cache:
     - .m2/repository
     - target
 
+dummy_job:
+  stage: package
+  rules: 
+  - if: '$CI_COMMIT_BRANCH == "config-server"'
+  script: echo "Dummy job for lag-pipeline"
 
 package_usuarios:
   stage: package
