@@ -60,7 +60,7 @@ package_payment:
   stage: package
   rules: 
     - !reference [.default_rules, rules]
-    - changes: [/api-vakita/ConfigData/ms-payment.yml]
+    - changes: ["**/api-vakita/ConfigData/ms-payment.yml"]
     # changes:
     #   - /api-vakita/ConfigData/ms-payment.yml
     #   - /api-vakita/ms-payment/**
