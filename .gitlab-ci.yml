@@ -60,7 +60,7 @@ package_payment:
   stage: package
   rules: 
     - !reference [.default_rules, rules]
-    - changes: ["**/api-vakita/ConfigData/ms-payment.yml"]
+    - changes: ["CTD/Hispanos/Proyecto Integrador 2/Proyecto Integrador 0723/1021FT-C1/Equipo 03/api-vakita/ConfigData/ms-payment.yml"]
     # changes:
     #   - /api-vakita/ConfigData/ms-payment.yml
     #   - /api-vakita/ms-payment/**
