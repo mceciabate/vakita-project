@@ -1,3 +1,7 @@
+.default_rules:
+  rules:
+    - if: $CI_COMMIT_BRANCH == "config-server"
+
 variables:
 
   MAVEN_OPTS: -Dmaven.repo.local=.m2/repository
@@ -16,7 +20,7 @@ cache:
 dummy_job:
   stage: package
   rules: 
-  - if: '$CI_COMMIT_BRANCH == "config-server"'
+  - !reference [.default_rules, rules]
   script: 
     - echo "Dummy job for lag-pipeline"
     - pwd 
@@ -24,10 +28,10 @@ dummy_job:
 package_usuarios:
   stage: package
   rules: 
-  - if: '$CI_COMMIT_BRANCH == "config-server"'
-    changes:
-      - ./api-vakita/ConfigData/ms-usuarios.yml
-      - ./api-vakita/ms-usuarios/** 
+  - !reference [.default_rules, rules]
+  # changes:
+  #     - ./api-vakita/ConfigData/ms-usuarios.yml
+  #     - ./api-vakita/ms-usuarios/** 
   artifacts:
     paths:
     - api-vakita/ms-usuarios/target/*.jar
@@ -39,10 +43,11 @@ package_usuarios:
 package_vakitas:
   stage: package
   rules: 
-  - if: '$CI_COMMIT_BRANCH == "config-server"'
-    changes:
-      - ./api-vakita/ConfigData/ms-vakitas.yml
-      - ./api-vakita/ms-vakitas/**
+  - !reference [.default_rules, rules]
+  # - if: '$CI_COMMIT_BRANCH == "config-server"'
+  #   changes:
+  #     - ./api-vakita/ConfigData/ms-vakitas.yml
+  #     - ./api-vakita/ms-vakitas/**
   artifacts:
     paths:
     - api-vakita/ms-vakitas/target/*.jar
@@ -54,10 +59,10 @@ package_vakitas:
 package_payment:
   stage: package
   rules: 
-  - if: '$CI_COMMIT_BRANCH == "config-server"'
-    changes:
-      - /api-vakita/ConfigData/ms-payment.yml
-      - /api-vakita/ms-payment/**
+  - !reference [.default_rules, rules]
+    # changes:
+    #   - /api-vakita/ConfigData/ms-payment.yml
+    #   - /api-vakita/ms-payment/**
   artifacts:
     paths:
     - api-vakita/ms-payment/target/*.jar
@@ -66,66 +71,66 @@ package_payment:
     - cd ./api-vakita/ms-payment
     - mvn package -DskipTests
 
-deploy_usuarios:   
-  stage: deploy
-  rules: 
-  - if: '$CI_COMMIT_BRANCH == "config-server"'
-    changes:
-      - ./api-vakita/ConfigData/ms-usuarios.yml
-      - ./api-vakita/ms-usuarios/**
-  image: alpine:3.16
-  before_script: 
-    - apk update && apk add openssh-client bash 
-    - mkdir -p ~/.ssh 
-    - eval $(ssh-agent -s) 
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null 
-    - touch ~/.ssh/config 
-    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config 
-    - pwd
-    - ssh-keyscan -H $CLOUD_USUARIOS_IP >> ~/.ssh/known_hosts 
-  script:
-    - scp /builds/ctd/hispanos/proyecto-integrador-2/proyecto-integrador-0723/1021ft-c1/equipo-03/api-vakita/ms-usuarios/target/ms-usuarios-0.0.1-SNAPSHOT.jar ubuntu@$CLOUD_USUARIOS_IP:~/usuarios-app/ 
-    - ssh ubuntu@$CLOUD_USUARIOS_IP "sudo systemctl restart usuariosapp.service"
+# deploy_usuarios:   
+#   stage: deploy
+#   rules: 
+#   - if: '$CI_COMMIT_BRANCH == "config-server"'
+#     changes:
+#       - ./api-vakita/ConfigData/ms-usuarios.yml
+#       - ./api-vakita/ms-usuarios/**
+#   image: alpine:3.16
+#   before_script: 
+#     - apk update && apk add openssh-client bash 
+#     - mkdir -p ~/.ssh 
+#     - eval $(ssh-agent -s) 
+#     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null 
+#     - touch ~/.ssh/config 
+#     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config 
+#     - pwd
+#     - ssh-keyscan -H $CLOUD_USUARIOS_IP >> ~/.ssh/known_hosts 
+#   script:
+#     - scp /builds/ctd/hispanos/proyecto-integrador-2/proyecto-integrador-0723/1021ft-c1/equipo-03/api-vakita/ms-usuarios/target/ms-usuarios-0.0.1-SNAPSHOT.jar ubuntu@$CLOUD_USUARIOS_IP:~/usuarios-app/ 
+#     - ssh ubuntu@$CLOUD_USUARIOS_IP "sudo systemctl restart usuariosapp.service"
 
-deploy_vakitas: 
-  stage: deploy
-  rules: 
-  - if: '$CI_COMMIT_BRANCH == "config-server"'
-    changes:
-      - ./api-vakita/ConfigData/ms-vakitas.yml
-      - ./api-vakita/ms-vakitas/** 
-  image: alpine:3.16
-  before_script: 
-    - apk update && apk add openssh-client bash 
-    - mkdir -p ~/.ssh 
-    - eval $(ssh-agent -s) 
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null 
-    - touch ~/.ssh/config 
-    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config 
-    - pwd
-    - ssh-keyscan -H $CLOUD_VAKITAS_IP >> ~/.ssh/known_hosts 
-  script:
-    - scp /builds/ctd/hispanos/proyecto-integrador-2/proyecto-integrador-0723/1021ft-c1/equipo-03/api-vakita/ms-vakitas/target/ms-vakitas-0.0.1-SNAPSHOT.jar ubuntu@$CLOUD_VAKITAS_IP:~/vakita-app/ 
-    - ssh ubuntu@$CLOUD_VAKITAS_IP "sudo systemctl restart vakita.service"
+# deploy_vakitas: 
+#   stage: deploy
+#   rules: 
+#   - if: '$CI_COMMIT_BRANCH == "config-server"'
+#     changes:
+#       - ./api-vakita/ConfigData/ms-vakitas.yml
+#       - ./api-vakita/ms-vakitas/** 
+#   image: alpine:3.16
+#   before_script: 
+#     - apk update && apk add openssh-client bash 
+#     - mkdir -p ~/.ssh 
+#     - eval $(ssh-agent -s) 
+#     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null 
+#     - touch ~/.ssh/config 
+#     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config 
+#     - pwd
+#     - ssh-keyscan -H $CLOUD_VAKITAS_IP >> ~/.ssh/known_hosts 
+#   script:
+#     - scp /builds/ctd/hispanos/proyecto-integrador-2/proyecto-integrador-0723/1021ft-c1/equipo-03/api-vakita/ms-vakitas/target/ms-vakitas-0.0.1-SNAPSHOT.jar ubuntu@$CLOUD_VAKITAS_IP:~/vakita-app/ 
+#     - ssh ubuntu@$CLOUD_VAKITAS_IP "sudo systemctl restart vakita.service"
 
-deploy_payment: 
-  stage: deploy
-  rules: 
-  - if: '$CI_COMMIT_BRANCH == "config-server"'
-    changes:
-      - ./api-vakita/ConfigData/ms-payment.yml
-      - ./api-vakita/ms-payment/** 
-  image: alpine:3.16
-  before_script: 
-    - apk update && apk add openssh-client bash 
-    - mkdir -p ~/.ssh 
-    - eval $(ssh-agent -s) 
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null 
-    - touch ~/.ssh/config 
-    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config 
-    - pwd
-    - ssh-keyscan -H $CLOUD_PAYMENT_IP >> ~/.ssh/known_hosts 
-  script: 
-    - scp /builds/ctd/hispanos/proyecto-integrador-2/proyecto-integrador-0723/1021ft-c1/equipo-03/api-vakita/ms-payment/target/ms-payment-0.0.1-SNAPSHOT.jar ubuntu@$CLOUD_PAYMENT_IP:~/payment-app/ 
-    - ssh ubuntu@$CLOUD_PAYMENT_IP "sudo systemctl restart payment.service"
-#
+# deploy_payment: 
+#   stage: deploy
+#   rules: 
+#   - if: '$CI_COMMIT_BRANCH == "config-server"'
+#     changes:
+#       - ./api-vakita/ConfigData/ms-payment.yml
+#       - ./api-vakita/ms-payment/** 
+#   image: alpine:3.16
+#   before_script: 
+#     - apk update && apk add openssh-client bash 
+#     - mkdir -p ~/.ssh 
+#     - eval $(ssh-agent -s) 
+#     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null 
+#     - touch ~/.ssh/config 
+#     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config 
+#     - pwd
+#     - ssh-keyscan -H $CLOUD_PAYMENT_IP >> ~/.ssh/known_hosts 
+#   script: 
+#     - scp /builds/ctd/hispanos/proyecto-integrador-2/proyecto-integrador-0723/1021ft-c1/equipo-03/api-vakita/ms-payment/target/ms-payment-0.0.1-SNAPSHOT.jar ubuntu@$CLOUD_PAYMENT_IP:~/payment-app/ 
+#     - ssh ubuntu@$CLOUD_PAYMENT_IP "sudo systemctl restart payment.service"
+
