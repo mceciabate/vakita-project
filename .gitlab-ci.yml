@@ -59,6 +59,8 @@ package_vakitas:
 package_payment:
   stage: package
   only:
+    refs:
+      - config-server
     changes:
       - /api-vakita/ConfigData/ms-payment.yml
       - /api-vakita/ms-payment/**
