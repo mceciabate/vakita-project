@@ -121,3 +121,4 @@ deploy_payment:
   script: 
     - scp /builds/ctd/hispanos/proyecto-integrador-2/proyecto-integrador-0723/1021ft-c1/equipo-03/api-vakita/ms-payment/target/ms-payment-0.0.1-SNAPSHOT.jar ubuntu@$CLOUD_PAYMENT_IP:~/payment-app/ 
     - ssh ubuntu@$CLOUD_PAYMENT_IP "sudo systemctl restart payment.service"
+#
