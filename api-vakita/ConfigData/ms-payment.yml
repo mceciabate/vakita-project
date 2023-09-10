@@ -36,5 +36,5 @@ management:
 spring-doc:
   api-docs:
     path: /swagger-payment
-#cambio para pipeline
+
 
