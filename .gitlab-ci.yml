@@ -27,11 +27,12 @@ dummy_job:
 
 package_usuarios:
   stage: package
-  rules: 
-    - !reference [.default_rules, rules]
-  # changes:
-  #     - ./api-vakita/ConfigData/ms-usuarios.yml
-  #     - ./api-vakita/ms-usuarios/** 
+  only:
+    refs:
+      - config-server
+    changes:
+      - api-vakita/ConfigData/ms-usuarios.yml
+      - api-vakita/ms-usuarios/**
   artifacts:
     paths:
     - api-vakita/ms-usuarios/target/*.jar
@@ -42,12 +43,12 @@ package_usuarios:
 
 package_vakitas:
   stage: package
-  rules: 
-  - !reference [.default_rules, rules]
-  # - if: '$CI_COMMIT_BRANCH == "config-server"'
-  #   changes:
-  #     - ./api-vakita/ConfigData/ms-vakitas.yml
-  #     - ./api-vakita/ms-vakitas/**
+  only:
+    refs:
+      - config-server
+    changes:
+      - api-vakita/ConfigData/ms-vakitas.yml
+      - api-vakita/ms-vakitas/**
   artifacts:
     paths:
     - api-vakita/ms-vakitas/target/*.jar
