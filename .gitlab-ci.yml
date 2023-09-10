@@ -15,12 +15,11 @@ cache:
 
 
 package_usuarios:
-  rules:
-    - changes:
+  rules: 
+  - if: '$CI_COMMIT_BRANCH == "config-server"'
+    changes:
       - ./api-vakita/ConfigData/ms-usuarios.yml
       - ./api-vakita/ms-usuarios/** 
-  only:
-    - config-server
   stage: package
   artifacts:
     paths:
