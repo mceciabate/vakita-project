@@ -54,8 +54,8 @@ package_payment:
   rules: 
   - if: '$CI_COMMIT_BRANCH == "config-server"'
     changes:
-      - ./api-vakita/ConfigData/ms-payment.yml
-      - ./api-vakita/ms-payment/**
+      - /api-vakita/ConfigData/ms-payment.yml
+      - /api-vakita/ms-payment/**
   artifacts:
     paths:
     - api-vakita/ms-payment/target/*.jar
