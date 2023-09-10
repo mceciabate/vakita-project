@@ -15,6 +15,10 @@ cache:
 
 
 package_usuarios:
+  rules:
+    - changes:
+      - ./api-vakita/ConfigData/ms-usuarios.yml
+      - ./api-vakita/ms-usuarios/** 
   only:
     - config-server
   stage: package
@@ -51,7 +55,7 @@ package_payment:
     - mvn package -DskipTests
 
 # deploy_usuarios: 
-#   stage: deploy 
+#   stage: deploy
 #   image: alpine:3.16
 #   before_script: 
 #     - apk update && apk add openssh-client bash 
