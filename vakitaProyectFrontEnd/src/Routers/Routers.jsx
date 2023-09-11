@@ -24,7 +24,7 @@ const Routers = () => {
       </div>
 
       <Routes>
-        <Route path="/index.html" element={<LandingComponent />} />
+        <Route path="/" element={<LandingComponent />} />
         <Route path="/log-in" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route element={<Protected isLogged={logged} />}>

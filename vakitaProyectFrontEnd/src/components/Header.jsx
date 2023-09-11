@@ -17,26 +17,6 @@ function Header() {
   const currentPath = location.pathname;
   const { logged } = useUser();
 
-  // const userId = localStorage.getItem("userId");
-  // const [user, setUser] = useState({
-  //   name: "",
-  //   lastName: "",
-  //   dni: "",
-  //   email: "",
-  //   birthdate: "",
-  //   alias: "",
-  //   avatar: "",
-  // });
-
-  // useEffect(() => {
-  //   fetch("http://107.22.65.36:8080/api/v1/usuarios/" + userId)
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setUser(data);
-       
-  //     })
-  //     .catch((error) => console.error(error));
-  // }, [userId]);
 
   const handleButtonClick = (buttonId) => {
     setActiveButton(buttonId === activeButton ? null : buttonId);
@@ -44,10 +24,10 @@ function Header() {
 
   return (
     <header className="header">
-      <Link to="/index.html"><img className="header-logo" src={logoVaca} alt="logo" /></Link>
+      <Link to="/"><img className="header-logo" src={logoVaca} alt="logo" /></Link>
 
       <div className="header-botones">
-        {(currentPath === "/index.html" && !logged || currentPath === "/register") && (
+        {(currentPath === "/" && !logged || currentPath === "/register") && (
           <Link to="/log-in"><button
             className={`nav_item ${activeButton === "Iniciar-sesion" ? "active" : ""}`}
             id="Iniciar-sesion"
@@ -57,7 +37,7 @@ function Header() {
           </button></Link>
         )}
 
-        {(currentPath === "/index.html" && !logged || currentPath === "/log-in") && (
+        {(currentPath === "/" && !logged || currentPath === "/log-in") && (
            <Link to="/register"><button
             className={`nav_item ${activeButton === "Crear-cuenta" ? "active" : ""}`}
             id="Crear-cuenta"
@@ -67,7 +47,7 @@ function Header() {
           </button></Link>
         )}
 
-{(currentPath === "/index.html" && logged) && (
+{(currentPath === "/" && logged) && (
   <>
          <Link to="/dashboard"> <button
             className={`nav_item ${activeButton === "Crear-cuenta" ? "active" : ""}`}
@@ -80,17 +60,7 @@ function Header() {
           </div>
           </>
         )}
-{/* 
-{(currentPath === "/dashboard" && logged) && (
-  <>
-        
-          <div className="boxProfile">
-          <UserProfileImage user={user} />
-          </div>
-          </>
-        )} */}
 
-        {/* menu hamburguesa para mobile */}
         <button
           className="nav_btn_menu"
           title="Abrir menú"

@@ -23,12 +23,16 @@ const Menu = () => {
 
   useEffect(() => {
     fetch("http://107.22.65.36:8080/api/v1/usuarios/" + userId)
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
       .then((data) => {
         setUser(data);
-       
       })
-      .catch((error) => console.error(error));
+      .catch((error) => console.error(error))
   }, [userId]);
   return (
     <>
@@ -60,7 +64,7 @@ const Menu = () => {
                 <button
                   onClick={() => {
                     setLogged(false);
-                    navigate("/index.html");
+                    navigate("/");
                     window.localStorage.clear();
                   }}
                   className="botonSalir"

@@ -2,19 +2,37 @@
     display: flex;
   flex-direction: column;
     justify-content: center;
-    /* align-items: center;  */
-    background-color:#E7E1E1;
-    
-    background: linear-gradient(0deg, #EEE9FF 6%, #FCE8E9 91%);
+
+
     flex-wrap: wrap;
     align-items: center;
+  
  
+
     
     
 }
 
+.noDataText{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.boxPagination{
+
+    display: flex;
+    justify-content: center;
+align-items: center;
+   
+    
+    padding: 1rem 0px;
+}
+
+
 .pageMyVakita{
     width: 100%;
+/* height: 100vh; */
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -23,12 +41,16 @@
 
 }
 
-.h2, .titleMyVaquita{
+
+ .titleMyVaquita{
     text-align: center;
 
-    
-    
-    
+}
+.h2V{
+
+    margin-top: 50px;
+    text-align: left;
+    padding-left: 5%;
 }
 
 .titleMyVaquita{
@@ -50,14 +72,14 @@
 /* height: 20rem; */
 height: fit-content;
 
-margin: 0rem 1.5rem;
+/* margin: 0rem 1.5rem; */
     background-color: #FFFFFF;
     margin-bottom: 1rem;
     -webkit-box-shadow: 0px 3px 5px -2px rgba(61,59,61,1);
 -moz-box-shadow: 0px 3px 5px -2px rgba(61,59,61,1);
 box-shadow: 0px 3px 5px -2px rgba(61,59,61,1);
     border-radius: .5rem;
-    /* margin-bottom: 5rem; */
+
 
 }
 
@@ -160,6 +182,59 @@ color: #fdfde7;
     padding-right: 1px;
 
 }
+
+
+.pageMyVakita {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(0deg, #EEE9FF 6%, #FCE8E9 91%);
+}
+
+.pagination {
+    display: flex; /* Display pagination items horizontally */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en líneas si no caben en una fila */
+    justify-content: center; /* Centra los elementos horizontalmente */
+  }
+  
+  .pagination li {
+    margin: 0 5px; /* Ajusta el margen entre los números de paginación según sea necesario */
+  }
+  
+  .pagination li a {
+    text-decoration: none;
+    color: #000; /* Establece el color de los números de paginación */
+    padding: 5px 10px;
+    border: 1px solid #000; /* Agrega bordes a los números de paginación */
+    border-radius: 5px;
+    margin: 5px; /* Añade margen entre los elementos de paginación */
+    display: inline-block; /* Hace que los elementos de paginación se muestren en línea */
+  }
+  
+  .pagination li a:hover {
+    background-color: #000; /* Cambia el color de fondo al pasar el cursor */
+    color: #fff; /* Cambia el color del texto al pasar el cursor */
+  }
+  
+  /* Agregar estilos para el elemento de paginación activo si es necesario */
+  .pagination li.active a {
+    background-color: #000;
+    color: #fff;
+  }
+  
+
+
+
+.inactiveCard {
+    background-color: #f2f2f2; 
+    border: 2px solid #ccc;
+    opacity: 0.7; 
+  }
+  
+
 @media only screen and (min-width: 601px) {
     .chartContainer{
  
@@ -167,13 +242,20 @@ color: #fdfde7;
         width: 100%;
     }
    
+    .pageMyVakita {
+  
+        display: block;
+        justify-content: initial;
+        flex-direction: initial;
+   
+      }
     
     .containerPageMyVakita{
        
         display: flex;
         flex-direction: row;
         justify-content: center;
-        height: 100vh;
+        height: fit-content;
         align-items: normal;
     } 
     .cardMyVakita{
