@@ -1,6 +1,8 @@
 package grupo3.mspayment.controller;
 
 
+import grupo3.mspayment.handler.BadRequestException;
+import grupo3.mspayment.handler.ResourceCreateException;
 import grupo3.mspayment.handler.ResourceNotFoundException;
 import grupo3.mspayment.model.collection.CreditCard;
 import grupo3.mspayment.model.dto.CreditCardDTO;
@@ -31,7 +33,7 @@ public class PaymentController {
     @Operation(summary = "Registrar una tarjeta de crédito")
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public ResponseEntity createCC(@Valid @RequestBody CreditCardDTO cc){
+    public ResponseEntity createCC(@Valid @RequestBody CreditCardDTO cc) throws ResourceCreateException {
         cc.setCreditCardId(ccService.getSequenceNumber(CreditCard.SEQUENCE_NAME));
         ccService.registerCreditCard(cc);
         return ResponseEntity.ok().build();
@@ -40,7 +42,7 @@ public class PaymentController {
     @Operation(summary = "Listar todas las tarjetas de crédito")
     @GetMapping
     @ResponseStatus(code = HttpStatus.OK)
-    public ResponseEntity<List<CreditCardDTO>> getAllCC(){
+    public ResponseEntity<List<CreditCardDTO>> getAllCC() throws ResourceNotFoundException {
         return ResponseEntity.ok(ccService.getAllCards());
     }
 
