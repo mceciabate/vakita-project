@@ -29,13 +29,21 @@ build:
 deploy: 
   only:
     - front-end
-  image: python:latest
+  image: alpine:3.16
   stage: deploy
   before_script:
-    - cd ./vakitaProyectFrontEnd
+    - apk update && apk add openssh-client bash 
+    - mkdir -p ~/.ssh 
+    - eval $(ssh-agent -s) 
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null 
+    - touch ~/.ssh/config 
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config 
+    - pwd
+    - ssh-keyscan -H $CLOUD_NGINX_IP >> ~/.ssh/known_hosts 
   script:
-    - pwd && ls -la
-    - pip install awscli
-    - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-    - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-    - aws s3 sync /builds/ctd/hispanos/proyecto-integrador-2/proyecto-integrador-0723/1021ft-c1/equipo-03/vakitaProyectFrontEnd/dist s3://$S3_BUCKET_NAME 
+    - scp -r /builds/ctd/hispanos/proyecto-integrador-2/proyecto-integrador-0723/1021ft-c1/equipo-03/vakitaProyectFrontEnd/dist ubuntu@$CLOUD_NGINX_IP:/home/ubuntu/
+    - ssh ubuntu@$CLOUD_NGINX_IP "sudo cp -r dist/assets /var/www/54.221.139.107" 
+    - ssh ubuntu@$CLOUD_NGINX_IP "sudo cp -r dist/images /var/www/54.221.139.107" 
+    - ssh ubuntu@$CLOUD_NGINX_IP "sudo cp -r dist/index.html /var/www/54.221.139.107"
+    - ssh ubuntu@$CLOUD_NGINX_IP "sudo nginx -s reload"
+ 
