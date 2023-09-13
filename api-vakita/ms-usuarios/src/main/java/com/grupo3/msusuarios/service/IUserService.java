@@ -11,6 +11,7 @@ public interface IUserService {
 
     UserDTO save(UserDTO userDTO) throws Exception;
     UserDTO findById(Long id) throws Exception;
+    UserDTO findByDni(String dni) throws Exception;
     UserDTO findByEmail(String email) throws Exception;
     UserWithoutPasswordDTO updateById(Long id, UserUpdateDTO userDTO) throws Exception;
     Boolean changePassword(Long id, String newPassword) throws Exception;

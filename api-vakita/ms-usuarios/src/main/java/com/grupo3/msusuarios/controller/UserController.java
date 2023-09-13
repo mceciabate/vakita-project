@@ -95,6 +95,10 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(FormatMessage.formatMessage(result));
         }
         try {
+            if (userService.findByDni(userDTO.getDni()) != null){
+                logg.error("error: dni ya registrado");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. El dni ya se encuentra registrado.\"}");
+            }
             logg.info("saved");
             boolean response = confirmationTokenService.sendConfirmationEmail(userDTO);
             if (response) {

@@ -36,8 +36,8 @@ public class User implements Serializable {
     @Column(name = "ALIAS", nullable = false, length = 30)
     private String alias;
 
-    @NotBlank(message = "No puede ingresar un dni vacio")
-    @Column(name = "DNI", nullable = false, length = 20)
+    @NotBlank(message = "No puede ingresar un dni vacio o dni ya registrado")
+    @Column(name = "DNI", unique = true, nullable = false, length = 20)
     private String dni;
 
     @NotBlank(message = "No puede ingresar un email vacio o email existente")
