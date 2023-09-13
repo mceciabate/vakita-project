@@ -47,7 +47,7 @@ const Menu = () => {
               </HeaderMenuLateral>
 
               <BloqueOptions>
-                <Link to="/dashboard">Inicio</Link>
+                <Link to="/dashboard">Inicio cambio Cecilia</Link>
                 <Link to="/dashboard/crear-vaca">Nueva Vaca</Link>
                 <Link to="/dashboard/mis-vaquitas">Mis Vaquitas</Link>
                 <hr />
