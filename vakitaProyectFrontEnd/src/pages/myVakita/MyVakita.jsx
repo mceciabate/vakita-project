@@ -8,6 +8,8 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import jwt_decode from 'jwt-decode';
 import ReactPaginate from 'react-paginate';
+import { useNavigate } from 'react-router-dom';
+
 
 const MyVakita = () => {
   const [allMyVakita, setAllMyVakita] = useState([]);
@@ -19,7 +21,7 @@ const MyVakita = () => {
   
   const token = JSON.parse(localStorage.getItem('token'));
   const userId = localStorage.getItem('userId');
-
+  const navigate = useNavigate();
   const decoded = jwt_decode(token);
   const emailUser = decoded.sub;
 
@@ -287,7 +289,7 @@ const MyVakita = () => {
                   cancelButtonText: 'No',
                 }).then((result) => {
                   if (result.isConfirmed) {
-                    // User clicked "Si", proceed with Axios requests
+                    
                     axios
                       .put(`http://107.22.65.36:8080/api/v1/vakita/inactive/${vakita.id}`, null, {
                         headers: {
@@ -296,7 +298,7 @@ const MyVakita = () => {
                         },
                       })
                       .then((response) => {
-                        // Handle successful response
+                     
                         return axios.patch(`http://107.22.65.36:8080/api/v1/vakita/drain/${vakita.id}`, null, {
                           headers: {
                             'Content-type': 'application/json',
@@ -305,11 +307,16 @@ const MyVakita = () => {
                         });
                       })
                       .then((response) => {
-                        // Handle successful response
-                        Swal.fire('Se realizó correctamente el retiro de dinero', 'Visualizar balance de cuenta', 'success');
+                        Swal.fire({
+                          title: 'Se realizó correctamente el retiro de dinero',
+                          text: 'Sera redireccionado a la página de "Extracción de dinero" para visualizar el saldo de la cuenta',
+                          icon: 'success',
+                        }).then(() => {
+                          navigate('/dashboard/extraer-dinero');
+                        });
                       })
                       .catch((error) => {
-                        // Handle errors
+                      
                         Swal.fire('Error', 'Hubo un error al realizar el retiro de dinero', 'error');
                       });
                   }
@@ -432,10 +439,10 @@ const MyVakita = () => {
             <div className='chartContainer'>
               <Doughnut
                 data={{
-                  labels: ['Contribuido', 'Restante'],
+                  
                   datasets: [
                     {
-                      data: chartDataValues,
+                      data: [1,1],
                       backgroundColor: backgroundColor,
                     },
                   ],
@@ -446,7 +453,7 @@ const MyVakita = () => {
                   plugins: {
                     title: {
                       display: true,
-                      text: 'Progreso de ahorro',
+                      text: 'Vaquita inactiva',
                     },
                   },
                 }}
@@ -457,12 +464,12 @@ const MyVakita = () => {
                 <div
                   key={cIndex}
                   className={`usersMyVakita ${
-                    contributor.email === emailUser ? 'highlighted' : ''
+                    contributor.email === emailUser ? 'highlightedI' : ''
                   }`}
                 >
                   <div
                     className={`userIconT ${
-                      contributor.email === emailUser ? 'youIcon' : ''
+                      contributor.email === emailUser ? 'youIconI' : ''
                     }`}
                   >
                     <FontAwesomeIcon icon={faUser} />

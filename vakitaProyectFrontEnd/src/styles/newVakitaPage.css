@@ -112,6 +112,7 @@ label.labelDate {
 /* la card del lado derecho*/
 .inputEmail {
     background-color: #E4E4E4;
+    width: 14rem;
 
 }
 
@@ -425,7 +426,7 @@ h4 {
 
     form input[type="email"] {
 
-        width: 100%;
+        width: 14rem;
 
     }
 

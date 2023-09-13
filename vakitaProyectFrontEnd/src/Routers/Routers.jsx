@@ -12,6 +12,7 @@ import { useUser } from '../context/UserProvider';
 import Perfil from '../components/Perfil/Perfil';
 import PaymentApp from "../components/CreditCard/PaymentApp";
 import TransactionPage from "../pages/transaction/TransactionPage";
+import WithdrawalMoney from "../pages/withdrawal/WithdrawalMoney";
 
 
 const Routers = () => {
@@ -36,6 +37,7 @@ const Routers = () => {
             <Route path="mi-perfil" element={<Perfil />} />
             <Route path="mis-datos-financieros" element={<PaymentApp />} />
             <Route path="transacciones" element={<TransactionPage/>} />
+            <Route path="extraer-dinero" element={<WithdrawalMoney/>} />
           </Route>
         </Route>
       </Routes>

@@ -58,8 +58,11 @@ const Menu = () => {
                 <hr />
                 <Link to="/dashboard/transacciones">
                   Transacciones
+                </Link> 
+                 <Link to="/dashboard/extraer-dinero">
+                  Extracción de dinero
                 </Link>
-                {/* <Link to="/dashboard/ayuda">Ayuda</Link> */}
+             
 
                 <button
                   onClick={() => {

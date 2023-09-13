@@ -211,10 +211,23 @@ margin-top: 2.2rem;
    
   }
 
+  .highlightedI  {
+    color: #e3d7de;
+    font-weight: 800;
+    background-color: #000000;
+   
+   
+  }
+
 
   .usersMyVakita .youIcon {
     
     color: #D18EBA;
+  }
+
+  .usersMyVakitaI .youIconI {
+    
+    color: #0c0108;
   }
 
   .userIconT {
