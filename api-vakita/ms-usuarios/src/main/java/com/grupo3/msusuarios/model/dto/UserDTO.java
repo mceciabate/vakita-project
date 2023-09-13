@@ -26,7 +26,7 @@ public class UserDTO {
     @NotBlank(message = "No puede ingresar un alias vacio")
     @Size(max = 30 ,message = "El alias no puede contener mas de 30 caracteres")
     private String alias;
-    @NotBlank(message = "No puede ingresar un dni vacio")
+    @NotBlank(message = "No puede ingresar un dni vacio o dni existente")
     private String dni;
     @NotBlank(message = "No puede ingresar un email vacio o email existente")
     private String email;

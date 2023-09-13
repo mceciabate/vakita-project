@@ -65,6 +65,20 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public UserDTO findByDni(String dni) throws Exception {
+        try {
+            User user = userRepository.findByDni(dni).orElse(null);
+            if(user != null){
+                UserDTO userDTO = mapper.convertValue(user, UserDTO.class);
+                return userDTO;
+            }
+            return null;
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
     public UserDTO findByEmail(String email) throws Exception {
         try {
             User user = userRepository.findByEmail(email).orElse(null);
