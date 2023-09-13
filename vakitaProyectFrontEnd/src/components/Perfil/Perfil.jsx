@@ -114,7 +114,7 @@ const Perfil = () => {
           name: data.name,
           lastName: data.lastName,
           alias: data.alias,
-          avatar: "data:image/jpeg;base64," + data.avatar,
+          avatar: data.avatar,
         });
       })
       .catch((error) => console.error(error));
