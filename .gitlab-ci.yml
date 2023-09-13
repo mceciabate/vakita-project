@@ -13,13 +13,13 @@ cache:
     - .m2/repository
     - target
 
-# dummy_job:
-#   stage: package
-#   only:
-#     - config-server
-#   script: 
-#     - echo "Dummy job for lag-pipeline when has no tasks"
-#     - pwd 
+dummy_job:
+  stage: package
+  only:
+    - config-server
+  script: 
+    - echo "Dummy job for lag-pipeline when has no tasks"
+    - pwd 
   
 
 package_usuarios:
