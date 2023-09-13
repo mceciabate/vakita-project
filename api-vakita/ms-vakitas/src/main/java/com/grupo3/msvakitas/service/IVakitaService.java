@@ -14,6 +14,10 @@ public interface IVakitaService {
     VakitaDTO getVakitaById(Long id) throws ResourceNotFoundException;
     List<VakitaDTO> getVakitasByOwner(Long id) throws ResourceNotFoundException;
     List<VakitaDTO> getVakitasActivesByContributor(Long userId) throws ResourceNotFoundException;
+
+    //Este método filtra las vakitas inactivas de un user
+    List<VakitaDTO> getVakitasInactivesByContributor(Long id) throws ResourceNotFoundException;
+
     List<VakitaDTO> getVakitasByContributors(Long userId) throws ResourceNotFoundException, BadRequestException;
 
     //create

@@ -46,7 +46,6 @@ public class VakitaService implements IVakitaService {
 
 
     //Método para traer todas las vakitas
-    //TODO: CONSULTAR SI QUIEREN UN ERROR O UNA LISTA VACÍA ESTÁ BIEN
     @Override
     public List<VakitaDTO> getAllVakitas(){
         List<VakitaDTO> listaVakitas = new ArrayList<>();
@@ -95,11 +94,14 @@ public class VakitaService implements IVakitaService {
     //Método para crear una nueva vakita
     @Override
     public VakitaDTO createVakita(VakitaDTO vakita) throws BadRequestException, ResourceNotFoundException {
+        UserDTO userCreator = this.usuarioService.getUserById(vakita.getIdCreatorUser());
+        boolean result = this.containsEmail(vakita.getContributors(), userCreator.getEmail());
         if(vakita.getExpirationDate().equals(LocalDate.now()) || vakita.getName() == null || vakita.getIdCreatorUser() == null){
-            throw new BadRequestException("No se puede crear la vakita, corrobore los datos: fecha_expiración(debe ser distinta al día actual),name(no pued ser nulo), idCreatorUser(no puede ser nulo) ");
+            throw new BadRequestException("No se puede crear la vakita, corrobore los datos: fecha_expiración(debe ser distinta al día actual),name(no puede ser nulo), idCreatorUser(no puede ser nulo) ");
+        } else if (result) {
+            throw new BadRequestException("El usuario creador se asignará automaticamente a la lista de contribuyentes, no es necesario incluirlo en la misma");
         } else {
-            UserDTO userToAdd = usuarioService.getUserById(vakita.getIdCreatorUser());
-            vakita.getContributors().add(userToAdd);
+            vakita.getContributors().add(userCreator);
             Vakita vakitaNew = mapper.map(vakita, Vakita.class);
             vakitaRepository.save(vakitaNew);
             log.info("Saving new vakita from user:" + vakita.getIdCreatorUser());
@@ -108,10 +110,14 @@ public class VakitaService implements IVakitaService {
     }
 
     //Método para modificar el saldo de una vaquita
-    //TODO: FALTA LA VALIDACION DE USUARIO
     @Override
     public void modifyAmount(Long userID, Long vakitaId, Double amount) throws ResourceNotFoundException, BadRequestException{
         VakitaDTO vakitaModify = this.getVakitaById(vakitaId);
+        UserDTO userContributor = this.usuarioService.getUserById(userID);
+        boolean result = containsEmail(vakitaModify.getContributors(), userContributor.getEmail());
+        if (!result){
+            throw new BadRequestException("El usuario no pertenece a esta vakita");
+        }
         Double amountDiference = vakitaModify.getTotalAmount() - vakitaModify.getCumulativeAmount();
         if(vakitaModify.getIsActive() && amount <= amountDiference ){
             Double deposit = vakitaModify.getCumulativeAmount() + amount;
@@ -143,6 +149,23 @@ public class VakitaService implements IVakitaService {
         }
         if(listaActivas.size()==0){
             throw new ResourceNotFoundException("El usuario no posee vaitas activas");
+        }
+        log.info("Get all vakitas actives from user "+id+", size: " + listaActivas.size());
+        return  listaActivas;
+    }
+
+    //Este método filtra las vakitas inactivas de un user
+    @Override
+    public List<VakitaDTO> getVakitasInactivesByContributor(Long id) throws ResourceNotFoundException{
+        List<VakitaDTO> lista = this.getVakitasByContributors(id);
+        List<VakitaDTO> listaActivas = new ArrayList<>();
+        for (VakitaDTO vakita : lista) {
+            if (!vakita.getIsActive()){
+                listaActivas.add(vakita);
+            }
+        }
+        if(listaActivas.size()==0){
+            throw new ResourceNotFoundException("El usuario no posee vakitas inactivas");
         }
         log.info("Get all vakitas actives from user "+id+", size: " + listaActivas.size());
         return  listaActivas;
@@ -218,11 +241,17 @@ public class VakitaService implements IVakitaService {
     }
 
     //Este método es para agregarme como contribuyente a una vakita
-    //TODO: VALIDAR SI EL USUARIO YA ES PARTE DE LA LISTA
     @Override
     public void addContributor(Long vakitaId, Long userId) throws ResourceNotFoundException, BadRequestException {
         UserDTO newContributor = usuarioService.getUserById(userId);
         VakitaDTO vakita = this.getVakitaById(vakitaId);
+        boolean result = this.containsEmail(vakita.getContributors(), newContributor.getEmail());
+        if (vakita.getIdCreatorUser().equals(userId)){
+            throw new BadRequestException("El usuario es el creador de la vakita, ya se encuentra en la lista ");
+        } else if (result) {
+            throw new BadRequestException("El usuario ya pertenece a lista de contribuyentes de la vakita con id : " + vakitaId);
+        }
+
         vakita.getContributors().add(newContributor);
         this.updateVakita(vakitaId, vakita);
         log.info("Success updating contributor in  vakita: " + vakitaId);
@@ -277,6 +306,10 @@ public class VakitaService implements IVakitaService {
         }
         else throw new BadRequestException("No se puede vaciar una vakita activa");
 
+    }
+
+    public boolean containsEmail(final List<UserDTO> list, final String email){
+        return list.stream().anyMatch(o -> email.equals(o.getEmail()));
     }
 
 
