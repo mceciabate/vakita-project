@@ -135,32 +135,72 @@ margin-top: 2.2rem;
   
 
 
-.save-button{
-    border: none;
-    color: #7c4d86;
-    font-size: 2rem;
-    background-color: transparent;
-    border: 2px solid ;
-    width: 50px;
-    border-radius: 8px;
-    cursor: pointer;
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-    -ms-border-radius: 8px;
-    -o-border-radius: 8px;
-    position: absolute;
-   margin-left: 5px;
-   border-radius: 10px;
-    border-style: solid;
-    border-top-color: #BB75CB;
-    border-right-color: #D18EBA;
-    border-bottom-color: #E68C8C;
-    border-left-color: #D18EBA;
+
+
+
+
+
+.save-button {
+  letter-spacing: 0.05rem;
+  background: #9a5df0bc;
+  border-radius: 999px;
+  box-shadow: #9a5df0 0 5px 7px -5px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 24px;
+  opacity: 1;
+  outline: 0 solid transparent;
+  padding: 5px 8px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 120px;
+  word-break: break-word;
+  border: 0;
 }
 
 .save-button:hover{
-background-color: #D18EBA;
-color: #fdfde7;
+  background: #9a5df0;
+  box-shadow: #9a5df0 0 8px 10px -8px;
+} 
+
+.withdraw:hover{
+  background: #9a5df0;
+  box-shadow: #9a5df0 0 8px 10px -8px;
+} 
+.withdraw{
+  letter-spacing: 0.05rem;
+ 
+  background: #9a5df0bc;
+  border-radius: 999px;
+  box-shadow: #9a5df0 0 5px 7px -5px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 24px;
+  opacity: 1;
+  outline: 0 solid transparent;
+  padding: 5px 8px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 120px;
+  word-break: break-word;
+  border: 0;
+}
+
+.buttons{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 1rem;
+  gap: 12px;
+
 }
    
 .highlighted  {

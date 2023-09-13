@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import '../../styles/myVakitaPage.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faHandHoldingDollar, faAngleRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faHandHoldingDollar,faAngleRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { Doughnut } from 'react-chartjs-2';
 import 'chart.js/auto';
 import axios from 'axios';
@@ -17,7 +17,6 @@ const MyVakita = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [inactivePage, setInactivePage] = useState(0);
   
-
   const token = JSON.parse(localStorage.getItem('token'));
   const userId = localStorage.getItem('userId');
 
@@ -47,14 +46,13 @@ const MyVakita = () => {
 
       // Filtrar las vakitas inactivas (isActive = false)
       const inactiveVakitas = response.data.filter((vakita) => vakita.isActive === false);
-      
+      setInactiveVakitaElements(inactiveVakitas)
 
-      // Renderizar las vakitas inactivas utilizando la función renderDataMyVakita
-      const elements = renderDataMyVakita(inactiveVakitas);
-    
+      // Renderizar las vakitas inactivas utilizando la función renderInactiveVakitas
+      const elements = renderInactiveVakitas(inactiveVakitas);
 
       // Actualizar el estado con los elementos renderizados
-      setInactiveVakitaElements(elements);
+      // setInactiveVakitaElements(elements);
     } catch (error) {
       console.error('Error fetching inactive vakitas:', error);
     }
@@ -129,8 +127,6 @@ const MyVakita = () => {
       const vakita = allMyVakita[index];
       const totalContributed = chartData[index]?.totalContributed || 0;
       const remainingAmount = chartData[index]?.remainingAmount || vakita.totalAmount;
-
-
 
       if (totalContributed >= vakita.totalAmount || vakita.totalAmount === vakita.cumulativeAmount) {
         Swal.fire({
@@ -210,183 +206,346 @@ const MyVakita = () => {
   };
 
   const renderDataMyVakita = (vakitas) => {
-  return vakitas?.map((vakita, index) => {
-    const totalContributed = chartData[index]?.totalContributed || 0;
-    const remainingAmount = chartData[index]?.remainingAmount || vakita.totalAmount;
-    const isActive = vakita.isActive; // Check if the Vakita is active
-
-    // Calculate whether to render the Vakita based on the current page
-    const shouldRender =
-      index >= currentPage * perPage && index < (currentPage + 1) * perPage;
-
-    if (!shouldRender) {
-      return null; // Skip rendering for Vakitas not on the current page
-    }
-
-    const sortedContributors = [...vakita.contributors];
-    const matchingContributorIndex = sortedContributors.findIndex(
-      (contributor) => contributor.email === emailUser
-    );
-
-    if (matchingContributorIndex !== -1) {
-      const matchingContributor = sortedContributors.splice(
-        matchingContributorIndex,
-        1
-      )[0];
-      sortedContributors.unshift(matchingContributor);
-    }
-
-    const backgroundColor = isActive
-      ? totalContributed >= vakita.totalAmount
-        ? ['rgba(75, 192, 192, 0.6)', 'rgba(75, 192, 192, 0.6)']
-        : ['rgba(75, 192, 192, 0.6)', 'rgba(255, 99, 132, 0.6)']
-      : 'rgba(0, 0, 0, 0.6)'; // Black color for inactive Vakitas
-
-      const chartDataValues =
-      totalContributed >= vakita.totalAmount
-        ? [vakita.totalAmount, 0]
-        : [totalContributed, remainingAmount];
-    return (
-      <div
-        className={`cardMyVakita ${!isActive ? 'inactiveCard' : ''}`}
-        key={index}
-      >
-        <div>
-          {/* Disable the "save-button" for inactive Vakitas */}
-          <button
-            className={`save-button ${!isActive ? 'disabled' : ''}`}
+    
+    return vakitas?.map((vakita, index) => {
+    
+      const totalContributed = chartData[index]?.totalContributed || 0;
+      const remainingAmount = chartData[index]?.remainingAmount || vakita.totalAmount;
+      const isActive = vakita.isActive; 
+     
+  
+     
+      
+      const shouldRender =
+        index >= currentPage * perPage && index < (currentPage + 1) * perPage;
+  
+      if (!shouldRender) {
+        return null; 
+      }
+      // const shouldRender = true; // Remove the pagination condition
+  
+      // if (!shouldRender) {
+      //   return null; // Skip rendering for Vakitas not on the current page (remove this)
+      // }
+      
+      const sortedContributors = [...vakita.contributors];
+      const matchingContributorIndex = sortedContributors.findIndex(
+        (contributor) => contributor.email === emailUser
+      );
+      
+      if (matchingContributorIndex !== -1) {
+        const matchingContributor = sortedContributors.splice(
+          matchingContributorIndex,
+          1
+        )[0];
+        sortedContributors.unshift(matchingContributor);
+      }
+  
+      const backgroundColor = isActive
+        ? totalContributed >= vakita.totalAmount
+          ? ['rgba(75, 192, 192, 0.6)', 'rgba(75, 192, 192, 0.6)']
+          : ['rgba(75, 192, 192, 0.6)', 'rgba(255, 99, 132, 0.6)']
+        : 'rgba(0, 0, 0, 0.6)'; 
+  
+        const chartDataValues =
+        totalContributed >= vakita.totalAmount
+          ? [vakita.totalAmount, 0]
+          : [totalContributed, remainingAmount];
+      return (
+        <div
+          className={`cardMyVakita ${!isActive ? 'inactiveCard' : ''}`}
+          key={index}
+        >
+          <div>
+          
+            <div>
+              <h3 className='titleMyVaquita'>{vakita.name}</h3>
+              
+            </div>
+            
+            <div>
+              <h3 className='titleMyVaquita'>{`Meta: $${vakita.totalAmount}`}</h3>
+            </div>
+            <div className='buttons'>
+            <button
+              className={`save-button ${!isActive ? 'disabled' : ''}`}
+              onClick={() => {
+                isActive && payVakita(vakita.id, index);
+              }}
+            >
+            💰 Depositar 
+            </button>
+            <button
+            className="withdraw"
             onClick={() => {
-              isActive && payVakita(vakita.id, index);
+              if (isActive) {
+                Swal.fire({
+                  title: '¿Retirar el total del monto actual de la vaquita?',
+                  text: 'La vaquita pasará a inactiva',
+                  showCancelButton: true,
+                  confirmButtonText: 'Si',
+                  cancelButtonText: 'No',
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    // User clicked "Si", proceed with Axios requests
+                    axios
+                      .put(`http://107.22.65.36:8080/api/v1/vakita/inactive/${vakita.id}`, null, {
+                        headers: {
+                          'Content-type': 'application/json',
+                          Authorization: `Bearer ${token}`,
+                        },
+                      })
+                      .then((response) => {
+                        // Handle successful response
+                        return axios.patch(`http://107.22.65.36:8080/api/v1/vakita/drain/${vakita.id}`, null, {
+                          headers: {
+                            'Content-type': 'application/json',
+                            Authorization: `Bearer ${token}`,
+                          },
+                        });
+                      })
+                      .then((response) => {
+                        // Handle successful response
+                        Swal.fire('Se realizó correctamente el retiro de dinero', 'Visualizar balance de cuenta', 'success');
+                      })
+                      .catch((error) => {
+                        // Handle errors
+                        Swal.fire('Error', 'Hubo un error al realizar el retiro de dinero', 'error');
+                      });
+                  }
+                });
+              }
             }}
           >
-            <FontAwesomeIcon icon={faHandHoldingDollar} />
+            💰 Retirar
           </button>
-          <div>
-            <h3 className='titleMyVaquita'>{vakita.name}</h3>
+            </div>
           </div>
-          <div>
-            <h3 className='titleMyVaquita'>{`Meta: $${vakita.totalAmount}`}</h3>
-          </div>
-        </div>
-        <div className='BoxMembersAndChart'>
-          <div className='chartContainer'>
-            <Doughnut
-              data={{
-                labels: ['Contribuido', 'Restante'],
-                datasets: [
-                  {
-                    data: chartDataValues,
-                    backgroundColor: backgroundColor,
+          <div className='BoxMembersAndChart'>
+            <div className='chartContainer'>
+              <Doughnut
+                data={{
+                  labels: ['Contribuido', 'Restante'],
+                  datasets: [
+                    {
+                      data: chartDataValues,
+                      backgroundColor: backgroundColor,
+                    },
+                  ],
+                }}
+                options={{
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  plugins: {
+                    title: {
+                      display: true,
+                      text: 'Progreso de ahorro',
+                    },
                   },
-                ],
-              }}
-              options={{
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                  title: {
-                    display: true,
-                    text: 'Progreso de ahorro',
-                  },
-                },
-              }}
-            />
-          </div>
-          <div className='memebersMyVakita'>
-            {sortedContributors.map((contributor, cIndex) => (
-              <div
-                key={cIndex}
-                className={`usersMyVakita ${
-                  contributor.email === emailUser ? 'highlighted' : ''
-                }`}
-              >
+                }}
+              />
+            </div>
+            <div className='memebersMyVakita'>
+              {sortedContributors.map((contributor, cIndex) => (
                 <div
-                  className={`userIconT ${
-                    contributor.email === emailUser ? 'youIcon' : ''
+                  key={cIndex}
+                  className={`usersMyVakita ${
+                    contributor.email === emailUser ? 'highlighted' : ''
                   }`}
                 >
-                  <FontAwesomeIcon icon={faUser} />
+                  <div
+                    className={`userIconT ${
+                      contributor.email === emailUser ? 'youIcon' : ''
+                    }`}
+                  >
+                    <FontAwesomeIcon icon={faUser} />
+                  </div>
+                  <p>{contributor.email === emailUser ? 'Tú' : contributor.email}</p>
                 </div>
-                <p>{contributor.email === emailUser ? 'Tú' : contributor.email}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-    );
-  });
-};
+      );
+    });
+  };
+  const renderInactiveVakitas = (vakitas) => {
+    return vakitas?.map((vakita, index) => {
+      const totalContributed = chartData[index]?.totalContributed || 0;
+      const remainingAmount = chartData[index]?.remainingAmount || vakita.totalAmount;
+      const isActive = vakita.isActive; 
 
+   
+      if (!Array.isArray(vakita.contributors)) {
+       
+        return null; 
+      }
+
+      
+      const shouldRender =
+        index >= inactivePage * perPage && index < (inactivePage + 1) * perPage;
+
+      if (!shouldRender) {
+        return null; 
+      }
+
+      const sortedContributors = [...vakita.contributors];
+      const matchingContributorIndex = sortedContributors.findIndex(
+        (contributor) => contributor.email === emailUser
+      );
+
+      if (matchingContributorIndex !== -1) {
+        const matchingContributor = sortedContributors.splice(
+          matchingContributorIndex,
+          1
+        )[0];
+        sortedContributors.unshift(matchingContributor);
+      }
+
+      const backgroundColor = isActive
+        ? totalContributed >= vakita.totalAmount
+          ? ['rgba(75, 192, 192, 0.6)', 'rgba(75, 192, 192, 0.6)']
+          : ['rgba(75, 192, 192, 0.6)', 'rgba(255, 99, 132, 0.6)']
+        : 'rgba(0, 0, 0, 0.6)'; 
+
+      const chartDataValues =
+        totalContributed >= vakita.totalAmount
+          ? [vakita.totalAmount, 0]
+          : [totalContributed, remainingAmount];
+
+      return (
+        <div
+          className={`cardMyVakita ${!isActive ? 'inactiveCard' : ''}`}
+          key={index}
+        >
+          <div>
+          
+           
+            <div>
+              <h3 className='titleMyVaquita'>{vakita.name}</h3>
+            </div>
+            <div>
+              <h3 className='titleMyVaquita'>{`Meta: $${vakita.totalAmount}`}</h3>
+            </div>
+          </div>
+          <div className='BoxMembersAndChart'>
+            <div className='chartContainer'>
+              <Doughnut
+                data={{
+                  labels: ['Contribuido', 'Restante'],
+                  datasets: [
+                    {
+                      data: chartDataValues,
+                      backgroundColor: backgroundColor,
+                    },
+                  ],
+                }}
+                options={{
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  plugins: {
+                    title: {
+                      display: true,
+                      text: 'Progreso de ahorro',
+                    },
+                  },
+                }}
+              />
+            </div>
+            <div className='memebersMyVakita'>
+              {sortedContributors.map((contributor, cIndex) => (
+                <div
+                  key={cIndex}
+                  className={`usersMyVakita ${
+                    contributor.email === emailUser ? 'highlighted' : ''
+                  }`}
+                >
+                  <div
+                    className={`userIconT ${
+                      contributor.email === emailUser ? 'youIcon' : ''
+                    }`}
+                  >
+                    <FontAwesomeIcon icon={faUser} />
+                  </div>
+                  <p>{contributor.email === emailUser ? 'Tú' : contributor.email}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    });
+  };
 
   useEffect(() => {
-    if (userId !== null) {
-      loadInactiveVakitas(); // Llamar a la función para cargar las vakitas inactivas
+    if (userId !== null && inactiveVakitaElements.length === 0) {
+      loadInactiveVakitas();
     }
-  }, [userId, token]);
-
+  }, [userId, token, inactiveVakitaElements]);
+  
+  
   return (
     <>
     <div className='pageMyVakita'>
-     {allMyVakita.length === 0 && inactiveVakitaElements.length === 0 ?
-     <div className='noDataText'>No sos integrante de alguna vaquita</div>:
-    (
-      <div className='pageMyVakita'>
-        <h2 className='h2V'>Mis vaquitas</h2>
-        <h3 className='h3'>Activas</h3>
-        <div>
-        {allMyVakita.length > perPage && (
-          <div className='boxPagination'>
-           
-            <ReactPaginate
-              previousLabel={<FontAwesomeIcon icon={faChevronLeft} />}
-              nextLabel={<FontAwesomeIcon icon={faAngleRight} />}
-              breakLabel={'...'}
-              breakClassName={'break-me'}
-              pageCount={Math.ceil(allMyVakita.length / perPage)}
-              marginPagesDisplayed={2}
-              pageRangeDisplayed={5}
-              onPageChange={handlePageChange}
-              containerClassName={'pagination'}
-              subContainerClassName={'pages pagination'}
-              activeClassName={'active'}
-            />
-            
+      {allMyVakita.length === 0 && inactiveVakitaElements.length === 0 ?
+        <div className='noDataText'>No sos integrante de alguna vaquita</div> :
+        (
+          <div className='pageMyVakita'>
+            <h2 className='h2V'>Mis vaquitas</h2>
+            <h3 className='h3'>Activas</h3>
+            <div>
+              {allMyVakita.length > perPage && (
+                <div className='boxPagination'>
+                  <ReactPaginate
+                    previousLabel={<FontAwesomeIcon icon={faChevronLeft} />}
+                    nextLabel={<FontAwesomeIcon icon={faAngleRight} />}
+                    breakLabel={'...'}
+                    breakClassName={'break-me'}
+                    pageCount={Math.ceil(allMyVakita.length / perPage)}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={handlePageChange}
+                    containerClassName={'pagination'}
+                    subContainerClassName={'pages pagination'}
+                    activeClassName={'active'}
+                  />
+                </div>
+              )}
+              <div className='containerPageMyVakita'>
+                {renderDataMyVakita(allMyVakita)}
+              </div>
+            </div>
+            {inactiveVakitaElements.length > 0 ? (
+              <>
+                <h3 className='h3'>Inactivas</h3>
+                <div>
+                {inactiveVakitaElements.length > perPage && (
+  <div className='boxPagination'>
+    <ReactPaginate
+      previousLabel={<FontAwesomeIcon icon={faChevronLeft} />}
+      nextLabel={<FontAwesomeIcon icon={faAngleRight} />}
+      breakLabel={'...'}
+      breakClassName={'break-me'}
+      pageCount={Math.ceil(inactiveVakitaElements.length / perPage)}
+      marginPagesDisplayed={2}
+      pageRangeDisplayed={5}
+      onPageChange={handleInactivePageChange}
+      containerClassName={'pagination'}
+      subContainerClassName={'pages pagination'}
+      activeClassName={'active'}
+    />
+  </div>
+)}
+                  <div className='containerPageMyVakita'>
+              
+                    {renderInactiveVakitas(inactiveVakitaElements)}
+                  </div>
+                </div>
+              </>
+            ) : null}
           </div>
         )}
-          <div className='containerPageMyVakita'>
-            {renderDataMyVakita(allMyVakita)}
-          </div>
-        </div>
-        {inactiveVakitaElements.length > 0 ? (
-          <>
-        <h3 className='h3'>Inactivas</h3>
-        <div>
-        {inactiveVakitaElements.length > perPage && (
-          <div className='boxPagination'>
-        <ReactPaginate
-  previousLabel={<FontAwesomeIcon icon={faChevronLeft} />}
-  nextLabel={<FontAwesomeIcon icon={faAngleRight} />}
-  breakLabel={'...'}
-  breakClassName={'break-me'}
-  pageCount={Math.ceil(inactiveVakitaElements.length / perPage)}
-  marginPagesDisplayed={2}
-  pageRangeDisplayed={5}
-  onPageChange={handleInactivePageChange}
-  containerClassName={'pagination'}
-  subContainerClassName={'pages pagination'}
-  activeClassName={'active'}
-/>
-</div>
-        )}
-        <div className='containerPageMyVakita'>
-          {inactiveVakitaElements}
-        </div>
-        </div>
-        </>): null}
-        
-      </div>
-     )}
-     </div>
+    </div>
     </>
   );
 };

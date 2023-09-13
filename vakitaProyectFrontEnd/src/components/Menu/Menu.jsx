@@ -25,7 +25,7 @@ const Menu = () => {
     fetch("http://107.22.65.36:8080/api/v1/usuarios/" + userId)
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          throw new Error("Network response was not ok")
         }
         return response.json();
       })

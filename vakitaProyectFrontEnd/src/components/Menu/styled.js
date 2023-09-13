@@ -135,16 +135,16 @@ export const BloqueOptions = styled.div`
             margin-left:30px;
             font-weight:medium;
         }
-       }
+    
         hr {
             margin-left:30px;
             width:65%
         }
-
+    }
       
     
       
-    }
+    
 `;
 
 export const MenuDiv=styled.div`
