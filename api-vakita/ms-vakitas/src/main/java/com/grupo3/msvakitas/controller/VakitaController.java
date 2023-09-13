@@ -82,6 +82,15 @@ public class VakitaController {
         return ResponseEntity.ok(vakitaService.getVakitasActivesByContributor(userId));
     }
 
+    //OBTENER LA LISTA DE VAKITAS INACTIVAS POR CONTRIBUYENTE
+    @Operation(summary = "Traer la lista de vakitas inactivas por contribuyente")
+    @GetMapping("/inactives/{userId}")
+    @ResponseStatus(code = HttpStatus.OK)
+    //    @PreAuthorized("hasRole('USER')")
+    public ResponseEntity<List<VakitaDTO>> getInactivesByContributor(@PathVariable Long userId) throws ResourceNotFoundException {
+        return ResponseEntity.ok(vakitaService.getVakitasInactivesByContributor(userId));
+    }
+
     //OBTENER LISTADO DE VAKITAS EN LAS QUE SOY CONTRIBUYENTE(LAS HAYA CREADO O NO)
     @Operation(summary = "Traer listado de vakitas en las que soy contribuyente")
     @GetMapping("/contributors/{userId}")

@@ -148,6 +148,23 @@ public class VakitaService implements IVakitaService {
         return  listaActivas;
     }
 
+    //Este método filtra las vakitas inactivas de un user
+    @Override
+    public List<VakitaDTO> getVakitasInactivesByContributor(Long id) throws ResourceNotFoundException{
+        List<VakitaDTO> lista = this.getVakitasByContributors(id);
+        List<VakitaDTO> listaActivas = new ArrayList<>();
+        for (VakitaDTO vakita : lista) {
+            if (!vakita.getIsActive()){
+                listaActivas.add(vakita);
+            }
+        }
+        if(listaActivas.size()==0){
+            throw new ResourceNotFoundException("El usuario no posee vakitas inactivas");
+        }
+        log.info("Get all vakitas actives from user "+id+", size: " + listaActivas.size());
+        return  listaActivas;
+    }
+
     //Este método filtra las vakitas que coinciden con un id de un user
     //Es para saber en qué vakitas participo aunque yo no sea el owner, es decir
     //aunque yo no sea quien las creó.
