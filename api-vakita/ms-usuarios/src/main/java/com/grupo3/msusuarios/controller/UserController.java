@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.grupo3.msusuarios.model.dto.*;
 import com.grupo3.msusuarios.service.IUserService;
 import com.grupo3.msusuarios.service.impl.ConfirmationTokenService;
+import com.grupo3.msusuarios.service.impl.EmailService;
 import com.grupo3.msusuarios.util.FormatMessage;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -17,6 +18,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/v1/usuarios")
 public class UserController {
@@ -25,16 +28,18 @@ public class UserController {
     private final IUserService userService;
     private final ObjectMapper mapper;
     private final ConfirmationTokenService confirmationTokenService;
+    private final EmailService emailService;
 
     //Lo inyecto para poder validar las credenciales y generar token de acceso
     private final AuthenticationManager authenticationManager;
 
     @Autowired
-    public UserController(IUserService userService, ObjectMapper mapper, ConfirmationTokenService confirmationTokenService, AuthenticationManager authenticationManager) {
+    public UserController(IUserService userService, ObjectMapper mapper, ConfirmationTokenService confirmationTokenService, AuthenticationManager authenticationManager, EmailService emailService) {
         this.userService = userService;
         this.confirmationTokenService = confirmationTokenService;
         this.mapper = mapper;
         this.authenticationManager = authenticationManager;
+        this.emailService = emailService;
     }
 
     @Operation(summary = "Busca todos los registros de usuarios")
@@ -95,11 +100,13 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(FormatMessage.formatMessage(result));
         }
         try {
+            logg.info("saved");
+
             if (userService.findByDni(userDTO.getDni()) != null){
                 logg.error("error: dni ya registrado");
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. El dni ya se encuentra registrado.\"}");
             }
-            logg.info("saved");
+
             boolean response = confirmationTokenService.sendConfirmationEmail(userDTO);
             if (response) {
                 return ResponseEntity.status(HttpStatus.CREATED).body("Usuario registrado. Se ha enviado un correo de confirmación.");
@@ -273,6 +280,88 @@ public class UserController {
             logg.error(e.getMessage());
             response = "Invalid Token";
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+        }
+    }
+
+    @Operation(summary = "Enviar un email al usuario para restablecer password")
+    @PostMapping("/recover")
+    public ResponseEntity<?> recoverUserPassword(@Valid @RequestBody UserEmailDTO userEmailDTO, BindingResult result) {
+        logg.info("Metodo recoverUserPassword");
+        logg.info(userEmailDTO.toString());
+        if (result.hasErrors()) {
+            logg.error("error: "+ FormatMessage.formatMessage(result));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(FormatMessage.formatMessage(result));
+        }
+        try {
+            if (userService.findByEmail(userEmailDTO.getEmail()) == null){
+                logg.error("error: email no registrado");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. El email no se encuentra registrado.\"}");
+            }
+            else {
+                logg.info("sending email");
+                String token = UUID.randomUUID().toString();
+                String subject = "Restablecer contraseña";
+                String body = "<!DOCTYPE html>\n" +
+                        "<html lang=\"en\">\n" +
+                        "<head>\n" +
+                        "    <meta charset=\"UTF-8\">\n" +
+                        "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
+                        "    <title>Account Created</title>\n" +
+                        "    <style>\n" +
+                        "        .header {\n" +
+                        "          width: 50%;\n" +
+                        "          height: 50px;\n" +
+                        "          display: flex;\n" +
+                        "          align-items: center;\n" +
+                        "          justify-content: space-between;\n" +
+                        "          background: linear-gradient(0deg, #664e94 10%, #423163 90%);\n" +
+                        "          position: sticky;\n" +
+                        "          z-index: 999;\n" +
+                        "          box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.20); \n" +
+                        "        }\n" +
+                        "        .body {\n" +
+                        "          width: 50%;\n" +
+                        "          height: 30vh;\n" +
+                        "          display: flex;\n" +
+                        "          background: linear-gradient(0deg, rgba(200,185,224,1) 11%, rgba(217,181,195,1) 89%);\n" +
+                        "        }\n" +
+                        "        .container{\n" +
+                        "          height: 150px;\n" +
+                        "          width: 100%;\n" +
+                        "          margin-top: 40px;\n" +
+                        "          padding-left: 10px;\n" +
+                        "          padding-bottom: 10px;\n" +
+                        "          font-family: 'Inria Sans';\n" +
+                        "          background: linear-gradient(0deg, #EEE9FF 6%, #FCE8E9 91%);\n" +
+                        "          border-radius:20px;\n" +
+                        "        }\n" +
+                        "      </style>\n" +
+                        "</head>\n" +
+                        "<body>\n" +
+                        "    <div class=\"header\"></div>\n" +
+                        "  <div class=\"body\">\n" +
+                        "    <div class=\"container\">\n" +
+                        "      <br>\n" +
+                        "      <br>\n" +
+                        "      <br>\n" +
+                        "      <h2 style=\"margin-left: 50px; display: inline;\">Copia el siguiente token para restablecer tu contraseña:</h2>\n" +
+                        "      <br>\n" +
+                        "      <br>\n" +
+                        "      <h3 style=\"margin-left: 100px; color: blue; display: inline;\">" + token + "</h3>\n" +
+                        "    </div>\n" +
+                        "  </div>\n" +
+                        "</body>\n" +
+                        "</html>";
+
+                emailService.sendEmail(userEmailDTO.getEmail(), subject, body);
+                return ResponseEntity.status(HttpStatus.OK).body("{\n" +
+                        "  \"message\": \"Usuario encontrado. Se ha enviado un correo para restablecer la contraseña.\",\n" +
+                        "  \"token\": \"" + token + "\"\n" +
+                        "}");
+            }
+        } catch (Exception e) {
+            logg.error("error: "+ e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor, intente mas tarde.\"}");
         }
     }
 }
