@@ -41,30 +41,53 @@ function Login() {
         }).then((result) => {
             if (result.isConfirmed) {
                 const { email } = result.value;
-    
-                
+
                 axios.get('http://107.22.65.36:8080/api/v1/usuarios')
                     .then((response) => {
                         const users = response.data;
                         const userWithMatchingEmail = users.find(user => user.email === email);
+                        //Variable para codigo (restablecer password)
+                        let codeData = "";
     
                         if (userWithMatchingEmail) {
                             const userId = userWithMatchingEmail.id;
+
+                            //Post enviar correo al usuario para que obtenga el código
+                            axios.post(
+                                "http://107.22.65.36:8080/api/v1/usuarios/recover",
+                                {
+                                    email: email,
+                                },
+                                {
+                                    headers: {
+                                        "Content-type": "application/json",
+                                        "Accept": "application/json",
+                                    },
+                                })
+                                .then(response => {
+                                    codeData = response.data.token;
+                                })
+                                .catch(error => {
+                                    console.error('Error al hacer la solicitud:', error);
+                                });
     
                             Swal.fire({
                                 title: 'Cambiar Contraseña',
                                 html:
-                                    `<input type="password" id="newPassword" class="swal2-input" placeholder="Nueva Contraseña">
-                                     <input type="password" id="confirmNewPassword" class="swal2-input" placeholder="Confirmar">`,
+                                    `<p>Como medida de seguridad adicional, introduce el código que hemos enviado a su correo.</p>
+                                    <input type="password" id="code" class="swal2-input" placeholder="Código">
+                                    <input type="password" id="newPassword" class="swal2-input" placeholder="Nueva contraseña">
+                                    <input type="password" id="confirmNewPassword" class="swal2-input" placeholder="Confirmar contraseña">`,
                                 focusConfirm: false,
                                 showCancelButton: true,
                                 cancelButtonText: 'Cancelar',
                                 preConfirm: () => {
                                     const newPassword = Swal.getPopup().querySelector('#newPassword').value;
                                     const confirmNewPassword = Swal.getPopup().querySelector('#confirmNewPassword').value;
+                                    const code = Swal.getPopup().querySelector('#code').value;
     
-                                    if (!newPassword || !confirmNewPassword || newPassword !== confirmNewPassword) {
-                                        Swal.showValidationMessage('Por favor, completa los campos y asegúrate de que las contraseñas coincidan');
+                                    if (!code || code !== codeData || !newPassword || !confirmNewPassword || newPassword !== confirmNewPassword) {
+                                        Swal.showValidationMessage('Por favor, completa los campos y asegúrate de que las contraseñas coincidan y el código sea válido');
                                     }
     
                                     return { userId, newPassword, confirmNewPassword };
