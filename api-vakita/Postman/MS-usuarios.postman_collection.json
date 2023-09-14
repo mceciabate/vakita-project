@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "17df2f53-ff10-4e34-91c8-b2442f03a8c4",
+		"_postman_id": "16eb05a3-cce9-40f2-be73-7d31fccb3c36",
 		"name": "MS-usuarios",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "18026395"
@@ -81,6 +81,37 @@
 						"v1",
 						"usuarios",
 						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Correo restablecer password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"ACA-EL-EMAIL@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/usuarios/recover",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"usuarios",
+						"recover"
 					]
 				}
 			},
