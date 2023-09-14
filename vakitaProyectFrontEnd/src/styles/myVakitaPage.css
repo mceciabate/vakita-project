@@ -2,13 +2,24 @@
     display: flex;
   flex-direction: column;
     justify-content: center;
+<<<<<<< HEAD
     align-items: center; 
     background-color:#E7E1E1;
     height: 91vh;
+=======
+
+
+    flex-wrap: wrap;
+    align-items: center;
+  
+ 
+
+>>>>>>> 0669857aea63fd27b3bc84f13b48e135fce438dc
     
     
 }
 
+<<<<<<< HEAD
 .pageMyVakita{
     width: 100%;
    height: 80vh;
@@ -18,35 +29,96 @@
     text-align: center;
     margin-top: .2rem;
     
-    
+=======
+.noDataText{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+.boxPagination{
+
+    display: flex;
+    justify-content: center;
+align-items: center;
+   
+>>>>>>> 0669857aea63fd27b3bc84f13b48e135fce438dc
+    
+    padding: 1rem 0px;
+}
+<<<<<<< HEAD
 .h2{
     background-color: #E7E1E1;
+=======
+
+
+.pageMyVakita{
+    width: 100%;
+/* height: 100vh; */
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background: linear-gradient(0deg, #EEE9FF 6%, #FCE8E9 91%);
+ 
+
+>>>>>>> 0669857aea63fd27b3bc84f13b48e135fce438dc
 }
+
+
+ .titleMyVaquita{
+    text-align: center;
+
+}
+.h2V{
+
+    margin-top: 50px;
+    text-align: left;
+    padding-left: 5%;
+}
+
 .titleMyVaquita{
    margin-bottom: .5rem; 
 }
 
 .h3{
+<<<<<<< HEAD
     background-color: #E7E1E1;
     padding-left: 1rem;
+=======
+    height: fit-content;
+>>>>>>> 0669857aea63fd27b3bc84f13b48e135fce438dc
     font-size: 21px;
+   padding-top: 2rem;
+   margin-left: 1rem;
 }
 
 
 
 .cardMyVakita{
    
+<<<<<<< HEAD
     width: 22rem;
 height: 20rem;
 margin: 0rem 1.5rem;
+=======
+    width: 22.5rem;
+/* height: 20rem; */
+height: fit-content;
+
+/* margin: 0rem 1.5rem; */
+>>>>>>> 0669857aea63fd27b3bc84f13b48e135fce438dc
     background-color: #FFFFFF;
     margin-bottom: 1rem;
     -webkit-box-shadow: 0px 3px 5px -2px rgba(61,59,61,1);
 -moz-box-shadow: 0px 3px 5px -2px rgba(61,59,61,1);
 box-shadow: 0px 3px 5px -2px rgba(61,59,61,1);
     border-radius: .5rem;
+<<<<<<< HEAD
     /* margin-bottom: 5rem; */
+=======
+
+
+>>>>>>> 0669857aea63fd27b3bc84f13b48e135fce438dc
 }
 
 .BoxMembersAndChart{
@@ -76,7 +148,11 @@ margin-top: 2.2rem;
   
 .usersMyVakita{
     background-color: #c5bebe;
+<<<<<<< HEAD
     width: 10.5rem;
+=======
+    width: 11rem;
+>>>>>>> 0669857aea63fd27b3bc84f13b48e135fce438dc
     font-size: 12px;
     margin: 8px 0;
     border-radius: 5px;
@@ -95,11 +171,164 @@ margin-top: 2.2rem;
   
 .chartContainer{
  
+<<<<<<< HEAD
     width: 50%;
+}
+=======
+    width: 100px;
+    padding: 0.2rem;
 }
   
 
 
+
+
+
+
+
+.save-button {
+  letter-spacing: 0.05rem;
+  background: #9a5df0bc;
+  border-radius: 999px;
+  box-shadow: #9a5df0 0 5px 7px -5px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 24px;
+  opacity: 1;
+  outline: 0 solid transparent;
+  padding: 5px 8px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 120px;
+  word-break: break-word;
+  border: 0;
+}
+
+.save-button:hover{
+  background: #9a5df0;
+  box-shadow: #9a5df0 0 8px 10px -8px;
+} 
+
+.withdraw:hover{
+  background: #9a5df0;
+  box-shadow: #9a5df0 0 8px 10px -8px;
+} 
+.withdraw{
+  letter-spacing: 0.05rem;
+ 
+  background: #9a5df0bc;
+  border-radius: 999px;
+  box-shadow: #9a5df0 0 5px 7px -5px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 24px;
+  opacity: 1;
+  outline: 0 solid transparent;
+  padding: 5px 8px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 120px;
+  word-break: break-word;
+  border: 0;
+}
+
+.buttons{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 1rem;
+  gap: 12px;
+
+}
+   
+.highlighted  {
+    color: #e3d7de;
+    font-weight: 800;
+    background-color: #7c4d86;
+   
+   
+  }
+
+  .highlightedI  {
+    color: #e3d7de;
+    font-weight: 800;
+    background-color: #000000;
+   
+   
+  }
+
+
+  .usersMyVakita .youIcon {
+    
+    color: #D18EBA;
+  }
+
+  .usersMyVakitaI .youIconI {
+    
+    color: #0c0108;
+  }
+
+  .userIconT {
+    display: flex;
+    padding-right: 1px;
+
+}
+
+
+.pageMyVakita {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(0deg, #EEE9FF 6%, #FCE8E9 91%);
+}
+
+.pagination {
+    display: flex; /* Display pagination items horizontally */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en líneas si no caben en una fila */
+    justify-content: center; /* Centra los elementos horizontalmente */
+  }
+>>>>>>> 0669857aea63fd27b3bc84f13b48e135fce438dc
+  
+  .pagination li {
+    margin: 0 5px; /* Ajusta el margen entre los números de paginación según sea necesario */
+  }
+  
+  .pagination li a {
+    text-decoration: none;
+    color: #000; /* Establece el color de los números de paginación */
+    padding: 5px 10px;
+    border: 1px solid #000; /* Agrega bordes a los números de paginación */
+    border-radius: 5px;
+    margin: 5px; /* Añade margen entre los elementos de paginación */
+    display: inline-block; /* Hace que los elementos de paginación se muestren en línea */
+  }
+  
+  .pagination li a:hover {
+    background-color: #000; /* Cambia el color de fondo al pasar el cursor */
+    color: #fff; /* Cambia el color del texto al pasar el cursor */
+  }
+  
+  /* Agregar estilos para el elemento de paginación activo si es necesario */
+  .pagination li.active a {
+    background-color: #000;
+    color: #fff;
+  }
+  
+
+
+
+<<<<<<< HEAD
 .save-button{
     border: none;
     color: #7c4d86;
@@ -142,20 +371,40 @@ color: #fdfde7;
     color: #D18EBA;
   }
 @media only screen and (min-width: 767px) {
+=======
+.inactiveCard {
+    background-color: #f2f2f2; 
+    border: 2px solid #ccc;
+    opacity: 0.7; 
+  }
+  
+
+@media only screen and (min-width: 601px) {
+>>>>>>> 0669857aea63fd27b3bc84f13b48e135fce438dc
     .chartContainer{
  
         height: 13.2rem;
         width: 100%;
     }
    
+<<<<<<< HEAD
+=======
+    .pageMyVakita {
+  
+        display: block;
+        justify-content: initial;
+        flex-direction: initial;
+   
+      }
+>>>>>>> 0669857aea63fd27b3bc84f13b48e135fce438dc
     
     .containerPageMyVakita{
        
         display: flex;
         flex-direction: row;
         justify-content: center;
-        align-items: center; 
-        flex-wrap: wrap;
+        height: fit-content;
+        align-items: normal;
     } 
     .cardMyVakita{
       
@@ -170,7 +419,11 @@ color: #fdfde7;
         .usersMyVakita{
            
             font-size: 15px;
+<<<<<<< HEAD
             width: 13.2rem;
+=======
+            width: 14rem;
+>>>>>>> 0669857aea63fd27b3bc84f13b48e135fce438dc
         }
         
             .h3{

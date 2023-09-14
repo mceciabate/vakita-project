@@ -10,7 +10,13 @@ import MyVakita from '../pages/myVakita/MyVakita';
 import Menu from '../components/Menu/Menu';
 import { useUser } from '../context/UserProvider';
 import Perfil from '../components/Perfil/Perfil';
+<<<<<<< HEAD
 import CreditCard from '../components/CreditCard/CreditCard';
+=======
+import PaymentApp from "../components/CreditCard/PaymentApp";
+import TransactionPage from "../pages/transaction/TransactionPage";
+import WithdrawalMoney from "../pages/withdrawal/WithdrawalMoney";
+>>>>>>> 0669857aea63fd27b3bc84f13b48e135fce438dc
 
 
 const Routers = () => {
@@ -33,7 +39,13 @@ const Routers = () => {
             <Route path="crear-vaca" element={<NewVakita />} />
             <Route path="mis-vaquitas" element={<MyVakita />} />
             <Route path="mi-perfil" element={<Perfil />} />
+<<<<<<< HEAD
             <Route path="mis-datos-financieros" element={<CreditCard />} />
+=======
+            <Route path="mis-datos-financieros" element={<PaymentApp />} />
+            <Route path="transacciones" element={<TransactionPage/>} />
+            <Route path="extraer-dinero" element={<WithdrawalMoney/>} />
+>>>>>>> 0669857aea63fd27b3bc84f13b48e135fce438dc
           </Route>
         </Route>
       </Routes>

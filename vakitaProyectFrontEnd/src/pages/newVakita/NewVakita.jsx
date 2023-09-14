@@ -1,7 +1,11 @@
 
 import { Formik, Form, Field, ErrorMessage, FieldArray  } from 'formik';
 import * as Yup from 'yup';
+<<<<<<< HEAD
 import vakitabanner from "../../assets/vakitabanner.png"
+=======
+
+>>>>>>> 0669857aea63fd27b3bc84f13b48e135fce438dc
 import { useContext,  useEffect,  useState } from 'react';
 import "../../styles/newVakitaPage.css"
 import EmailList from './EmailList';
@@ -80,14 +84,21 @@ const NewVakita = () => {
       cumulativeAmount:values.cumulativeAmount,
       isActive: true,
       type: "normal",
+<<<<<<< HEAD
       // contributors: emails.filter((email) => email !== ''), // Filtrar emails vacíos
       contributors: arrayMembers,
     };
     // console.log(dataToSend);
     // addNewVakita(dataToSend);
+=======
+
+      contributors: arrayMembers,
+    };
+    // console.log(dataToSend);
+>>>>>>> 0669857aea63fd27b3bc84f13b48e135fce438dc
 
 
-     // Validar todos los emails antes de guardarlos solo si no hay emails vacíos
+    
      const allEmailsValid = emails.every((email) => email !== '' && checkEmail(email).exists);
 
      if (allEmailsValid) {
@@ -148,7 +159,11 @@ const NewVakita = () => {
     const emailData = checkEmail(values.email);
 
     if (values.email.trim() === '') {
+<<<<<<< HEAD
       // Ignorar emails vacíos 
+=======
+ 
+>>>>>>> 0669857aea63fd27b3bc84f13b48e135fce438dc
       return;
     }
   
@@ -167,7 +182,11 @@ const NewVakita = () => {
       if (!emails.includes(values.email)) {
         setEmails((prevEmails) => [...prevEmails, values.email]);
 
+<<<<<<< HEAD
          // Find the user with the matching email from getUsers
+=======
+   
+>>>>>>> 0669857aea63fd27b3bc84f13b48e135fce438dc
         const userWithEmail = getUsers.find(user => user.email === values.email);
       
       if (userWithEmail) {
@@ -204,10 +223,11 @@ const NewVakita = () => {
   return (
     <>
     <div className='containerPage'>
-      <div className="boxItems">
-        <div className='title'>
-    <h2>Hagamos una vaquita</h2>
+    <div className='title'>
+    <h2 className='title2'>Hagamos una vaquita</h2>
     </div>
+      <div className="boxItems">
+        
 
     <div> 
       
@@ -229,13 +249,21 @@ const NewVakita = () => {
 {({values}) => (
         <Form className='formNewVakita'>
           <div className='boxReverseBanner'>
+
             <div className='boxOne'>
           <div className="boxItems">
             <label htmlFor="name"></label>
             <Field  className="inputText" type="text" id="name" name="name" placeholder="Nombre de la vaca"/>
+<<<<<<< HEAD
             <div className='error'>
             <ErrorMessage name="name" component="div" />
             </div>
+=======
+            <span className='error'>
+            <ErrorMessage className='error-mensaje' name="name" component="span" />
+            </span>
+            
+>>>>>>> 0669857aea63fd27b3bc84f13b48e135fce438dc
           </div>
           <div className="boxItems">
             <label htmlFor="amount"></label>
@@ -255,10 +283,17 @@ const NewVakita = () => {
 
           <div className="boxItems">
             <label htmlFor="description"></label>
+<<<<<<< HEAD
             <Field as="textarea" id="description" name="description" placeholder="Descripción" />
             <div className='error'>
             <ErrorMessage name="description" component="div" />
             </div>
+=======
+            <Field type="text"  className="inputDescription"  id="description" name="description" placeholder="Descripción" />
+            <span className='error'>
+            <ErrorMessage name="description" component="div" />
+            </span>
+>>>>>>> 0669857aea63fd27b3bc84f13b48e135fce438dc
           </div>
 
           <div className="boxItems">
@@ -273,7 +308,7 @@ const NewVakita = () => {
 
           <div className='boxTwo'>
           <div className='img'>
-        <img src={vakitabanner} alt="Imagen de banner"/>
+        <img src="https://grupo3-vakita.s3.amazonaws.com/assets/vakitabanner.png" alt="Imagen de banner"/>
       </div>
       <div>
         <p className={values.name ?"textBannerActive": 'textBanner'}>{values.name|| "Nombre de la vaca"}</p>
@@ -288,6 +323,10 @@ const NewVakita = () => {
       <div className='halfBackground'>
 
 <div >
+<<<<<<< HEAD
+=======
+  <div className='membersDesktop'>
+>>>>>>> 0669857aea63fd27b3bc84f13b48e135fce438dc
 <div className="boxItems">
 
           <EmailList emails={emails} onRemove={removeMember} />
@@ -295,7 +334,11 @@ const NewVakita = () => {
         <div>
         <div className="boxItems">
               <label htmlFor="email"></label>
+<<<<<<< HEAD
               <Field className="inputEmail" type="email" id="email" name="email" placeholder="Agregar integrante con su email" />
+=======
+              <Field className="inputEmail" type="email" id="email" name="email" placeholder="Agregar email del integrante" />
+>>>>>>> 0669857aea63fd27b3bc84f13b48e135fce438dc
               <div className='error'>
               <ErrorMessage name="email" component="div" />
               </div>
@@ -335,7 +378,7 @@ const NewVakita = () => {
             </div>
           
             </div>
-
+            </div>
 
 
     
@@ -353,6 +396,19 @@ const NewVakita = () => {
          
           
           </div>
+      <div className='info'>
+        
+        <div className='infoText'>
+
+        <FontAwesomeIcon icon={faCircleInfo}  size="xl"style={{ marginBottom: '20px',marginTop: '-40px',marginLeft: '-18px',color: '#4D7B84'}} />
+        <p>Recuerda que todos los integrantes 
+         tienen que estar registrados en nuestra plataforma.
+        </p>
+        <div className='boton-invitar'><ShareButton url={"http://vakita.ddns.net/"} /></div>
+        </div>
+        
+        
+        </div>
           </div>
         </Form>
          )}
@@ -360,19 +416,6 @@ const NewVakita = () => {
          
       </Formik>
 
-      <div className='info'>
-        
-        <div className='infoText'>
-
-        <FontAwesomeIcon icon={faCircleInfo} size="xl" />
-        <p>Recuerda que todos los integrantes de este grupo
-         tienen que estar registrados en nuestra plataforma.
-        </p>
-        <div ><ShareButton url={"https://fontawesome.com/docs/web/use-with/react/style#size"} /></div>
-        </div>
-        
-        
-        </div>
 
 
     </div>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .App {
     font-family: sans-serif;
     text-align: left;
@@ -86,3 +87,271 @@
   .rccs__card--unknown > div {
     background-image: url("../../public/images/6.jpeg");
   }
+=======
+.App-payment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+.titulo-AppPayment{
+display: flex;
+width: 100%;
+margin-top: 50px;
+font-size: 1.5em;
+margin-bottom: 20px;
+}
+
+.generalCointainer{
+width: 90%;
+
+  
+  }
+
+.boxCreditCard {
+
+  font-family: sans-serif;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.form-group {
+  margin-top: 1.5rem;
+}
+
+.form-control {
+  text-indent: 10px;
+}
+
+.boxCard {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+
+}
+
+
+.buttonCardCredit button {
+
+
+  display: inline-block;
+  outline: 0;
+  width: 120px;
+  cursor: pointer;
+  color: black;
+  font-weight: 500;
+  font-size: 14px;
+  height: 40px;
+  padding: 0px 15px;
+  text-shadow: rgb(0 0 0 / 25%) 0px 3px 8px;
+  transition: all 0.5s ease 0s;
+  background-color: transparent;
+  border-radius: 10px;
+  border-style: solid;
+  border-top-color: #BB75CB;
+  border-right-color: #D18EBA;
+  border-bottom-color: #E68C8C;
+  border-left-color: #D18EBA;
+  margin-bottom: 20px;
+
+
+  /* Estilo en hover */
+  &:hover {
+    color: white;
+    background-color: #AD8FF3;
+  }
+
+
+}
+
+.buttonCardCredit button:hover {
+  box-shadow: rgba(182, 176, 230, 0.5) 0px 1px 40px;
+  transition: all 0.1s ease 0s;
+}
+
+.formCardCredit {
+  background: linear-gradient(0deg, #EEE9FF 6%, #FCE8E9 91%);
+  box-shadow: 0 6px 8px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+
+.formCardCredit {
+  display: flex;
+  width: 70%;
+  flex-direction: column;
+  margin-top: 20px;
+
+}
+
+.dataCardCredit {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.column-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin: 0 10px;
+
+}
+
+
+.boxCard {
+  width: 50%;
+}
+
+
+.buttonCardCredit {
+  display: flex;
+  align-self: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.errorCreditCard {
+  display: block;
+  color: red;
+  font-style: italic;
+
+}
+
+.boxInput input {
+  height: 35px !important;
+  width: 100% !important;
+  border-radius: 10px !important;
+  background-color: white !important;
+  outline: none !important;
+  border: none !important;
+  /* margin:0 auto  !important; */
+  padding: 2px !important;
+}
+
+.boxInput {
+
+  height: 6rem;
+}
+
+small {
+  font-weight: 500;
+  font-size: 16px;
+
+}
+
+thead tr {
+  background-color: #609AA6;
+  color: #ffffff;
+  text-align: middle;
+}
+
+tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+tbody tr:nth-of-type(even) {
+  background-color: white;
+}
+
+tbody tr:last-of-type {
+  border-bottom: 2px solid #009879;
+}
+
+
+
+
+th,
+td {
+  
+  text-align: left;
+  padding: 12px 0px;
+
+}
+td {
+  background-color: #BBCDD1;
+}
+
+
+
+.saved-cardGeneral {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+
+
+}
+
+.buttonDeletedC {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  font-size: 20px;
+  color: #bf1717;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+
+
+}
+
+
+.Titulo-savedCards {
+  margin-bottom: 40px;
+
+
+}
+
+
+@media only screen and (min-width: 767px) {
+  .App-payment {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .boxInput {
+
+    height: 5rem;
+  }
+
+  th,
+  td {
+    padding: 12px 15px;
+  }
+
+  .formCardCredit {
+    
+    width: 90%;
+    
+  
+  }
+  
+  }
+
+
+
+@media only screen and (max-width: 500px) {
+ 
+  .formCardCredit {
+    
+    width: 350px;
+    
+  
+  }
+}
+
+
+
+
+
+>>>>>>> 0669857aea63fd27b3bc84f13b48e135fce438dc

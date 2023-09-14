@@ -47,6 +47,7 @@ export const ModalContainer = styled.article`
         display:flex;
         flex-direction: column;
         justify-content: space-between;
+<<<<<<< HEAD
         background-image: url("https://i.pinimg.com/750x/4c/84/51/4c8451a12cff12f4ca5b050e56d88f64.jpg");
         background-position: center ;
         background-size:cover;
@@ -56,6 +57,32 @@ export const ModalContainer = styled.article`
     .btnExit {
         width: 100%;
         background-color:black;
+        color: white;
+        margin: 0px;
+        padding:0.8rem;
+        display: flex;
+        justify-content: flex-end;
+        
+
+=======
+        background-image: url("https://i.pinimg.com/750x/37/7a/ea/377aeabbccd59dd33e16a4e7521244b7.jpg");
+        background-position: center ;
+        background-size:cover;
+        
+
+
+        a { color: black;
+        }
+        
+>>>>>>> 0669857aea63fd27b3bc84f13b48e135fce438dc
+    }
+    
+
+    
+
+    .btnExit {
+        width: 100%;
+        background-color:#674F95;
         color: white;
         margin: 0px;
         padding:0.8rem;
