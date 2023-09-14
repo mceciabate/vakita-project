@@ -18,6 +18,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/v1/usuarios")
 public class UserController {
@@ -297,6 +299,7 @@ public class UserController {
             }
             else {
                 logg.info("sending email");
+                String token = UUID.randomUUID().toString();
                 String subject = "Restablecer contraseña";
                 String body = "<!DOCTYPE html>\n" +
                         "<html lang=\"en\">\n" +
@@ -341,15 +344,20 @@ public class UserController {
                         "      <br>\n" +
                         "      <br>\n" +
                         "      <br>\n" +
-                        "      <h2 style=\"margin-left: 50px; display: inline;\">Haz clic en el siguiente enlace para restablecer tu contraseña:</h2>\n" +
-                        "      <a style=\"margin-left: 50px; font-size: 20px; font-weight: bold; text-decoration: none;\" href=\"http://localhost:8080/urlParaRestablecer\">Link</a>\n" +
+                        "      <h2 style=\"margin-left: 50px; display: inline;\">Copia el siguiente token para restablecer tu contraseña:</h2>\n" +
+                        "      <br>\n" +
+                        "      <br>\n" +
+                        "      <h3 style=\"margin-left: 100px; color: blue; display: inline;\">" + token + "</h3>\n" +
                         "    </div>\n" +
                         "  </div>\n" +
                         "</body>\n" +
                         "</html>";
 
                 emailService.sendEmail(userEmailDTO.getEmail(), subject, body);
-                return ResponseEntity.status(HttpStatus.OK).body("Usuario encontrado. Se ha enviado un correo para restablecer la contraseña.");
+                return ResponseEntity.status(HttpStatus.OK).body("{\n" +
+                        "  \"message\": \"Usuario encontrado. Se ha enviado un correo para restablecer la contraseña.\",\n" +
+                        "  \"token\": \"" + token + "\"\n" +
+                        "}");
             }
         } catch (Exception e) {
             logg.error("error: "+ e.getMessage());
