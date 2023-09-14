@@ -14,7 +14,7 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    background-image: url("../assets/Wave.svg");
+    background-image: url("https://grupo3-vakita.s3.amazonaws.com/assets/Wave.svg");
 }
 
 .Titulo-propaganda {
@@ -70,6 +70,7 @@
 .imagen-equipo {
     width: 25%;
     height: auto;
+  
 }
 
 @media only screen and (max-width: 900px) {
