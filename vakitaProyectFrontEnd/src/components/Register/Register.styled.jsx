@@ -11,7 +11,6 @@ align-items: center;
 background: linear-gradient(0deg, rgba(200,185,224,1) 11%, rgba(217,181,195,1) 89%);
 
 @media (max-width: 1180px){
-
   height: 170vh !important;
 }
 `;
@@ -23,14 +22,15 @@ export const GeneralFormContainer = styled.div`
    flex-direction: column;
    align-items: center;
 
-   @media (max-width: 1189px){
-  
 
+
+  @media (max-width: 1180px){
+    height: 1200px;
   }
 `;
 
 export const FormContainer = styled.form`
-height: 600px;
+height: 700px;
 width: 50%;
 margin-top: -8px;
 font-family: 'Inria Sans';
@@ -43,18 +43,22 @@ border-radius:50px;
 
 @media (max-width: 768px){
   width: 80%;
-
+  margin-top:-655px;
+  height: 1100px;
 }
 
+@media (max-width: 1680px){
+  margin-top: 29px;
+}
+  
 
 
-
-@media (max-width: 1180px){
-
-  margin-top: -304px;
-  height: 1000px;
+@media (max-width: 1181px){
+  margin-top: -15px;
+  height: 1100px;
 }
   `;
+  
 
 
 
@@ -78,6 +82,11 @@ margin-top:-350px;
 @media (max-width: 1180px){
 
   margin-top:-745px;
+}
+@media (max-width: 750px){
+
+  margin-top:-755px;
+  
 }
 
 `;
@@ -118,11 +127,7 @@ margin-left:13%;
       width: 100%!important; ;
     }
 
-
   }
-
-
-
 
 `;
 
@@ -193,7 +198,6 @@ export const Button = styled.button`
   cursor: pointer;
   font-weight: medium;
   
-  
 
   /* Estilo en hover */
   &:hover {
@@ -215,6 +219,7 @@ export const Button = styled.button`
     margin-left: 19%;
     margin-right: 5%;
   }
+  @media (max-width: 1181px){
+  }
 
- 
 `;
