@@ -1,5 +1,4 @@
 import { BloqueOptions,HeaderMenuLateral, MenuDiv, MenuLateral,MenuSinLoguear } from "./styled";
-import  Avatar from "../../assets/usuario2.png";
 import { Link, Outlet, useNavigate} from 'react-router-dom'
 import { useUser } from "../../context/UserProvider";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

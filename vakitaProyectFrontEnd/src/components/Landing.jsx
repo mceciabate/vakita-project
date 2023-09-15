@@ -1,11 +1,7 @@
 import React from "react";
 import "../styles/landing.css"
-import UsuarioImg1 from "../assets/usuario1.png";
-import UsuarioImg2 from "../assets/usuario2.png";
-import UsuarioImg3 from "../assets/usuario3.png";
-import ImagenEquipo from "../assets/equipo.png";
-import ImagenTelefonoMoneda from "../assets//telefonoDescubre.png";
-import ImagenTelefonoServicio from "../assets/telefonoServicio.png";
+
+
 
 
 
@@ -33,14 +29,14 @@ function LandingComponent() {
           <p className="texto-infoQuienes">En el corazón mismo de América Latina late una pasión innegable por la comunidad. Por eso, en Vakita nos definimos por nuestra voluntad de ayudar, compartir y unir fuerzas para lograr algo más grande que nosotros mismos. Frases como "¿Hacemos una vaquita?" han marcado el comienzo de innumerables aventuras compartidas, de objetivos cumplidos y de sueños que se han convertido en realidad. En honor a todos aquellos que creen en el poder de proponer, en la fuerza de la unión, nace la web-app VAKITA.</p>
         </div>
 
-        <img className="imagen-equipo" src={ImagenEquipo} alt="logo" />
+        <img className="imagen-equipo" src="https://grupo3-vakita.s3.amazonaws.com/assets/equipo.png" alt="logo" />
 
       </div >
 
 
 
       <div className="contenedor-descubreVakita">
-        <img className="imagen-telefonoMoneda" src={ImagenTelefonoMoneda} alt="logo" />
+        <img className="imagen-telefonoMoneda" src="https://grupo3-vakita.s3.amazonaws.com/assets/telefonoDescubre.png" alt="logo" />
 
         <div className="info-descubreVakita">
 
@@ -97,7 +93,7 @@ function LandingComponent() {
 
         </div>
 
-        <img className="imagen-telefono" src={ImagenTelefonoServicio} alt="logo" />
+        <img className="imagen-telefono" src="https://grupo3-vakita.s3.amazonaws.com/assets/misvaquitas.png" alt="logo" />
 
 
       </div>
@@ -128,7 +124,7 @@ function LandingComponent() {
 
         <div className="card-usuario">
           <div className="informacion-usuario">
-            <img className="imagen-usuario" src={UsuarioImg1} alt="logo" />
+            <img className="imagen-usuario" src="https://grupo3-vakita.s3.amazonaws.com/assets/usuario1.png" alt="logo" />
 
 
             <div className="nombre-usario">
@@ -151,7 +147,7 @@ function LandingComponent() {
 
         <div className="card-usuario">
           <div className="informacion-usuario">
-            <img className="imagen-usuario" src={UsuarioImg2} alt="logo" />
+            <img className="imagen-usuario" src="https://grupo3-vakita.s3.amazonaws.com/assets/usuario2.png" alt="logo" />
 
 
             <div className="nombre-usario">
@@ -175,7 +171,7 @@ function LandingComponent() {
 
         <div className="card-usuario">
           <div className="informacion-usuario">
-            <img className="imagen-usuario" src={UsuarioImg3} alt="logo" />
+            <img className="imagen-usuario" src="https://grupo3-vakita.s3.amazonaws.com/assets/usuario3.png" alt="logo" />
 
 
             <div className="nombre-usario">
@@ -197,24 +193,6 @@ function LandingComponent() {
 
 
       </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

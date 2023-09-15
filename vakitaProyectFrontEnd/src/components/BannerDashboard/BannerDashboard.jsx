@@ -1,4 +1,3 @@
-import imgBanner from "../../assets/bienvenida.png";
 import { DashboardDiv, H1, Image, SpanText, H3 } from "./styled";
 import axios from 'axios';
 import { useEffect, useState } from 'react';
@@ -27,7 +26,7 @@ const BannerDashboard = () => {
 
     return (
         <DashboardDiv>
-            <Image src={imgBanner} />
+            <Image src= "https://grupo3-vakita.s3.amazonaws.com/assets/bienvenida.png"/>
             <SpanText>
                 <H1>{`Hola, ${alias} `}</H1>
                 <H3>¿Estás listo/a para crear tu vaca virtual?</H3>

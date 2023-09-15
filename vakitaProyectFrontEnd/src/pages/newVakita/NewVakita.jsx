@@ -1,7 +1,7 @@
 
 import { Formik, Form, Field, ErrorMessage, FieldArray  } from 'formik';
 import * as Yup from 'yup';
-import vakitabanner from "../../assets/vakitabanner.png"
+
 import { useContext,  useEffect,  useState } from 'react';
 import "../../styles/newVakitaPage.css"
 import EmailList from './EmailList';
@@ -275,7 +275,7 @@ const NewVakita = () => {
 
           <div className='boxTwo'>
           <div className='img'>
-        <img src={vakitabanner} alt="Imagen de banner"/>
+        <img src="https://grupo3-vakita.s3.amazonaws.com/assets/vakitabanner.png" alt="Imagen de banner"/>
       </div>
       <div>
         <p className={values.name ?"textBannerActive": 'textBanner'}>{values.name|| "Nombre de la vaca"}</p>

@@ -1,12 +1,8 @@
-import Cow from "../assets/misvaquitas.png";
-import Hands from "../assets/telefonoDescubre.png";
-import Goals from "../assets/goals.svg";
-
 const sections_dashboards = [
     {
         "title": "Mis Vaquitas",
         "link":"/dashboard/mis-vaquitas",
-        "img": `${Cow}`,
+        "img": `https://grupo3-vakita.s3.amazonaws.com/assets/misvaquitas.png`,
         "color": "#FFE4E5",
         "texto": "Si eliges esta opción podras ver todas las vaquitas que haz creado con tus amigos :)",
 
@@ -14,7 +10,7 @@ const sections_dashboards = [
     },
     {
         "title": "Nueva vaca",
-        "img": `${Hands}`,
+        "img": `https://grupo3-vakita.s3.amazonaws.com/assets/telefonoDescubre.png`,
         "link":"/dashboard/crear-vaca",
         "color": "#E1DAEC",
         "texto": "Si eliges esta opción podras crear todas las vaquitas que quieras  con tus amigos :)",

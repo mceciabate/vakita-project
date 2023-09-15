@@ -1,10 +1,8 @@
 
 import { useLocation } from "react-router-dom";
 import "../styles/header.css";
-import logoVaca from "../assets/LogoVaca.svg";
 import BurgerMenu from "./BurgerMenu/BurgerMenu";
 import { useModal } from "../hooks/useModal";
-import MenuIcon from "../assets/menu_burger.svg";
 import { Link } from 'react-router-dom';
 import { useUser } from "../context/UserProvider";
 import { useState, useEffect } from "react";
@@ -24,7 +22,7 @@ function Header() {
 
   return (
     <header className="header">
-      <Link to="/"><img className="header-logo" src={logoVaca} alt="logo" /></Link>
+      <Link to="/"><img className="header-logo" src="https://grupo3-vakita.s3.amazonaws.com/assets/LogoVaca.svg" alt="logo" /></Link>
 
       <div className="header-botones">
         {(currentPath === "/" && !logged || currentPath === "/register") && (
@@ -67,7 +65,7 @@ function Header() {
           aria-label="Abrir menú"
           onClick={() => openModal()}
         >
-          <img className="img-menuIcon" src={MenuIcon} alt="menu" />
+          <img className="img-menuIcon" src="https://grupo3-vakita.s3.amazonaws.com/assets/menu_burger.svg" alt="menu" />
         </button>
         <BurgerMenu isOpen={isOpenModal} closeMenu={closeModal} />
       </div>
