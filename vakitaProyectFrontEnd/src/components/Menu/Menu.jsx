@@ -1,12 +1,13 @@
-import { BloqueOptions,HeaderMenuLateral, MenuDiv, MenuLateral,MenuSinLoguear } from "./styled";
-import { Link, Outlet, useNavigate} from 'react-router-dom'
+
+import React, { useEffect, useState } from "react";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useUser } from "../../context/UserProvider";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons"
-import { useState, useEffect } from "react";
+ import { BloqueOptions,HeaderMenuLateral, MenuDiv, MenuLateral,MenuSinLoguear } from "./styled";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import UserProfileImage from "../Perfil/UserProfileImage";
 
-const Menu = () => {
+const Menu = ({ handleCloseModal }) => {
   const { logged, setLogged } = useUser();
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
@@ -24,15 +25,16 @@ const Menu = () => {
     fetch("http://107.22.65.36:8080/api/v1/usuarios/" + userId)
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Network response was not ok")
+          throw new Error("Network response was not ok");
         }
         return response.json();
       })
       .then((data) => {
         setUser(data);
       })
-      .catch((error) => console.error(error))
+      .catch((error) => console.error(error));
   }, [userId]);
+
   return (
     <>
       <MenuDiv>
@@ -40,30 +42,34 @@ const Menu = () => {
           <>
             <MenuLateral>
               <HeaderMenuLateral>
-            
-              <UserProfileImage user={user} />
-               
+                <UserProfileImage user={user} />
               </HeaderMenuLateral>
 
               <BloqueOptions>
-                <Link to="/dashboard">Inicio</Link>
-                <Link to="/dashboard/crear-vaka">Nueva Vaka</Link>
-                <Link to="/dashboard/mis-vakitas">Mis Vakitas</Link>
-                <hr />
-                <Link to="/dashboard/mi-perfil">Mi perfil</Link>
-                <Link to="/dashboard/mis-datos-financieros">
-                  Datos financieros
+                <Link to="/dashboard" onClick={handleCloseModal}>
+                  Inicio
+                </Link>
+                <Link to="/dashboard/crear-vaka" onClick={handleCloseModal}>
+                  Nueva Vaka
+                </Link>
+                <Link to="/dashboard/mis-vakitas" onClick={handleCloseModal}>
+                  Mis Vakitas
                 </Link>
                 <hr />
-                <Link to="/dashboard/transacciones">
-                  Transacciones
+                 <Link to="/dashboard/mi-perfil" onClick={handleCloseModal}>Mi perfil</Link>
+                 <Link to="/dashboard/mis-datos-financieros" onClick={handleCloseModal}>
+                   Datos financieros
+                 </Link>
+                 <hr />
+                 <Link to="/dashboard/transacciones" onClick={handleCloseModal}>
+                   Transacciones
                 </Link> 
-                 <Link to="/dashboard/extraer-dinero">
-                  Extracción de dinero
-                </Link>
+                 <Link to="/dashboard/extraer-dinero" onClick={handleCloseModal}>
+                   Extracción de dinero
+                 </Link>
              
 
-                <button
+                 <button
                   onClick={() => {
                     setLogged(false);
                     navigate("/");
@@ -81,13 +87,18 @@ const Menu = () => {
           </>
         ) : (
           <MenuSinLoguear>
-            <button>
-              <Link to="/log-in">Iniciar sesión</Link>
+            <div className="boxBtn">
+            <button className="btnMenu">
+              <Link to="/log-in" onClick={handleCloseModal}>
+                Iniciar sesión
+              </Link>
             </button>
             <button>
-              {" "}
-              <Link to="/register">Crear cuenta</Link>
+              <Link to="/register" onClick={handleCloseModal}>
+                Crear cuenta
+              </Link>
             </button>
+            </div>
           </MenuSinLoguear>
         )}
       </MenuDiv>

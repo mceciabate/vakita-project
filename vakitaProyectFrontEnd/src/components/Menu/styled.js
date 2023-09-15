@@ -164,10 +164,33 @@ export const MenuDiv=styled.div`
 `;
 
 export const MenuSinLoguear=styled.div`
+ width: 100%;
+ display: flex;
+ justify-content: center;
+
+.boxBtn{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    gap: 1rem;
+  
+   
+    
+}
     
     button{
-        background-color:white !important;
-        border: none;
+      
+    border: none;
+    padding: 10px;
+    border-radius: .7rem;
+    cursor: pointer;
+    border: none;
+    font-weight: 500;
+    background-color: #FCE8E9;
+    font-family: 'Inria Sans', sans-serif;
+    font-size: 16.5px;
+    width: 12rem;
+       
     }
     a{
         color:black ;

@@ -155,8 +155,9 @@ useEffect(() => {
         }
     
       
-        formik.resetForm();
       }
+      formik.resetForm();
+      
     },
     
   });

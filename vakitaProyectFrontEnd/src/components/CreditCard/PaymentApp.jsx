@@ -5,6 +5,7 @@ import "../../styles/cardCredit.css";
 function PaymentApp() {
   const [paymentDetails, setPaymentDetails] = useState({
     number: '',
+    alias: '',
     name: '',
     expiry: '',
     cvc: '',
