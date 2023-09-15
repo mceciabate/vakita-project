@@ -1,6 +1,6 @@
 .containerPage {
     display: flex;
-    height: auto;
+   
     flex-direction: column;
     align-items: center;
     width: 100%;
@@ -13,6 +13,7 @@
 
 .boxItems {
     display: flex;
+    width: 100%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -22,6 +23,7 @@
 }
 
 .halfBackground {
+    padding:30px;
     background-color: #FFFFFF;
     margin: 0rem -2.5%;
     margin-bottom: -1.8%;
@@ -138,6 +140,7 @@ form input[type="submit"]:hover {
 .boxReverseBanner {
     display: flex;
     flex-direction: column;
+    width: 90%;
 }
 
 .boxOne {
@@ -178,6 +181,11 @@ img {
 
 }
 
+.contenedor-miembros{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 h4 {
     text-align: center;
     margin: 20px 0px;
@@ -186,19 +194,16 @@ h4 {
 
 .memberAdded {
     background-color: #c5bebe;
-    width: 14rem;
+    width: 80%; /* Cambiar el ancho a 100% para centrar */
     font-size: 16.5px;
     margin: 8px 0;
     border-radius: 5px;
     text-align: center;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
     display: flex;
-    padding: 10px;
-}
 
+    padding: 10px;
+   
+}
 .userIcon {
     display: flex;
     padding-right: 10px;
@@ -435,15 +440,50 @@ h4 {
         width: 95%;
         margin-left: .4rem;
     }
+    .halfBackground {
+        padding: 0;
+        width: 93%;
+        margin: 0rem 0%;
+        margin:0 auto;
+    }
+
+    .halfBackground {
+        padding: 0;
+        width: 93%;
+        margin: 0rem 0%;
+        margin:0 auto;
+    }
+    .boxReverseBanner {
+        
+        margin:0 auto;
+        
+    }
+    
+    
+
+}
 
 
-
+@media only screen and (max-width: 400px) {
+   
+    .halfBackground {
+        padding: 0;
+        width: 99%;
+        margin: 0rem 0%;
+        margin:0 auto;
+    }
+    .boxReverseBanner {
+        
+        margin:0 auto;
+        
+    }
 }
 
 
 @media only screen and (min-width: 980px) {
 
     .halfBackground {
+        padding: 0;
         width: 93%;
         margin: 0rem 0%;
         margin-left: 1.4rem;
@@ -472,8 +512,46 @@ h4 {
     }
 
     .halfBackground {
-        width: 35%;
+        width: 55%;
 
     }
 
+}
+
+.contenedor-miembros{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+h4 {
+    text-align: center;
+    margin: 20px 0px;
+    font-size: 18px;
+}
+
+
+
+
+@media only screen and (min-width: 1199px) {
+
+    .contenedor-miembros{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+ 
+    
+    .memberAdded {
+        background-color: #c5bebe;
+        width: 70%; /* Cambiar el ancho a 100% para centrar */
+        font-size: 16.5px;
+        margin: 8px 0;
+        border-radius: 5px;
+        text-align: center;
+        display: flex;
+    
+        padding: 10px;
+       
+    }
+    
 }
