@@ -145,16 +145,22 @@ function Login() {
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Usuario no encontrado',
-                                text: 'No se encontró ningún usuario con el correo electrónico proporcionado',
+                                text: 'El correo electrónico proporcionado no coincide con ningún usuario registrado en nuestro sistema. Por favor, asegúrate de que has ingresado correctamente tu dirección de correo electrónico y que está registrada en nuestra plataforma.',
+                                customClass: {
+                                    validationMessage: 'my-custom-validation-message' // Aquí usamos la clase personalizada
+                                  }
                             });
                         }
                     })
                     .catch((error) => {
                         
-                        Swal.fire({
+                         Swal.fire({
                             icon: 'error',
-                            title: 'Usuario no encontrado',
-                            text: 'No se encontró ningún usuario con el correo electrónico proporcionado',
+                            title: 'Usuario no encontrados',
+                            text: 'El correo electrónico proporcionado no coincide con ningún usuario registrado en nuestro sistema. Por favor, asegúrate de que has ingresado correctamente tu dirección de correo electrónico y que está registrada en nuestra plataforma.',
+                            customClass: {
+                                validationMessage: 'my-custom-validation-message' // Aquí usamos la clase personalizada
+                              }
                         });
                     });
             }
@@ -282,7 +288,7 @@ function Login() {
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                         />
-                        {formik.touched.email && formik.errors.email && <span style={{ color: "red", marginLeft: "87px" }}>{formik.errors.email}</span>}
+                        {formik.touched.email && formik.errors.email && <span style={{ color: "red", marginLeft: "12%" }}>{formik.errors.email}</span>}
 
                     </ContainerInput>
 
@@ -295,7 +301,7 @@ function Login() {
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                         />
-                        {formik.touched.password && formik.errors.password && <span style={{ color: "red", marginLeft: "87px" }}>{formik.errors.password}</span>}
+                        {formik.touched.password && formik.errors.password && <span style={{ color: "red", marginLeft: "12%"}}>{formik.errors.password}</span>}
                     </ContainerInput>
 
                     <Button className="continuar" type='submit'>Continuar </Button>

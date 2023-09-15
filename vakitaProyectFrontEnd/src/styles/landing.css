@@ -70,7 +70,7 @@
 .imagen-equipo {
     width: 25%;
     height: auto;
-  
+
 }
 
 @media only screen and (max-width: 900px) {
@@ -362,7 +362,7 @@
     justify-content: space-evenly;
     margin-bottom: 20px;
 
-    
+
 
 }
 
@@ -505,4 +505,12 @@
         font-weight: 900;
     }
 
+}
+
+div#swal2-html-container {
+    text-align: justify;
+}
+
+Input#email.swal2-input {
+    width: 82%;
 }

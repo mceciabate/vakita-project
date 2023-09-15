@@ -153,6 +153,7 @@ export const Input = styled.input`
 /* Estilos para los mensajes de error */
 export const ErrorSpan = styled.span`
 display:flex;
+width: 70%;
   color: red;
   font-size: 14px;
   margin-left: 1px;
@@ -162,7 +163,7 @@ display:flex;
 
 export const CheckSection = styled.div`
   display: flex;
-  width: 80%;
+  width: 70%;
   align-items: flex-start;
   margin-top: 0.8rem;
 
