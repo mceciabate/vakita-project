@@ -364,4 +364,19 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor, intente mas tarde.\"}");
         }
     }
+    @Operation(summary = "Modificar saldo de un user")
+    @PostMapping("/balance")
+    public ResponseEntity<?> modifyAcountBalance(@RequestParam Long userId, @RequestParam Double amount) {
+        String response = new String();
+        try {
+            userService.updateAccountBalance(userId, amount);
+            response = "Success!Update AccountBalance";
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        }
+        catch(Exception e) {
+            logg.error(e.getMessage());
+            response = "Error: insufficient balance. Please check values";
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+        }
+    }
 }
