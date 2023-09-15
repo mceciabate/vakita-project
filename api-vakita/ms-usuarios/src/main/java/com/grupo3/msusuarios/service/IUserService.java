@@ -24,4 +24,5 @@ public interface IUserService {
 
     //MÉTODO PARA VALIDAR TOKEN
     void validateToken(String token) throws Exception;
+
 }
