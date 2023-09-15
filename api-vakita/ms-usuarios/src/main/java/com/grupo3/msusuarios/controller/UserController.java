@@ -174,7 +174,7 @@ public class UserController {
                     "  <div class=\"body\">\n" +
                     "    <div class=\"container\">\n" +
                     "      <h1>Cuenta confirmada exitosamente!</h1>\n" +
-                    "      <a style=\"text-decoration: none;\" href=\"http://http://54.221.139.107/\"><h2>Ir al login</h2></a>\n" +
+                    "      <a style=\"text-decoration: none;\" href=\"http://54.221.139.107/\"><h2>Ir al login</h2></a>\n" +
                     "    </div>\n" +
                     "  </div>\n" +
                     "</body>\n" +
