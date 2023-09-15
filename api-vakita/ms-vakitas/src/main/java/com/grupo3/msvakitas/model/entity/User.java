@@ -25,10 +25,15 @@ public class User implements Serializable{
     @Column(name = "USER_EMAIL", nullable = false, length = 200)
     private String email;
 
+//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+//    private List<Transaction> transactions;
+
+//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JoinColumn(name = "USER_ID")
+//    private List<Transaction> transactions;
+
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "contributors")
     private List<Vakita> vakitas;
-
-
 
     //CONTRUCTOR SIN ARRAY DE VAKITAS
     public User(Long id, String email) {
@@ -36,6 +41,17 @@ public class User implements Serializable{
         this.email = email;
     }
 
+<<<<<<< HEAD
+=======
+//    //CONSTRUCTOR CON TRANSACCIONES
+//    public User(Long id, String email, List<Transaction> transactions) {
+//        this.id = id;
+//        this.email = email;
+//        this.transactions = transactions;
+//    }
+
+    //CONSTRUCTOR CON MAIL
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
     public User(String email) {
         this.email = email;
     }

@@ -31,9 +31,19 @@ public class ConfirmationToken implements Serializable {
 
     private String userName;
     private String userLastName;
+<<<<<<< HEAD
+=======
+    private String userAlias;
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
     private String userDni;
     private String userEmail;
     private String userPassword;
     private LocalDate userBirthdate;
+<<<<<<< HEAD
+=======
+    @Lob
+    @Column(name = "avatar", columnDefinition = "LONGBLOB")
+    private byte[] userAvatar;
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
     private Double account_balance;
 }

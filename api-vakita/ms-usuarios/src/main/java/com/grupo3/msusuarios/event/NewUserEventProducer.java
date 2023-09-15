@@ -1,6 +1,9 @@
 package com.grupo3.msusuarios.event;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
 import com.grupo3.msusuarios.config.RabbitMQConfig;
 import com.grupo3.msusuarios.model.dto.UserRabbitDTO;
 import lombok.AllArgsConstructor;

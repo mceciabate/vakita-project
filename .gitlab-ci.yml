@@ -7,9 +7,12 @@ image: maven:latest
 stages:
   - build
   - test
+<<<<<<< HEAD
   - package
 
 #  - deploy
+=======
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
 
 cache:
   paths:
@@ -26,6 +29,18 @@ build_usuarios:
     - cd ./api-vakita/ms-usuarios 
     - mvn compile
 
+<<<<<<< HEAD
+=======
+build_payment:
+  stage: build
+  only:
+    - backend
+  script:
+    - echo "Maven compile started on payment"
+    - cd ./api-vakita/ms-payment
+    - mvn compile
+
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
 build_vakitas:
   stage: build
   only:
@@ -72,6 +87,7 @@ test_vakitas:
    - cd ./api-vakita/ms-vakitas
    - mvn clean test
 
+<<<<<<< HEAD
 #Artefactos para los resource server
 package_users: 
   stage: package
@@ -96,3 +112,7 @@ package_vakitas:
     - echo "Maven package started on vakitas"
     - cd ./api-vakita/ms-vakitas
     - mvn package
+=======
+
+
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63

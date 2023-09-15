@@ -10,4 +10,8 @@ import java.util.Optional;
 public interface IUserRepository extends JpaRepository<User, Long>{
 
     Optional<User> findByEmail(String email);
+<<<<<<< HEAD
+=======
+    Optional<User> findByDni(String email);
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
 }

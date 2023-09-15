@@ -2,8 +2,13 @@ package com.grupo3.msvakitas.controller;
 
 import com.grupo3.msvakitas.handler.BadRequestException;
 import com.grupo3.msvakitas.handler.ResourceNotFoundException;
+import com.grupo3.msvakitas.model.dto.TransactionDTO;
 import com.grupo3.msvakitas.model.dto.VakitaDTO;
 import com.grupo3.msvakitas.model.dto.VakitaPatchDTO;
+<<<<<<< HEAD
+=======
+import com.grupo3.msvakitas.service.impl.TransactionService;
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
 import com.grupo3.msvakitas.service.impl.VakitaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -15,7 +20,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @Slf4j
@@ -26,6 +34,12 @@ public class VakitaController {
     @Autowired
     private VakitaService vakitaService;
 
+<<<<<<< HEAD
+=======
+    @Autowired
+    private TransactionService tService;
+
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
     //TODO ESTA DEVOLVIENDO 200
     //CREAR UNA VAKITA
     @Operation(summary = "Crear vakita")
@@ -52,6 +66,7 @@ public class VakitaController {
     @ResponseStatus(code = HttpStatus.OK)
     //    @PreAuthorized("hasRole('ADMIN')")
     public ResponseEntity<List<VakitaDTO>> getAllVakitas(){
+
         return ResponseEntity.ok(vakitaService.getAllVakitas());
     }
 
@@ -73,6 +88,18 @@ public class VakitaController {
         return ResponseEntity.ok(vakitaService.getVakitasActivesByContributor(userId));
     }
 
+<<<<<<< HEAD
+=======
+    //OBTENER LA LISTA DE VAKITAS INACTIVAS POR CONTRIBUYENTE
+    @Operation(summary = "Traer la lista de vakitas inactivas por contribuyente")
+    @GetMapping("/inactives/{userId}")
+    @ResponseStatus(code = HttpStatus.OK)
+    //    @PreAuthorized("hasRole('USER')")
+    public ResponseEntity<List<VakitaDTO>> getInactivesByContributor(@PathVariable Long userId) throws ResourceNotFoundException {
+        return ResponseEntity.ok(vakitaService.getVakitasInactivesByContributor(userId));
+    }
+
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
     //OBTENER LISTADO DE VAKITAS EN LAS QUE SOY CONTRIBUYENTE(LAS HAYA CREADO O NO)
     @Operation(summary = "Traer listado de vakitas en las que soy contribuyente")
     @GetMapping("/contributors/{userId}")
@@ -115,8 +142,13 @@ public class VakitaController {
     @PutMapping("/deposit")
     @ResponseStatus(code = HttpStatus.OK)
     //    @PreAuthorized("hasRole('USER')")
+<<<<<<< HEAD
     public ResponseEntity deposit(@RequestParam Double amount, @RequestParam Long vakitaId) throws BadRequestException, ResourceNotFoundException {
         vakitaService.modifyAmount(amount, vakitaId);
+=======
+    public ResponseEntity deposit(@RequestParam Long userId,  @RequestParam Long vakitaId, @RequestParam Double amount) throws BadRequestException, ResourceNotFoundException {
+        vakitaService.modifyAmount(userId, vakitaId, amount);
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
         return ResponseEntity.ok().build();
     }
 
@@ -151,9 +183,29 @@ public class VakitaController {
         return ResponseEntity.ok().build();
     }
 
-
-
-
+    @Operation(summary = "Filtrar las transacciones")
+    @GetMapping("/transactions")
+    @ResponseStatus(code = HttpStatus.OK)
+    public ResponseEntity<List<TransactionDTO>> filterTrasactions(
+             @RequestParam(required = false) Optional<Long> userId
+            , @RequestParam(required = false) Optional<Long> vakitaId
+            , @RequestParam(required = false) Optional<LocalDate> inicialDate
+            , @RequestParam(required = false) Optional<LocalDate> finalDate) throws ResourceNotFoundException {
+        List<TransactionDTO> transactionF = new ArrayList<>();
+        if (vakitaId.isPresent()&&inicialDate.isPresent()&&finalDate.isPresent()){
+            transactionF = tService.getTransactionsByVakitaByDate(vakitaId, inicialDate, finalDate);
+        }
+        else if(userId.isPresent()&&vakitaId.isPresent()) {
+            transactionF = tService.getTransactionsByUserIdVakitaId(userId, vakitaId);
+        }
+        else if(vakitaId.isPresent()&&!(userId.isPresent())) {
+            transactionF = tService.getTransactionsByVakitaId(vakitaId);
+        }
+        else if (userId.isPresent()&&!(vakitaId.isPresent())) {
+            transactionF = tService.getTransccionsByUser(userId);
+        }
+        return ResponseEntity.ok(transactionF);
+    }
 }
 
 

@@ -14,8 +14,16 @@ public class UserWithoutPasswordDTO {
     private Long id;
     private String name;
     private String lastName;
+<<<<<<< HEAD
     private String dni;
     private String email;
     private LocalDate birthdate;
+=======
+    private String alias;
+    private String dni;
+    private String email;
+    private LocalDate birthdate;
+    private byte[] avatar;
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
     private Double account_balance;
 }

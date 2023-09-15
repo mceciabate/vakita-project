@@ -1,0 +1,217 @@
+{
+	"info": {
+		"_postman_id": "2bdde00a-cd9c-45bc-9d5d-114a74ffaeb3",
+		"name": "MS-Payment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20337969"
+	},
+	"item": [
+		{
+			"name": "getAllCC",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtLmNlY2lsaWEuYWJhdGVAZ21haWwuY29tIiwiaWF0IjoxNjkzNjc0OTM1LCJleHAiOjE2OTM2NzY3MzV9.I5tEEZZWucRHHh31lq3E_xrPy-58DrX1dUbbybGNrOY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/payment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"payment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtLmNlY2lsaWEuYWJhdGVAZ21haWwuY29tIiwiaWF0IjoxNjkzNjc0OTM1LCJleHAiOjE2OTM2NzY3MzV9.I5tEEZZWucRHHh31lq3E_xrPy-58DrX1dUbbybGNrOY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/payment/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"payment",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getByUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtLmNlY2lsaWEuYWJhdGVAZ21haWwuY29tIiwiaWF0IjoxNjkzNjc0OTM1LCJleHAiOjE2OTM2NzY3MzV9.I5tEEZZWucRHHh31lq3E_xrPy-58DrX1dUbbybGNrOY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/payment/personal/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"payment",
+						"personal",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postCC",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtLmNlY2lsaWEuYWJhdGVAZ21haWwuY29tIiwiaWF0IjoxNjkzNjc0OTM1LCJleHAiOjE2OTM2NzY3MzV9.I5tEEZZWucRHHh31lq3E_xrPy-58DrX1dUbbybGNrOY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n    \"userId\": 10,\r\n    \"alias\": \"banco provincia\",\r\n    \"cardNumber\" : \"123456\",\r\n    \"expirationDate\": \"2030-01-13\",\r\n    \"cvv\": \"1234\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/payment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"payment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "modifyAlias",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtLmNlY2lsaWEuYWJhdGVAZ21haWwuY29tIiwiaWF0IjoxNjkzNjc0OTM1LCJleHAiOjE2OTM2NzY3MzV9.I5tEEZZWucRHHh31lq3E_xrPy-58DrX1dUbbybGNrOY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/payment/alias/7?alias=banco macro",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"payment",
+						"alias",
+						"7"
+					],
+					"query": [
+						{
+							"key": "alias",
+							"value": "banco macro"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteCCbyId",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtLmNlY2lsaWEuYWJhdGVAZ21haWwuY29tIiwiaWF0IjoxNjkzNjc0OTM1LCJleHAiOjE2OTM2NzY3MzV9.I5tEEZZWucRHHh31lq3E_xrPy-58DrX1dUbbybGNrOY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/payment/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"payment",
+						"7"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

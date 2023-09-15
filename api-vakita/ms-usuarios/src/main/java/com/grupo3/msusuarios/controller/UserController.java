@@ -1,12 +1,19 @@
 package com.grupo3.msusuarios.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+<<<<<<< HEAD
 import com.grupo3.msusuarios.model.dto.AuthRequestDTO;
 import com.grupo3.msusuarios.model.dto.AuthResponseDTO;
 import com.grupo3.msusuarios.model.dto.UserDTO;
 import com.grupo3.msusuarios.model.dto.UserWithoutPasswordDTO;
 import com.grupo3.msusuarios.service.IUserService;
 import com.grupo3.msusuarios.service.impl.ConfirmationTokenService;
+=======
+import com.grupo3.msusuarios.model.dto.*;
+import com.grupo3.msusuarios.service.IUserService;
+import com.grupo3.msusuarios.service.impl.ConfirmationTokenService;
+import com.grupo3.msusuarios.service.impl.EmailService;
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
 import com.grupo3.msusuarios.util.FormatMessage;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -19,7 +26,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+<<<<<<< HEAD
 import org.springframework.web.server.ResponseStatusException;
+=======
+
+import java.util.UUID;
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
 
 @RestController
 @RequestMapping("/api/v1/usuarios")
@@ -29,16 +41,28 @@ public class UserController {
     private final IUserService userService;
     private final ObjectMapper mapper;
     private final ConfirmationTokenService confirmationTokenService;
+<<<<<<< HEAD
+=======
+    private final EmailService emailService;
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
 
     //Lo inyecto para poder validar las credenciales y generar token de acceso
     private final AuthenticationManager authenticationManager;
 
     @Autowired
+<<<<<<< HEAD
     public UserController(IUserService userService, ObjectMapper mapper, ConfirmationTokenService confirmationTokenService, AuthenticationManager authenticationManager) {
+=======
+    public UserController(IUserService userService, ObjectMapper mapper, ConfirmationTokenService confirmationTokenService, AuthenticationManager authenticationManager, EmailService emailService) {
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
         this.userService = userService;
         this.confirmationTokenService = confirmationTokenService;
         this.mapper = mapper;
         this.authenticationManager = authenticationManager;
+<<<<<<< HEAD
+=======
+        this.emailService = emailService;
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
     }
 
     @Operation(summary = "Busca todos los registros de usuarios")
@@ -96,17 +120,35 @@ public class UserController {
         logg.info(userDTO.toString());
         if (result.hasErrors()) {
             logg.error("error: "+ FormatMessage.formatMessage(result));
+<<<<<<< HEAD
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, FormatMessage.formatMessage(result));
         }
         try {
             logg.info("saved");
+=======
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(FormatMessage.formatMessage(result));
+        }
+        try {
+            logg.info("saved");
+
+            if (userService.findByDni(userDTO.getDni()) != null){
+                logg.error("error: dni ya registrado");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. El dni ya se encuentra registrado.\"}");
+            }
+
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
             boolean response = confirmationTokenService.sendConfirmationEmail(userDTO);
             if (response) {
                 return ResponseEntity.status(HttpStatus.CREATED).body("Usuario registrado. Se ha enviado un correo de confirmación.");
             }
             else {
+<<<<<<< HEAD
                 logg.info("Mail duplicado");
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El mail ya se encuentra registrado");
+=======
+                logg.error("error: email duplicado");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. El email ya se encuentra registrado.\"}");
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
             }
         } catch (Exception e) {
             logg.error("error: "+ e.getMessage());
@@ -121,7 +163,61 @@ public class UserController {
         try {
             logg.info("confirmed");
             confirmationTokenService.confirmUser(token);
+<<<<<<< HEAD
             return ResponseEntity.status(HttpStatus.OK).body("Cuenta confirmada exitosamente.");
+=======
+            return ResponseEntity.status(HttpStatus.OK).body("<!DOCTYPE html>\n" +
+                    "<html lang=\"en\">\n" +
+                    "<head>\n" +
+                    "    <meta charset=\"UTF-8\">\n" +
+                    "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
+                    "    <title>Account Created</title>\n" +
+                    "    <style>\n" +
+                    "        .header {\n" +
+                    "          width: 100%;\n" +
+                    "          height: 100px;\n" +
+                    "          display: flex;\n" +
+                    "          align-items: center;\n" +
+                    "          justify-content: space-between;\n" +
+                    "          background: linear-gradient(0deg, #664e94 10%, #423163 90%);\n" +
+                    "          position: sticky;\n" +
+                    "          z-index: 999;\n" +
+                    "          box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.20); \n" +
+                    "        }\n" +
+                    "        .body {\n" +
+                    "          width: 100%;\n" +
+                    "          height: 100vh;\n" +
+                    "          display: flex;\n" +
+                    "          justify-content: center;\n" +
+                    "          align-items: center;\n" +
+                    "          background: linear-gradient(0deg, rgba(200,185,224,1) 11%, rgba(217,181,195,1) 89%);\n" +
+                    "        }\n" +
+                    "        .container{\n" +
+                    "          height: 300px;\n" +
+                    "          margin-top: -8px;\n" +
+                    "          width: 50%;\n" +
+                    "          display: flex;\n" +
+                    "          font-family: 'Inria Sans';\n" +
+                    "          justify-content: center;\n" +
+                    "          align-items: center;\n" +
+                    "          flex-direction: column;\n" +
+                    "          background: linear-gradient(0deg, #EEE9FF 6%, #FCE8E9 91%);\n" +
+                    "          border-radius:50px;\n" +
+                    "          margin-bottom: 100px;\n" +
+                    "        }\n" +
+                    "      </style>\n" +
+                    "</head>\n" +
+                    "<body>\n" +
+                    "    <div class=\"header\"></div>\n" +
+                    "  <div class=\"body\">\n" +
+                    "    <div class=\"container\">\n" +
+                    "      <h1>Cuenta confirmada exitosamente!</h1>\n" +
+                    "      <h2>Ir al login</h2>\n" +
+                    "    </div>\n" +
+                    "  </div>\n" +
+                    "</body>\n" +
+                    "</html>");
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
         } catch (Exception e) {
             logg.error("error: "+ e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor, intente mas tarde.\"}");
@@ -130,11 +226,16 @@ public class UserController {
 
     @Operation(summary = "Actualiza un usuario por el id")
     @PutMapping("/{id}")
+<<<<<<< HEAD
     public ResponseEntity<?> updateUserById(@PathVariable Long id, @Valid @RequestBody UserDTO userDTO, BindingResult result) {
+=======
+    public ResponseEntity<?> updateUserById(@PathVariable Long id, @Valid @RequestBody UserUpdateDTO userDTO, BindingResult result) {
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
         logg.info("Metodo updateUserById");
         logg.info(userDTO.toString());
         if (result.hasErrors()) {
             logg.error("error: "+ FormatMessage.formatMessage(result));
+<<<<<<< HEAD
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, FormatMessage.formatMessage(result));
         }
         try {
@@ -142,6 +243,11 @@ public class UserController {
 //                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "{\"error\":\"Los Ids no coinciden\"}");
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Los Ids no coinciden\"}");
             }
+=======
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(FormatMessage.formatMessage(result));
+        }
+        try {
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
             UserDTO findUserDTO = userService.findById(id);
             if (findUserDTO == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"No se encontraron registros con ese ID.\"}");
@@ -156,12 +262,20 @@ public class UserController {
 
     @Operation(summary = "Actualiza password del usuario por el id")
     @PatchMapping("/{id}")
+<<<<<<< HEAD
     public ResponseEntity<?> changeUserPasswordById(@PathVariable Long id, @Valid @RequestBody UserDTO newPassword, BindingResult result) {
+=======
+    public ResponseEntity<?> changeUserPasswordById(@PathVariable Long id, @Valid @RequestBody UserPasswordDTO newPassword, BindingResult result) {
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
         logg.info("Metodo changeUserPasswordById");
         logg.info(newPassword);
         if (result.hasErrors()) {
             logg.error("error: "+ FormatMessage.formatMessage(result));
+<<<<<<< HEAD
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, FormatMessage.formatMessage(result));
+=======
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(FormatMessage.formatMessage(result));
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
         }
         try {
             boolean changePassword = userService.changePassword(id, newPassword.getPassword());
@@ -229,4 +343,89 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
     }
+<<<<<<< HEAD
+=======
+
+    @Operation(summary = "Enviar un email al usuario para restablecer password")
+    @PostMapping("/recover")
+    public ResponseEntity<?> recoverUserPassword(@Valid @RequestBody UserEmailDTO userEmailDTO, BindingResult result) {
+        logg.info("Metodo recoverUserPassword");
+        logg.info(userEmailDTO.toString());
+        if (result.hasErrors()) {
+            logg.error("error: "+ FormatMessage.formatMessage(result));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(FormatMessage.formatMessage(result));
+        }
+        try {
+            if (userService.findByEmail(userEmailDTO.getEmail()) == null){
+                logg.error("error: email no registrado");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. El email no se encuentra registrado.\"}");
+            }
+            else {
+                logg.info("sending email");
+                String token = UUID.randomUUID().toString();
+                String subject = "Restablecer contraseña";
+                String body = "<!DOCTYPE html>\n" +
+                        "<html lang=\"en\">\n" +
+                        "<head>\n" +
+                        "    <meta charset=\"UTF-8\">\n" +
+                        "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
+                        "    <title>Account Created</title>\n" +
+                        "    <style>\n" +
+                        "        .header {\n" +
+                        "          width: 50%;\n" +
+                        "          height: 50px;\n" +
+                        "          display: flex;\n" +
+                        "          align-items: center;\n" +
+                        "          justify-content: space-between;\n" +
+                        "          background: linear-gradient(0deg, #664e94 10%, #423163 90%);\n" +
+                        "          position: sticky;\n" +
+                        "          z-index: 999;\n" +
+                        "          box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.20); \n" +
+                        "        }\n" +
+                        "        .body {\n" +
+                        "          width: 50%;\n" +
+                        "          height: 30vh;\n" +
+                        "          display: flex;\n" +
+                        "          background: linear-gradient(0deg, rgba(200,185,224,1) 11%, rgba(217,181,195,1) 89%);\n" +
+                        "        }\n" +
+                        "        .container{\n" +
+                        "          height: 150px;\n" +
+                        "          width: 100%;\n" +
+                        "          margin-top: 40px;\n" +
+                        "          padding-left: 10px;\n" +
+                        "          padding-bottom: 10px;\n" +
+                        "          font-family: 'Inria Sans';\n" +
+                        "          background: linear-gradient(0deg, #EEE9FF 6%, #FCE8E9 91%);\n" +
+                        "          border-radius:20px;\n" +
+                        "        }\n" +
+                        "      </style>\n" +
+                        "</head>\n" +
+                        "<body>\n" +
+                        "    <div class=\"header\"></div>\n" +
+                        "  <div class=\"body\">\n" +
+                        "    <div class=\"container\">\n" +
+                        "      <br>\n" +
+                        "      <br>\n" +
+                        "      <br>\n" +
+                        "      <h2 style=\"margin-left: 50px; display: inline;\">Copia el siguiente token para restablecer tu contraseña:</h2>\n" +
+                        "      <br>\n" +
+                        "      <br>\n" +
+                        "      <h3 style=\"margin-left: 100px; color: blue; display: inline;\">" + token + "</h3>\n" +
+                        "    </div>\n" +
+                        "  </div>\n" +
+                        "</body>\n" +
+                        "</html>";
+
+                emailService.sendEmail(userEmailDTO.getEmail(), subject, body);
+                return ResponseEntity.status(HttpStatus.OK).body("{\n" +
+                        "  \"message\": \"Usuario encontrado. Se ha enviado un correo para restablecer la contraseña.\",\n" +
+                        "  \"token\": \"" + token + "\"\n" +
+                        "}");
+            }
+        } catch (Exception e) {
+            logg.error("error: "+ e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor, intente mas tarde.\"}");
+        }
+    }
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
 }

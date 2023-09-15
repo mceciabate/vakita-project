@@ -1,6 +1,9 @@
 package com.grupo3.msusuarios.config;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;

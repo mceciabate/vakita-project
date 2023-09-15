@@ -43,6 +43,7 @@ spring:
   sql:
     init:
       mode: always
+
 eureka:
   client:
     registerWithEureka: true

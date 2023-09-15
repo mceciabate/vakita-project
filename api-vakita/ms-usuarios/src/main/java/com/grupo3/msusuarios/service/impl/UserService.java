@@ -2,20 +2,24 @@ package com.grupo3.msusuarios.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.grupo3.msusuarios.event.NewUserEventProducer;
+<<<<<<< HEAD
 import com.grupo3.msusuarios.model.dto.AuthResponseDTO;
 import com.grupo3.msusuarios.model.dto.UserDTO;
 import com.grupo3.msusuarios.model.dto.UserRabbitDTO;
 import com.grupo3.msusuarios.model.dto.UserWithoutPasswordDTO;
+=======
+import com.grupo3.msusuarios.model.dto.*;
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
 import com.grupo3.msusuarios.model.entity.User;
 import com.grupo3.msusuarios.repository.IUserRepository;
 import com.grupo3.msusuarios.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Slf4j
@@ -27,13 +31,24 @@ public class UserService implements IUserService {
 
     private final JwtService jwtService;
 
+<<<<<<< HEAD
 
     @Autowired
     public UserService(IUserRepository userRepository, ObjectMapper mapper, NewUserEventProducer event, JwtService jwtService) {
+=======
+    private final PasswordEncoder encoder;
+
+    @Autowired
+    public UserService(IUserRepository userRepository, ObjectMapper mapper, NewUserEventProducer event, JwtService jwtService, PasswordEncoder encoder) {
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
         this.userRepository = userRepository;
         this.mapper = mapper;
         this.event = event;
         this.jwtService = jwtService;
+<<<<<<< HEAD
+=======
+        this.encoder = encoder;
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
     }
 
     @Override
@@ -66,6 +81,23 @@ public class UserService implements IUserService {
     }
 
     @Override
+<<<<<<< HEAD
+=======
+    public UserDTO findByDni(String dni) throws Exception {
+        try {
+            User user = userRepository.findByDni(dni).orElse(null);
+            if(user != null){
+                UserDTO userDTO = mapper.convertValue(user, UserDTO.class);
+                return userDTO;
+            }
+            return null;
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
     public UserDTO findByEmail(String email) throws Exception {
         try {
             User user = userRepository.findByEmail(email).orElse(null);
@@ -81,6 +113,7 @@ public class UserService implements IUserService {
 
     @Override
     @Transactional
+<<<<<<< HEAD
     public UserDTO updateById(Long id, UserDTO userDTO) throws Exception {
         try {
             Optional<User> findUser = userRepository.findById(id);
@@ -88,6 +121,19 @@ public class UserService implements IUserService {
                 User user = mapper.convertValue(userDTO, User.class);
                 userRepository.save(user);
                 return userDTO;
+=======
+    public UserWithoutPasswordDTO updateById(Long id, UserUpdateDTO userDTO) throws Exception {
+        try {
+            User findUser = userRepository.findById(id).orElse(null);
+            if(findUser != null){
+                findUser.setName(userDTO.getName());
+                findUser.setLastName(userDTO.getLastName());
+                findUser.setAlias(userDTO.getAlias());
+                findUser.setAvatar(userDTO.getAvatar());
+                UserWithoutPasswordDTO userUpdateDTO = mapper.convertValue(findUser, UserWithoutPasswordDTO.class);
+                userRepository.save(findUser);
+                return userUpdateDTO;
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
             }
             return null;
         }catch (Exception e){
@@ -101,7 +147,12 @@ public class UserService implements IUserService {
         try {
             User user = userRepository.findById(id).orElse(null);
             if(user != null){
+<<<<<<< HEAD
                 user.setPassword(newPassword);
+=======
+                String encoderPass = this.encoder.encode(newPassword);
+                user.setPassword(encoderPass);
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
                 userRepository.save(user);
                 return true;
             }else {
@@ -143,6 +194,7 @@ public class UserService implements IUserService {
         try {
             Double accountBalanceUdate = userToModify.getAccount_balance() + amount;
             userToModify.setAccount_balance(accountBalanceUdate);
+<<<<<<< HEAD
             this.updateById(id, userToModify);
         } catch (Exception e){
             throw new Exception(e.getMessage());
@@ -172,11 +224,45 @@ public class UserService implements IUserService {
     public void validateToken(String token) throws Exception {
         try {
             jwtService.validateToken(token);
+=======
+            userRepository.save(mapper.convertValue(userToModify, User.class));
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    //MÉTODO PARA CREAR TOKEN
+    @Override
+    public AuthResponseDTO generateToken(String email) throws Exception {
+        try{
+            AuthResponseDTO response = new AuthResponseDTO();
+            Long userId = this.findByEmail(email).getId();
+            String token = jwtService.generateToken(email);
+            response.setUserId(userId);
+            response.setToken(token);
+            return response;
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
+        }
+        catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+<<<<<<< HEAD
+    }
+
+=======
+
+    }
+
+    //MÉTODO PARA VALIDAR TOKEN
+    @Override
+    public void validateToken(String token) throws Exception {
+        try {
+            jwtService.validateToken(token);
         }
         catch (Exception e){
             throw new Exception(e.getMessage());
         }
     }
-
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
 
 }

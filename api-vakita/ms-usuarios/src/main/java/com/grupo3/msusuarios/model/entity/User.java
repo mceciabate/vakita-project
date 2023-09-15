@@ -22,11 +22,16 @@ public class User implements Serializable {
     private Long id;
 
     @NotBlank(message = "No puede ingresar un nombre vacio")
+<<<<<<< HEAD
     @Size(max = 30 ,message = "El nombre no puede contener mas de 20 caracteres")
+=======
+    @Size(max = 30 ,message = "El nombre no puede contener mas de 30 caracteres")
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
     @Column(name = "NAME", nullable = false, length = 30)
     private String name;
 
     @NotBlank(message = "No puede ingresar un apellido vacio")
+<<<<<<< HEAD
     @Size(max = 30 ,message = "El apellido no puede contener mas de 20 caracteres")
     @Column(name = "LAST_NAME", nullable = false, length = 30)
     private String lastName;
@@ -37,6 +42,23 @@ public class User implements Serializable {
 
     @NotBlank(message = "No puede ingresar un email vacio")
     @Column(name = "EMAIL", nullable = false, length = 50)
+=======
+    @Size(max = 30 ,message = "El apellido no puede contener mas de 30 caracteres")
+    @Column(name = "LAST_NAME", nullable = false, length = 30)
+    private String lastName;
+
+    @NotBlank(message = "No puede ingresar un alias vacio")
+    @Size(max = 30 ,message = "El alias no puede contener mas de 30 caracteres")
+    @Column(name = "ALIAS", nullable = false, length = 30)
+    private String alias;
+
+    @NotBlank(message = "No puede ingresar un dni vacio o dni ya registrado")
+    @Column(name = "DNI", unique = true, nullable = false, length = 20)
+    private String dni;
+
+    @NotBlank(message = "No puede ingresar un email vacio o email existente")
+    @Column(name = "EMAIL", unique = true, nullable = false, length = 50)
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
     private String email;
 
     @NotBlank(message = "No puede ingresar un password vacio")
@@ -47,6 +69,14 @@ public class User implements Serializable {
     @Column(name = "BIRTHDATE", nullable = false)
     private LocalDate birthdate;
 
+<<<<<<< HEAD
+=======
+    @Lob
+    @Column(name = "AVATAR", columnDefinition = "LONGBLOB")
+    @Size(max = 1024 * 1024, message = "El tamaño máximo del avatar es de 1 MB")
+    private byte[] avatar;
+
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
     @Column(name = "ACCOUNT_BALANCE")
     private Double account_balance = 0.0;
 }

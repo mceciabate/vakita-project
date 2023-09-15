@@ -12,14 +12,20 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
 @Component
 public class JwtService {
 
     @Value("${jwt.secret}")
     private String secret;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
     public void validateToken(final String token) {
         Jwts.parserBuilder().setSigningKey(getSignKey()).build().parseClaimsJws(token);
     }

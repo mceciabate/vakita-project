@@ -1,6 +1,8 @@
 package com.grupo3.msusuarios.service;
 
 import com.grupo3.msusuarios.model.dto.UserDTO;
+import com.grupo3.msusuarios.model.dto.UserUpdateDTO;
+import com.grupo3.msusuarios.model.dto.UserWithoutPasswordDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -55,8 +57,15 @@ public class UserServiceTest {
     @Test
     void updateByIdTest(){
         try {
+<<<<<<< HEAD
             userDTOTest1.setName("Prueba1MOD");
             UserDTO userDTO = userService.updateById(1L, userDTOTest1);
+=======
+            UserUpdateDTO userUpdateDTO = new UserUpdateDTO();
+            userUpdateDTO.setName("Prueba1MOD");
+            userUpdateDTO.setLastName("Prueba1MOD");
+            UserWithoutPasswordDTO userDTO = userService.updateById(1L, userUpdateDTO);
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
             Assertions.assertEquals("Prueba1MOD", userDTO.getName());
         }catch (Exception e){
             e.getMessage();

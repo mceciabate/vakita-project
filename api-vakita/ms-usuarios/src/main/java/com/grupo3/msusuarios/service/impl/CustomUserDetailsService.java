@@ -17,7 +17,10 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private UserService service;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
     @SneakyThrows
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

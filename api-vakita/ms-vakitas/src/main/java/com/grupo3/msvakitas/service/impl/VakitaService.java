@@ -3,10 +3,16 @@ package com.grupo3.msvakitas.service.impl;
 import com.grupo3.msvakitas.event.NewVakitaEventProducer;
 import com.grupo3.msvakitas.handler.BadRequestException;
 import com.grupo3.msvakitas.handler.ResourceNotFoundException;
+<<<<<<< HEAD
+=======
+import com.grupo3.msvakitas.model.dto.TransactionDTO;
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
 import com.grupo3.msvakitas.model.dto.UserForTransactionRabbitDTO;
 import com.grupo3.msvakitas.model.dto.UserDTO;
 import com.grupo3.msvakitas.model.dto.VakitaDTO;
+import com.grupo3.msvakitas.model.entity.Transaction;
 import com.grupo3.msvakitas.model.entity.Vakita;
+import com.grupo3.msvakitas.repository.ITransactionRepository;
 import com.grupo3.msvakitas.repository.IVakitaRepository;
 import com.grupo3.msvakitas.service.IVakitaService;
 import lombok.extern.slf4j.Slf4j;
@@ -37,10 +43,15 @@ public class VakitaService implements IVakitaService {
     @Autowired
     private UsuarioService usuarioService;
 
+<<<<<<< HEAD
+=======
+    @Autowired
+    private ITransactionRepository tRepository;
+
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
 
 
     //Método para traer todas las vakitas
-    //TODO: CONSULTAR SI QUIEREN UN ERROR O UNA LISTA VACÍA ESTÁ BIEN
     @Override
     public List<VakitaDTO> getAllVakitas(){
         List<VakitaDTO> listaVakitas = new ArrayList<>();
@@ -89,11 +100,17 @@ public class VakitaService implements IVakitaService {
     //Método para crear una nueva vakita
     @Override
     public VakitaDTO createVakita(VakitaDTO vakita) throws BadRequestException, ResourceNotFoundException {
+<<<<<<< HEAD
+=======
+        UserDTO userCreator = this.usuarioService.getUserById(vakita.getIdCreatorUser());
+        boolean result = this.containsEmail(vakita.getContributors(), userCreator.getEmail());
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
         if(vakita.getExpirationDate().equals(LocalDate.now()) || vakita.getName() == null || vakita.getIdCreatorUser() == null){
-            throw new BadRequestException("No se puede crear la vakita, corrobore los datos");
+            throw new BadRequestException("No se puede crear la vakita, corrobore los datos: fecha_expiración(debe ser distinta al día actual),name(no puede ser nulo), idCreatorUser(no puede ser nulo) ");
+        } else if (result) {
+            throw new BadRequestException("El usuario creador se asignará automaticamente a la lista de contribuyentes, no es necesario incluirlo en la misma");
         } else {
-            UserDTO userToAdd = usuarioService.getUserById(vakita.getIdCreatorUser());
-            vakita.getContributors().add(userToAdd);
+            vakita.getContributors().add(userCreator);
             Vakita vakitaNew = mapper.map(vakita, Vakita.class);
             vakitaRepository.save(vakitaNew);
             log.info("Saving new vakita from user:" + vakita.getIdCreatorUser());
@@ -103,14 +120,30 @@ public class VakitaService implements IVakitaService {
 
     //Método para modificar el saldo de una vaquita
     @Override
+<<<<<<< HEAD
     public void modifyAmount(Double amount, Long vakitaId) throws ResourceNotFoundException, BadRequestException{
         VakitaDTO vakitaModify = this.getVakitaById(vakitaId);
+=======
+    public void modifyAmount(Long userID, Long vakitaId, Double amount) throws ResourceNotFoundException, BadRequestException{
+        VakitaDTO vakitaModify = this.getVakitaById(vakitaId);
+        UserDTO userContributor = this.usuarioService.getUserById(userID);
+        boolean result = containsEmail(vakitaModify.getContributors(), userContributor.getEmail());
+        if (!result){
+            throw new BadRequestException("El usuario no pertenece a esta vakita");
+        }
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
         Double amountDiference = vakitaModify.getTotalAmount() - vakitaModify.getCumulativeAmount();
         if(vakitaModify.getIsActive() && amount <= amountDiference ){
             Double deposit = vakitaModify.getCumulativeAmount() + amount;
             vakitaModify.setCumulativeAmount(deposit);
             log.info("Success, amount update: "+ vakitaModify.getCumulativeAmount());
             this.updateVakita(vakitaId, vakitaModify);
+<<<<<<< HEAD
+=======
+            TransactionDTO transactionDTO = new TransactionDTO(LocalDate.now(), userID, vakitaId, amount);
+            log.info("creando nueva transacción en la vakita con id : " + vakitaId);
+            tRepository.save(mapper.map(transactionDTO, Transaction.class));
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
         }
         else if(!vakitaModify.getIsActive()){
             throw new BadRequestException("Para depositar dinero la vakita debe estar activa");
@@ -138,6 +171,26 @@ public class VakitaService implements IVakitaService {
         return  listaActivas;
     }
 
+<<<<<<< HEAD
+=======
+    //Este método filtra las vakitas inactivas de un user
+    @Override
+    public List<VakitaDTO> getVakitasInactivesByContributor(Long id) throws ResourceNotFoundException{
+        List<VakitaDTO> lista = this.getVakitasByContributors(id);
+        List<VakitaDTO> listaActivas = new ArrayList<>();
+        for (VakitaDTO vakita : lista) {
+            if (!vakita.getIsActive()){
+                listaActivas.add(vakita);
+            }
+        }
+        if(listaActivas.size()==0){
+            throw new ResourceNotFoundException("El usuario no posee vakitas inactivas");
+        }
+        log.info("Get all vakitas actives from user "+id+", size: " + listaActivas.size());
+        return  listaActivas;
+    }
+
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
     //Este método filtra las vakitas que coinciden con un id de un user
     //Es para saber en qué vakitas participo aunque yo no sea el owner, es decir
     //aunque yo no sea quien las creó.
@@ -179,6 +232,10 @@ public class VakitaService implements IVakitaService {
         vakitaToModify.setIsActive(vakita.getIsActive());
         vakitaToModify.setType(vakita.getType());
         vakitaToModify.setContributors(vakita.getContributors());
+<<<<<<< HEAD
+=======
+        vakitaToModify.setTransactions(vakita.getTransactions());
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
 
         if(vakitaRepository.existsById(vakitaToModify.getId())){
             Vakita vakitaToSave = mapper.map(vakitaToModify, Vakita.class);
@@ -211,6 +268,16 @@ public class VakitaService implements IVakitaService {
     public void addContributor(Long vakitaId, Long userId) throws ResourceNotFoundException, BadRequestException {
         UserDTO newContributor = usuarioService.getUserById(userId);
         VakitaDTO vakita = this.getVakitaById(vakitaId);
+<<<<<<< HEAD
+=======
+        boolean result = this.containsEmail(vakita.getContributors(), newContributor.getEmail());
+        if (vakita.getIdCreatorUser().equals(userId)){
+            throw new BadRequestException("El usuario es el creador de la vakita, ya se encuentra en la lista ");
+        } else if (result) {
+            throw new BadRequestException("El usuario ya pertenece a lista de contribuyentes de la vakita con id : " + vakitaId);
+        }
+
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
         vakita.getContributors().add(newContributor);
         this.updateVakita(vakitaId, vakita);
         log.info("Success updating contributor in  vakita: " + vakitaId);
@@ -267,6 +334,13 @@ public class VakitaService implements IVakitaService {
 
     }
 
+<<<<<<< HEAD
+=======
+    public boolean containsEmail(final List<UserDTO> list, final String email){
+        return list.stream().anyMatch(o -> email.equals(o.getEmail()));
+    }
+
+>>>>>>> 742943a60c7d2129d269178e98491915a9d5af63
 
 }
 
