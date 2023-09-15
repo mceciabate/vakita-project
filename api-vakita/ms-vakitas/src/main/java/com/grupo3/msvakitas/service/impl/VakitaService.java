@@ -106,6 +106,7 @@ public class VakitaService implements IVakitaService {
             vakitaRepository.save(vakitaNew);
             log.info("Saving new vakita from user:" + vakita.getIdCreatorUser());
             return mapper.map(vakitaNew, VakitaDTO.class);
+
         }
     }
 
