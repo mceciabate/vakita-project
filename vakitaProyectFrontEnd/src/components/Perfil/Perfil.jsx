@@ -6,6 +6,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { ErrorSpan } from '../Register/Register.styled';
 import UserProfileImage from './UserProfileImage';
+import '../../styles/withdrawalPage.css';
 
 const Perfil = () => {
   const [user, setUser] = useState({
@@ -198,6 +199,7 @@ const Perfil = () => {
               accept="image/*"
               onChange={handleAvatarInputChange}
               onBlur={formik.handleBlur}
+             
             />
           </Li>
 

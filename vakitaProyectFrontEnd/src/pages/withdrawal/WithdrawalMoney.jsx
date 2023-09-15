@@ -7,11 +7,11 @@ const WithdrawalMoney = () => {
   const [accountBalance, setAccountBalance] = useState(0);
 
   useEffect(() => {
-    // Realizar la solicitud GET para obtener el saldo del usuario
+
     axios
       .get(`http://107.22.65.36:8080/api/v1/usuarios/${userId}`)
       .then((response) => {
-        // Obtener el saldo del usuario desde la respuesta
+   
         const user = response.data;
         setAccountBalance(user.account_balance);
       })
@@ -40,3 +40,6 @@ const WithdrawalMoney = () => {
 };
 
 export default WithdrawalMoney;
+
+
+
