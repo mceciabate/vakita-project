@@ -39,7 +39,7 @@ const MyVakita = () => {
 
   const loadInactiveVakitas = async () => {
     try {
-      const response = await axios.get(`http://107.22.65.36:8080/api/v1/vakita/contributors/${userId}`, {
+      const response = await axios.get(`http://107.22.65.36:8080/api/v1/vakita/inactives/${userId}`, {
         headers: {
           'Content-type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -47,7 +47,7 @@ const MyVakita = () => {
       });
 
       // Filtrar las vakitas inactivas (isActive = false)
-      const inactiveVakitas = response.data.filter((vakita) => vakita.isActive === false);
+      const inactiveVakitas = response.data;
       setInactiveVakitaElements(inactiveVakitas)
 
       // Renderizar las vakitas inactivas utilizando la función renderInactiveVakitas

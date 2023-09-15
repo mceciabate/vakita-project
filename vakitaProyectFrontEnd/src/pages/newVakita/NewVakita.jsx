@@ -278,7 +278,7 @@ const NewVakita = () => {
         <img src="https://grupo3-vakita.s3.amazonaws.com/assets/vakitabanner.png" alt="Imagen de banner"/>
       </div>
       <div>
-        <p className={values.name ?"textBannerActive": 'textBanner'}>{values.name|| "Nombre de la vaca"}</p>
+        <p className={values.name ?"textBannerActive": 'textBanner'}>{values.name|| "Nombre de la vaka"}</p>
         <p className= {values.amount ?"textBannerActiveNumber": 'textBanner'}>{values.amount ? `$ ${values.amount}`: "$0 "}</p>
         
       </div>
