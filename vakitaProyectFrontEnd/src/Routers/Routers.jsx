@@ -36,8 +36,8 @@ const Routers = () => {
           <Route path="/dashboard/*" element={<Menu />}>
             {/* Nested routes without leading slashes */}
             <Route index element={<Dashboard />} />
-            <Route path="crear-vaca" element={<NewVakita />} />
-            <Route path="mis-vaquitas" element={<MyVakita />} />
+            <Route path="crear-vaka" element={<NewVakita />} />
+            <Route path="mis-vakitas" element={<MyVakita />} />
             <Route path="mi-perfil" element={<Perfil />} />
             <Route path="mis-datos-financieros" element={<PaymentApp />} />
             <Route path="transacciones" element={<TransactionPage/>} />

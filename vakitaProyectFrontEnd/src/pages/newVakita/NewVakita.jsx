@@ -117,11 +117,11 @@ const NewVakita = () => {
         if (res.status === 200) {
          
           Swal.fire({
-            title: '<strong>Vaquita creada con éxito</strong>',
+            title: '<strong>Vakita creada con éxito</strong>',
             icon: 'success',
             html:
               'Ir a ' +
-              `<a href="/dashboard/mis-vaquitas">Mis Vaquitas</a> ` ,
+              `<a href="/dashboard/mis-vakitas">Mis Vakitas</a> ` ,
             showCloseButton: true, 
           })
 
@@ -204,7 +204,7 @@ const NewVakita = () => {
     <>
     <div className='containerPage'>
     <div className='title'>
-    <h2 className='title2'>Hagamos una vaquita</h2>
+    <h2 className='title2'>Hagamos una vakita</h2>
     </div>
       <div className="boxItems">
         
@@ -233,7 +233,7 @@ const NewVakita = () => {
             <div className='boxOne'>
           <div className="boxItems">
             <label htmlFor="name"></label>
-            <Field  className="inputText" type="text" id="name" name="name" placeholder="Nombre de la vaca"/>
+            <Field  className="inputText" type="text" id="name" name="name" placeholder="Nombre de la vaka"/>
             <span className='error'>
             <ErrorMessage className='error-mensaje' name="name" component="span" />
             </span>
@@ -352,7 +352,7 @@ const NewVakita = () => {
 
 <div className='buttonSubmitBox'>
  
-          <button id="buttonNewVakita" className={!emailValid || !emailExists || !values.name || !values.amount || !values.endDate ||  !values.startDate|| !values.description || !values.name || !values.amount ||  !values.description?"buttonSubmit":"buttonSubmitActive"}  type="submit"  disabled={!emailValid || !emailExists || !values.name || !values.amount || !values.endDate ||  !values.startDate|| !values.description || !values.name || !values.amount || !values.description}>Crear Vaca</button>
+          <button id="buttonNewVakita" className={!emailValid || !emailExists || !values.name || !values.amount || !values.endDate ||  !values.startDate|| !values.description || !values.name || !values.amount ||  !values.description?"buttonSubmit":"buttonSubmitActive"}  type="submit"  disabled={!emailValid || !emailExists || !values.name || !values.amount || !values.endDate ||  !values.startDate|| !values.description || !values.name || !values.amount || !values.description}>Crear Vaka</button>
          
           
           </div>
@@ -364,7 +364,7 @@ const NewVakita = () => {
         <p>Recuerda que todos los integrantes 
          tienen que estar registrados en nuestra plataforma.
         </p>
-        <div className='boton-invitar'><ShareButton url={"http://vakita.ddns.net/"} /></div>
+        <div className='boton-invitar'><ShareButton url={"http://54.221.139.107/"} /></div>
         </div>
         
         

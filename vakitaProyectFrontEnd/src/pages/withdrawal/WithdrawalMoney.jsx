@@ -20,6 +20,15 @@ const WithdrawalMoney = () => {
       });
   }, [userId]);
 
+  const formatCurrency = (value) => {
+    return value.toLocaleString('es-AR', {
+      style: 'currency',
+      currency: 'ARS',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  };
+
   return (
     <>
       <div className='cointainerW'>
@@ -30,7 +39,8 @@ const WithdrawalMoney = () => {
             </div>
             <div>
              <p className='text2W'>
-             $ {accountBalance.toFixed(2)}  <span>pesos</span></p>
+              {formatCurrency(accountBalance)} <span>pesos</span>
+             </p>
             </div>
           </div>
         </div>

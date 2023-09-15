@@ -282,8 +282,8 @@ const MyVakita = () => {
             onClick={() => {
               if (isActive) {
                 Swal.fire({
-                  title: '¿Retirar el total del monto actual de la vaquita?',
-                  text: 'La vaquita pasará a inactiva',
+                  title: '¿Retirar el total del monto actual de la vakita?',
+                  text: 'La vakita pasará a inactiva',
                   showCancelButton: true,
                   confirmButtonText: 'Si',
                   cancelButtonText: 'No',
@@ -453,7 +453,7 @@ const MyVakita = () => {
                   plugins: {
                     title: {
                       display: true,
-                      text: 'Vaquita inactiva',
+                      text: 'Vakita inactiva',
                     },
                   },
                 }}
@@ -495,10 +495,10 @@ const MyVakita = () => {
     <>
     <div className='pageMyVakita'>
       {allMyVakita.length === 0 && inactiveVakitaElements.length === 0 ?
-        <div className='noDataText'>No sos integrante de alguna vaquita</div> :
+        <div className='noDataText'>No sos integrante de alguna vakita</div> :
         (
           <div className='pageMyVakita'>
-            <h2 className='h2V'>Mis vaquitas</h2>
+            <h2 className='h2V'>Mis vakitas</h2>
             <h3 className='h3'>Activas</h3>
             <div>
               {allMyVakita.length > perPage && (

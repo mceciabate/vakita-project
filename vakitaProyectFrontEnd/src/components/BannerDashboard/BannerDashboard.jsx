@@ -29,7 +29,7 @@ const BannerDashboard = () => {
             <Image src= "https://grupo3-vakita.s3.amazonaws.com/assets/bienvenida.png"/>
             <SpanText>
                 <H1>{`Hola, ${alias} `}</H1>
-                <H3>¿Estás listo/a para crear tu vaca virtual?</H3>
+                <H3>¿Estás listo/a para crear tu vaka virtual?</H3>
             </SpanText>
         </DashboardDiv>
     );

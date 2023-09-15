@@ -47,8 +47,8 @@ const Menu = () => {
 
               <BloqueOptions>
                 <Link to="/dashboard">Inicio</Link>
-                <Link to="/dashboard/crear-vaca">Nueva Vaca</Link>
-                <Link to="/dashboard/mis-vaquitas">Mis Vaquitas</Link>
+                <Link to="/dashboard/crear-vaka">Nueva Vaka</Link>
+                <Link to="/dashboard/mis-vakitas">Mis Vakitas</Link>
                 <hr />
                 <Link to="/dashboard/mi-perfil">Mi perfil</Link>
                 <Link to="/dashboard/mis-datos-financieros">

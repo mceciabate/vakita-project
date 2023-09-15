@@ -41,16 +41,28 @@ function Login() {
         }).then((result) => {
             if (result.isConfirmed) {
                 const { email } = result.value;
+               
 
-                axios.get('http://107.22.65.36:8080/api/v1/usuarios')
+              
+                axios.get(`http://107.22.65.36:8080/api/v1/usuarios/email/${email}`)
                     .then((response) => {
                         const users = response.data;
-                        const userWithMatchingEmail = users.find(user => user.email === email);
-                        //Variable para codigo (restablecer password)
+                        console.log(users.id);
+                        console.log(response.status===200);
+                      
                         let codeData = "";
+
+                        if(response.status===404){
+                              
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Hubo un problema al intentar obtener la lista de usuarios',
+                        });
+                        }
     
-                        if (userWithMatchingEmail) {
-                            const userId = userWithMatchingEmail.id;
+                        if (response.status===200) {
+                            const userId = users.id;
 
                             //Post enviar correo al usuario para que obtenga el código
                             axios.post(
@@ -141,8 +153,8 @@ function Login() {
                         
                         Swal.fire({
                             icon: 'error',
-                            title: 'Error',
-                            text: 'Hubo un problema al intentar obtener la lista de usuarios',
+                            title: 'Usuario no encontrado',
+                            text: 'No se encontró ningún usuario con el correo electrónico proporcionado',
                         });
                     });
             }
