@@ -55,6 +55,10 @@ const WithdrawalMoney = () => {
           (val) => val.toString().length === 22
         ),
     }),
+
+
+
+    // http://107.22.65.36:8080/swagger-ui/index.html#/user-controller/modifyAcountBalance
   });
 
 
@@ -75,11 +79,11 @@ const WithdrawalMoney = () => {
             </div>
           </div>
 
-          <div>
+          <div className='formExtraction'>
             <h3>Retirar dinero</h3>
 
-            <form>
-              <fieldset>
+            <form className='formWithInputs'>
+              <fieldset className='sectionInput'>
                 <label htmlFor="amount">Monto a retirar</label>
                 <input
                   type="number"
@@ -94,7 +98,7 @@ const WithdrawalMoney = () => {
                 )}
               </fieldset>
 
-              <fieldset>
+              <fieldset className='sectionInput'>
                 <label htmlFor="cbu">CBU de la cuenta</label>
                 <input
                   type="number"
@@ -107,31 +111,6 @@ const WithdrawalMoney = () => {
                 {formik.touched.cbu && formik.errors.cbu && (
                   <ErrorSpan>{formik.errors.cbu}</ErrorSpan>
                 )}
-              </fieldset>
-
-              <fieldset>
-                <label htmlFor="accountType">¿Es una cuenta corriente?</label>
-                <label>
-                  <input
-                    type="radio"
-                    value={true}
-                    // value={}
-                    // onChange={}
-                    // onBlur={}
-                  />
-                  Sí
-                </label>
-
-                <label>
-                  <input
-                    type="radio"
-                    value={false}
-                    // value={}
-                    // onChange={}
-                    // onBlur={}
-                  />
-                  No
-                </label>
               </fieldset>
 
               <button type="submit">Retirar dinero</button>
