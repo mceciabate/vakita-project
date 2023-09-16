@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useFormik } from "formik";
+import * as Yup from "yup";
 import axios from 'axios';
+import Swal from 'sweetalert2';
+
 import '../../styles/withdrawalPage.css';
+import { ErrorSpan } from '../../components/Register/Register.styled';
 
 const WithdrawalMoney = () => {
   const userId = localStorage.getItem('userId');
@@ -28,6 +32,31 @@ const WithdrawalMoney = () => {
       maximumFractionDigits: 2,
     });
   };
+
+
+  const formik = useFormik({
+    initialValues: {
+      amount: 0,
+      cbu: "",
+    },
+    validationSchema: Yup.object({
+      amount: Yup.number()
+        .required("Campo requerido")
+        .min(0.1, "Monto a retirar debe ser mayor a 0")
+        .max(
+          accountBalance,
+          "Se puede retirar hasta el total del saldo disponible"
+        ),
+      cbu: Yup.number()
+        .required("Campo requerido")
+        .test(
+          "len",
+          "CBU debe tener 22 números",
+          (val) => val.toString().length === 22
+        ),
+    }),
+  });
+
 
   return (
     <>
@@ -56,19 +85,35 @@ const WithdrawalMoney = () => {
                   type="number"
                   name="amount"
                   id="amount"
-                  // value={}
-                  // onChange={}
-                  // onBlur={}
+                  value={formik.values.amount}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                 />
+                {formik.touched.amount && formik.errors.amount && (
+                  <ErrorSpan>{formik.errors.amount}</ErrorSpan>
+                )}
               </fieldset>
 
               <fieldset>
-                <label htmlFor="acountType">¿Es una cuenta corriente?</label>
-                <label htmlFor="acountType">
+                <label htmlFor="cbu">CBU de la cuenta</label>
+                <input
+                  type="number"
+                  name="cbu"
+                  id="cbu"
+                  value={formik.values.cbu}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                {formik.touched.cbu && formik.errors.cbu && (
+                  <ErrorSpan>{formik.errors.cbu}</ErrorSpan>
+                )}
+              </fieldset>
+
+              <fieldset>
+                <label htmlFor="accountType">¿Es una cuenta corriente?</label>
+                <label>
                   <input
                     type="radio"
-                    name="acountType"
-                    id="acountType"
                     value={true}
                     // value={}
                     // onChange={}
@@ -77,11 +122,9 @@ const WithdrawalMoney = () => {
                   Sí
                 </label>
 
-                <label htmlFor="acountType">
+                <label>
                   <input
                     type="radio"
-                    name="acountType"
-                    id="acountType"
                     value={false}
                     // value={}
                     // onChange={}
@@ -91,8 +134,7 @@ const WithdrawalMoney = () => {
                 </label>
               </fieldset>
 
-              <button type='submit'>Retirar dinero</button>
-
+              <button type="submit">Retirar dinero</button>
             </form>
           </div>
         </section>
