@@ -16,7 +16,7 @@ cache:
 dummy_job:
   stage: build
   only:
-    - config-server
+    - backend
   script: 
     - echo "Dummy job for lag-pipeline when has no tasks"
     - pwd 
