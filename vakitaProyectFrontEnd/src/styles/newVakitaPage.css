@@ -183,9 +183,10 @@ img {
 .contenedor-miembros{
     width: 100%;
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
-h4 {
+ .titulo-integrantes{
     text-align: center;
     margin: 20px 0px;
     font-size: 18px;
@@ -467,9 +468,12 @@ h4 {
    
     .halfBackground {
         padding: 0;
-        width: 99%;
-        margin: 0rem 0%;
-        margin:0 auto;
+        width: 105%;
+        
+       .titulo-integrantes{
+           
+            font-size: 17px;
+        }
     }
     .boxReverseBanner {
         

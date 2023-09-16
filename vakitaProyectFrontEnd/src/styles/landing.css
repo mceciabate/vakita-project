@@ -507,10 +507,3 @@
 
 }
 
-div#swal2-html-container {
-    text-align: justify;
-}
-
-Input#email.swal2-input {
-    width: 82%;
-}

@@ -254,7 +254,7 @@ function Login() {
 
                     Swal.fire({
                                         title: 'Error',
-                                        text: 'Hubo un problema al intentar iniciar sesión',
+                                        text: 'Hubo un problema al intentar iniciar sesión, por favor intente otra vez',
                                         icon: 'error'
                                     })
                     
