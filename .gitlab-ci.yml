@@ -13,11 +13,23 @@ cache:
     - .m2/repository
     - target
 
+dummy_job:
+  stage: package
+  only:
+    - config-server
+  script: 
+    - echo "Dummy job for lag-pipeline when has no tasks"
+    - pwd 
+
+
 # Build para todos los ms
 build_usuarios:
   stage: build
   only:
-    - backend
+    refs:
+      - backend
+    changes:
+      - api-vakita/ms-usuarios/**/*
   script:
     - echo "Maven compile started on users"
     - cd ./api-vakita/ms-usuarios 
@@ -26,7 +38,10 @@ build_usuarios:
 build_payment:
   stage: build
   only:
-    - backend
+    refs:
+      - backend
+    changes:
+      - api-vakita/ms-payment/**/*
   script:
     - echo "Maven compile started on payment"
     - cd ./api-vakita/ms-payment
@@ -35,7 +50,10 @@ build_payment:
 build_vakitas:
   stage: build
   only:
-    - backend
+    refs:
+      - backend
+    changes:
+      - api-vakita/ms-vakitas/**/*
   script:
     - echo "Maven compile started on vakitas"
     - cd ./api-vakita/ms-vakitas
@@ -44,7 +62,10 @@ build_vakitas:
 build_gateway:
   stage: build
   only:
-    - backend
+    refs:
+      - backend
+    changes:
+      - api-vakita/gateway/**/*
   script:
     - echo "Maven compile started on gateway"
     - cd ./api-vakita/gateway
@@ -53,7 +74,10 @@ build_gateway:
 build_eureka:
   stage: build
   only:
-    - backend
+    refs:
+      - backend
+    changes:
+      - api-vakita/EurekaServer/**/*
   script:
     - echo "Maven compile started on eureka-server"
     - cd ./api-vakita/EurekaServer 
@@ -63,7 +87,10 @@ build_eureka:
 test_usuarios:
  stage: test
  only:
-    - backend
+    refs:
+      - backend
+    changes:
+      - api-vakita/ms-usuarios/**/*
  script:
    - echo "Maven test started on users"
    - cd ./api-vakita/ms-usuarios
@@ -72,7 +99,10 @@ test_usuarios:
 test_vakitas:
  stage: test
  only:
-    - backend
+    refs:
+      - backend
+    changes:
+      - api-vakita/ms-vakitas/**/*
  script:
    - echo "Maven test started on vakitas"
    - cd ./api-vakita/ms-vakitas
