@@ -47,7 +47,7 @@ const WithdrawalMoney = () => {
           accountBalance,
           "Se puede retirar hasta el total del saldo disponible"
         ),
-      cbu: Yup.number()
+      cbu: Yup.string()
         .required("Campo requerido")
         .test(
           "len",
@@ -56,10 +56,51 @@ const WithdrawalMoney = () => {
         ),
     }),
 
+    onSubmit: async (values) => {
+        try {
+          const response = await axios.post(`http://107.22.65.36:8080/api/v1/usuarios/balance?userId=${parseInt(userId)}&amount=${values.amount}`);
 
 
-    // http://107.22.65.36:8080/swagger-ui/index.html#/user-controller/modifyAcountBalance
-  });
+          if(response.status === 200) {
+
+            Swal.fire({
+              icon: 'success',
+              title: 'Retiro exitoso',
+              text: 'El dinero ha sido enviado a la cuenta ' + values.cbu.toString(),
+            });
+
+            axios
+            .get(`http://107.22.65.36:8080/api/v1/usuarios/${userId}`)
+            .then((response) => {
+      
+              const user = response.data;
+              setAccountBalance(user.account_balance);
+            })
+            .catch((error) => {
+              console.error('Error al obtener el saldo del usuario:', error);
+            });
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error en el retiro',
+              text: "Lo sentimos, no se pudo retirar el dinero :(",
+            });
+          }
+
+          formik.resetForm();
+    
+        } catch (error) {
+      
+          console.error('An error occurred while sending the request', error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Hubo un error al enviar la solicitud. Por favor, inténtalo de nuevo más tarde.',
+          });
+        }
+    
+      
+    }});
 
 
   return (
@@ -73,7 +114,7 @@ const WithdrawalMoney = () => {
               </div>
               <div>
                 <p className="text2W">
-                  {formatCurrency(accountBalance)} <span>pesos</span>
+                  {formatCurrency(accountBalance)}
                 </p>
               </div>
             </div>
@@ -82,7 +123,7 @@ const WithdrawalMoney = () => {
           <div className='formExtraction'>
             <h3>Retirar dinero</h3>
 
-            <form className='formWithInputs'>
+            <form className='formWithInputs' onSubmit={formik.handleSubmit}>
               <fieldset className='sectionInput'>
                 <label htmlFor="amount">Monto a retirar</label>
                 <input
@@ -101,7 +142,7 @@ const WithdrawalMoney = () => {
               <fieldset className='sectionInput'>
                 <label htmlFor="cbu">CBU de la cuenta</label>
                 <input
-                  type="number"
+                  type="text"
                   name="cbu"
                   id="cbu"
                   value={formik.values.cbu}
