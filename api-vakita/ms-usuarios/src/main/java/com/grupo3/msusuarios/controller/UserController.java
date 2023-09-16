@@ -364,12 +364,12 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor, intente mas tarde.\"}");
         }
     }
-    @Operation(summary = "Modificar saldo de un user")
+    @Operation(summary = "Modificar saldo de un usuario")
     @PostMapping("/balance")
     public ResponseEntity<?> modifyAcountBalance(@RequestParam Long userId, @RequestParam Double amount) {
         String response = new String();
         try {
-            userService.updateAccountBalance(userId, amount);
+            userService.updateAccountBalanceFromClient(userId, amount);
             response = "Success!Update AccountBalance";
             return ResponseEntity.status(HttpStatus.OK).body(response);
         }

@@ -25,7 +25,7 @@ public class NewVakitaEventConsumer {
         try {
             UserRabbitAmountDTO user = new UserRabbitAmountDTO();
             BeanUtils.copyProperties(data.getUser(), user);
-            service.updateAccountBalance(user.getId(), user.getAmount());
+            service.updateAccountBalanceFromVakita(user.getId(), user.getAmount());
         }
         catch (Exception e){
             throw new Exception(e.getMessage());
