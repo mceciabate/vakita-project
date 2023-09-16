@@ -90,11 +90,10 @@ public class VakitaService implements IVakitaService {
     //Método para crear una nueva vakita
     @Override
     public VakitaDTO createVakita(VakitaDTO vakita) throws BadRequestException, ResourceNotFoundException {
+        Double saldoInicial = vakita.getCumulativeAmount();
         UserDTO userCreator = this.usuarioService.getUserById(vakita.getIdCreatorUser());
         boolean result = this.containsEmail(vakita.getContributors(), userCreator.getEmail());
-        Long vakitaId = Long.valueOf(this.getAllVakitas().size() + 1);
-        TransactionDTO t = new TransactionDTO(LocalDate.now(), userCreator.getId(), vakitaId, vakita.getCumulativeAmount());
-        if (vakita.getExpirationDate().equals(LocalDate.now()) || vakita.getName() == null || vakita.getIdCreatorUser() == null) {
+        if(vakita.getExpirationDate().equals(LocalDate.now()) || vakita.getName() == null || vakita.getIdCreatorUser() == null){
             throw new BadRequestException("No se puede crear la vakita, corrobore los datos: fecha_expiración(debe ser distinta al día actual),name(no puede ser nulo), idCreatorUser(no puede ser nulo) ");
         } else if (result) {
             throw new BadRequestException("El usuario creador se asignará automaticamente a la lista de contribuyentes, no es necesario incluirlo en la misma");
@@ -103,8 +102,16 @@ public class VakitaService implements IVakitaService {
             Vakita vakitaNew = mapper.map(vakita, Vakita.class);
             vakitaRepository.save(vakitaNew);
             log.info("Saving new vakita from user:" + vakita.getIdCreatorUser());
-            return mapper.map(vakitaNew, VakitaDTO.class);
+
         }
+        if(saldoInicial !=0 ){
+            Long vakitaId = vakitaRepository.lastInsertId();
+            VakitaDTO vakitaToModify = this.getVakitaById(vakitaId);
+            this.modifyAmount(userCreator.getId(), vakitaId, saldoInicial);
+            vakitaToModify.setCumulativeAmount(saldoInicial);
+            this.updateVakita(vakitaId, vakitaToModify);
+        }
+        return mapper.map(vakita, VakitaDTO.class);
 
     }
 
