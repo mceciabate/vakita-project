@@ -157,23 +157,16 @@ public class UserService implements IUserService {
 
     @Override
     @Transactional
-    public void updateAccountBalanceFromVakita(Long userId, Double amount) throws Exception {
-        UserDTO userToModify = this.findById(userId);
-        Double accountBalanceUdate = userToModify.getAccount_balance() + amount;
-
-            try {
-                if (accountBalanceUdate >= 0) {
-                    userToModify.setAccount_balance(accountBalanceUdate);
-                    userRepository.save(mapper.convertValue(userToModify, User.class));
-                }
-                else {
-                    throw new Exception("Dinero insuficiente");
-                }
-            }
-            catch (Exception e){
-                throw new Exception(e.getMessage());
-            }
+    public void updateAccountBalanceFromVakita(Long id, Double amount) throws Exception {
+        UserDTO userToModify = this.findById(id);
+        try {
+            Double accountBalanceUdate = userToModify.getAccount_balance() + amount;
+            userToModify.setAccount_balance(accountBalanceUdate);
+            userRepository.save(mapper.convertValue(userToModify, User.class));
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
         }
+    }
 
     @Override
     @Transactional
