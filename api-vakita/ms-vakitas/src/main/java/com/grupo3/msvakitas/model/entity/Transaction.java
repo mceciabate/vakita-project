@@ -3,6 +3,7 @@ package com.grupo3.msvakitas.model.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 @Table(name = "transaction")
+@ToString
 public class Transaction implements Serializable {
 
     @Serial

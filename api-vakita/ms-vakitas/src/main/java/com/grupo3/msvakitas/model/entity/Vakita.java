@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -17,8 +18,8 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "vakitas")
+@ToString
 public class Vakita implements Serializable {
-//TODO: NOT BLANK PARA VALIDATION
     @Serial
     private static final long serialVersionUID = 1L;
 
