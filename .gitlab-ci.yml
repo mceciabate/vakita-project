@@ -14,7 +14,7 @@ cache:
     - target
 
 dummy_job:
-  stage: package
+  stage: build
   only:
     - config-server
   script: 
