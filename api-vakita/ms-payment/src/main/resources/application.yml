@@ -1,5 +1,11 @@
 server:
-  port: ${PORT:${SERVER_PORT:0}}
+  ssl:
+    key-alias: grupo-3
+    key-store: classpath:grupo3.jks
+    key-store-type: JKS
+    key-password: grupo3
+
+  port: 7777
 
 spring:
   application:
