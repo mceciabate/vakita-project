@@ -18,12 +18,14 @@ import {
 function Registerr() {
 
   const maxYear = () => {
-
-    let maxYear = new Date().getFullYear() - 18;
-    const currentDate = new Date();
-
-    return new Date(currentDate.getDay() + "/" + currentDate.getMonth() + "/" + maxYear)
-  }
+    const maxYear = new Date().getFullYear() - 18;
+    const currentDate = new Date(maxYear, 0, 1);
+  
+    const formattedDate = currentDate.toISOString().split("T")[0];
+  
+    return formattedDate;
+  };
+  
 
   const [checked, setChecked] = useState(false)
 
