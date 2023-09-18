@@ -53,7 +53,7 @@ const NewVakita = () => {
     endDate: Yup.string().required('Campo requerido'),
     description: Yup.string().required('Campo requerido'),
     cumulativeAmount: Yup.number()
-      .min(1, 'El importe debe ser mayor que 0'),
+    .min(0, 'El importe debe ser mayor o igual a 0'), // Cambiado de min(1) a min(0),
     email: Yup.string()
       .email('Ingrese un email válido')
       .required('Campo requerido'),
