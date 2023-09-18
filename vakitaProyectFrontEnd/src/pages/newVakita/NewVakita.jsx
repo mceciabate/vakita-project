@@ -61,15 +61,28 @@ const NewVakita = () => {
 
   });
 
+  
+  // Función para limpiar los valores del formulario cuando se hunda el boton crear vaka
+  const resetFormValues = (actions) => {
+    actions.resetForm({
+      name: '',
+      amount: '',
+      startDate: '',
+      endDate: '',
+      description: '',
+      cumulativeAmount: '',
+      email: '',
+    });
+    setEmails([]); // Limpiar la lista de emails
+    setArrayMembers([]); // Limpiar la lista de miembros
+  };
+
+  
   // Función para manejar el envío del formulario
   const handleSubmit = (values, actions) => {
     // Acá se puede realizar las acciones necesarias con los datos ingresados
     // Por ejemplo, enviar los datos a una API o guardarlos en una base de datos
     // console.log(values);
-
-
-
-
 
     // console.log(arrayMembers);
     const dataToSend = {
@@ -85,6 +98,8 @@ const NewVakita = () => {
       type: "normal",
 
       contributors: arrayMembers,
+
+
     };
     // console.log(dataToSend);
 
@@ -128,13 +143,16 @@ const NewVakita = () => {
             showCloseButton: true,
           })
 
-          actions.resetForm();
+          actions.resetForm(); // Restablece el formulario después de enviarlo con éxito
+          resetFormValues(actions); // Limpia los campos después de restablecer el formulario
 
         } else if (res.status === 503) {
           console.log("respuesta1 ", res.data.data);
         }
       })
       .catch(error => console.log(error))
+
+      
   };
 
 
