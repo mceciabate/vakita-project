@@ -4,8 +4,7 @@
     align-items: center;
     width: 100%;
     background: linear-gradient(0deg, #EEE9FF 6%, #FCE8E9 91%);
-
-
+   
 
 
 }
@@ -510,7 +509,7 @@ img {
 
     .containerPage {
 
-        height: 100vh;
+        height: auto ;
     }
 
 

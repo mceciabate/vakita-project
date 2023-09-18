@@ -2,21 +2,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
-}
-.titulo-AppPayment{
-display: flex;
-width: 100%;
-margin-top: 50px;
-font-size: 1.5em;
-margin-bottom: 20px;
+  height: auto !important;
 }
 
-.generalCointainer{
-width: 90%;
+.titulo-AppPayment {
+  display: flex;
+  width: 100%;
+  margin-top: 50px;
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
 
-  
-  }
+.generalCointainer {
+  width: 90%;
+}
 
 .boxCreditCard {
 
@@ -179,11 +178,12 @@ tbody tr:last-of-type {
 
 th,
 td {
-  
+
   text-align: left;
   padding: 12px 0px;
 
 }
+
 td {
   background-color: #BBCDD1;
 }
@@ -240,27 +240,22 @@ td {
   }
 
   .formCardCredit {
-    
+
     width: 90%;
-    
-  
-  }
-  
-  }
 
 
-
-@media only screen and (max-width: 500px) {
- 
-  .formCardCredit {
-    
-    width: 350px;
-    
-  
   }
+
 }
 
 
 
+@media only screen and (max-width: 500px) {
+
+  .formCardCredit {
+
+    width: 350px;
 
 
+  }
+}

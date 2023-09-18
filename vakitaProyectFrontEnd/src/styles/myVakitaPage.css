@@ -1,138 +1,142 @@
-.containerPageMyVakita{
-    display: flex;
+.containerPageMyVakita {
+  display: flex;
   flex-direction: column;
-    justify-content: center;
+  justify-content: center;
 
 
-    flex-wrap: wrap;
-    align-items: center;
-  
- 
 
-    
-    
+  flex-wrap: wrap;
+  align-items: center;
+
+
+
+
+
 }
 
-.noDataText{
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.boxPagination{
-
-    display: flex;
-    justify-content: center;
-align-items: center;
-   
-    
-    padding: 1rem 0px;
+.noDataText {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+.boxPagination {
 
-.pageMyVakita{
-    width: 100%;
-/* height: 100vh; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+  padding: 1rem 0px;
+}
+
+
+.pageMyVakita {
+  width: 100%;
+  /* height: 100vh; */
   display: flex;
   justify-content: center;
   flex-direction: column;
   background: linear-gradient(0deg, #EEE9FF 6%, #FCE8E9 91%);
- 
-
-}
-
-
- .titleMyVaquita{
-    text-align: center;
-
-}
-.h2V{
-
-    margin-top: 50px;
-    text-align: left;
-    padding-left: 5%;
-}
-
-.titleMyVaquita{
-   margin-bottom: .5rem; 
-}
-
-.h3{
-    height: fit-content;
-    font-size: 21px;
-   padding-top: 2rem;
-   margin-left: 1rem;
-}
-
-
-
-.cardMyVakita{
-   
-    width: 22.5rem;
-/* height: 20rem; */
-height: fit-content;
-
-/* margin: 0rem 1.5rem; */
-    background-color: #FFFFFF;
-    margin-bottom: 1rem;
-    -webkit-box-shadow: 0px 3px 5px -2px rgba(61,59,61,1);
--moz-box-shadow: 0px 3px 5px -2px rgba(61,59,61,1);
-box-shadow: 0px 3px 5px -2px rgba(61,59,61,1);
-    border-radius: .5rem;
 
 
 }
 
-.BoxMembersAndChart{
-display: flex;
-justify-content: center;
-margin-top: 2.2rem;
 
-/* gap: 6rem; */
+.titleMyVaquita {
+  text-align: center;
+
+}
+
+.h2V {
+
+  margin-top: 50px;
+  text-align: left;
+  padding-left: 5%;
+}
+
+.titleMyVaquita {
+  margin-bottom: .5rem;
+}
+
+.h3 {
+  height: fit-content;
+  font-size: 21px;
+  padding-top: 2rem;
+  margin-left: 1rem;
+}
+
+
+
+.cardMyVakita {
+
+  width: 22.5rem;
+  /* height: 20rem; */
+  height: fit-content;
+
+  /* margin: 0rem 1.5rem; */
+  background-color: #FFFFFF;
+  margin-bottom: 1rem;
+  -webkit-box-shadow: 0px 3px 5px -2px rgba(61, 59, 61, 1);
+  -moz-box-shadow: 0px 3px 5px -2px rgba(61, 59, 61, 1);
+  box-shadow: 0px 3px 5px -2px rgba(61, 59, 61, 1);
+  border-radius: .5rem;
 
 
 }
+
+.BoxMembersAndChart {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.2rem;
+
+  /* gap: 6rem; */
+
+
+}
+
 .memebersMyVakita {
-   
-    padding: 10px; 
-      /*provisorio */
-    padding-right: 2rem;
-   
-    display: flex;
-    flex-direction: column;
- 
-    width: 9rem;
-    margin-right: 0.5rem;
-  
-   
-   
-  }
-  
-.usersMyVakita{
-    background-color: #c5bebe;
-    width: 11rem;
-    font-size: 12px;
-    margin: 8px 0;
-    border-radius: 5px;
-    text-align: center;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
-   display: flex;
-    padding: 5px 1px;
-    padding-left: 4px;
-    
-    
-    
+
+  padding: 10px;
+  /*provisorio */
+  padding-right: 2rem;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 9rem;
+  margin-right: 0.5rem;
+
+
+
 }
-  
-.chartContainer{
- 
-    width: 100px;
-    padding: 0.2rem;
+
+.usersMyVakita {
+  background-color: #c5bebe;
+  width: 11rem;
+  font-size: 12px;
+  margin: 8px 0;
+  border-radius: 5px;
+  text-align: center;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  display: flex;
+  padding: 5px 1px;
+  padding-left: 4px;
+
+
+
 }
-  
+
+.chartContainer {
+
+  width: 100px;
+  padding: 0.2rem;
+}
+
 
 
 
@@ -162,18 +166,19 @@ margin-top: 2.2rem;
   border: 0;
 }
 
-.save-button:hover{
+.save-button:hover {
   background: #9a5df0;
   box-shadow: #9a5df0 0 8px 10px -8px;
-} 
+}
 
-.withdraw:hover{
+.withdraw:hover {
   background: #9a5df0;
   box-shadow: #9a5df0 0 8px 10px -8px;
-} 
-.withdraw{
+}
+
+.withdraw {
   letter-spacing: 0.05rem;
- 
+
   background: #9a5df0bc;
   border-radius: 999px;
   box-shadow: #9a5df0 0 5px 7px -5px;
@@ -194,7 +199,7 @@ margin-top: 2.2rem;
   border: 0;
 }
 
-.buttons{
+.buttons {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -202,143 +207,155 @@ margin-top: 2.2rem;
   gap: 12px;
 
 }
-   
-.highlighted  {
-    color: #e3d7de;
-    font-weight: 800;
-    background-color: #7c4d86;
-   
-   
-  }
 
-  .highlightedI  {
-    color: #e3d7de;
-    font-weight: 800;
-    background-color: #000000;
-   
-   
-  }
+.highlighted {
+  color: #e3d7de;
+  font-weight: 800;
+  background-color: #7c4d86;
 
 
-  .usersMyVakita .youIcon {
-    
-    color: #D18EBA;
-  }
+}
 
-  .usersMyVakitaI .youIconI {
-    
-    color: #0c0108;
-  }
+.highlightedI {
+  color: #e3d7de;
+  font-weight: 800;
+  background-color: #000000;
 
-  .userIconT {
-    display: flex;
-    padding-right: 1px;
+
+}
+
+
+.usersMyVakita .youIcon {
+
+  color: #D18EBA;
+}
+
+.usersMyVakitaI .youIconI {
+
+  color: #0c0108;
+}
+
+.userIconT {
+  display: flex;
+  padding-right: 1px;
 
 }
 
 
 .pageMyVakita {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    background: linear-gradient(0deg, #EEE9FF 6%, #FCE8E9 91%);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(0deg, #EEE9FF 6%, #FCE8E9 91%);
 }
 
 .pagination {
-    display: flex; /* Display pagination items horizontally */
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    flex-wrap: wrap; /* Permite que los elementos se envuelvan en líneas si no caben en una fila */
-    justify-content: center; /* Centra los elementos horizontalmente */
-  }
-  
-  .pagination li {
-    margin: 0 5px; /* Ajusta el margen entre los números de paginación según sea necesario */
-  }
-  
-  .pagination li a {
-    text-decoration: none;
-    color: #000; /* Establece el color de los números de paginación */
-    padding: 5px 10px;
-    border: 1px solid #000; /* Agrega bordes a los números de paginación */
-    border-radius: 5px;
-    margin: 5px; /* Añade margen entre los elementos de paginación */
-    display: inline-block; /* Hace que los elementos de paginación se muestren en línea */
-  }
-  
-  .pagination li a:hover {
-    background-color: #000; /* Cambia el color de fondo al pasar el cursor */
-    color: #fff; /* Cambia el color del texto al pasar el cursor */
-  }
-  
-  /* Agregar estilos para el elemento de paginación activo si es necesario */
-  .pagination li.active a {
-    background-color: #000;
-    color: #fff;
-  }
-  
+  display: flex;
+  /* Display pagination items horizontally */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap;
+  /* Permite que los elementos se envuelvan en líneas si no caben en una fila */
+  justify-content: center;
+  /* Centra los elementos horizontalmente */
+}
+
+.pagination li {
+  margin: 0 5px;
+  /* Ajusta el margen entre los números de paginación según sea necesario */
+}
+
+.pagination li a {
+  text-decoration: none;
+  color: #000;
+  /* Establece el color de los números de paginación */
+  padding: 5px 10px;
+  border: 1px solid #000;
+  /* Agrega bordes a los números de paginación */
+  border-radius: 5px;
+  margin: 5px;
+  /* Añade margen entre los elementos de paginación */
+  display: inline-block;
+  /* Hace que los elementos de paginación se muestren en línea */
+}
+
+.pagination li a:hover {
+  background-color: #000;
+  /* Cambia el color de fondo al pasar el cursor */
+  color: #fff;
+  /* Cambia el color del texto al pasar el cursor */
+}
+
+/* Agregar estilos para el elemento de paginación activo si es necesario */
+.pagination li.active a {
+  background-color: #000;
+  color: #fff;
+}
+
 
 
 
 .inactiveCard {
-    background-color: #f2f2f2; 
-    border: 2px solid #ccc;
-    opacity: 0.7; 
-  }
-  
-
-@media only screen and (min-width: 601px) {
-    .chartContainer{
- 
-        height: 13.2rem;
-        width: 100%;
-    }
-   
-    .pageMyVakita {
-  
-        display: block;
-        justify-content: initial;
-        flex-direction: initial;
-   
-      }
-    
-    .containerPageMyVakita{
-       
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        height: fit-content;
-        align-items: normal;
-    } 
-    .cardMyVakita{
-      
-        width: 35rem;
-        margin: 1rem 1.5rem;
-       
-        
-        }
-        .saveIconBox{
-            width: 13.5rem;
-        }
-        .usersMyVakita{
-           
-            font-size: 15px;
-            width: 14rem;
-        }
-        
-            .h3{
-               
-                font-size: 21px;
-            }
-
-            .memebersMyVakita {
-   
-                /*provisorio */
-                padding-right: 4rem;
-                width:10rem;
-                margin-right: 1.8rem;
-               
-              }
+  background-color: #f2f2f2;
+  border: 2px solid #ccc;
+  opacity: 0.7;
 }
 
+
+@media only screen and (min-width: 601px) {
+  .chartContainer {
+
+    height: 13.2rem;
+    width: 100%;
+  }
+
+  .pageMyVakita {
+
+    display: block;
+    justify-content: initial;
+    flex-direction: initial;
+
+  }
+
+  .containerPageMyVakita {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: fit-content;
+    align-items: normal;
+  }
+
+  .cardMyVakita {
+
+    width: 35rem;
+    margin: 1rem 1.5rem;
+
+
+  }
+
+  .saveIconBox {
+    width: 13.5rem;
+  }
+
+  .usersMyVakita {
+
+    font-size: 15px;
+    width: 14rem;
+  }
+
+  .h3 {
+
+    font-size: 21px;
+  }
+
+  .memebersMyVakita {
+
+    /*provisorio */
+    padding-right: 4rem;
+    width: 10rem;
+    margin-right: 1.8rem;
+
+  }
+}

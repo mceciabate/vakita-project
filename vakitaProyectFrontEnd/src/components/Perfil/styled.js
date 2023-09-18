@@ -109,11 +109,13 @@ export const Input = styled.input`
     max-width: 300px;
     height: 35px;
     text-indent: 10px;
+    background-color:white;
 
    
     &:disabled {
         color: black;
         background-color :#CAC1D1;
+        border-color: #CAC1D1;
     }
 
     &:focus {
