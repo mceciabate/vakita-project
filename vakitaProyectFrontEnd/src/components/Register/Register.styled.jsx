@@ -10,7 +10,7 @@ flex-direction: row wrap;
 align-items: center;
 background: linear-gradient(0deg, rgba(200,185,224,1) 11%, rgba(217,181,195,1) 89%);
 
-@media (max-width: 1180px){
+@media (max-width: 1423px){
   height: 170vh !important;
 }
 `;
@@ -24,7 +24,7 @@ export const GeneralFormContainer = styled.div`
 
 
 
-  @media (max-width: 1180px){
+  @media (max-width: 1423px){
     height: 1200px;
   }
 `;
@@ -53,7 +53,7 @@ border-radius:50px;
   
 
 
-@media (max-width: 1181px){
+@media (max-width: 1423px){
   margin-top: -15px;
   height: 1100px;
 }
@@ -79,7 +79,7 @@ margin-top:-350px;
   
 }
 
-@media (max-width: 1180px){
+@media (max-width: 1423px){
 
   margin-top:-745px;
 }
@@ -114,7 +114,7 @@ margin-left:13%;
   }
 
 
-  @media (max-width: 1180px){
+  @media (max-width: 1423px){
 
     flex-direction: column;
     margin-left:30%;
