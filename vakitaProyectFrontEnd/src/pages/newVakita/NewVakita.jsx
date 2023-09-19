@@ -253,16 +253,16 @@ const NewVakita = () => {
 
                     <div className='boxOne'>
                       <div className="boxItems">
-                        <label htmlFor="name"></label>
-                        <Field className="inputText" type="text" id="name" name="name" placeholder="Nombre de la vaka" />
+                        <label className='labelDate' htmlFor="name">Nombre de la vaka</label>
+                        <Field className="inputText" type="text" id="name" name="name" placeholder="¿Qué nombre le vas a poner a tu vakita?" />
                         <span className='error'>
                           <ErrorMessage className='error-mensaje' name="name" component="span" />
                         </span>
 
                       </div>
                       <div className="boxItems">
-                        <label htmlFor="amount"></label>
-                        <Field className="inputNumber" type="number" id="amount" name="amount" placeholder="Importe total" />
+                        <label className='labelDate' htmlFor="amount">Importe total</label>
+                        <Field className="inputNumber" type="number" id="amount" name="amount" label="Fecha inicio de ahorro" placeholder="¿Cuánto es el importe que quieres obtener con esta Vakita?" />
                         <div className='error'>
                           <ErrorMessage name="amount" component="div" />
                         </div>
@@ -277,16 +277,16 @@ const NewVakita = () => {
 
 
                       <div className="boxItems">
-                        <label htmlFor="description"></label>
-                        <Field type="text" className="inputDescription" id="description" name="description" placeholder="Descripción" />
+                        <label className='labelDate' htmlFor="description">Descripción</label>
+                        <Field type="text" className="inputDescription" id="description" name="description" placeholder="Agrega tu descripción" />
                         <span className='error'>
                           <ErrorMessage name="description" component="div" />
                         </span>
                       </div>
 
                       <div className="boxItems">
-                        <label htmlFor="cumulativeAmount"></label>
-                        <Field className="inputNumber" type="number" id="cumulativeAmount" name="cumulativeAmount" placeholder="Importe a cargar en la vakita" />
+                        <label className='labelDate' htmlFor="cumulativeAmount">Importe a cargar en la vakita</label>
+                        <Field className="inputNumber" type="number" id="cumulativeAmount" name="cumulativeAmount" placeholder="Agrega aquí tu importe" />
                         <div className='error'>
                           <ErrorMessage name="cumulativeAmount" component="div" />
                         </div>
