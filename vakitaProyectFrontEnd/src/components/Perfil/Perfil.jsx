@@ -18,6 +18,7 @@ const Perfil = () => {
     alias: "",
     avatar: "",
   });
+  const [loading, setLoading] = useState(true);
 
   const userId = localStorage.getItem("userId");
 
@@ -106,6 +107,20 @@ const Perfil = () => {
     },
   });
 
+  // useEffect(() => {
+  //   fetch("http://107.22.65.36:8080/api/v1/usuarios/" + userId)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setUser(data);
+  //       formik.setValues({
+  //         name: data.name,
+  //         lastName: data.lastName,
+  //         alias: data.alias,
+  //         avatar: data.avatar,
+  //       });
+  //     })
+  //     .catch((error) => console.error(error));
+  // }, [userId]);
   useEffect(() => {
     fetch("http://107.22.65.36:8080/api/v1/usuarios/" + userId)
       .then((response) => response.json())
@@ -118,18 +133,26 @@ const Perfil = () => {
           avatar: data.avatar,
         });
       })
-      .catch((error) => console.error(error));
+      .catch((error) => console.error(error))
+      .finally(() => {
+        setLoading(false); 
+      });
   }, [userId]);
-
   
 
   return (
     <PerfilContainer>
-      <H2>Mi Perfil</H2>
+     
 
-      <UserProfileImage user={user} />
+      {loading ? (
+           <div className='noDataText'>
+           <div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> </div>
+    ) : (
+      <>
+       <H2>Mi Perfil</H2>
 
-      <ListDiv onSubmit={formik.handleSubmit}>
+<UserProfileImage user={user} />
+    <ListDiv onSubmit={formik.handleSubmit}>
         <TitleH5>Acá puedes actualizar tus datos</TitleH5>
 
         <Div1>
@@ -193,6 +216,7 @@ const Perfil = () => {
           <Li>
             <Label>Avatar</Label>
             <Input
+          
               type="file"
               name="avatar"
               id="avatar"
@@ -206,6 +230,87 @@ const Perfil = () => {
           <Button type="submit" >Guardar cambios</Button>
         </Div2>
       </ListDiv>
+      </>
+    )}
+
+      {/* <ListDiv onSubmit={formik.handleSubmit}>
+        <TitleH5>Acá puedes actualizar tus datos</TitleH5>
+
+        <Div1>
+          <Li>
+            <Label>Nombre</Label>
+            <Input
+              type="text"
+              name="name"
+              id="name"
+              value={formik.values.name}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.name && formik.errors.name && (
+              <ErrorSpan>{formik.errors.name}</ErrorSpan>
+            )}
+          </Li>
+          <Li>
+            <Label>Apellido</Label>
+            <Input
+              type="text"
+              name="lastName"
+              id="lastName"
+              value={formik.values.lastName}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.lastName && formik.errors.lastName && (
+              <ErrorSpan>{formik.errors.lastName}</ErrorSpan>
+            )}
+          </Li>
+          <Li>
+            <Label>Nombre de usuario</Label>
+            <Input
+              type="text"
+              name="alias"
+              id="alias"
+              value={formik.values.alias}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.alias && formik.errors.alias && (
+              <ErrorSpan>{formik.errors.alias}</ErrorSpan>
+            )}
+          </Li>
+          <Li>
+            <Label>DNI</Label>
+            <Input disabled value={user.dni} />
+          </Li>
+        </Div1>
+
+        <Div2>
+          <Li>
+            <Label>Email</Label>
+            <Input disabled value={user.email} />
+          </Li>
+          <Li>
+            <Label>Fecha de nacimiento</Label>
+            <Input disabled value={user.birthdate} />
+          </Li>
+          <Li>
+            <Label>Avatar</Label>
+            <Input
+          
+              type="file"
+              name="avatar"
+              id="avatar"
+              accept="image/*"
+              onChange={handleAvatarInputChange}
+              onBlur={formik.handleBlur}
+             
+            />
+          </Li>
+
+          <Button type="submit" >Guardar cambios</Button>
+        </Div2>
+      </ListDiv> */}
     </PerfilContainer>
   );
 };

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import '../../styles/myVakitaPage.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faHandHoldingDollar,faAngleRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faAngleRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { Doughnut } from 'react-chartjs-2';
 import 'chart.js/auto';
 import axios from 'axios';
@@ -18,6 +18,7 @@ const MyVakita = () => {
   const [inactiveVakitaElements, setInactiveVakitaElements] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [inactivePage, setInactivePage] = useState(0);
+  const [loading, setLoading] = useState(true);
   
   const token = JSON.parse(localStorage.getItem('token'));
   const userId = localStorage.getItem('userId');
@@ -82,35 +83,44 @@ const MyVakita = () => {
     }
   }, [userId, token]);
 
+ 
+
+
+
   useEffect(() => {
     if (userId !== null) {
       const loadData = async () => {
-        await axios
-          .get(`http://107.22.65.36:8080/api/v1/vakita/actives/${userId}`, {
+        try {
+          setLoading(true); // Indicar que el componente se está cargando
+          const response = await axios.get(`http://107.22.65.36:8080/api/v1/vakita/actives/${userId}`, {
             headers: {
               'Content-type': 'application/json',
               Authorization: `Bearer ${token}`,
             },
-          })
-          .then((res) => {
-            setAllMyVakita(res.data);
-            const initialChartData = res.data.map((vakita) => {
-              // Calcula el totalContributed sumando las transacciones y el cumulativeAmount
-              const totalContributed = vakita.transactions.reduce(
-                (total, transaction) => total + transaction.amount,
-                0
-              ) + vakita.cumulativeAmount; // se suma el cumulativeAmount
-
-              const remainingAmount = vakita.totalAmount - totalContributed;
-
-              return {
-                totalContributed,
-                remainingAmount,
-              };
-            });
-
-            setChartData(initialChartData);
           });
+          setAllMyVakita(response.data);
+          const initialChartData = response.data.map((vakita) => {
+            // Calcula el totalContributed sumando las transacciones y el cumulativeAmount
+            const totalContributed = vakita.transactions.reduce(
+              (total, transaction) => total + transaction.amount,
+              0
+            ) + vakita.cumulativeAmount; // se suma el cumulativeAmount
+
+            const remainingAmount = vakita.totalAmount - totalContributed;
+
+            return {
+              totalContributed,
+              remainingAmount,
+            };
+          });
+
+          setChartData(initialChartData);
+          
+          setLoading(false); // Indicar que la carga ha finalizado
+        } catch (error) {
+          console.error('Error fetching data:', error);
+          setLoading(false); // Asegurarse de que la carga termine en caso de error
+        }
       };
       loadData();
     }
@@ -224,11 +234,7 @@ const MyVakita = () => {
       if (!shouldRender) {
         return null; 
       }
-      // const shouldRender = true; // Remove the pagination condition
-  
-      // if (!shouldRender) {
-      //   return null; // Skip rendering for Vakitas not on the current page (remove this)
-      // }
+      
       
       const sortedContributors = [...vakita.contributors];
       const matchingContributorIndex = sortedContributors.findIndex(
@@ -494,64 +500,69 @@ const MyVakita = () => {
   return (
     <>
     <div className='pageMyVakita'>
-      {allMyVakita.length === 0 && inactiveVakitaElements.length === 0 ?
-        <div className='noDataText'>No sos integrante de alguna vakita</div> :
-        (
-          <div className='pageMyVakita'>
-            <h2 className='h2V'>Mis vakitas</h2>
-            <h3 className='h3'>Activas</h3>
-            <div>
-              {allMyVakita.length > perPage && (
-                <div className='boxPagination'>
-                  <ReactPaginate
-                    previousLabel={<FontAwesomeIcon icon={faChevronLeft} />}
-                    nextLabel={<FontAwesomeIcon icon={faAngleRight} />}
-                    breakLabel={'...'}
-                    breakClassName={'break-me'}
-                    pageCount={Math.ceil(allMyVakita.length / perPage)}
-                    marginPagesDisplayed={2}
-                    pageRangeDisplayed={5}
-                    onPageChange={handlePageChange}
-                    containerClassName={'pagination'}
-                    subContainerClassName={'pages pagination'}
-                    activeClassName={'active'}
-                  />
-                </div>
-              )}
-              <div className='containerPageMyVakita'>
-                {renderDataMyVakita(allMyVakita)}
+
+      {loading ? (
+        <div className='noDataText'>
+        <div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> </div>
+      ) : allMyVakita.length === 0 && inactiveVakitaElements.length === 0 ? (
+        <div className='noDataText'>No sos integrante de alguna vakita</div>
+      ) :(
+        <div className='pageMyVakita'>
+          <h2 className='h2V'>Mis vakitas</h2>
+          <h3 className='h3'>Activas</h3>
+          <div>
+            {allMyVakita.length > perPage && (
+              <div className='boxPagination'>
+                <ReactPaginate
+                  previousLabel={<FontAwesomeIcon icon={faChevronLeft} />}
+                  nextLabel={<FontAwesomeIcon icon={faAngleRight} />}
+                  breakLabel={'...'}
+                  breakClassName={'break-me'}
+                  pageCount={Math.ceil(allMyVakita.length / perPage)}
+                  marginPagesDisplayed={2}
+                  pageRangeDisplayed={5}
+                  onPageChange={handlePageChange}
+                  containerClassName={'pagination'}
+                  subContainerClassName={'pages pagination'}
+                  activeClassName={'active'}
+                />
               </div>
+            )}
+            <div className='containerPageMyVakita'>
+              {renderDataMyVakita(allMyVakita)}
             </div>
-            {inactiveVakitaElements.length > 0 ? (
-              <>
-                <h3 className='h3'>Inactivas</h3>
-                <div>
-                {inactiveVakitaElements.length > perPage && (
-  <div className='boxPagination'>
-    <ReactPaginate
-      previousLabel={<FontAwesomeIcon icon={faChevronLeft} />}
-      nextLabel={<FontAwesomeIcon icon={faAngleRight} />}
-      breakLabel={'...'}
-      breakClassName={'break-me'}
-      pageCount={Math.ceil(inactiveVakitaElements.length / perPage)}
-      marginPagesDisplayed={2}
-      pageRangeDisplayed={5}
-      onPageChange={handleInactivePageChange}
-      containerClassName={'pagination'}
-      subContainerClassName={'pages pagination'}
-      activeClassName={'active'}
-    />
-  </div>
-)}
-                  <div className='containerPageMyVakita'>
-              
-                    {renderInactiveVakitas(inactiveVakitaElements)}
-                  </div>
-                </div>
-              </>
-            ) : null}
           </div>
-        )}
+          {inactiveVakitaElements.length > 0 ? (
+            <>
+              <h3 className='h3'>Inactivas</h3>
+              <div>
+              {inactiveVakitaElements.length > perPage && (
+<div className='boxPagination'>
+  <ReactPaginate
+    previousLabel={<FontAwesomeIcon icon={faChevronLeft} />}
+    nextLabel={<FontAwesomeIcon icon={faAngleRight} />}
+    breakLabel={'...'}
+    breakClassName={'break-me'}
+    pageCount={Math.ceil(inactiveVakitaElements.length / perPage)}
+    marginPagesDisplayed={2}
+    pageRangeDisplayed={5}
+    onPageChange={handleInactivePageChange}
+    containerClassName={'pagination'}
+    subContainerClassName={'pages pagination'}
+    activeClassName={'active'}
+  />
+</div>
+)}
+                <div className='containerPageMyVakita'>
+            
+                  {renderInactiveVakitas(inactiveVakitaElements)}
+                </div>
+              </div>
+            </>
+          ) : null}
+        </div>
+      )}
+     
     </div>
     </>
   );
