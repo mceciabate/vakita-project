@@ -15,8 +15,8 @@ import Swal from 'sweetalert2'
 
 
 
-
 const NewVakita = () => {
+
   const [cardAliases, setCardAliases] = useState([]);
   const [selectedCard, setSelectedCard] = useState('');
   const [emails, setEmails] = useState([]);
@@ -25,12 +25,15 @@ const NewVakita = () => {
   const [emailValid, setEmailValid] = useState(true);
   const [getUsers, setGetUsers] = useState([]);
   const [arrayMembers, setArrayMembers] = useState([]);
+  const [cumulativeAmount, setCumulativeAmount] = useState('');
+  const [inputTarjetaDisabled, setInputTarjetaDisabled] = useState(false);
+
 
 
 
   const token = JSON.parse(localStorage.getItem('token'));
   const userId = localStorage.getItem("userId")
-  const emailUser=localStorage.getItem("emailUser")
+  const emailUser = localStorage.getItem("emailUser")
 
   useEffect(() => {
     const loadData = async () => {
@@ -42,7 +45,12 @@ const NewVakita = () => {
     };
     loadData();
   }, []);
-  
+
+  useEffect(() => {
+    // Agrega la lógica para deshabilitar inputTarjeta si cumulativeAmount es igual a 0
+    setInputTarjetaDisabled(cumulativeAmount === '0');
+  }, [cumulativeAmount]);
+
 
   useEffect(() => {
     if (userId !== null) {
@@ -114,6 +122,13 @@ const NewVakita = () => {
     // console.log(values);
 
     // console.log(arrayMembers);
+    if (cumulativeAmount === '0') {
+      setInputTarjetaDisabled(true);
+    } else {
+      setInputTarjetaDisabled(false);
+    }
+
+
     const dataToSend = {
       name: values.name,
       idCreatorUser: userId,
@@ -188,11 +203,11 @@ const NewVakita = () => {
 
   const handleAddEmail = (values) => {
     const emailData = checkEmail(values.email);
-  
+
     if (values.email.trim() === '') {
       return;
     }
-  
+
     if (!emailData.exists) {
       setEmailValid(false);
       setEmailExists(false);
@@ -204,17 +219,17 @@ const NewVakita = () => {
       setEmailValid(true);
       setEmailExists(true);
       setIsDuplicate(false);
-  
+
       if (!emails.includes(values.email)) {
         if (values.email === emailUser) {
-         
-          return; 
+
+          return;
         }
-  
+
         setEmails((prevEmails) => [...prevEmails, values.email]);
-  
+
         const userWithEmail = getUsers.find((user) => user.email === values.email);
-  
+
         if (userWithEmail) {
           const newMember = {
             id: userWithEmail.id,
@@ -225,7 +240,7 @@ const NewVakita = () => {
       }
     }
   };
-  
+
 
   const checkEmail = (email) => {
 
@@ -311,7 +326,15 @@ const NewVakita = () => {
 
                       <div className="boxItems">
                         <label className='labelDate' htmlFor="cumulativeAmount">Importe a cargar en la vakita</label>
-                        <Field className="inputNumber" type="number" id="cumulativeAmount" name="cumulativeAmount" placeholder="Agrega aquí tu importe" />
+                        <Field
+                          className="inputNumber"
+                          type="number"
+                          id="cumulativeAmount"
+                          name="cumulativeAmount"
+                          placeholder="Agrega aquí tu importe"
+                          value={cumulativeAmount}
+                          onChange={(e) => setCumulativeAmount(e.target.value)}
+                        />
                         <div className='error'>
                           <ErrorMessage name="cumulativeAmount" component="div" />
                         </div>
@@ -324,6 +347,7 @@ const NewVakita = () => {
                           id="TarjetaSeleccionada"
                           name="TarjetaSeleccionada"
                           value={selectedCard}
+                          disabled={cumulativeAmount === '0'}
                           onChange={handleCardChange}
                         >
                           <option value="">Selecciona una tarjeta</option>
@@ -384,21 +408,21 @@ const NewVakita = () => {
         </div>
       )} */}
 
-{emailExists !== null && (
-  <div>
-    {!emailExists && (
-      <p>
-        {emailValid
-          ? 'Ingrese un email válido.'
-          : 'El email no está registrado.'}
-      </p>
-    )}
-    {emailExists && isDuplicate && <p>El email está duplicado.</p>}
-    {emailExists && values.email === emailUser && (
-      <p>El email ingresado, se agrega por default.</p>
-    )}
-  </div>
-)}
+                            {emailExists !== null && (
+                              <div>
+                                {!emailExists && (
+                                  <p>
+                                    {emailValid
+                                      ? 'Ingrese un email válido.'
+                                      : 'El email no está registrado.'}
+                                  </p>
+                                )}
+                                {emailExists && isDuplicate && <p>El email está duplicado.</p>}
+                                {emailExists && values.email === emailUser && (
+                                  <p>El email ingresado, se agrega por default.</p>
+                                )}
+                              </div>
+                            )}
 
                           </div>
                           <div>
