@@ -17,8 +17,8 @@ import Swal from 'sweetalert2'
 
 
 const NewVakita = () => {
-
-
+  const [cardAliases, setCardAliases] = useState([]);
+  const [selectedCard, setSelectedCard] = useState('');
   const [emails, setEmails] = useState([]);
   const [emailExists, setEmailExists] = useState(null);
   const [isDuplicate, setIsDuplicate] = useState(false);
@@ -27,6 +27,8 @@ const NewVakita = () => {
   const [arrayMembers, setArrayMembers] = useState([]);
 
 
+
+  const token = JSON.parse(localStorage.getItem('token'));
   const userId = localStorage.getItem("userId")
 
   useEffect(() => {
@@ -39,6 +41,29 @@ const NewVakita = () => {
     };
     loadData();
   }, []);
+  
+
+  useEffect(() => {
+    if (userId !== null) {
+      const loadCardAliases = async () => {
+        try {
+          const response = await axios.get(`http://107.22.65.36:8080/api/v1/payment/personal/${userId}`, {
+            headers: {
+              'Content-type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          const aliases = response.data.map((card) => card.alias);
+          console.log('Aliases recibidos:', aliases);
+          setCardAliases(aliases);
+        } catch (error) {
+          console.error('Error fetching card aliases:', error);
+        }
+      };
+      loadCardAliases();
+    }
+  }, [userId, token]);
 
 
 
@@ -53,7 +78,7 @@ const NewVakita = () => {
     endDate: Yup.string().required('Campo requerido'),
     description: Yup.string().required('Campo requerido'),
     cumulativeAmount: Yup.number()
-    .min(0, 'El importe debe ser mayor o igual a 0'), // Cambiado de min(1) a min(0),
+      .min(0, 'El importe debe ser mayor o igual a 0'), // Cambiado de min(1) a min(0),
     email: Yup.string()
       .email('Ingrese un email válido')
       .required('Campo requerido'),
@@ -61,7 +86,10 @@ const NewVakita = () => {
 
   });
 
-  
+  const handleCardChange = (event) => {
+    setSelectedCard(event.target.value);
+  };
+
   // Función para limpiar los valores del formulario cuando se hunda el boton crear vaka
   const resetFormValues = (actions) => {
     actions.resetForm({
@@ -77,7 +105,7 @@ const NewVakita = () => {
     setArrayMembers([]); // Limpiar la lista de miembros
   };
 
-  
+
   // Función para manejar el envío del formulario
   const handleSubmit = (values, actions) => {
     // Acá se puede realizar las acciones necesarias con los datos ingresados
@@ -152,7 +180,7 @@ const NewVakita = () => {
       })
       .catch(error => console.log(error))
 
-      
+
   };
 
 
@@ -292,6 +320,22 @@ const NewVakita = () => {
                         </div>
                       </div>
 
+                      <div className="boxItems">
+                        <label className='labelDate' htmlFor="TarjetaSeleccionada">¿Qué tarjeta quieres utilizar para debitar tu aporte?</label>
+                        <select
+                          className="inputTarjeta"
+                          id="TarjetaSeleccionada"
+                          name="TarjetaSeleccionada"
+                          value={selectedCard}
+                          onChange={handleCardChange}
+                        >
+                          <option value="">Selecciona una tarjeta</option>
+                          {cardAliases.map((alias, index) => (
+                            <option value={alias} key={index}>{alias}</option>
+                          ))}
+                        </select>
+                      </div>
+
                     </div>
 
                     <div className='boxTwo'>
@@ -324,6 +368,8 @@ const NewVakita = () => {
                                 <ErrorMessage name="email" component="div" />
                               </div>
                             </div>
+
+
                             {/* {emailExists !== null && (
         <div>
           {emailExists ? (
