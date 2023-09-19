@@ -28,6 +28,7 @@ const NewVakita = () => {
 
 
   const userId = localStorage.getItem("userId")
+  const emailUser=localStorage.getItem("emailUser")
 
   useEffect(() => {
     const loadData = async () => {
@@ -101,7 +102,7 @@ const NewVakita = () => {
 
 
     };
-    // console.log(dataToSend);
+
 
 
 
@@ -157,21 +158,13 @@ const NewVakita = () => {
 
 
 
-
-
-
-
   const handleAddEmail = (values) => {
-
-
-
     const emailData = checkEmail(values.email);
-
+  
     if (values.email.trim() === '') {
-
       return;
     }
-
+  
     if (!emailData.exists) {
       setEmailValid(false);
       setEmailExists(false);
@@ -183,24 +176,28 @@ const NewVakita = () => {
       setEmailValid(true);
       setEmailExists(true);
       setIsDuplicate(false);
-
+  
       if (!emails.includes(values.email)) {
+        if (values.email === emailUser) {
+         
+          return; 
+        }
+  
         setEmails((prevEmails) => [...prevEmails, values.email]);
-
-
-        const userWithEmail = getUsers.find(user => user.email === values.email);
-
+  
+        const userWithEmail = getUsers.find((user) => user.email === values.email);
+  
         if (userWithEmail) {
           const newMember = {
             id: userWithEmail.id,
             email: userWithEmail.email,
           };
-          setArrayMembers(prevArrayMembers => [...prevArrayMembers, newMember]);
+          setArrayMembers((prevArrayMembers) => [...prevArrayMembers, newMember]);
         }
-
       }
     }
   };
+  
 
   const checkEmail = (email) => {
 
@@ -341,14 +338,21 @@ const NewVakita = () => {
         </div>
       )} */}
 
-                            {emailExists !== null && (
-                              <div>
-                                {!emailExists && (
-                                  <p>{emailValid ? 'Ingrese un email válido.' : 'El email no está registrado.'}</p>
-                                )}
-                                {emailExists && isDuplicate && <p>El email está duplicado.</p>}
-                              </div>
-                            )}
+{emailExists !== null && (
+  <div>
+    {!emailExists && (
+      <p>
+        {emailValid
+          ? 'Ingrese un email válido.'
+          : 'El email no está registrado.'}
+      </p>
+    )}
+    {emailExists && isDuplicate && <p>El email está duplicado.</p>}
+    {emailExists && values.email === emailUser && (
+      <p>El email ingresado, se agrega por default.</p>
+    )}
+  </div>
+)}
 
                           </div>
                           <div>

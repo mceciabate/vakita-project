@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import '../../styles/myVakitaPage.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faHandHoldingDollar,faAngleRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faAngleRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { Doughnut } from 'react-chartjs-2';
 import 'chart.js/auto';
 import axios from 'axios';
@@ -83,39 +83,7 @@ const MyVakita = () => {
     }
   }, [userId, token]);
 
-  // useEffect(() => {
-  //   if (userId !== null) {
-  //     const loadData = async () => {
-  //       await axios
-  //         .get(`http://107.22.65.36:8080/api/v1/vakita/actives/${userId}`, {
-  //           headers: {
-  //             'Content-type': 'application/json',
-  //             Authorization: `Bearer ${token}`,
-  //           },
-  //         })
-  //         .then((res) => {
-  //           setAllMyVakita(res.data);
-  //           const initialChartData = res.data.map((vakita) => {
-  //             // Calcula el totalContributed sumando las transacciones y el cumulativeAmount
-  //             const totalContributed = vakita.transactions.reduce(
-  //               (total, transaction) => total + transaction.amount,
-  //               0
-  //             ) + vakita.cumulativeAmount; // se suma el cumulativeAmount
-
-  //             const remainingAmount = vakita.totalAmount - totalContributed;
-
-  //             return {
-  //               totalContributed,
-  //               remainingAmount,
-  //             };
-  //           });
-
-  //           setChartData(initialChartData);
-  //         });
-  //     };
-  //     loadData();
-  //   }
-  // }, [userId, token]);
+ 
 
 
 
@@ -266,11 +234,7 @@ const MyVakita = () => {
       if (!shouldRender) {
         return null; 
       }
-      // const shouldRender = true; // Remove the pagination condition
-  
-      // if (!shouldRender) {
-      //   return null; // Skip rendering for Vakitas not on the current page (remove this)
-      // }
+      
       
       const sortedContributors = [...vakita.contributors];
       const matchingContributorIndex = sortedContributors.findIndex(

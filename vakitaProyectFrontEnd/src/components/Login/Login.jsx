@@ -203,12 +203,17 @@ function Login() {
               )
               .then((res) => {
            
+           
                 if (res.status === 201) {
                   const token = JSON.stringify(res.data.token)
                   localStorage.setItem('token',token);
                   const userId = JSON.stringify(res.data.userId)
                   localStorage.setItem('userId',userId);
-                 
+                  const email = values.email;
+                  localStorage.setItem('emailUser',email);
+        
+
+               
               
                
                   const Toast = Swal.mixin({
