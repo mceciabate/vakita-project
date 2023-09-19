@@ -112,7 +112,7 @@ const TransactionPage = () => {
      
       {loading ? (
          <div className='noDataText'>
-           <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> </div>
+           <div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> </div>
         ) : (
           <>
            <h2 className="h2">Movimientos de mis vakitas</h2>

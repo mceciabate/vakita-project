@@ -22,18 +22,20 @@ const Menu = ({ handleCloseModal }) => {
   });
 
   useEffect(() => {
-    fetch("http://107.22.65.36:8080/api/v1/usuarios/" + userId)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setUser(data);
-      })
-      .catch((error) => console.error(error));
-  }, [userId]);
+    if (logged) {
+      fetch("http://107.22.65.36:8080/api/v1/usuarios/" + userId)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setUser(data);
+        })
+        .catch((error) => console.error(error));
+    }
+  }, [userId, logged]);
 
   return (
     <>

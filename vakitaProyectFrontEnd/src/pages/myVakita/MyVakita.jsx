@@ -503,7 +503,7 @@ const MyVakita = () => {
 
       {loading ? (
         <div className='noDataText'>
-        <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> </div>
+        <div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> </div>
       ) : allMyVakita.length === 0 && inactiveVakitaElements.length === 0 ? (
         <div className='noDataText'>No sos integrante de alguna vakita</div>
       ) :(
