@@ -78,7 +78,7 @@ const TransactionPage = () => {
 
   const generatePDF = () => {
     const doc = new jsPDF();
-    doc.text('Movimientos de mis vaquitas', 10, 10);
+    doc.text('Movimientos de mis vakitas', 10, 10);
 
     const transactionRows = renderTransactionRows();
 
@@ -91,7 +91,7 @@ const TransactionPage = () => {
       ]);
 
       doc.autoTable({
-        head: [['Nombre de vaquita', 'Email', 'Ingreso de dinero', 'Fecha']],
+        head: [['Nombre de vakita', 'Email', 'Ingreso de dinero', 'Fecha']],
         body: tableData,
         startY: 20,
         margin: { top: 20 },
@@ -99,12 +99,9 @@ const TransactionPage = () => {
         showHead: 'firstPage',
         tableWidth: 'auto',
         theme: 'striped',
-        // didDrawPage: function (data) {
-        //   doc.text('Página ' + doc.internal.getNumberOfPages(), data.settings.margin.left, 10);
-        // },
       });
 
-      doc.save('movimientos_vaquitas.pdf');
+      doc.save('movimientos_vakitas.pdf');
     } else {
       doc.text('No hay datos para mostrar', 10, 30);
     }
@@ -112,9 +109,14 @@ const TransactionPage = () => {
 
   return (
     <div className="tranxPage">
-      <h2 className="h2">Movimientos de mis vaquitas</h2>
+     
+      {loading ? (
+         <div className='noDataText'>
+           <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> </div>
+        ) : (
+          <>
+           <h2 className="h2">Movimientos de mis vakitas</h2>
       <div className="containerTranx">
-        
         <div className='containerInput'>
           <input
             className='inputTx'
@@ -132,7 +134,7 @@ const TransactionPage = () => {
         <table className='tranxTable'>
           <thead>
             <tr>
-              <th>Nombre de vaquita</th>
+              <th>Nombre de vakita</th>
               <th>Email</th>
               <th>Ingreso de dinero</th>
               <th>Fecha</th>
@@ -157,7 +159,11 @@ const TransactionPage = () => {
             ))}
           </tbody>
         </table>
-      </div>
+        </div>
+          </>
+        )}
+
+      
     </div>
   );
 };

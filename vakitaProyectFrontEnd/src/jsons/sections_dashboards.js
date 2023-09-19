@@ -1,6 +1,6 @@
 const sections_dashboards = [
     {
-        "title": "Mis Vakias",
+        "title": "Mis Vakitas",
         "link":"/dashboard/mis-vakitas",
         "img": `https://grupo3-vakita.s3.amazonaws.com/assets/misvaquitas.png`,
         "color": "#FFE4E5",
