@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>grupo3</groupId>
 	<artifactId>ms-payment</artifactId>
-	<packaging>war</packaging>
+<!--	<packaging>war</packaging>-->
 	<version>0.0.1-SNAPSHOT</version>
 <!--	<name>ms-payment</name>-->
 	<description>Microservicio Payments</description>

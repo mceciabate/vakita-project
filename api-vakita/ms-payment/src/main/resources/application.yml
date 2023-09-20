@@ -5,7 +5,7 @@ server:
     key-store-type: JKS
     key-store-password: grupo32020
 
-  port: 7777
+  port: 8080
 
 spring:
   application:
@@ -21,7 +21,7 @@ eureka:
     registerWithEureka: true
     fetchRegistry: false
     serviceURL:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://35.153.134.97:8761/
   instance:
     instance-id: ${spring.application.name}:${random.int}
     preferIpAddress: true
@@ -39,7 +39,4 @@ management:
       version: 1.0.0
       description: Microservicios de Pagos
 
-spring-doc:
-  api-docs:
-    path: /swagger-payment
 

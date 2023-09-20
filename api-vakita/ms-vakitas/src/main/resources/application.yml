@@ -1,5 +1,11 @@
 server:
-  port: ${PORT:${SERVER_PORT:0}}
+  ssl:
+    key-alias: vakita_certificado
+    key-store: classpath:keystore.jks
+    key-store-type: JKS
+    key-store-password: grupo3
+
+  port: 8080
 
 spring:
   cloud:
