@@ -13,7 +13,14 @@ export const Image = styled.img`
 
 
 export const DivBox = styled.div`
-width:100%;
+    width:100%;
+    display: flex;
+    justify-content: center;
+
+    @media only screen and (min-width: 767px) {
+        padding: 0 2rem;
+        display: block;
+    }
 `
 
 

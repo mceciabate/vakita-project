@@ -1,8 +1,15 @@
 .cointainerW{
     display: flex;
-    justify-content: center;
-    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  
+    
     height: 100vh;
+    padding: 0;
+
+    @media only screen and (min-width: 767px) {
+        padding: 0 2rem;
+    }
 }
 
 .boxW{
@@ -16,6 +23,10 @@
     backdrop-filter: blur( 13px );
     -webkit-backdrop-filter: blur( 13px );
     border: 1px solid rgba( 255, 255, 255, 0.18 );
+
+    @media only screen and (min-width: 767px) {
+        height: 240px;
+    }
 }
 
 .boxTextW{
@@ -56,19 +67,9 @@
         color: #323232;
     }
 
-    label {
-        width: 100%;
-        margin-bottom: 5px;
-    }
-
-    input {
-        padding: 5px;
-        border: none;
-        border-radius: 8px;
-    }
-
     @media only screen and (min-width: 767px) {
         width: 60%;
+        height: 240px;
     }
 }
 
@@ -77,11 +78,12 @@
     flex-direction: column;
     border: none;
     max-width: 100%;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
 }
 
 .formWithInputs {
     width: auto !important;
+    margin: 0 !important;
     /* @media only screen and (min-width: 767px) {
         width: inherit;
     } */
@@ -103,5 +105,62 @@
         max-width: 800px;
         margin: 3rem 0;
         gap: 2rem;
+        height: min-content;
     }
+}
+
+.inputStyle{
+    border: 2px solid white;
+    border-radius: 8px;
+    min-width: 100%;
+    max-width: 300px;
+    height: 25px;
+    text-indent: 10px;
+    background-color:white;
+    margin-top: 5px;
+    width: 100%;
+}
+
+.labelStyle {
+    /* margin-bottom: 5px; */
+    width: 100%;
+}
+
+.buttonExtract{
+    padding: 0.5rem;
+    background: none;
+    border-radius: 10px;
+    font-weight: 600;
+    border-style: 2px solid;
+    border-top-color: #BB75CB;
+    border-right-color: #D18EBA;
+    border-bottom-color: #E68C8C;
+    border-left-color: #D18EBA;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.buttonExtract:hover {
+    background-color: #AD8FF3;
+    color: white;
+
+}
+
+.bannerBoxW{
+ width: 100%;
+ display: flex;
+ justify-content: center;
+ margin-top: 2rem;
+
+}
+
+.boxWM{
+    width: 100%;
+}
+
+@media only screen and (min-width: 767px) {
+    .bannerBoxW{
+        
+        margin-bottom: 4rem;
+       }
 }

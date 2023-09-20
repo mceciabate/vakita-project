@@ -32,7 +32,7 @@ export const ListDiv = styled.form`
     border-radius: 20px;
     width: 80%;
     max-width: 800px;
-    margin-top: -1rem;
+    margin-top: -2rem;
     box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
     display: grid;
     grid-template-columns: 1fr;
@@ -122,8 +122,28 @@ export const Input = styled.input`
         border-color: #423163; /* Cambiar el color del borde a verde cuando se selecciona */
         outline: none; /* Quitar el resplandor predeterminado en algunos navegadores */
     }
-  
+`;
 
+export const InputAvatar = styled.input`
+    border: 2px solid white;
+    border-radius: 8px;
+    min-width: 100%;
+    max-width: 300px;
+    height: 35px;
+    text-indent: 10px;
+    background-color:white;
+    padding-top: 0.9rem;
+
+    &:disabled {
+        color: black;
+        background-color :#CAC1D1;
+        border-color: #CAC1D1;
+    }
+
+    &:focus {
+        border-color: #423163; /* Cambiar el color del borde a verde cuando se selecciona */
+        outline: none; /* Quitar el resplandor predeterminado en algunos navegadores */
+    }
 `;
 
 export const Button = styled.button`
@@ -141,10 +161,33 @@ export const Button = styled.button`
     cursor: pointer;
     height: 40px;
    
-
-
     &:hover {
         background-color: #AD8FF3;
         color: white;
     }
 `
+
+export const BtnChangePwd = styled.button`
+    margin-left: 1.5rem;
+    align-self: flex-start;
+    padding: 0.5rem 1rem;
+    border-style: 2px solid;
+    border-top-color: #BB75CB;
+    border-right-color: #D18EBA;
+    border-bottom-color: #E68C8C;
+    border-left-color: #D18EBA;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 10px;
+    background: none;
+    height: 40px;
+
+    &:hover {
+        background-color: #AD8FF3;
+        color: white;
+    }
+
+    @media (min-width: 769px) {
+        margin: 0 5rem;
+    }
+`;

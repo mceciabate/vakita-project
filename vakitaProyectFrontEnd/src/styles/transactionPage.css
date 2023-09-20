@@ -1,5 +1,5 @@
 .tranxPage{
-   height: 100vh;
+   height: auto;
    width: 100%;
    display: flex;
    justify-content: center;
@@ -7,11 +7,14 @@
 
 
 }
-.h2 {
+.h2T {
     width: 100%;
     margin-top: 50px;
     text-align: left;
     margin-left: 5%;
+
+    
+  
 }
 .containerTranx{
     

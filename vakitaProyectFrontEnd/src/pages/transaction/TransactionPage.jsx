@@ -113,9 +113,11 @@ const TransactionPage = () => {
       {loading ? (
          <div className='noDataText'>
            <div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> </div>
+        ) : renderTransactionRows().length === 0 ? (
+          <div className='noDataText'>No existen transacciones para el usuario</div>
         ) : (
           <>
-           <h2 className="h2">Movimientos de mis vakitas</h2>
+           <h2 className="h2T">Movimientos de mis vakitas</h2>
       <div className="containerTranx">
         <div className='containerInput'>
           <input

@@ -104,7 +104,7 @@ const MyVakita = () => {
             const totalContributed = vakita.transactions.reduce(
               (total, transaction) => total + transaction.amount,
               0
-            ) + vakita.cumulativeAmount; // se suma el cumulativeAmount
+            ) ;
 
             const remainingAmount = vakita.totalAmount - totalContributed;
 
@@ -148,6 +148,17 @@ const MyVakita = () => {
         });
         return;
       }
+
+      if (cardAliases.length === 0) {
+        Swal.fire({
+          icon: 'info',
+          title: 'Medio de pago no asociado',
+          html: 'Debe <a href="/dashboard/mis-datos-financieros" style="text-decoration: underline; color: blue;">asociar un medio de pago</a> para realizar un depósito en una vakita.',
+          allowOutsideClick: true,
+        });
+        return;
+      }
+      
 
       const { value: formValues, isDismissed } = await Swal.fire({
         title: 'Cargar fondos',
