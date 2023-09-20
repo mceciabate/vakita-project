@@ -1,7 +1,7 @@
 server:
   ssl:
     key-alias: vakita_certificado
-    key-store: classpath:keystore.jks
+    key-store: classpath:cervakita.jks
     key-store-type: JKS
     key-store-password: grupo3
 
@@ -14,35 +14,29 @@ spring:
   application:
     name: ms-vakitas
   rabbitmq:
-    username: guest
-    password: guest
-    host: localhost
+    host: 54.152.71.174
     port: 5672
+    username: admin
+    password: admin1234
   datasource:
-    url: jdbc:mysql://localhost:3306/vakitadb?createDatabaseIfNotExist=true
-    username: root
-    password: root
+    url: jdbc:mysql://54.173.235.41:3306/vakitadb?createDatabaseIfNotExist=true
+    username: grupo3
+    password: grupo3
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
-    hibernate.ddl-auto: create-drop
+    hibernate.ddl-auto: update
     generate-ddl: true
     show-sql: true
-#    properties:
-#      hibernate:
-#        dialect: org.hibernate.dialect.MySQLDialect
-
-#Inicializacion de data en la bd, toma el script que está en resources al iniciar el ms
-    defer-datasource-initialization: true
-  sql:
-    init:
-      mode: always
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
 
 eureka:
   client:
     registerWithEureka: true
     fetchRegistry: false
     serviceURL:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://35.153.134.97:8761/
   instance:
     instance-id: ${spring.application.name}:${random.int}
     preferIpAddress: true
@@ -56,10 +50,6 @@ management:
     env:
       enabled: true
     app:
-      name: ms-vakitas
+      name: ms-payment
       version: 1.0.0
-      description: Microservicios Vakitas
-
-spring-doc:
-  api-docs:
-    path: /swagger-vakitas
+      description: Microservicios de Vakitas
