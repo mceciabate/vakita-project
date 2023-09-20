@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 		org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration.class})*/
 @EnableMongoRepositories
 //@EnableDiscoveryClient
-public class MsPaymentApplication {
+public class MsPaymentApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MsPaymentApplication.class, args);

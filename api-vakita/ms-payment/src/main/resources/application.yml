@@ -1,9 +1,9 @@
 server:
   ssl:
-    key-alias: grupo-3
-    key-store: classpath:grupo3.jks
+    key-alias: alias_certificado
+    key-store: classpath:keystore.jks
     key-store-type: JKS
-    key-password: grupo3
+    key-store-password: grupo32020
 
   port: 7777
 
