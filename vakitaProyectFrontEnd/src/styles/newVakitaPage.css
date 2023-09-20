@@ -262,30 +262,16 @@ img {
     border-right-color: #D18EBA;
     border-bottom-color: #E68C8C;
     border-left-color: #D18EBA;
+    background-color: #f2f2f2;
+    opacity: 0.6;
+   
 
 }
 
-.buttonSubmit:hover {
-    background-color: #AD8FF3;
-    color: white;
-}
+
 
 
 .buttonSubmitActive {
-    padding: 14px 24px;
-    border-radius: .7rem;
-    margin: 2.5rem 0px;
-    font-size: 17px;
-    cursor: pointer;
-    border: none;
-    font-weight: 500;
-    cursor: pointer;
-    background-color: #dfabab;
-    font-family: 'Inria Sans', sans-serif;
-}
-
-.buttonSubmitActive:hover {
-
     padding: 10px 24px;
     margin: 2.5rem 0px;
     font-size: 17px;
@@ -304,6 +290,12 @@ img {
     border-right-color: #D18EBA;
     border-bottom-color: #E68C8C;
     border-left-color: #D18EBA;
+}
+
+.buttonSubmitActive:hover {
+
+    background-color: #AD8FF3;
+    color: white;
 
 }
 

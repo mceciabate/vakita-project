@@ -1,4 +1,3 @@
-
 import { Formik, Form, Field, ErrorMessage, FieldArray } from 'formik';
 import * as Yup from 'yup';
 
@@ -15,6 +14,7 @@ import Swal from 'sweetalert2'
 
 
 
+
 const NewVakita = () => {
 
   const [cardAliases, setCardAliases] = useState([]);
@@ -25,31 +25,12 @@ const NewVakita = () => {
   const [emailValid, setEmailValid] = useState(true);
   const [getUsers, setGetUsers] = useState([]);
   const [arrayMembers, setArrayMembers] = useState([]);
-  const [cumulativeAmount, setCumulativeAmount] = useState('');
-  const [inputTarjetaDisabled, setInputTarjetaDisabled] = useState(false);
 
 
-
-
-  const token = JSON.parse(localStorage.getItem('token'));
   const userId = localStorage.getItem("userId")
-  const emailUser = localStorage.getItem("emailUser")
-
-  useEffect(() => {
-    const loadData = async () => {
-      await axios.get("http://107.22.65.36:8080/api/v1/usuarios").then((res) => {
-
-        setGetUsers(res.data)
-
-      });
-    };
-    loadData();
-  }, []);
-
-  useEffect(() => {
-    // Agrega la lógica para deshabilitar inputTarjeta si cumulativeAmount es igual a 0
-    setInputTarjetaDisabled(cumulativeAmount === '0');
-  }, [cumulativeAmount]);
+  const emailUser=localStorage.getItem("emailUser")
+  const token = JSON.parse(localStorage.getItem('token'));
+ 
 
 
   useEffect(() => {
@@ -64,7 +45,7 @@ const NewVakita = () => {
           });
 
           const aliases = response.data.map((card) => card.alias);
-          console.log('Aliases recibidos:', aliases);
+         
           setCardAliases(aliases);
         } catch (error) {
           console.error('Error fetching card aliases:', error);
@@ -73,6 +54,24 @@ const NewVakita = () => {
       loadCardAliases();
     }
   }, [userId, token]);
+
+  const handleCardChange = (event) => {
+    setSelectedCard(event.target.value);
+  };
+
+ 
+
+
+  useEffect(() => {
+    const loadData = async () => {
+      await axios.get("http://107.22.65.36:8080/api/v1/usuarios").then((res) => {
+
+        setGetUsers(res.data)
+
+      });
+    };
+    loadData();
+  }, []);
 
 
 
@@ -87,7 +86,7 @@ const NewVakita = () => {
     endDate: Yup.string().required('Campo requerido'),
     description: Yup.string().required('Campo requerido'),
     cumulativeAmount: Yup.number()
-      .min(0, 'El importe debe ser mayor o igual a 0'), // Cambiado de min(1) a min(0),
+    .min(0, 'El importe debe ser mayor o igual a 0'), // Cambiado de min(1) a min(0),
     email: Yup.string()
       .email('Ingrese un email válido')
       .required('Campo requerido'),
@@ -95,10 +94,7 @@ const NewVakita = () => {
 
   });
 
-  const handleCardChange = (event) => {
-    setSelectedCard(event.target.value);
-  };
-
+  
   // Función para limpiar los valores del formulario cuando se hunda el boton crear vaka
   const resetFormValues = (actions) => {
     actions.resetForm({
@@ -114,7 +110,7 @@ const NewVakita = () => {
     setArrayMembers([]); // Limpiar la lista de miembros
   };
 
-
+  
   // Función para manejar el envío del formulario
   const handleSubmit = (values, actions) => {
     // Acá se puede realizar las acciones necesarias con los datos ingresados
@@ -122,13 +118,6 @@ const NewVakita = () => {
     // console.log(values);
 
     // console.log(arrayMembers);
-    if (cumulativeAmount === '0') {
-      setInputTarjetaDisabled(true);
-    } else {
-      setInputTarjetaDisabled(false);
-    }
-
-
     const dataToSend = {
       name: values.name,
       idCreatorUser: userId,
@@ -145,6 +134,8 @@ const NewVakita = () => {
 
 
     };
+
+    
 
 
 
@@ -196,18 +187,18 @@ const NewVakita = () => {
       })
       .catch(error => console.log(error))
 
-
+      
   };
 
 
 
   const handleAddEmail = (values) => {
     const emailData = checkEmail(values.email);
-
+  
     if (values.email.trim() === '') {
       return;
     }
-
+  
     if (!emailData.exists) {
       setEmailValid(false);
       setEmailExists(false);
@@ -219,17 +210,17 @@ const NewVakita = () => {
       setEmailValid(true);
       setEmailExists(true);
       setIsDuplicate(false);
-
+  
       if (!emails.includes(values.email)) {
         if (values.email === emailUser) {
-
-          return;
+         
+          return; 
         }
-
+  
         setEmails((prevEmails) => [...prevEmails, values.email]);
-
+  
         const userWithEmail = getUsers.find((user) => user.email === values.email);
-
+  
         if (userWithEmail) {
           const newMember = {
             id: userWithEmail.id,
@@ -240,7 +231,7 @@ const NewVakita = () => {
       }
     }
   };
-
+  
 
   const checkEmail = (email) => {
 
@@ -326,28 +317,20 @@ const NewVakita = () => {
 
                       <div className="boxItems">
                         <label className='labelDate' htmlFor="cumulativeAmount">Importe a cargar en la vakita</label>
-                        <Field
-                          className="inputNumber"
-                          type="number"
-                          id="cumulativeAmount"
-                          name="cumulativeAmount"
-                          placeholder="Agrega aquí tu importe"
-                          value={cumulativeAmount}
-                          onChange={(e) => setCumulativeAmount(e.target.value)}
-                        />
+                        <Field className="inputNumber" type="number" id="cumulativeAmount" name="cumulativeAmount" placeholder="Agrega aquí tu importe" />
                         <div className='error'>
                           <ErrorMessage name="cumulativeAmount" component="div" />
                         </div>
                       </div>
 
-                      <div className="boxItems">
+                      <div className="boxItems"> 
                         <label className='labelDate' htmlFor="TarjetaSeleccionada">¿Qué tarjeta quieres utilizar para debitar tu aporte?</label>
                         <select
                           className="inputTarjeta"
                           id="TarjetaSeleccionada"
                           name="TarjetaSeleccionada"
                           value={selectedCard}
-                          disabled={cumulativeAmount === '0'}
+                          disabled={!values.cumulativeAmount || values.cumulativeAmount <= 0}
                           onChange={handleCardChange}
                         >
                           <option value="">Selecciona una tarjeta</option>
@@ -356,6 +339,7 @@ const NewVakita = () => {
                           ))}
                         </select>
                       </div>
+
 
                     </div>
 
@@ -389,8 +373,6 @@ const NewVakita = () => {
                                 <ErrorMessage name="email" component="div" />
                               </div>
                             </div>
-
-
                             {/* {emailExists !== null && (
         <div>
           {emailExists ? (
@@ -408,21 +390,21 @@ const NewVakita = () => {
         </div>
       )} */}
 
-                            {emailExists !== null && (
-                              <div>
-                                {!emailExists && (
-                                  <p>
-                                    {emailValid
-                                      ? 'Ingrese un email válido.'
-                                      : 'El email no está registrado.'}
-                                  </p>
-                                )}
-                                {emailExists && isDuplicate && <p>El email está duplicado.</p>}
-                                {emailExists && values.email === emailUser && (
-                                  <p>El email ingresado, se agrega por default.</p>
-                                )}
-                              </div>
-                            )}
+{emailExists !== null && (
+  <div>
+    {!emailExists && (
+      <p>
+        {emailValid
+          ? 'Ingrese un email válido.'
+          : 'El email no está registrado.'}
+      </p>
+    )}
+    {emailExists && isDuplicate && <p>El email está duplicado.</p>}
+    {emailExists && values.email === emailUser && (
+      <p>El email ingresado, se agrega por default.</p>
+    )}
+  </div>
+)}
 
                           </div>
                           <div>
