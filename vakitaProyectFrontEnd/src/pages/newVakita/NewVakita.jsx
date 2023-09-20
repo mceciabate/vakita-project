@@ -86,14 +86,22 @@ const NewVakita = () => {
     endDate: Yup.string().required('Campo requerido'),
     description: Yup.string().required('Campo requerido'),
     cumulativeAmount: Yup.number()
-    .min(0, 'El importe debe ser mayor o igual a 0'), // Cambiado de min(1) a min(0),
+    .min(0, 'El importe debe ser mayor o igual a 0').required('Campo requerido'), // Cambiado de min(1) a min(0),
     email: Yup.string()
-      .email('Ingrese un email válido')
-      .required('Campo requerido'),
+    .email('Ingrese un email válido')
+    .test('is-email-required', 'Debes agregar al menos 1 integrante', function (value) {
+      // La validación personalizada verifica si el campo de correo electrónico está vacío
+      // Si está vacío y no hay ningún correo electrónico en la lista 'emails', muestra el mensaje de error
+      return value || emails.length > 0;
+    })
+     ,
 
 
   });
 
+  validationSchema.test('hasMembers', 'Debes agregar al menos 1 integrante', function (value) {
+    return emails.length > 0;
+  });
   
   // Función para limpiar los valores del formulario cuando se hunda el boton crear vaka
   const resetFormValues = (actions) => {
@@ -136,16 +144,7 @@ const NewVakita = () => {
     };
 
     
-
-
-
-
-    const allEmailsValid = emails.every((email) => email !== '' && checkEmail(email).exists);
-
-    if (allEmailsValid) {
-      // Mostrar los emails por consola
-      //  console.log('Array de emails:', emails);
-    }
+    
 
     actions.setSubmitting(false);
 
