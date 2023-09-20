@@ -58,7 +58,7 @@ const Perfil = () => {
         const { email } = result.value;
 
         axios
-          .get(`http://107.22.65.36:8080/api/v1/usuarios/email/${email}`)
+          .get(`https://gatewayvakitas.ddns.net:8080/api/v1/usuarios/email/${email}`)
           .then((response) => {
             const users = response.data;
             console.log(users.id);
@@ -80,7 +80,7 @@ const Perfil = () => {
               //Post enviar correo al usuario para que obtenga el código
               axios
                 .post(
-                  "http://107.22.65.36:8080/api/v1/usuarios/recover",
+                  "https://gatewayvakitas.ddns.net:8080/api/v1/usuarios/recover",
                   {
                     email: email,
                   },
@@ -136,7 +136,7 @@ const Perfil = () => {
 
                   axios
                     .patch(
-                      `http://107.22.65.36:8080/api/v1/usuarios/${userId}`,
+                      `https://gatewayvakitas.ddns.net:8080/api/v1/usuarios/${userId}`,
                       {
                         password: newPassword,
                       },
@@ -230,7 +230,7 @@ const Perfil = () => {
     onSubmit: async (values) => {
       try {
         const response = await axios.put(
-          "http://107.22.65.36:8080/api/v1/usuarios/" + userId,
+          "https://gatewayvakitas.ddns.net:8080/api/v1/usuarios/" + userId,
           {
             name: values.name,
             lastName: values.lastName,
@@ -274,7 +274,7 @@ const Perfil = () => {
   });
 
   useEffect(() => {
-    fetch("http://107.22.65.36:8080/api/v1/usuarios/" + userId)
+    fetch("https://gatewayvakitas.ddns.net:8080/api/v1/usuarios/" + userId)
       .then((response) => response.json())
       .then((data) => {
         setUser(data);

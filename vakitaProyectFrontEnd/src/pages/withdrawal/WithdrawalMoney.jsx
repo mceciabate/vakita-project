@@ -14,7 +14,7 @@ const WithdrawalMoney = () => {
 
   useEffect(() => {
     axios
-      .get(`http://107.22.65.36:8080/api/v1/usuarios/${userId}`)
+      .get(`https://gatewayvakitas.ddns.net:8080/api/v1/usuarios/${userId}`)
       .then((response) => {
         const user = response.data;
         setAccountBalance(user.account_balance);
@@ -58,7 +58,7 @@ const WithdrawalMoney = () => {
     onSubmit: async (values) => {
       try {
         const response = await axios.post(
-          `http://107.22.65.36:8080/api/v1/usuarios/balance?userId=${parseInt(
+          `https://gatewayvakitas.ddns.net:8080/api/v1/usuarios/balance?userId=${parseInt(
             userId
           )}&amount=${values.amount}`
         );
@@ -72,7 +72,7 @@ const WithdrawalMoney = () => {
           });
 
           axios
-            .get(`http://107.22.65.36:8080/api/v1/usuarios/${userId}`)
+            .get(`https://gatewayvakitas.ddns.net:8080/api/v1/usuarios/${userId}`)
             .then((response) => {
               const user = response.data;
               setAccountBalance(user.account_balance);

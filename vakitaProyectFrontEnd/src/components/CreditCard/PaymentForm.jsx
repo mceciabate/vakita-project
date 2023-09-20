@@ -63,7 +63,7 @@ useEffect(() => {
       setLoading(true); 
   
       const response = await Axios.get(
-        `http://107.22.65.36:8080/api/v1/payment/personal/${userId}`,
+        `https://gatewayvakitas.ddns.net:8080/api/v1/payment/personal/${userId}`,
         {
           headers: {
             'Content-type': 'application/json',
@@ -113,7 +113,7 @@ useEffect(() => {
         try {
        
           const response = await Axios.post(
-            'http://107.22.65.36:8080/api/v1/payment',
+            'https://gatewayvakitas.ddns.net:8080/api/v1/payment',
             cardData,
             {
               headers: {
@@ -166,7 +166,7 @@ useEffect(() => {
   const deleteCard = async (creditCardId) => {
     try {
       const response = await Axios.delete(
-        `http://107.22.65.36:8080/api/v1/payment/${creditCardId}`,
+        `https://gatewayvakitas.ddns.net:8080/api/v1/payment/${creditCardId}`,
         {
           headers: {
             'Content-type': 'application/json',

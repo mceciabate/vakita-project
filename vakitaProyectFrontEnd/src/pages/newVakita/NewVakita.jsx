@@ -37,7 +37,7 @@ const NewVakita = () => {
     if (userId !== null) {
       const loadCardAliases = async () => {
         try {
-          const response = await axios.get(`http://107.22.65.36:8080/api/v1/payment/personal/${userId}`, {
+          const response = await axios.get(`https://gatewayvakitas.ddns.net:8080/api/v1/payment/personal/${userId}`, {
             headers: {
               'Content-type': 'application/json',
               Authorization: `Bearer ${token}`,
@@ -64,7 +64,7 @@ const NewVakita = () => {
 
   useEffect(() => {
     const loadData = async () => {
-      await axios.get("http://107.22.65.36:8080/api/v1/usuarios").then((res) => {
+      await axios.get("https://gatewayvakitas.ddns.net:8080/api/v1/usuarios").then((res) => {
 
         setGetUsers(res.data)
 

@@ -23,7 +23,7 @@ const Menu = ({ handleCloseModal }) => {
 
   useEffect(() => {
     if (logged) {
-      fetch("http://107.22.65.36:8080/api/v1/usuarios/" + userId)
+      fetch("https://gatewayvakitas.ddns.net:8080/api/v1/usuarios/" + userId)
         .then((response) => {
           if (!response.ok) {
             throw new Error("Network response was not ok");

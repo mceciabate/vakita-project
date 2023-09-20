@@ -10,7 +10,7 @@ const BannerDashboard = () => {
     useEffect(() => {
         const getAlias = async () => {
             try {
-                const response = await axios.get(`http://107.22.65.36:8080/api/v1/usuarios/${userId}`);
+                const response = await axios.get(`https://gatewayvakitas.ddns.net:8080/api/v1/usuarios/${userId}`);
                 const aliasUser = response.data.alias; 
                 const aliasUserVakita = JSON.stringify(aliasUser)
                   localStorage.setItem('alias', aliasUserVakita);

@@ -53,7 +53,7 @@ function Registerr() {
         onSubmit: async (values) => {    
           try {
     
-            const response = await axios.post("http://107.22.65.36:8080/api/v1/usuarios/register", {
+            const response = await axios.post("https://gatewayvakitas.ddns.net:8080/api/v1/usuarios/register", {
               "name": values.name,
               "lastName": values.lastName,
               "alias": values.alias,

@@ -49,7 +49,7 @@ function Login() {
         const { email } = result.value;
 
         axios
-          .get(`http://107.22.65.36:8080/api/v1/usuarios/email/${email}`)
+          .get(`https://gatewayvakitas.ddns.net:8080/api/v1/usuarios/email/${email}`)
           .then((response) => {
             const users = response.data;
             console.log(users.id);
@@ -71,7 +71,7 @@ function Login() {
               //Post enviar correo al usuario para que obtenga el código
               axios
                 .post(
-                  "http://107.22.65.36:8080/api/v1/usuarios/recover",
+                  "https://gatewayvakitas.ddns.net:8080/api/v1/usuarios/recover",
                   {
                     email: email,
                   },
@@ -127,7 +127,7 @@ function Login() {
 
                   axios
                     .patch(
-                      `http://107.22.65.36:8080/api/v1/usuarios/${userId}`,
+                      `https://gatewayvakitas.ddns.net:8080/api/v1/usuarios/${userId}`,
                       {
                         password: newPassword,
                       },
@@ -196,7 +196,7 @@ function Login() {
     onSubmit: async (values) => {
       axios
         .post(
-          "http://107.22.65.36:8080/api/v1/usuarios/token",
+          "https://gatewayvakitas.ddns.net:8080/api/v1/usuarios/token",
           {
             email: values.email,
             password: values.password,

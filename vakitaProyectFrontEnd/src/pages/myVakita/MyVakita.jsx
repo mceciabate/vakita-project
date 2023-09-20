@@ -40,7 +40,7 @@ const MyVakita = () => {
 
   const loadInactiveVakitas = async () => {
     try {
-      const response = await axios.get(`http://107.22.65.36:8080/api/v1/vakita/inactives/${userId}`, {
+      const response = await axios.get(`https://gatewayvakitas.ddns.net:8080/api/v1/vakita/inactives/${userId}`, {
         headers: {
           'Content-type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -65,7 +65,7 @@ const MyVakita = () => {
     if (userId !== null) {
       const loadCardAliases = async () => {
         try {
-          const response = await axios.get(`http://107.22.65.36:8080/api/v1/payment/personal/${userId}`, {
+          const response = await axios.get(`https://gatewayvakitas.ddns.net:8080/api/v1/payment/personal/${userId}`, {
             headers: {
               'Content-type': 'application/json',
               Authorization: `Bearer ${token}`,
@@ -92,7 +92,7 @@ const MyVakita = () => {
       const loadData = async () => {
         try {
           setLoading(true); // Indicar que el componente se está cargando
-          const response = await axios.get(`http://107.22.65.36:8080/api/v1/vakita/actives/${userId}`, {
+          const response = await axios.get(`https://gatewayvakitas.ddns.net:8080/api/v1/vakita/actives/${userId}`, {
             headers: {
               'Content-type': 'application/json',
               Authorization: `Bearer ${token}`,
@@ -193,7 +193,7 @@ const MyVakita = () => {
       const { cardNumber, amount } = formValues;
 
       const response = await fetch(
-        `http://107.22.65.36:8080/api/v1/vakita/deposit?amount=${amount}&vakitaId=${vakitaId}&userId=${userId}`,
+        `https://gatewayvakitas.ddns.net:8080/api/v1/vakita/deposit?amount=${amount}&vakitaId=${vakitaId}&userId=${userId}`,
         {
           method: 'PUT',
           headers: {
@@ -308,7 +308,7 @@ const MyVakita = () => {
                   if (result.isConfirmed) {
                     
                     axios
-                      .put(`http://107.22.65.36:8080/api/v1/vakita/inactive/${vakita.id}`, null, {
+                      .put(`https://gatewayvakitas.ddns.net:8080/api/v1/vakita/inactive/${vakita.id}`, null, {
                         headers: {
                           'Content-type': 'application/json',
                           Authorization: `Bearer ${token}`,
@@ -316,7 +316,7 @@ const MyVakita = () => {
                       })
                       .then((response) => {
                      
-                        return axios.patch(`http://107.22.65.36:8080/api/v1/vakita/drain/${vakita.id}`, null, {
+                        return axios.patch(`https://gatewayvakitas.ddns.net:8080/api/v1/vakita/drain/${vakita.id}`, null, {
                           headers: {
                             'Content-type': 'application/json',
                             Authorization: `Bearer ${token}`,

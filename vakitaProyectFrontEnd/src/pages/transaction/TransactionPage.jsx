@@ -15,7 +15,7 @@ const TransactionPage = () => {
 
   useEffect(() => {
     axios
-      .get(`http://107.22.65.36:8080/api/v1/vakita/user/${userId}`, {
+      .get(`https://gatewayvakitas.ddns.net:8080/api/v1/vakita/user/${userId}`, {
         headers: {
           'Content-type': 'application/json',
           Authorization: `Bearer ${token}`,
