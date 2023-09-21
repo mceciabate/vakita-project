@@ -13,9 +13,15 @@ import {
   Input,
   Button, ErrorSpan, CheckSection
 } from "./Register.styled.jsx";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 function Registerr() {
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
+
 
   const maxYear = () => {
     const maxYear = new Date().getFullYear() - 18;
@@ -191,32 +197,54 @@ function Registerr() {
               )}
               <Label htmlFor="password">Contraseña</Label>
               <Input
-                type="password"
-                name="password"
-                id="password"
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-              />
+        type={showPassword ? "text" : "password"}
+        name="password"
+        id="password"
+        value={formik.values.password}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+      />
+      <button
+        type="button"
+        className="password-toggle"
+        onClick={() => setShowPassword(!showPassword)}
+      >
+        <FontAwesomeIcon
+          icon={showPassword ? faEye :  faEyeSlash }
+          className="password-icon"
+        />
+      </button>
+    
+    {formik.touched.password && formik.errors.password && (
+      <ErrorSpan>{formik.errors.password}</ErrorSpan>
+    )}
 
-              {formik.touched.password && formik.errors.password && (
-                <ErrorSpan>{formik.errors.password}</ErrorSpan>
-              )}
+      
 
               <Label htmlFor="passwordConfirm">Confirmar contraseña</Label>
-              <Input
-                type="password"
-                name="passwordConfirm"
-                id="passwordConfirm"
-                value={formik.values.passwordConfirm}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-              />
-              {formik.touched.passwordConfirm &&
-                formik.errors.passwordConfirm && (
-                  <ErrorSpan>{formik.errors.passwordConfirm}</ErrorSpan>
-                )}
-
+             
+   <Input
+        type={showPasswordConfirm ? "text" : "password"}
+        name="passwordConfirm"
+        id="passwordConfirm"
+        value={formik.values.passwordConfirm}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+      />
+      <button
+        type="button"
+        className="password-toggle"
+        onClick={() => setShowPasswordConfirm(!showPasswordConfirm)}
+      >
+        <FontAwesomeIcon
+          icon={showPasswordConfirm ? faEye :  faEyeSlash}
+          className="password-confirm-icon"
+        />
+      </button>
+  
+    {formik.touched.passwordConfirm && formik.errors.passwordConfirm && (
+      <ErrorSpan>{formik.errors.passwordConfirm}</ErrorSpan>
+    )}
                 <CheckSection>
                   <input type="checkbox"
                   onClick={() => setChecked(!checked)}

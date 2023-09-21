@@ -104,6 +104,15 @@ flex-direction: row;
 justify-content: space-between;
 margin-left:13%;
 
+.password-toggle{
+  background-color: transparent;
+  border: none;
+  position: relative;
+  right: 1.5rem;
+}
+
+
+
 .contedor-form1 {
   width: 50%;
 

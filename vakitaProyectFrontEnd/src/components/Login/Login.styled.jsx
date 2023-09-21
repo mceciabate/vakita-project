@@ -34,6 +34,15 @@ align-items: center;
 background: linear-gradient(0deg, #EEE9FF 6%, #FCE8E9 91%);
 border-radius:50px;
 
+ .password-t{
+
+     background-color: transparent;
+     border: none;
+     position:relative;
+     right: 240%;
+     top: 160%;
+     height: 40px;
+}
 
 /* En esta seccion cambiara en mobile*/
 @media (max-width: 1400px){
@@ -79,6 +88,8 @@ export const ContainerInput = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+
+  
 
     .input-email {
       
