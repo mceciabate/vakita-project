@@ -188,6 +188,10 @@ export const BtnChangePwd = styled.button`
     }
 
     @media (min-width: 769px) {
-        margin: 0 5rem;
+        margin: 0 ;
+        margin-left: 10%;
+       position: relative;
+       bottom: 1.8rem;
+
     }
 `;
