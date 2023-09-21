@@ -174,7 +174,7 @@ public class UserController {
                     "  <div class=\"body\">\n" +
                     "    <div class=\"container\">\n" +
                     "      <h1>Cuenta confirmada exitosamente!</h1>\n" +
-                    "      <h2>Ir al login</h2>\n" +
+                    "      <a style=\"text-decoration: none;\" href=\"https://vakita-web.ddns.net/\"><h2>Ir al home</h2></a>\n" +
                     "    </div>\n" +
                     "  </div>\n" +
                     "</body>\n" +
@@ -184,6 +184,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor, intente mas tarde.\"}");
         }
     }
+
 
     @Operation(summary = "Actualiza un usuario por el id")
     @PutMapping("/{id}")

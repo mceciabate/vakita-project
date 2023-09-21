@@ -16,18 +16,18 @@ public class MsUsuariosApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MsUsuariosApplication.class, args);
 	}
-
-	@Bean
-	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurer() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**")
-						.allowedOrigins("*")
-						.allowedMethods("*")
-						.allowedHeaders("*");
-			}
-		};
-	}
+//
+//	@Bean
+//	public WebMvcConfigurer corsConfigurer() {
+//		return new WebMvcConfigurer() {
+//			@Override
+//			public void addCorsMappings(CorsRegistry registry) {
+//				registry.addMapping("/**")
+//						.allowedOrigins("*")
+//						.allowedMethods("*")
+//						.allowedHeaders("*");
+//			}
+//		};
+//	}
 
 }

@@ -1,51 +1,71 @@
 server:
-  port: ${PORT:${SERVER_PORT:8080}}
+  ssl:
+    key-alias: gateway_certificado
+    key-store: classpath:gateway.jks
+    key-store-type: JKS
+    key-store-password: grupo3
+  server:
+    port: 8080
 
 spring:
   application:
-    name: api-gateway
+    name: gateway
   cloud:
     gateway:
       globalcors:
         corsConfigurations:
           '[/**]':
-            allowedOrigins: "*"
-            allowedHeaders: "*"
+            allowedOrigins:
+              - "https://vakita-web.ddns.net"
             allowedMethods:
               - GET
               - POST
               - PUT
               - PATCH
               - DELETE
-      discovery:
-        locator:
-          enabled: true
+              - OPTIONS
+            allowedHeaders:
+              - "DNT"
+              - "User-Agent"
+              - "X-Requested-With"
+              - "If-Modified-Since"
+              - "Cache-Control"
+              - "Content-Type"
+              - "Range"
+              - "Authorization"
+            maxAge: 1728000
+            allowedExposedHeaders: "Content-Length"
       routes:
         - id: ms-usuarios
-          uri: lb://ms-usuarios
+          uri: https://vakitausers.ddns.net:8080/
           predicates:
             - Path=/api/v1/usuarios/**,/swagger-ui/**,/swagger-resources/**,/swagger-ui.html,/v3/api-docs,/webjars/**,/view/**,/swagger-usuarios
 
-        - id: ms-vakitas
-          uri: lb://ms-vakitas
-          predicates:
-            - Path=/api/v1/vakita/**,/swagger-ui/**,/swagger-resources/**,/swagger-ui.html,/v3/api-docs,/webjars/**,/view/**,/swagger-vakitas
-          filters:
-            - AuthenticationFilter
-
         - id: ms-payment
-          uri: lb://ms-payment
+          uri: https://vakita.ddns.net:8080/
           predicates:
             - Path=/api/v1/payment/**,/swagger-ui/**,/swagger-resources/**,/swagger-ui.html,/v3/api-docs,/webjars/**,/view/**,/swagger-payment
           filters:
             - AuthenticationFilter
 
+        - id: ms-vakitas
+          uri: https://vakitas.ddns.net:8080/
+          predicates:
+            - Path=/api/v1/vakita/**,/swagger-ui/**,/swagger-resources/**,/swagger-ui.html,/v3/api-docs,/webjars/**,/view/**,/swagger-vakitas
+          filters:
+            - AuthenticationFilter
+
+
 eureka:
   client:
     registerWithEureka: true
-    fetchRegistry: true
+    fetchRegistry: false
     serviceURL:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://35.153.134.97:8761/
+  instance:
+    instance-id: ${spring.application.name}:${random.int}
+    preferIpAddress: true
+    lease-renewal-interval-in-seconds: 30
 
 management:
   endpoint:
@@ -54,8 +74,15 @@ management:
   endpoints:
     web:
       exposure:
-#        include: "*"
+        #        include: "*"
         include: gateway
+  info:
+    env:
+      enabled: true
+    app:
+      name: gateway
+      version: 1.0.0
+      description: Entry point
 
 jwt:
   secret: "5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437"
@@ -63,3 +90,4 @@ jwt:
 info:
   app:
     name: ${spring.application.name}
+
