@@ -56,6 +56,23 @@ public class LogInPage extends BasePage {
         return messageText;
     }
 
+    public String checkMessageEmailLogIn() {
+
+        wait = new WebDriverWait(driver, Duration.ofSeconds(8));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"root\"]/div/div[2]/div/form/div[2]/span")));
+        WebElement message = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/form/div[2]/span"));
+        String messageText = message.getText();
+        return messageText;
+    }
+
+    public String checkMessagePasswordLogIn() {
+
+        wait = new WebDriverWait(driver, Duration.ofSeconds(8));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"root\"]/div/div[2]/div/form/div[3]/span")));
+        WebElement message = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/form/div[3]/span"));
+        String messageText = message.getText();
+        return messageText;
+    }
 
     public void clickOkSucessModal() {
 

@@ -94,8 +94,8 @@ public class RegisterPage extends BasePage {
     public void clickRegisterButton() {
 
         wait = new WebDriverWait(driver, Duration.ofSeconds(1));
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"root\"]/div/div[2]/div/form/button")));
-        WebElement registerButton = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/form/button"));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"root\"]/div/div[2]/div/form/div[2]/div[2]/button[3]")));
+        WebElement registerButton = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/form/div[2]/div[2]/button[3]"));
         registerButton.click();
     }
 
@@ -108,7 +108,80 @@ public class RegisterPage extends BasePage {
         return messageText;
     }
 
+    public void checkboxClick() {
+        wait = new WebDriverWait(driver, Duration.ofSeconds(8));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"root\"]/div/div[2]/div/form/div[2]/div[2]/div/input")));
+        WebElement checkbox = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/form/div[2]/div[2]/div/input"));
+        checkbox.click();
+    }
+    public String checkMessageName() {
 
+        wait = new WebDriverWait(driver, Duration.ofSeconds(8));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"root\"]/div/div[2]/div/form/div[2]/div[1]/span[1]")));
+        WebElement message = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/form/div[2]/div[1]/span[1]"));
+        String messageText = message.getText();
+        return messageText;
+    }
 
+    public String checkMessageLastname() {
 
+        wait = new WebDriverWait(driver, Duration.ofSeconds(8));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"root\"]/div/div[2]/div/form/div[2]/div[1]/span[2]")));
+        WebElement message = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/form/div[2]/div[1]/span[2]"));
+        String messageText = message.getText();
+        return messageText;
+    }
+
+    public String checkMessageUsername() {
+
+        wait = new WebDriverWait(driver, Duration.ofSeconds(8));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"root\"]/div/div[2]/div/form/div[2]/div[1]/span[3]")));
+        WebElement message = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/form/div[2]/div[1]/span[3]"));
+        String messageText = message.getText();
+        return messageText;
+    }
+
+    public String checkMessageDni() {
+
+        wait = new WebDriverWait(driver, Duration.ofSeconds(8));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"root\"]/div/div[2]/div/form/div[2]/div[1]/span[4]")));
+        WebElement message = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/form/div[2]/div[1]/span[4]"));
+        String messageText = message.getText();
+        return messageText;
+    }
+
+    public String checkMessageEmail() {
+
+        wait = new WebDriverWait(driver, Duration.ofSeconds(8));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"root\"]/div/div[2]/div/form/div[2]/div[2]/span[1]")));
+        WebElement message = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/form/div[2]/div[2]/span[1]"));
+        String messageText = message.getText();
+        return messageText;
+    }
+    public String checkMessageBirthday() {
+
+        wait = new WebDriverWait(driver, Duration.ofSeconds(8));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"root\"]/div/div[2]/div/form/div[2]/div[2]/span[2]")));
+        WebElement message = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/form/div[2]/div[2]/span[2]"));
+        String messageText = message.getText();
+        return messageText;
+    }
+
+    public String checkMessagePassword() {
+
+        wait = new WebDriverWait(driver, Duration.ofSeconds(8));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"root\"]/div/div[2]/div/form/div[2]/div[2]/span[3]")));
+        WebElement message = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/form/div[2]/div[2]/span[3]"));
+        String messageText = message.getText();
+        return messageText;
+    }
+
+    public String checkMessagePasswordCheck() {
+
+        wait = new WebDriverWait(driver, Duration.ofSeconds(8));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"root\"]/div/div[2]/div/form/div[2]/div[2]/span[4]")));
+        WebElement message = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/form/div[2]/div[2]/span[4]"));
+        String messageText = message.getText();
+        return messageText;
+    }
 }

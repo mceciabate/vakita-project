@@ -34,7 +34,7 @@ public class DashboardTest {
     @BeforeAll
     public void setUpDriver(){
         driver= home.setup();
-        home.url("http://localhost:5173/");
+        home.url("http://54.221.139.107/");
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         extent = ExtentFactory.getInstance();
         extent.attachReporter(spark);

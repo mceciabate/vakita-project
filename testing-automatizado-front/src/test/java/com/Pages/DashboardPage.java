@@ -80,4 +80,12 @@ public class DashboardPage extends BasePage {
         linkNewVakita.click();
     }
 
+    public void clickMenuTransactionButton() {
+
+        wait = new WebDriverWait(driver, Duration.ofSeconds(1));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"root\"]/div/div[2]/section/div[2]/a[6]")));
+        WebElement linkNewVakita = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/section/div[2]/a[6]"));
+        linkNewVakita.click();
+    }
+
 }

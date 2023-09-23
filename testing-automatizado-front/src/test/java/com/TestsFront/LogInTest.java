@@ -35,7 +35,7 @@ public class LogInTest {
     @BeforeAll
     public void setUpDriver(){
         driver= home.setup();
-        home.url("http://localhost:5173/");
+        home.url("http://54.221.139.107/");
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
        extent = ExtentFactory.getInstance();
         extent.attachReporter(spark);
@@ -93,9 +93,58 @@ public class LogInTest {
 
     }
 
+    @Test
+    @Tag("smoke")
+    public void testWithoutDataLogIn()  {
+        test = extent.createTest("Inicio de sesión incorrecto");
+        test.log(Status.INFO, "Inicia el Test");
+        home= new HomePage(driver);
+        home.clickLogInPage();
+        test.log(Status.PASS, "Ingreso a la página Log In");
+        login = new LogInPage(driver);
+//        login.enterEmail("test@gmail.com");
+//        test.log(Status.PASS, "Ingreso email");
+//        login.enterPassword("1234");
+//        test.log(Status.PASS, "Ingreso contraseña");
 
 
+        login.clickLogInButton();
 
+        test.log(Status.INFO, "Finaliza test de LogIn");
+        String resultTextOfLogIn= login.checkMessageLogIn();
+        assertTrue(resultTextOfLogIn.contains("Error"));
+        System.out.println("Resultado: " + resultTextOfLogIn);
+
+    }
+
+    @Test
+    @Tag("smoke")
+    public void testEmptyLogIn()  {
+        test = extent.createTest("Inicio de sesión sin datos");
+        test.log(Status.INFO, "Inicia el Test");
+        home= new HomePage(driver);
+        home.clickLogInPage();
+        test.log(Status.PASS, "Ingreso a la página Log In");
+        login = new LogInPage(driver);
+        login.enterEmail("");
+        test.log(Status.PASS, "Ingreso email vacio");
+        login.enterPassword("");
+        test.log(Status.PASS, "Ingreso contraseña");
+
+        login.clickLogInButton();
+
+        test.log(Status.INFO, "Finaliza test de LogIn");
+//        String resultTextOfLogIn= login.checkMessageLogIn();
+        String resultTextOfEmail= login.checkMessageEmailLogIn();
+        String resultTextOfPassword= login.checkMessagePasswordLogIn();
+
+//        assertTrue(resultTextOfLogIn.contains("Error"));
+        assertTrue(resultTextOfEmail.contains("Email es requerido"));
+        assertTrue(resultTextOfPassword.contains("Contraseña es requerida"));
+
+        System.out.println("Resultado: " + resultTextOfEmail + " "+resultTextOfPassword);
+
+    }
 
 
 
